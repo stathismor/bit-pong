@@ -3,12 +3,16 @@ import BootScene from './scene/BootScene';
 import GameplayScene from './scene/GameplayScene';
 import ScaleManager from './ScaleManager';
 
+const _WIDTH = 640;
+const _HEIGHT = 360;
+
+
 const config = {
   type: Phaser.AUTO,
   parent: 'content',
   title: 'Weird Pong',
-  width: 640,
-  height: 360,
+  width: _WIDTH,
+  height: _HEIGHT,
   backgroundColor: '#ffffff',
   pixelArt: true,
   physics: {
@@ -21,7 +25,7 @@ const config = {
   scene: [BootScene, GameplayScene],
   callbacks: {
     postBoot: () => {
-      new ScaleManager();
+      new ScaleManager(_WIDTH, _HEIGHT);
     }
   }
 };

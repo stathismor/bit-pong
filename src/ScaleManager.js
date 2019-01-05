@@ -1,12 +1,12 @@
 class ScaleManager {
-    constructor() {
-        window.addEventListener('resize', this.resize)
-        this.resize();
+    constructor(width, height) {
+        window.addEventListener('resize', () => this.resize(width, height))
+        this.resize(width, height);
     }
 
-    resize() {
+    resize(config_width, config_height) {
         // Width-height-ratio of game resolution
-        let game_ratio = 640 / 360;
+        let game_ratio = config_width / config_height;
 
         // Make div full height of browser and keep the ratio of game resolution
         let div = document.getElementById('content');
@@ -27,4 +27,5 @@ class ScaleManager {
         canvas.style.height = height + 'px';
     }
 }
+
 export default ScaleManager;
