@@ -1,3 +1,5 @@
+import   Ball from '../sprite/Ball';
+
 class GameplayScene extends Phaser.Scene {
   constructor() {
     super({
@@ -17,7 +19,9 @@ class GameplayScene extends Phaser.Scene {
                                         config.height - size);
       border.setStrokeStyle(size, "0xFF0000");
     }
-    this.add.existing(new Phaser.GameObjects.Sprite(this, config.centerX, config.centerY, 'ball'));
+
+    const ball = new Ball(this, config.centerX, config.centerY, 'ball');
+    this.add.existing(ball);
   }
 }
 
