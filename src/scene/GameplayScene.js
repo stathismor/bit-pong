@@ -6,7 +6,18 @@ class GameplayScene extends Phaser.Scene {
   }
 
   create() {
-    this.add.existing(new Phaser.GameObjects.Sprite(this, 30, 30, 'ball'));
+    const config = this.sys.game.CONFIG;
+
+    // Add a red border
+    if (__DEV__) {
+      const size = 2;
+      const border = this.add.rectangle(config.centerX,
+                                        config.centerY,
+                                        config.width - size,
+                                        config.height - size);
+      border.setStrokeStyle(size, "0xFF0000");
+    }
+    this.add.existing(new Phaser.GameObjects.Sprite(this, config.centerX, config.centerY, 'ball'));
   }
 }
 
