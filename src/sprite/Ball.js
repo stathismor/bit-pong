@@ -1,11 +1,10 @@
-const _SPEED = 0.10;
+const _SPEED = 0.1;
 const _STIFFNESS = 0.0001;
-
 
 class Ball extends Phaser.Physics.Matter.Sprite {
   constructor(scene, x, y, key) {
     super(scene.matter.world, x, y, key, null);
-    this.startPos = { x, y, };
+    this.startPos = { x, y };
     this.spring = scene.matter.add.mouseSpring();
 
     this.setCircle();
@@ -14,7 +13,7 @@ class Ball extends Phaser.Physics.Matter.Sprite {
     scene.input.setDraggable(this);
 
     this.constraint = Phaser.Physics.Matter.Matter.Constraint.create({
-      pointA: {x, y,},
+      pointA: { x, y },
       bodyB: this.body,
       stiffness: _STIFFNESS,
       damping: 1,
@@ -33,7 +32,6 @@ class Ball extends Phaser.Physics.Matter.Sprite {
 
       gameObject.scene.matter.world.removeConstraint(gameObject.constraint);
       gameObject.spring.destroy();
-
     });
   }
 }
