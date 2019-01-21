@@ -33,6 +33,16 @@ class Ball extends Phaser.Physics.Matter.Sprite {
       gameObject.scene.matter.world.removeConstraint(gameObject.constraint);
       gameObject.spring.destroy();
     });
+
+    const context = this;
+    this.scene.matter.world.on('collisionstart', function(event, bodyA, bodyB) {
+      if (
+        [bodyA.id, bodyB.id].includes(context.body.id) &&
+        [bodyA.id, bodyB.id].some(r => context.scene.tableIds.includes(r))
+      ) {
+        context.scene.sound.play('bounce');
+      }
+    });
   }
 }
 
