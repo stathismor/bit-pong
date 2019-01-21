@@ -25,23 +25,31 @@ class GameplayScene extends Phaser.Scene {
     const level = _LEVELS[this.levelNumber];
     const { tables: tables_data = [], cup: cup_data } = level;
 
-    const ball = new Ball(this, 125, config.centerY, 'ball');
-    this.add.existing(ball);
+    this.ball = new Ball(this, 125, config.centerY, 'ball');
+    this.add.existing(this.ball);
 
-    const tables = tables_data.map(
-      (table_data, scene) =>
-        new Table({
-          scene: this,
-          key: 'table',
-          x: table_data.x,
-          y: table_data.y,
-          angle: table_data.angle,
-        })
-    );
+    const scene = this;
+    const tables = tables_data.map((table_data, scene) => {
+      return new Table(
+        this,
+        table_data.x,
+        table_data.y,
+        'table',
+        table_data.angle
+      );
+    });
+    tables.forEach(table => {
+      this.add.existing(tables[0]);
+    });
+    this.tableIds = tables.map(t => t.body.id);
 
     if (__DEV__) {
       this.debug();
     }
+  }
+
+  update(time, delta) {
+    this.ball.update();
   }
 
   debug() {

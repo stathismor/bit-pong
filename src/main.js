@@ -6,7 +6,6 @@ import ScaleManager from './ScaleManager';
 const _WIDTH = 640;
 const _HEIGHT = 360;
 
-
 const config = {
   type: Phaser.AUTO,
   parent: 'content',
@@ -22,12 +21,13 @@ const config = {
       debug: true,
     },
   },
+
   scene: [BootScene, GameplayScene],
   callbacks: {
     postBoot: () => {
       new ScaleManager(_WIDTH, _HEIGHT);
-    }
-  }
+    },
+  },
 };
 
 const game = new Phaser.Game(config);
