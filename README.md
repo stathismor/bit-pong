@@ -1,1 +1,1 @@
-# weird-pong
+# bit-pong
