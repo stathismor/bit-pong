@@ -10,13 +10,13 @@ export default class LevelMenuScene extends Phaser.Scene {
   }
 
   create() {
-    for (let index = 1; index <= _LEVELS.length; index += 1) {
-      const levelText = this.add.text(0, 0, index.toString(), {
+    for (let levelNumber = 1; levelNumber <= _LEVELS.length; levelNumber += 1) {
+      const levelText = this.add.text(0, 0, levelNumber.toString(), {
         fontFamily: 'Arial',
         fill: 'black',
         fontSize: 64,
       });
-      levelText.setPosition(index * LEVEL_NUMBERS_DISTANCE, 16);
+      levelText.setPosition(levelNumber * LEVEL_NUMBERS_DISTANCE, 16);
 
       // make the text interactive
       levelText.setInteractive(
@@ -26,7 +26,7 @@ export default class LevelMenuScene extends Phaser.Scene {
 
       const { scene } = this;
       levelText.on('pointerdown', () =>
-        scene.start('GameplayScene', { levelNumber: index })
+        scene.start('GameplayScene', { levelNumber })
       );
     }
   }

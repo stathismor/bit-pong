@@ -3,9 +3,8 @@ const STIFFNESS = 0.0001;
 const OUT_OF_BOUNDS_DISTANCE = 200;
 
 class Ball extends Phaser.Physics.Matter.Sprite {
-  constructor(scene, x, y, key, lives) {
+  constructor(scene, x, y, key) {
     super(scene.matter.world, x, y, key, null);
-    this.lives = lives;
     this.startPos = { x, y };
     this.spring = scene.matter.add.mouseSpring();
 
@@ -56,8 +55,7 @@ class Ball extends Phaser.Physics.Matter.Sprite {
         this.startPos.y
       ) > OUT_OF_BOUNDS_DISTANCE
     ) {
-      this.lives -= 1;
-      this.scene.scene.restart({ lives: this.lives });
+      this.scene.scene.restart({ result: 'fail' });
     }
   }
 }

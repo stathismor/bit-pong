@@ -3,25 +3,31 @@ import Ball from '../sprite/Ball';
 import Table from '../sprite/Table';
 import HealthBar from '../hud/HealthBar';
 
+const MAX_LIVES = 3;
+
 class GameplayScene extends Phaser.Scene {
   constructor() {
     super({
       key: 'GameplayScene',
     });
     this.levelNumber = 1;
+    this.livesNumber = MAX_LIVES;
     this.tableIds = [];
     this.ball = null;
   }
 
   create(data) {
-    const { lives } = data;
     const config = this.sys.game.CONFIG;
     this.levelNumber = this.getLevelNumber(data);
+    this.livesNumber = this.getLivesNumber(data);
+    if (this.livesNumber === 0) {
+      this.scene.start('LevelMenuScene');
+    }
 
     const level = _LEVELS[this.levelNumber - 1];
     const { tables: confTables = [] } = level;
 
-    this.ball = new Ball(this, 125, config.centerY, 'ball', lives);
+    this.ball = new Ball(this, 125, config.centerY, 'ball');
     this.add.existing(this.ball);
 
     confTables.forEach(confTable => {
@@ -36,7 +42,7 @@ class GameplayScene extends Phaser.Scene {
       this.tableIds.push(table.body.id);
     });
 
-    new HealthBar(this, lives, this.ball);
+    new HealthBar(this, this.livesNumber, this.ball);
 
     if (__DEV__) {
       this.debug();
@@ -48,31 +54,30 @@ class GameplayScene extends Phaser.Scene {
   }
 
   getLevelNumber(data) {
-    const { reset, advance, levelNumber } = data;
+    const { result, levelNumber } = data;
 
     if (levelNumber) {
       return levelNumber;
     }
 
-    if (reset) {
-      return 1;
+    switch (result) {
+      case 'fail':
+        return this.levelNumber;
+      case 'success':
+        return this.levelNumber + 1;
+      default:
+        return this.levelNumber;
     }
-
-    if (advance) {
-      return this.levelNumber + 1;
-    }
-
-    return this.levelNumber;
   }
 
   getLivesNumber(data) {
-    const { lives } = data;
+    const { result } = data;
 
-    if (lives) {
-      return lives;
+    if (result === 'fail') {
+      return this.livesNumber - 1;
     }
 
-    return;
+    return MAX_LIVES;
   }
 
   debug() {
