@@ -1,7 +1,7 @@
 {
-    "name": "helloworld",
-    "displayName": "HelloCordova",
-    "version": "1.0.0",
+    "name": "bit-pong",
+    "displayName": "Bit Pong",
+    "version": "0.0.1",
     "description": "A sample Apache Cordova application that responds to the deviceready event.",
     "main": "index.js",
     "scripts": {

@@ -1,9 +1,11 @@
-const _SPEED = 0.1;
-const _STIFFNESS = 0.0001;
+const SPEED = 0.1;
+const STIFFNESS = 0.0001;
+const OUT_OF_BOUNDS_DISTANCE = 200;
 
 class Ball extends Phaser.Physics.Matter.Sprite {
-  constructor(scene, x, y, key) {
+  constructor(scene, x, y, key, lives) {
     super(scene.matter.world, x, y, key, null);
+    this.lives = lives;
     this.startPos = { x, y };
     this.spring = scene.matter.add.mouseSpring();
 
@@ -15,7 +17,7 @@ class Ball extends Phaser.Physics.Matter.Sprite {
     this.constraint = Phaser.Physics.Matter.Matter.Constraint.create({
       pointA: { x, y },
       bodyB: this.body,
-      stiffness: _STIFFNESS,
+      stiffness: STIFFNESS,
       damping: 1,
     });
 
@@ -26,8 +28,8 @@ class Ball extends Phaser.Physics.Matter.Sprite {
     scene.input.on('dragend', function(pointer, gameObject) {
       gameObject.setStatic(false);
       gameObject.setVelocity(
-        (gameObject.startPos.x - gameObject.x) * _SPEED,
-        (gameObject.startPos.y - gameObject.y) * _SPEED
+        (gameObject.startPos.x - gameObject.x) * SPEED,
+        (gameObject.startPos.y - gameObject.y) * SPEED
       );
 
       gameObject.scene.matter.world.removeConstraint(gameObject.constraint);
@@ -43,6 +45,20 @@ class Ball extends Phaser.Physics.Matter.Sprite {
         context.scene.sound.play('bounce');
       }
     });
+  }
+
+  update() {
+    if (
+      Phaser.Math.Distance.Between(
+        this.x,
+        this.y,
+        this.startPos.x,
+        this.startPos.y
+      ) > OUT_OF_BOUNDS_DISTANCE
+    ) {
+      this.lives -= 1;
+      this.scene.scene.restart({ lives: this.lives });
+    }
   }
 }
 
