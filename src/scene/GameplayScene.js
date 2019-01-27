@@ -43,14 +43,14 @@ class GameplayScene extends Phaser.Scene {
       this.tableIds.push(table.body.id);
     });
 
-    const cup = new Cup(
+    this.cup = new Cup(
       this,
       confCup.x,
       confCup.y,
       confCup.angle,
       this.ball.body.id
     );
-    this.add.existing(cup);
+    this.add.existing(this.cup);
 
     new HealthBar(this, this.livesNumber, this.ball);
 
