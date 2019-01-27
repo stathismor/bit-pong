@@ -1,6 +1,7 @@
 import _LEVELS from '../../config/levels.json';
 import Ball from '../sprite/Ball';
 import Table from '../sprite/Table';
+import HealthBar from '../hud/HealthBar';
 
 class GameplayScene extends Phaser.Scene {
   constructor() {
@@ -11,7 +12,7 @@ class GameplayScene extends Phaser.Scene {
   }
 
   create(data) {
-    const { reset, advance } = data;
+    const { reset, advance, lives } = data;
     const config = this.sys.game.CONFIG;
 
     if (reset) {
@@ -25,10 +26,9 @@ class GameplayScene extends Phaser.Scene {
     const level = _LEVELS[this.levelNumber];
     const { tables: tables_data = [], cup: cup_data } = level;
 
-    this.ball = new Ball(this, 125, config.centerY, 'ball');
+    this.ball = new Ball(this, 125, config.centerY, 'ball', lives);
     this.add.existing(this.ball);
 
-    const scene = this;
     const tables = tables_data.map((table_data, scene) => {
       return new Table(
         this,
@@ -42,6 +42,8 @@ class GameplayScene extends Phaser.Scene {
       this.add.existing(tables[0]);
     });
     this.tableIds = tables.map(t => t.body.id);
+
+    new HealthBar(this, lives, this.ball);
 
     if (__DEV__) {
       this.debug();
