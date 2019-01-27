@@ -3,7 +3,9 @@
     "extends": ["airbnb-base", "prettier"],
     "globals": {
         "Phaser": true,
-        "__DEV__": true
+        "__DEV__": true,
+        "localStorage": true
+
     },
     "settings": {
         "import/core-modules": ["phaser"]

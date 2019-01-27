@@ -5,9 +5,6 @@ const SENSOR_WIDTH = 25;
 export default class Cup extends Phaser.Physics.Matter.Sprite {
   constructor(scene, x, y, angle, ballId) {
     super(scene.matter.world, x, y, 'cup');
-    // const WIDTH = config.scene.textures.get('cup').source[0].width;
-    // const HEIGHT = config.scene.textures.get('cup').source[0].height;
-    // this.cup = config.scene.matter.add.sprite(config.x, config.y, 'cup');
 
     // The player's body is going to be a compound body.
     const cupLeft = M.Bodies.rectangle(
@@ -45,7 +42,16 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
     scene.matter.world.on('collisionstart', (event, bodyA, bodyB) => {
       for (let i = 0; i < event.pairs.length; i += 1) {
         if ([bodyA.id, bodyB.id].every(r => [sensor.id, ballId].includes(r))) {
-          scene.scene.start('LevelMenuScene', { result: 'success' });
+          const currentLevel = scene.levelNumber;
+          const completedLevels =
+            JSON.parse(localStorage.getItem('completed-levels')) || [];
+          if (!completedLevels.includes(currentLevel)) {
+            localStorage.setItem(
+              'completed-levels',
+              JSON.stringify([currentLevel, ...completedLevels])
+            );
+          }
+          scene.scene.start('LevelMenuScene');
         }
       }
     });

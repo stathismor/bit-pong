@@ -10,10 +10,17 @@ export default class LevelMenuScene extends Phaser.Scene {
   }
 
   create() {
+    const completedLevels =
+      JSON.parse(localStorage.getItem('completed-levels')) || [];
+
     for (let levelNumber = 1; levelNumber <= _LEVELS.length; levelNumber += 1) {
+      let colour = 'black';
+      if (completedLevels.includes(levelNumber)) {
+        colour = 'green';
+      }
       const levelText = this.add.text(0, 0, levelNumber.toString(), {
         fontFamily: 'Arial',
-        fill: 'black',
+        fill: colour,
         fontSize: 64,
       });
       levelText.setPosition(levelNumber * LEVEL_NUMBERS_DISTANCE, 16);
