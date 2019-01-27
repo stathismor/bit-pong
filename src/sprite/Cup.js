@@ -39,20 +39,26 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
       .setFriction(0)
       .setStatic(true);
 
+    const context = this;
     scene.matter.world.on('collisionstart', (event, bodyA, bodyB) => {
-      for (let i = 0; i < event.pairs.length; i += 1) {
-        if ([bodyA.id, bodyB.id].every(r => [sensor.id, ballId].includes(r))) {
-          const currentLevel = scene.levelNumber;
-          const completedLevels =
-            JSON.parse(localStorage.getItem('completed-levels')) || [];
-          if (!completedLevels.includes(currentLevel)) {
-            localStorage.setItem(
-              'completed-levels',
-              JSON.stringify([currentLevel, ...completedLevels])
-            );
-          }
-          scene.scene.start('LevelMenuScene');
+      if ([bodyA.id, bodyB.id].every(r => [sensor.id, ballId].includes(r))) {
+        const currentLevel = scene.levelNumber;
+        const completedLevels =
+          JSON.parse(localStorage.getItem('completed-levels')) || [];
+        if (!completedLevels.includes(currentLevel)) {
+          localStorage.setItem(
+            'completed-levels',
+            JSON.stringify([currentLevel, ...completedLevels])
+          );
         }
+        scene.scene.start('LevelMenuScene');
+      }
+
+      if (
+        [bodyA.id, bodyB.id].includes(ballId) &&
+        [bodyA.id, bodyB.id].some(r => [cupLeft.id, cupRight.id].includes(r))
+      ) {
+        context.scene.sound.play('cup_bounce');
       }
     });
   }

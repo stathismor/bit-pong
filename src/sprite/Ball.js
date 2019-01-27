@@ -41,7 +41,7 @@ class Ball extends Phaser.Physics.Matter.Sprite {
         [bodyA.id, bodyB.id].includes(context.body.id) &&
         [bodyA.id, bodyB.id].some(r => context.scene.tableIds.includes(r))
       ) {
-        context.scene.sound.play('bounce');
+        context.scene.sound.play('table_bounce');
       }
     });
   }

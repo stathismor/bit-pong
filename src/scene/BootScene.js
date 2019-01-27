@@ -12,7 +12,8 @@ class BootScene extends Phaser.Scene {
     this.load.image('full_life', 'assets/images/full_life.png');
     this.load.image('empty_life', 'assets/images/empty_life.png');
 
-    this.load.audio('bounce', 'assets/sounds/bounce.mp3');
+    this.load.audio('table_bounce', 'assets/sounds/table_bounce.mp3');
+    this.load.audio('cup_bounce', 'assets/sounds/cup_bounce.mp3');
   }
 
   create() {
