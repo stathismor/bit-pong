@@ -8,40 +8,33 @@ class GameplayScene extends Phaser.Scene {
     super({
       key: 'GameplayScene',
     });
-    this.levelNumber = 0;
+    this.levelNumber = 1;
+    this.tableIds = [];
+    this.ball = null;
   }
 
   create(data) {
-    const { reset, advance, lives } = data;
+    const { lives } = data;
     const config = this.sys.game.CONFIG;
+    this.levelNumber = this.getLevelNumber(data);
 
-    if (reset) {
-      this.levelNumber = 0;
-    }
-
-    if (advance) {
-      this.levelNumber++;
-    }
-
-    const level = _LEVELS[this.levelNumber];
-    const { tables: tables_data = [], cup: cup_data } = level;
+    const level = _LEVELS[this.levelNumber - 1];
+    const { tables: confTables = [] } = level;
 
     this.ball = new Ball(this, 125, config.centerY, 'ball', lives);
     this.add.existing(this.ball);
 
-    const tables = tables_data.map((table_data, scene) => {
-      return new Table(
+    confTables.forEach(confTable => {
+      const table = new Table(
         this,
-        table_data.x,
-        table_data.y,
+        confTable.x,
+        confTable.y,
         'table',
-        table_data.angle
+        confTable.angle
       );
+      this.add.existing(table);
+      this.tableIds.push(table.body.id);
     });
-    tables.forEach(table => {
-      this.add.existing(tables[0]);
-    });
-    this.tableIds = tables.map(t => t.body.id);
 
     new HealthBar(this, lives, this.ball);
 
@@ -52,6 +45,34 @@ class GameplayScene extends Phaser.Scene {
 
   update(time, delta) {
     this.ball.update();
+  }
+
+  getLevelNumber(data) {
+    const { reset, advance, levelNumber } = data;
+
+    if (levelNumber) {
+      return levelNumber;
+    }
+
+    if (reset) {
+      return 1;
+    }
+
+    if (advance) {
+      return this.levelNumber + 1;
+    }
+
+    return this.levelNumber;
+  }
+
+  getLivesNumber(data) {
+    const { lives } = data;
+
+    if (lives) {
+      return lives;
+    }
+
+    return;
   }
 
   debug() {

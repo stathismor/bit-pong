@@ -25,7 +25,7 @@ class Ball extends Phaser.Physics.Matter.Sprite {
       gameObject.setStatic(false);
     });
 
-    scene.input.on('dragend', function(pointer, gameObject) {
+    scene.input.on('dragend', (pointer, gameObject) => {
       gameObject.setStatic(false);
       gameObject.setVelocity(
         (gameObject.startPos.x - gameObject.x) * SPEED,
@@ -37,7 +37,7 @@ class Ball extends Phaser.Physics.Matter.Sprite {
     });
 
     const context = this;
-    this.scene.matter.world.on('collisionstart', function(event, bodyA, bodyB) {
+    this.scene.matter.world.on('collisionstart', (event, bodyA, bodyB) => {
       if (
         [bodyA.id, bodyB.id].includes(context.body.id) &&
         [bodyA.id, bodyB.id].some(r => context.scene.tableIds.includes(r))
