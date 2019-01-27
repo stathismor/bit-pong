@@ -7,6 +7,7 @@ class BootScene extends Phaser.Scene {
 
   preload() {
     this.load.image('ball', 'assets/images/ball.png');
+    this.load.image('cup', 'assets/images/cup.png');
     this.load.image('table', 'assets/images/table.png');
     this.load.image('full_life', 'assets/images/full_life.png');
     this.load.image('empty_life', 'assets/images/empty_life.png');

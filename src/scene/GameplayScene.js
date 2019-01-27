@@ -1,5 +1,6 @@
 import _LEVELS from '../../config/levels.json';
 import Ball from '../sprite/Ball';
+import Cup from '../sprite/Cup';
 import Table from '../sprite/Table';
 import HealthBar from '../hud/HealthBar';
 
@@ -25,7 +26,7 @@ class GameplayScene extends Phaser.Scene {
     }
 
     const level = _LEVELS[this.levelNumber - 1];
-    const { tables: confTables = [] } = level;
+    const { tables: confTables = [], cup: confCup } = level;
 
     this.ball = new Ball(this, 125, config.centerY, 'ball');
     this.add.existing(this.ball);
@@ -41,6 +42,15 @@ class GameplayScene extends Phaser.Scene {
       this.add.existing(table);
       this.tableIds.push(table.body.id);
     });
+
+    const cup = new Cup(
+      this,
+      confCup.x,
+      confCup.y,
+      confCup.angle,
+      this.ball.body.id
+    );
+    this.add.existing(cup);
 
     new HealthBar(this, this.livesNumber, this.ball);
 

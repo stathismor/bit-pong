@@ -1,6 +1,6 @@
 const SPEED = 0.1;
 const STIFFNESS = 0.0001;
-const OUT_OF_BOUNDS_DISTANCE = 200;
+const OUT_OF_BOUNDS_DISTANCE = 700;
 
 class Ball extends Phaser.Physics.Matter.Sprite {
   constructor(scene, x, y, key) {
