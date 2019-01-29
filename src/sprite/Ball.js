@@ -1,3 +1,5 @@
+import ProjectionLine from '../component/ProjectionLine';
+
 const SPEED = 0.1;
 const STIFFNESS = 0.0001;
 const RESET_DISTANCE = 500;
@@ -22,6 +24,8 @@ class Ball extends Phaser.Physics.Matter.Sprite {
       stiffness: STIFFNESS,
       damping: 1,
     });
+
+    new ProjectionLine(scene, x, y, SPEED);
 
     scene.input.on('dragstart', (pointer, gameObject) => {
       gameObject.setStatic(false);
