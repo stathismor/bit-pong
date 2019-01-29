@@ -13,7 +13,7 @@ const config = {
   title: 'Weird Pong',
   width: _WIDTH,
   height: _HEIGHT,
-  scaleMode: 0, //Phaser.ScaleManager.EXACT_FIT,
+  scaleMode: 0, // Phaser.ScaleManager.EXACT_FIT,
   backgroundColor: '#ffffff',
   pixelArt: false,
   physics: {
