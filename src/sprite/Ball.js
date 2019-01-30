@@ -1,10 +1,14 @@
 import ProjectionLine from '../component/ProjectionLine';
 
-const SPEED = 0.1;
-const STIFFNESS = 0.0001;
+const SPEED = 0.15;
 const RESET_DISTANCE = 500;
 const IMMOBILE_SPEED = 0.222;
 const IMMOBILE_ANGULAR_SPPED = 0.03;
+const GREY_BALL_SCALE = 1.6;
+
+const LOW_STIFFNESS = 0.0001;
+const HIGH_STIFFNESS = 0.05;
+const DRAG_LENGTH = 100;
 
 class Ball extends Phaser.Physics.Matter.Sprite {
   constructor(scene, x, y, key) {
@@ -14,24 +18,53 @@ class Ball extends Phaser.Physics.Matter.Sprite {
     this.spring = scene.matter.add.mouseSpring();
 
     this.setCircle();
-    this.setStatic(true);
+    // this.setStatic(true);
     this.setInteractive({ draggable: true });
     scene.input.setDraggable(this);
+
+    const greyBall = scene.add.image(x, y, 'grey_ball');
+    greyBall.setAlpha(0.12);
+    greyBall.setScale(GREY_BALL_SCALE);
+
+    const throwOffset = greyBall.width * GREY_BALL_SCALE - this.width;
+    new ProjectionLine(scene, x, y, SPEED, throwOffset);
 
     this.constraint = Phaser.Physics.Matter.Matter.Constraint.create({
       pointA: { x, y },
       bodyB: this.body,
-      stiffness: STIFFNESS,
-      damping: 1,
+      stiffness: HIGH_STIFFNESS,
     });
-
-    new ProjectionLine(scene, x, y, SPEED);
+    scene.matter.world.add(this.constraint);
 
     scene.input.on('dragstart', (pointer, gameObject) => {
       gameObject.setStatic(false);
     });
 
+    scene.input.on('drag', (pointer, gameObject, dragX, dragY) => {
+      const { constraint } = gameObject;
+      if (Phaser.Math.Distance.Between(x, y, dragX, dragY) > DRAG_LENGTH) {
+        constraint.stiffness = 1;
+        constraint.length = DRAG_LENGTH;
+      } else {
+        constraint.stiffness = LOW_STIFFNESS;
+      }
+    });
+
     scene.input.on('dragend', (pointer, gameObject) => {
+      const fromStartDistance = Phaser.Math.Distance.Between(
+        x,
+        y,
+        gameObject.x,
+        gameObject.y
+      );
+
+      const { constraint } = gameObject;
+      if (fromStartDistance < throwOffset) {
+        constraint.stiffness = HIGH_STIFFNESS;
+        constraint.length = 0;
+        return;
+      }
+
       gameObject.setStatic(false);
       gameObject.setVelocity(
         (gameObject.startPos.x - gameObject.x) * SPEED,
