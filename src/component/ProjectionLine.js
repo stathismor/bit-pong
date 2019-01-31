@@ -1,9 +1,9 @@
 const MAX_PROJECTION_POINTS = 30;
-const PROJECTION_LINE_LENGTH = 300;
+const PROJECTION_LINE_LENGTH = 250;
 const SKIP_UPDATE_NUM = 2;
 
 export default class ProjectionLine {
-  constructor(scene, x, y, speed, offset) {
+  constructor(scene, x, y, speed, dragLength, offset) {
     this.projectionPointsGroup = scene.add.group({
       key: 'projection_point',
       repeat: MAX_PROJECTION_POINTS,
@@ -28,6 +28,13 @@ export default class ProjectionLine {
         y,
         offset
       );
+    });
+
+    scene.input.on('dragend', () => {
+      this.projectionPointsGroup.children.each(point => {
+        point.setVisible(false);
+        point.setActive(false);
+      });
     });
   }
 
@@ -68,8 +75,8 @@ export default class ProjectionLine {
     this.hiddenBall.body.force.y = 0;
     this.hiddenBall.body.force.x = 0;
     this.hiddenBall.setVelocity(
-      (startX - dragX) * speed,
-      (startY - dragY) * speed
+      (startX - gameObject.x) * speed,
+      (startY - gameObject.y) * speed
     );
 
     const projectionLineData = [

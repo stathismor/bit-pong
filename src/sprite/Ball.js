@@ -18,7 +18,6 @@ class Ball extends Phaser.Physics.Matter.Sprite {
     this.spring = scene.matter.add.mouseSpring();
 
     this.setCircle();
-    // this.setStatic(true);
     this.setInteractive({ draggable: true });
     scene.input.setDraggable(this);
 
@@ -27,7 +26,7 @@ class Ball extends Phaser.Physics.Matter.Sprite {
     greyBall.setScale(GREY_BALL_SCALE);
 
     const throwOffset = greyBall.width * GREY_BALL_SCALE - this.width;
-    new ProjectionLine(scene, x, y, SPEED, throwOffset);
+    new ProjectionLine(scene, x, y, SPEED, DRAG_LENGTH, throwOffset);
 
     this.constraint = Phaser.Physics.Matter.Matter.Constraint.create({
       pointA: { x, y },
@@ -73,6 +72,7 @@ class Ball extends Phaser.Physics.Matter.Sprite {
 
       gameObject.scene.matter.world.removeConstraint(gameObject.constraint);
       gameObject.spring.destroy();
+      gameObject.removeInteractive();
     });
 
     const context = this;
