@@ -1,6 +1,7 @@
 import _LEVELS from '../../config/levels.json';
 
-const LEVEL_NUMBERS_DISTANCE = 64;
+const LEVELS_PER_ROW = 3;
+const ROW_HEIGHT = 96;
 
 export default class LevelMenuScene extends Phaser.Scene {
   constructor() {
@@ -10,6 +11,9 @@ export default class LevelMenuScene extends Phaser.Scene {
   }
 
   create() {
+    const config = this.sys.game.CONFIG;
+    const levelWidthDistance = config.width / LEVELS_PER_ROW;
+    const levelPos = { x: levelWidthDistance, y: 96 };
     const completedLevels =
       JSON.parse(localStorage.getItem('completed-levels')) || [];
 
@@ -23,13 +27,23 @@ export default class LevelMenuScene extends Phaser.Scene {
         fill: colour,
         fontSize: 64,
       });
-      levelText.setPosition(levelNumber * LEVEL_NUMBERS_DISTANCE, 16);
+      levelText.setPosition(
+        levelPos.x - levelWidthDistance / 2 - levelText.width / 2,
+        levelPos.y - levelText.height
+      );
 
       // make the text interactive
       levelText.setInteractive(
         new Phaser.Geom.Rectangle(0, 0, levelText.width, levelText.height),
         Phaser.Geom.Rectangle.Contains
       );
+
+      if (levelNumber % LEVELS_PER_ROW === 0) {
+        levelPos.x = levelWidthDistance;
+        levelPos.y += ROW_HEIGHT;
+      } else {
+        levelPos.x += levelWidthDistance;
+      }
 
       const { scene } = this;
       levelText.on('pointerdown', () =>
