@@ -16,12 +16,12 @@ export default class LevelMenuScene extends Phaser.Scene {
     const levelPos = { x: levelWidthDistance, y: 96 };
     const completedLevels =
       JSON.parse(localStorage.getItem('completed-levels')) || [];
+    const nextLevel = Math.max(...completedLevels) + 1;
 
     for (let levelNumber = 1; levelNumber <= _LEVELS.length; levelNumber += 1) {
-      let colour = 'black';
-      if (completedLevels.includes(levelNumber)) {
-        colour = 'green';
-      }
+      const isCompleted = completedLevels.includes(levelNumber);
+      const colour = isCompleted ? 'green' : 'black';
+
       const levelText = this.add.text(0, 0, levelNumber.toString(), {
         fontFamily: 'Arial',
         fill: colour,
@@ -32,12 +32,6 @@ export default class LevelMenuScene extends Phaser.Scene {
         levelPos.y - levelText.height
       );
 
-      // make the text interactive
-      levelText.setInteractive(
-        new Phaser.Geom.Rectangle(0, 0, levelText.width, levelText.height),
-        Phaser.Geom.Rectangle.Contains
-      );
-
       if (levelNumber % LEVELS_PER_ROW === 0) {
         levelPos.x = levelWidthDistance;
         levelPos.y += ROW_HEIGHT;
@@ -45,10 +39,19 @@ export default class LevelMenuScene extends Phaser.Scene {
         levelPos.x += levelWidthDistance;
       }
 
-      const { scene } = this;
-      levelText.on('pointerdown', () =>
-        scene.start('GameplayScene', { levelNumber })
-      );
+      // Only allow click if it's completed or it's the next level
+      if (isCompleted || levelNumber === nextLevel || __DEV__) {
+        // Make the text interactive
+        levelText.setInteractive(
+          new Phaser.Geom.Rectangle(0, 0, levelText.width, levelText.height),
+          Phaser.Geom.Rectangle.Contains
+        );
+
+        const { scene } = this;
+        levelText.on('pointerdown', () =>
+          scene.start('GameplayScene', { levelNumber })
+        );
+      }
     }
   }
 }
