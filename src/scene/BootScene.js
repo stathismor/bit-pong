@@ -13,6 +13,9 @@ class BootScene extends Phaser.Scene {
     this.load.image('empty_life', 'assets/images/empty_life.png');
     this.load.image('projection_point', 'assets/images/projection_point.png');
     this.load.image('grey_ball', 'assets/images/grey_ball.png');
+    this.load.image('level_completed', 'assets/images/level_completed.png');
+    this.load.image('level_locked', 'assets/images/level_locked.png');
+    this.load.image('level_empty', 'assets/images/level_empty.png');
 
     this.load.audio('table_bounce', 'assets/sounds/table_bounce.mp3');
     this.load.audio('cup_bounce', 'assets/sounds/cup_bounce.mp3');
