@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+
 import ProjectionLine from '../component/ProjectionLine';
 
 const SPEED = 0.15;
@@ -6,50 +8,58 @@ const IMMOBILE_SPEED = 0.222;
 const IMMOBILE_ANGULAR_SPPED = 0.03;
 const GREY_BALL_SCALE = 1.6;
 
-const LOW_STIFFNESS = 0.0001;
-const HIGH_STIFFNESS = 0.05;
-const DRAG_LENGTH = 100;
-
 class Ball extends Phaser.Physics.Matter.Sprite {
   constructor(scene, x, y, key) {
     super(scene.matter.world, x, y, key, null);
     this.startPos = { x, y };
     this.touchesTable = false;
-    this.spring = scene.matter.add.mouseSpring();
+    this.hasConstraint = false;
+
+    this.isPressed = false;
+    this.dragX = x;
+    this.dragY = y;
+
+    this.spring = scene.matter.add.mouseSpring({
+      length: 0.1,
+      stiffness: 1,
+    });
 
     this.setCircle();
     this.setInteractive({ draggable: true });
-    scene.input.setDraggable(this);
 
     const greyBall = scene.add.image(x, y, 'grey_ball');
     greyBall.setAlpha(0.12);
     greyBall.setScale(GREY_BALL_SCALE);
 
     const throwOffset = greyBall.width * GREY_BALL_SCALE - this.width;
-    new ProjectionLine(scene, x, y, SPEED, DRAG_LENGTH, throwOffset);
+    (() => new ProjectionLine(scene, x, y, SPEED, 100, throwOffset))();
 
     this.constraint = Phaser.Physics.Matter.Matter.Constraint.create({
       pointA: { x, y },
       bodyB: this.body,
-      stiffness: HIGH_STIFFNESS,
+      stiffness: 0.05,
     });
-    scene.matter.world.add(this.constraint);
+    this.setStatic(true);
 
     scene.input.on('dragstart', (pointer, gameObject) => {
+      gameObject.isPressed = true;
+      gameObject.dragX = gameObject.x;
+      gameObject.dragY = gameObject.y;
+
+      if (gameObject.hasConstraint) {
+        gameObject.scene.matter.world.removeConstraint(gameObject.constraint);
+      }
       gameObject.setStatic(false);
     });
 
     scene.input.on('drag', (pointer, gameObject, dragX, dragY) => {
-      const { constraint } = gameObject;
-      if (Phaser.Math.Distance.Between(x, y, dragX, dragY) > DRAG_LENGTH) {
-        constraint.stiffness = 1;
-        constraint.length = DRAG_LENGTH;
-      } else {
-        constraint.stiffness = LOW_STIFFNESS;
-      }
+      gameObject.isPressed = true;
+      gameObject.dragX = dragX;
+      gameObject.dragY = dragY;
     });
 
     scene.input.on('dragend', (pointer, gameObject) => {
+      gameObject.isPressed = false;
       const fromStartDistance = Phaser.Math.Distance.Between(
         x,
         y,
@@ -57,10 +67,9 @@ class Ball extends Phaser.Physics.Matter.Sprite {
         gameObject.y
       );
 
-      const { constraint } = gameObject;
       if (fromStartDistance < throwOffset) {
-        constraint.stiffness = HIGH_STIFFNESS;
-        constraint.length = 0;
+        gameObject.scene.matter.world.add(gameObject.constraint);
+        gameObject.hasConstraint = true;
         return;
       }
 
@@ -70,7 +79,6 @@ class Ball extends Phaser.Physics.Matter.Sprite {
         (gameObject.startPos.y - gameObject.y) * SPEED
       );
 
-      gameObject.scene.matter.world.removeConstraint(gameObject.constraint);
       gameObject.spring.destroy();
       gameObject.removeInteractive();
     });
@@ -97,6 +105,12 @@ class Ball extends Phaser.Physics.Matter.Sprite {
   }
 
   update() {
+    // Workaround for bug where when ball is clicked on the edge, it falls down
+    if (this.isPressed) {
+      this.x = this.dragX;
+      this.y = this.dragY;
+    }
+
     const isImmobile =
       this.body.speed < IMMOBILE_SPEED &&
       this.body.angularSpeed < IMMOBILE_ANGULAR_SPPED &&
