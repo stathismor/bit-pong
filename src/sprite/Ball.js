@@ -125,7 +125,7 @@ class Ball extends Phaser.Physics.Matter.Sprite {
       isImmobile
     ) {
       this.touchesTable = false;
-      this.scene.scene.restart({ result: 'fail' });
+      this.emit('dead');
     }
   }
 }

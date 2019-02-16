@@ -1,37 +1,51 @@
-const MAX_LIVES = 3;
+import * as constants from '../constants';
+
 const HEALTH_BAR_Y = 16;
 const LIVES_DISTANCE = 16;
 
 export default class HealthBar {
-  constructor(scene, lives, ball) {
+  constructor(scene, livesNumber) {
     this.scene = scene;
-    this.ball = ball;
-    this.lives = ball.lives;
-    this.healthSlots = [];
 
-    this.empty_lives = scene.add.group({
+    this.emptyLives = scene.add.group({
       key: 'empty_life',
-      repeat: MAX_LIVES,
+      repeat: constants.MAX_LIVES,
       active: false,
       visible: false,
     });
-    this.full_lives = scene.add.group({
+    this.fullLives = scene.add.group({
       key: 'full_life',
-      repeat: MAX_LIVES,
+      repeat: constants.MAX_LIVES,
       active: false,
       visible: false,
     });
 
-    for (let index = 1; index <= MAX_LIVES; index += 1) {
+    this.update(livesNumber);
+  }
+
+  update(livesNumber) {
+    this.killAllLives();
+    for (let index = 0; index < constants.MAX_LIVES; index += 1) {
       const life =
-        index <= lives
-          ? this.full_lives.getFirstDead()
-          : this.empty_lives.getFirstDead();
+        index < livesNumber
+          ? this.fullLives.getFirstDead()
+          : this.emptyLives.getFirstDead();
       life.setActive(true);
       life.setVisible(true);
-      life.x = LIVES_DISTANCE * index;
+      life.x = LIVES_DISTANCE * (index + 1);
       life.y = HEALTH_BAR_Y;
-      this.healthSlots.push(life);
     }
+  }
+
+  killAllLives() {
+    this.fullLives.children.each(life => {
+      this.fullLives.kill(life);
+      life.setVisible(false);
+    });
+
+    this.emptyLives.children.each(life => {
+      this.emptyLives.kill(life);
+      life.setVisible(false);
+    });
   }
 }

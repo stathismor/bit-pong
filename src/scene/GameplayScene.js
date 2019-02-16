@@ -2,9 +2,9 @@ import _LEVELS from '../../config/levels.json';
 import Ball from '../sprite/Ball';
 import Cup from '../sprite/Cup';
 import Table from '../sprite/Table';
+import RetryLevelPopup from '../sprite/RetryLevelPopup';
 import HealthBar from '../hud/HealthBar';
-
-const MAX_LIVES = 3;
+import * as constants from '../constants';
 
 class GameplayScene extends Phaser.Scene {
   constructor() {
@@ -12,7 +12,7 @@ class GameplayScene extends Phaser.Scene {
       key: 'GameplayScene',
     });
     this.levelNumber = 1;
-    this.livesNumber = MAX_LIVES;
+    this.livesNumber = constants.MAX_LIVES;
     this.tableIds = [];
     this.ball = null;
   }
@@ -52,8 +52,19 @@ class GameplayScene extends Phaser.Scene {
     );
     this.add.existing(this.cup);
 
-    new HealthBar(this, this.livesNumber, this.ball);
+    this.healthBar = new HealthBar(this, this.livesNumber, this.ball);
+    this.retryLevelPopup = new RetryLevelPopup(this, 200, 200);
 
+    this.ball.once('dead', () => {
+      if (this.livesNumber === 1) {
+        this.livesNumber = 0;
+        this.healthBar.update(this.livesNumber);
+        this.retryLevelPopup.popup();
+      } else if (this.livesNumber !== 0) {
+        this.scene.restart({ result: 'fail' });
+      }
+    });
+    // If this was the last attempt, do not restart the scene, but show the retry popup
     if (__DEV__) {
       this.debug();
     }
@@ -87,7 +98,7 @@ class GameplayScene extends Phaser.Scene {
       return this.livesNumber - 1;
     }
 
-    return MAX_LIVES;
+    return constants.MAX_LIVES;
   }
 
   debug() {
