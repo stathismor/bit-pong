@@ -20,15 +20,10 @@ export default class RetryLevelPopup extends Phaser.GameObjects.Sprite {
       repeat: 0,
       delay: 0,
       paused: true,
+      onComplete: RetryLevelPopup.onComplete,
     });
-  }
 
-  popup() {
-    this.setVisible(true);
-
-    this.tween.play();
-
-    const zoneNo = this.scene.add
+    this.zoneNo = this.scene.add
       .zone(
         this.x - this.width / 2,
         this.y + this.height / 2 - OPTION_HEIGHT,
@@ -36,10 +31,9 @@ export default class RetryLevelPopup extends Phaser.GameObjects.Sprite {
         OPTION_HEIGHT
       )
       .setOrigin(0)
-      .setName(OPTION_NO_NAME)
-      .setInteractive();
+      .setName(OPTION_NO_NAME);
 
-    const zoneYes = this.scene.add
+    this.zoneYes = this.scene.add
       .zone(
         this.x - this.width / 2 + OPTION_WIDTH,
         this.y + this.height / 2 - OPTION_HEIGHT,
@@ -47,14 +41,40 @@ export default class RetryLevelPopup extends Phaser.GameObjects.Sprite {
         OPTION_HEIGHT
       )
       .setOrigin(0)
-      .setName(OPTION_YES_NAME)
-      .setInteractive();
+      .setName(OPTION_YES_NAME);
+  }
+
+  popup() {
+    this.setVisible(true);
+
+    this.zoneNo.setInteractive();
+    this.zoneYes.setInteractive();
+
+    this.tween.play();
+  }
+
+  static onComplete(tween, gameObjects) {
+    const retryLevelPopup = gameObjects[0];
+    retryLevelPopup.scene.input.on('gameobjectdown', (pointer, gameObject) => {
+      if (
+        gameObject.name === OPTION_YES_NAME ||
+        gameObject.name === OPTION_NO_NAME
+      ) {
+        retryLevelPopup.zoneNo.removeInteractive();
+        retryLevelPopup.zoneYes.removeInteractive();
+        if (gameObject.name === OPTION_NO_NAME) {
+          gameObject.scene.scene.start('LevelMenuScene');
+        } else {
+          gameObject.scene.scene.restart({ result: 'retry' });
+        }
+      }
+    });
 
     // Add a red border
     if (__DEV__) {
       const size = 2;
-      const boundsNo = zoneNo.getBounds();
-      const borderNo = this.scene.add.rectangle(
+      const boundsNo = retryLevelPopup.zoneNo.getBounds();
+      const borderNo = retryLevelPopup.scene.add.rectangle(
         boundsNo.x + OPTION_WIDTH / 2,
         boundsNo.y + OPTION_HEIGHT / 2,
         boundsNo.width,
@@ -62,8 +82,8 @@ export default class RetryLevelPopup extends Phaser.GameObjects.Sprite {
       );
       borderNo.setStrokeStyle(size, '0xFF0000');
 
-      const boundsYes = zoneYes.getBounds();
-      const borderYes = this.scene.add.rectangle(
+      const boundsYes = retryLevelPopup.zoneYes.getBounds();
+      const borderYes = retryLevelPopup.scene.add.rectangle(
         boundsYes.x + OPTION_WIDTH / 2,
         boundsYes.y + OPTION_HEIGHT / 2,
         boundsYes.width,
@@ -71,20 +91,5 @@ export default class RetryLevelPopup extends Phaser.GameObjects.Sprite {
       );
       borderYes.setStrokeStyle(size, '0xFF0000');
     }
-
-    this.scene.input.on('gameobjectdown', (pointer, gameObject) => {
-      if (
-        gameObject.name === OPTION_YES_NAME ||
-        gameObject.name === OPTION_NO_NAME
-      ) {
-        zoneNo.removeInteractive();
-        zoneYes.removeInteractive();
-        if (gameObject.name === OPTION_NO_NAME) {
-          this.scene.scene.start('LevelMenuScene');
-        } else {
-          this.scene.scene.restart({ result: 'retry' });
-        }
-      }
-    });
   }
 }
