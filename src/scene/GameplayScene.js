@@ -50,7 +50,11 @@ class GameplayScene extends Phaser.Scene {
     this.add.existing(this.cup);
 
     this.healthBar = new HealthBar(this, this.livesNumber, this.ball);
-    this.retryLevelPopup = new RetryLevelPopup(this, 200, 200);
+    this.retryLevelPopup = new RetryLevelPopup(
+      this,
+      config.centerX,
+      config.centerY
+    );
 
     this.ball.once('dead', () => {
       if (this.livesNumber === 1) {
