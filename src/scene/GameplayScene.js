@@ -21,9 +21,6 @@ class GameplayScene extends Phaser.Scene {
     const config = this.sys.game.CONFIG;
     this.levelNumber = this.getLevelNumber(data);
     this.livesNumber = this.getLivesNumber(data);
-    if (this.livesNumber === 0) {
-      this.scene.start('LevelMenuScene');
-    }
 
     const level = _LEVELS[this.levelNumber - 1];
     const { tables: confTables = [], cup: confCup } = level;
@@ -94,11 +91,14 @@ class GameplayScene extends Phaser.Scene {
   getLivesNumber(data) {
     const { result } = data;
 
-    if (result === 'fail') {
-      return this.livesNumber - 1;
+    switch (result) {
+      case 'fail':
+        return this.livesNumber - 1;
+      case 'retry':
+        return constants.MAX_LIVES;
+      default:
+        return constants.MAX_LIVES;
     }
-
-    return constants.MAX_LIVES;
   }
 
   debug() {
