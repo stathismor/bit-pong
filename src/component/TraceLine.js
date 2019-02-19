@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+
 const TRACE_POINTS_DISTANCE = 30;
 const TRACE_ALPHA = 0.25;
 const TRACE_FADE_OUT_DURARION = 600;
@@ -6,7 +8,6 @@ export default class TraceLine {
   constructor(scene, ball) {
     this.ball = ball;
     this.previousTracePos = { x: ball.x, y: ball.y };
-    this.launched = false;
 
     let fadeOutTween = null;
 
@@ -47,13 +48,12 @@ export default class TraceLine {
         point.setActive(false);
         point.alpha = 1;
       });
-      context.launched = true;
     });
   }
 
   update() {
     if (
-      this.launched &&
+      this.ball.launched &&
       Phaser.Math.Distance.Between(
         this.previousTracePos.x,
         this.previousTracePos.y,

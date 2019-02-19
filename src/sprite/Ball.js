@@ -12,20 +12,22 @@ const GREY_BALL_SCALE = 1.6;
 class Ball extends Phaser.Physics.Matter.Sprite {
   constructor(scene, x, y, key) {
     super(scene.matter.world, x, y, key, null);
-    this.startPos = { x, y };
     this.touchesTable = false;
     this.hasConstraint = false;
+    this.launched = false;
+
+    this.startPos = { x, y };
 
     this.isPressed = false;
     this.dragX = x;
     this.dragY = y;
 
+    this.setCircle();
+
     this.spring = scene.matter.add.mouseSpring({
       length: 0.1,
       stiffness: 1,
     });
-
-    this.setCircle();
     this.setInteractive({ draggable: true });
 
     const greyBall = scene.add.image(x, y, 'grey_ball');
@@ -45,6 +47,8 @@ class Ball extends Phaser.Physics.Matter.Sprite {
     this.setStatic(true);
 
     scene.input.on('dragstart', (pointer, gameObject) => {
+      gameObject.launched = false;
+
       gameObject.isPressed = true;
       gameObject.dragX = gameObject.x;
       gameObject.dragY = gameObject.y;
@@ -75,6 +79,8 @@ class Ball extends Phaser.Physics.Matter.Sprite {
         gameObject.hasConstraint = true;
         return;
       }
+
+      gameObject.launched = true;
 
       gameObject.setStatic(false);
       gameObject.setVelocity(
@@ -127,11 +133,26 @@ class Ball extends Phaser.Physics.Matter.Sprite {
       ) > RESET_DISTANCE ||
       isImmobile
     ) {
-      this.touchesTable = false;
       this.emit('dead');
+      this.reset();
     }
 
     this.traceLine.update();
+  }
+
+  reset() {
+    this.spring = this.scene.matter.add.mouseSpring({
+      length: 0.1,
+      stiffness: 1,
+    });
+    this.setInteractive({ draggable: true });
+
+    this.launched = false;
+    this.touchesTable = false;
+
+    this.setStatic(true);
+    this.x = this.startPos.x;
+    this.y = this.startPos.y;
   }
 }
 
