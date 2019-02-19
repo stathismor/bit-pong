@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 
 import ProjectionLine from '../component/ProjectionLine';
+import TraceLine from '../component/TraceLine';
 
 const SPEED = 0.15;
 const RESET_DISTANCE = 500;
@@ -33,6 +34,8 @@ class Ball extends Phaser.Physics.Matter.Sprite {
 
     const throwOffset = greyBall.width * GREY_BALL_SCALE - this.width;
     (() => new ProjectionLine(scene, x, y, SPEED, 100, throwOffset))();
+
+    this.traceLine = new TraceLine(scene, this);
 
     this.constraint = Phaser.Physics.Matter.Matter.Constraint.create({
       pointA: { x, y },
@@ -127,6 +130,8 @@ class Ball extends Phaser.Physics.Matter.Sprite {
       this.touchesTable = false;
       this.emit('dead');
     }
+
+    this.traceLine.update();
   }
 }
 

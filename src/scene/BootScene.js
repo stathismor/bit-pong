@@ -12,6 +12,7 @@ class BootScene extends Phaser.Scene {
     this.load.image('full_life', 'assets/images/full_life.png');
     this.load.image('empty_life', 'assets/images/empty_life.png');
     this.load.image('projection_point', 'assets/images/projection_point.png');
+    this.load.image('trace_point', 'assets/images/trace_point.png');
     this.load.image('grey_ball', 'assets/images/grey_ball.png');
     this.load.image('level_completed', 'assets/images/level_completed.png');
     this.load.image('level_locked', 'assets/images/level_locked.png');
@@ -23,7 +24,7 @@ class BootScene extends Phaser.Scene {
   }
 
   create() {
-    this.scene.start('LevelMenuScene');
+    this.scene.start('GameplayScene');
   }
 }
 
