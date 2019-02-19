@@ -49,22 +49,21 @@ class GameplayScene extends Phaser.Scene {
     );
     this.add.existing(this.cup);
 
-    this.healthBar = new HealthBar(this, this.livesNumber, this.ball);
-    this.retryLevelPopup = new RetryLevelPopup(
+    const healthBar = new HealthBar(this, this.livesNumber, this.ball);
+    const retryLevelPopup = new RetryLevelPopup(
       this,
       config.centerX,
       config.centerY
     );
 
-    this.ball.once('dead', () => {
-      if (this.livesNumber === 1) {
-        this.livesNumber = 0;
-        this.healthBar.update(this.livesNumber);
-        this.retryLevelPopup.popup();
-      } else if (this.livesNumber !== 0) {
-        this.scene.restart({ result: 'fail' });
+    this.ball.on('dead', () => {
+      this.livesNumber -= 1;
+      healthBar.update(this.livesNumber);
+      if (this.livesNumber === 0) {
+        retryLevelPopup.popup();
       }
     });
+
     // If this was the last attempt, do not restart the scene, but show the retry popup
     if (__DEV__) {
       this.debug();
