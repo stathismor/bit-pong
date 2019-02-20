@@ -2,19 +2,23 @@
 
 import ProjectionLine from '../component/ProjectionLine';
 import TraceLine from '../component/TraceLine';
+import * as constants from '../constants';
 
 const SPEED = 0.15;
 const RESET_DISTANCE = 500;
-const IMMOBILE_SPEED = 0.222;
+const IMMOBILE_SPEED = 0.2222222222229;
 const IMMOBILE_ANGULAR_SPPED = 0.03;
 const GREY_BALL_SCALE = 1.6;
+const DEATH_DELAY = 650;
 
 class Ball extends Phaser.Physics.Matter.Sprite {
   constructor(scene, x, y, key) {
     super(scene.matter.world, x, y, key, null);
+    this.livesNumber = constants.MAX_LIVES;
     this.touchesTable = false;
     this.hasConstraint = false;
     this.launched = false;
+    this.isDead = false;
 
     this.startPos = { x, y };
 
@@ -37,7 +41,7 @@ class Ball extends Phaser.Physics.Matter.Sprite {
     const throwOffset = greyBall.width * GREY_BALL_SCALE - this.width;
     (() => new ProjectionLine(scene, x, y, SPEED, 100, throwOffset))();
 
-    this.traceLine = new TraceLine(scene, this);
+    this.traceLine = new TraceLine(scene, this, throwOffset);
 
     this.constraint = Phaser.Physics.Matter.Matter.Constraint.create({
       pointA: { x, y },
@@ -114,6 +118,10 @@ class Ball extends Phaser.Physics.Matter.Sprite {
   }
 
   update() {
+    if (this.isDead || this.livesNumber === 0) {
+      return;
+    }
+
     // Workaround for bug where when ball is clicked on the edge, it falls down
     if (this.isPressed) {
       this.x = this.dragX;
@@ -133,11 +141,20 @@ class Ball extends Phaser.Physics.Matter.Sprite {
       ) > RESET_DISTANCE ||
       isImmobile
     ) {
-      this.emit('dead');
-      this.reset();
+      this.isDead = true;
+      this.scene.time.delayedCall(DEATH_DELAY, this.kill, null, this);
     }
 
     this.traceLine.update();
+  }
+
+  kill() {
+    this.livesNumber -= 1;
+    this.emit('dead');
+    if (this.livesNumber !== 0) {
+      this.reset();
+    }
+    this.isDead = false;
   }
 
   reset() {

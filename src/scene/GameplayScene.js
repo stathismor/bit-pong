@@ -4,7 +4,6 @@ import Cup from '../sprite/Cup';
 import Table from '../sprite/Table';
 import RetryLevelPopup from '../sprite/RetryLevelPopup';
 import HealthBar from '../hud/HealthBar';
-import * as constants from '../constants';
 
 class GameplayScene extends Phaser.Scene {
   constructor() {
@@ -12,7 +11,6 @@ class GameplayScene extends Phaser.Scene {
       key: 'GameplayScene',
     });
     this.levelNumber = 1;
-    this.livesNumber = constants.MAX_LIVES;
     this.tableIds = [];
     this.ball = null;
   }
@@ -20,7 +18,6 @@ class GameplayScene extends Phaser.Scene {
   create(data) {
     const config = this.sys.game.CONFIG;
     this.levelNumber = this.getLevelNumber(data);
-    this.livesNumber = this.getLivesNumber(data);
 
     const level = _LEVELS[this.levelNumber - 1];
     const { tables: confTables = [], cup: confCup } = level;
@@ -49,7 +46,7 @@ class GameplayScene extends Phaser.Scene {
     );
     this.add.existing(this.cup);
 
-    const healthBar = new HealthBar(this, this.livesNumber, this.ball);
+    const healthBar = new HealthBar(this, this.ball.livesNumber);
     const retryLevelPopup = new RetryLevelPopup(
       this,
       config.centerX,
@@ -57,14 +54,12 @@ class GameplayScene extends Phaser.Scene {
     );
 
     this.ball.on('dead', () => {
-      this.livesNumber -= 1;
-      healthBar.update(this.livesNumber);
-      if (this.livesNumber === 0) {
+      healthBar.update(this.ball.livesNumber);
+      if (this.ball.livesNumber === 0) {
         retryLevelPopup.popup();
       }
     });
 
-    // If this was the last attempt, do not restart the scene, but show the retry popup
     if (__DEV__) {
       this.debug();
     }
@@ -88,19 +83,6 @@ class GameplayScene extends Phaser.Scene {
         return this.levelNumber + 1;
       default:
         return this.levelNumber;
-    }
-  }
-
-  getLivesNumber(data) {
-    const { result } = data;
-
-    switch (result) {
-      case 'fail':
-        return this.livesNumber - 1;
-      case 'retry':
-        return constants.MAX_LIVES;
-      default:
-        return constants.MAX_LIVES;
     }
   }
 
