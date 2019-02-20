@@ -5,7 +5,7 @@ const TRACE_ALPHA = 0.25;
 const TRACE_FADE_OUT_DURARION = 600;
 
 export default class TraceLine {
-  constructor(scene, ball) {
+  constructor(scene, ball, offset) {
     this.ball = ball;
     this.previousTracePos = { x: ball.x, y: ball.y };
 
@@ -33,14 +33,25 @@ export default class TraceLine {
           duration: TRACE_FADE_OUT_DURARION,
           delay: 0,
           alpha: {
-            getStart: () => 1,
+            getStart: () => points[0].alpha,
             getEnd: () => TRACE_ALPHA,
           },
         });
       }
     });
 
-    scene.input.on('dragend', () => {
+    scene.input.on('dragend', (pointer, gameObject) => {
+      const fromStartDistance = Phaser.Math.Distance.Between(
+        ball.startPos.x,
+        ball.startPos.y,
+        gameObject.x,
+        gameObject.y
+      );
+
+      if (fromStartDistance < offset) {
+        return;
+      }
+
       // Remove previous attempt's trace points
       // TODO: Need to stop the previous tween, this is a race condition.
       context.tracePointsGroup.children.each(point => {
