@@ -4,15 +4,15 @@ import GameplayScene from './scene/GameplayScene';
 import LevelMenuScene from './scene/LevelMenuScene';
 import ScaleManager from './ScaleManager';
 
-const _WIDTH = 640;
-const _HEIGHT = 360;
+const WIDTH = 640;
+const HEIGHT = 360;
 
 const config = {
   type: Phaser.AUTO,
   parent: 'content',
-  title: 'Weird Pong',
-  width: _WIDTH,
-  height: _HEIGHT,
+  title: 'Bit Pong',
+  width: WIDTH,
+  height: HEIGHT,
   scaleMode: 0, // Phaser.ScaleManager.EXACT_FIT,
   backgroundColor: '#ffffff',
   pixelArt: false,
@@ -27,7 +27,7 @@ const config = {
   scene: [BootScene, LevelMenuScene, GameplayScene],
   callbacks: {
     postBoot: () => {
-      new ScaleManager(_WIDTH, _HEIGHT);
+      (() => new ScaleManager(WIDTH, HEIGHT))();
     },
   },
 };
