@@ -3,6 +3,7 @@
 import ProjectionLine from '../component/ProjectionLine';
 import TraceLine from '../component/TraceLine';
 import * as constants from '../constants';
+import util from '../utils';
 
 const SPEED = 0.15;
 const RESET_DISTANCE = 500;
@@ -10,6 +11,7 @@ const IMMOBILE_SPEED = 0.2222222222229;
 const IMMOBILE_ANGULAR_SPPED = 0.03;
 const GREY_BALL_SCALE = 1.6;
 const DEATH_DELAY = 650;
+const DRAG_LENGTH = 95;
 
 class Ball extends Phaser.Physics.Matter.Sprite {
   constructor(scene, x, y, key) {
@@ -65,8 +67,23 @@ class Ball extends Phaser.Physics.Matter.Sprite {
 
     scene.input.on('drag', (pointer, gameObject, dragX, dragY) => {
       gameObject.isPressed = true;
-      gameObject.dragX = dragX;
-      gameObject.dragY = dragY;
+      let pointX = dragX;
+      let pointY = dragY;
+
+      if (Phaser.Math.Distance.Between(x, y, dragX, dragY) >= DRAG_LENGTH) {
+        const position = util.closestPointToCircle(
+          x,
+          y,
+          dragX,
+          dragY,
+          DRAG_LENGTH
+        );
+        pointX = position.x;
+        pointY = position.y;
+      }
+
+      gameObject.dragX = pointX;
+      gameObject.dragY = pointY;
     });
 
     scene.input.on('dragend', (pointer, gameObject) => {
