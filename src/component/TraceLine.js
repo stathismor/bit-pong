@@ -9,6 +9,7 @@ export default class TraceLine {
     this.ball = ball;
     this.previousTracePos = { x: ball.x, y: ball.y };
 
+    this.launched = false;
     let fadeOutTween = null;
 
     this.tracePointsGroup = scene.add.group({
@@ -20,6 +21,7 @@ export default class TraceLine {
 
     const context = this;
     scene.input.on('dragstart', (pointer, gameObject) => {
+      context.launched = false;
       const points = context.tracePointsGroup.children.entries.filter(
         point => point.active
       );
@@ -52,8 +54,8 @@ export default class TraceLine {
         return;
       }
 
-      // Remove previous attempt's trace points
-      // TODO: Need to stop the previous tween, this is a race condition.
+      context.launched = true;
+
       context.tracePointsGroup.children.each(point => {
         point.setVisible(false);
         point.setActive(false);
@@ -64,7 +66,7 @@ export default class TraceLine {
 
   update() {
     if (
-      this.ball.launched &&
+      this.launched &&
       Phaser.Math.Distance.Between(
         this.previousTracePos.x,
         this.previousTracePos.y,

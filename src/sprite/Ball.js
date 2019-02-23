@@ -19,7 +19,6 @@ class Ball extends Phaser.Physics.Matter.Sprite {
     this.livesNumber = constants.MAX_LIVES;
     this.touchesTable = false;
     this.hasConstraint = false;
-    this.launched = false;
     this.isDead = false;
 
     this.startPos = { x, y };
@@ -53,8 +52,6 @@ class Ball extends Phaser.Physics.Matter.Sprite {
     this.setStatic(true);
 
     scene.input.on('dragstart', (pointer, gameObject) => {
-      gameObject.launched = false;
-
       gameObject.isPressed = true;
       gameObject.dragX = gameObject.x;
       gameObject.dragY = gameObject.y;
@@ -100,8 +97,6 @@ class Ball extends Phaser.Physics.Matter.Sprite {
         gameObject.hasConstraint = true;
         return;
       }
-
-      gameObject.launched = true;
 
       gameObject.setStatic(false);
       gameObject.setVelocity(
@@ -181,7 +176,6 @@ class Ball extends Phaser.Physics.Matter.Sprite {
     });
     this.setInteractive({ draggable: true });
 
-    this.launched = false;
     this.touchesTable = false;
 
     this.setStatic(true);

@@ -31,7 +31,7 @@ class GameplayScene extends Phaser.Scene {
         confTable.x,
         confTable.y,
         'table',
-        confTable.angle
+        Phaser.Math.DegToRad(confTable.angle)
       );
       this.add.existing(table);
       this.tableIds.push(table.body.id);
@@ -42,7 +42,8 @@ class GameplayScene extends Phaser.Scene {
       confCup.x,
       confCup.y,
       confCup.angle,
-      this.ball.body.id
+      this.ball.body.id,
+      confCup.behaviour
     );
     this.add.existing(this.cup);
 
@@ -67,6 +68,7 @@ class GameplayScene extends Phaser.Scene {
 
   update(time, delta) {
     this.ball.update();
+    this.cup.update(delta);
   }
 
   getLevelNumber(data) {
