@@ -1,10 +1,13 @@
+import behaviour from '../behaviour';
+
 const M = Phaser.Physics.Matter.Matter;
 const SIDE_WITH = 10;
 const SENSOR_WIDTH = 25;
 
 export default class Cup extends Phaser.Physics.Matter.Sprite {
-  constructor(scene, x, y, angle, ballId) {
+  constructor(scene, x, y, angleRad, ballId, behaviourName) {
     super(scene.matter.world, x, y, 'cup');
+    this.behaviour = behaviour[behaviourName];
 
     // The player's body is going to be a compound body.
     const cupLeft = M.Bodies.rectangle(
@@ -34,7 +37,7 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
     });
 
     this.setExistingBody(compoundBody)
-      .setAngle(angle)
+      .setAngle(angleRad)
       .setPosition(x, y)
       .setFriction(0)
       .setStatic(true);
@@ -61,5 +64,11 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
         context.scene.sound.play('cup_bounce');
       }
     });
+  }
+
+  update(delta) {
+    if (this.behaviour) {
+      this.behaviour(this, delta);
+    }
   }
 }
