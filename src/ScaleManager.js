@@ -1,31 +1,44 @@
 class ScaleManager {
-    constructor(width, height) {
-        window.addEventListener('resize', () => this.resize(width, height))
-        this.resize(width, height);
+  constructor(width, height, isDesktop) {
+    window.addEventListener('resize', () =>
+      ScaleManager.resize(width, height, isDesktop)
+    );
+    ScaleManager.resize(width, height, isDesktop);
+  }
+
+  static resize(configWidth, configHeight, isDesktop) {
+    // Check if device DPI messes up the width-height-ratio
+    const canvas = document.getElementsByTagName('canvas')[0];
+
+    // For desktop, only multiply with integer number
+    if (isDesktop) {
+      const multiple = Math.max(
+        1,
+        Math.floor(window.innerHeight / configHeight)
+      );
+      canvas.style.width = `${multiple * configWidth}px`;
+      canvas.style.height = `${multiple * configHeight}px`;
+      return;
     }
 
-    resize(config_width, config_height) {
-        // Width-height-ratio of game resolution
-        let game_ratio = config_width / config_height;
+    // Width-height-ratio of game resolution
+    const gameRatio = configWidth / configHeight;
 
-        // Make div full height of browser and keep the ratio of game resolution
-        let div = document.getElementById('content');
-        div.style.width = (window.innerHeight * game_ratio) + 'px';
-        div.style.height = window.innerHeight + 'px';
+    // Make div full height of browser and keep the ratio of game resolution
+    const div = document.getElementById('content');
+    div.style.width = `${window.innerHeight * gameRatio}px`;
+    div.style.height = `${window.innerHeight}px`;
 
-        // Check if device DPI messes up the width-height-ratio
-        let canvas  = document.getElementsByTagName('canvas')[0];
+    const dpiW = parseInt(div.style.width, 10) / canvas.width;
+    const dpiH = parseInt(div.style.height, 10) / canvas.height;
 
-        let dpi_w = parseInt(div.style.width) / canvas.width;
-        let dpi_h = parseInt(div.style.height) / canvas.height;
+    const height = window.innerHeight * (dpiW / dpiH);
+    const width = height * gameRatio;
 
-        let height  = window.innerHeight * (dpi_w / dpi_h);
-        let width = height * game_ratio;
-
-        // Scale canvas
-        canvas.style.width  = width + 'px';
-        canvas.style.height = height + 'px';
-    }
+    // Scale canvas
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+  }
 }
 
 export default ScaleManager;

@@ -1,9 +1,10 @@
-import _LEVELS from '../../config/levels.json';
+import LEVELS from '../../config/levels.json';
 import Ball from '../sprite/Ball';
 import Cup from '../sprite/Cup';
 import Table from '../sprite/Table';
 import RetryLevelPopup from '../sprite/RetryLevelPopup';
 import HealthBar from '../hud/HealthBar';
+import * as constants from '../constants';
 
 class GameplayScene extends Phaser.Scene {
   constructor() {
@@ -19,10 +20,16 @@ class GameplayScene extends Phaser.Scene {
     const config = this.sys.game.CONFIG;
     this.levelNumber = this.getLevelNumber(data);
 
-    const level = _LEVELS[this.levelNumber - 1];
+    const level = LEVELS[this.levelNumber - 1];
     const { tables: confTables = [], cup: confCup } = level;
 
-    this.ball = new Ball(this, 125, config.centerY, 'ball');
+    this.ball = new Ball(
+      this,
+      125,
+      config.centerY,
+      constants.TEXTURE_ATLAS,
+      'ball'
+    );
     this.add.existing(this.ball);
 
     confTables.forEach(confTable => {
@@ -30,6 +37,7 @@ class GameplayScene extends Phaser.Scene {
         this,
         confTable.x,
         confTable.y,
+        constants.TEXTURE_ATLAS,
         'table',
         Phaser.Math.DegToRad(confTable.angle)
       );

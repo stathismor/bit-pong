@@ -7,7 +7,7 @@ import ScaleManager from './ScaleManager';
 const WIDTH = 640;
 const HEIGHT = 360;
 
-const config = {
+const game = new Phaser.Game({
   type: Phaser.AUTO,
   parent: 'content',
   title: 'Bit Pong',
@@ -27,16 +27,14 @@ const config = {
   scene: [BootScene, LevelMenuScene, GameplayScene],
   callbacks: {
     postBoot: () => {
-      (() => new ScaleManager(WIDTH, HEIGHT))();
+      (() => new ScaleManager(WIDTH, HEIGHT, game.device.os.desktop))();
     },
   },
-};
-
-const game = new Phaser.Game(config);
+});
 
 game.CONFIG = {
-  width: config.width,
-  height: config.height,
-  centerX: Math.round(0.5 * config.width),
-  centerY: Math.round(0.5 * config.height),
+  width: WIDTH,
+  height: HEIGHT,
+  centerX: Math.round(0.5 * WIDTH),
+  centerY: Math.round(0.5 * HEIGHT),
 };

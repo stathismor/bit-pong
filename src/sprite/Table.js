@@ -1,6 +1,6 @@
 export default class Table extends Phaser.Physics.Matter.Sprite {
-  constructor(scene, x, y, key, angleDeg) {
-    super(scene.matter.world, x, y, key, null, {
+  constructor(scene, x, y, texture, frame, angleDeg) {
+    super(scene.matter.world, x, y, texture, frame, {
       isStatic: true,
       angle: angleDeg,
     });

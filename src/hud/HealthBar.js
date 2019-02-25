@@ -8,13 +8,15 @@ export default class HealthBar {
     this.scene = scene;
 
     this.emptyLives = scene.add.group({
-      key: 'empty_life',
+      key: constants.TEXTURE_ATLAS,
+      frame: 'empty_life',
       repeat: constants.MAX_LIVES,
       active: false,
       visible: false,
     });
     this.fullLives = scene.add.group({
-      key: 'full_life',
+      key: constants.TEXTURE_ATLAS,
+      frame: 'full_life',
       repeat: constants.MAX_LIVES,
       active: false,
       visible: false,
