@@ -4,8 +4,9 @@
     "globals": {
         "Phaser": true,
         "__DEV__": true,
-        "localStorage": true
-
+        "localStorage": true,
+        "window": true,
+        "document": true
     },
     "settings": {
         "import/core-modules": ["phaser"]

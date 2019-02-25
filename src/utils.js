@@ -11,4 +11,7 @@ export default {
 
     return { x, y };
   },
+  isInCircle(x, y, currentX, currentY, radius) {
+    return Phaser.Math.Distance.Between(x, y, currentX, currentY) <= radius;
+  },
 };

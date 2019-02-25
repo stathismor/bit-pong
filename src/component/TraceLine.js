@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+import * as constants from '../constants';
 
 const TRACE_POINTS_DISTANCE = 30;
 const TRACE_ALPHA = 0.25;
@@ -13,7 +14,8 @@ export default class TraceLine {
     let fadeOutTween = null;
 
     this.tracePointsGroup = scene.add.group({
-      key: 'trace_point',
+      key: constants.TEXTURE_ATLAS,
+      frame: 'trace_point',
       repeat: 140,
       active: false,
       visible: false,

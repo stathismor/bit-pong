@@ -1,3 +1,5 @@
+import * as constants from '../constants';
+
 const OPTION_WIDTH = 100;
 const OPTION_HEIGHT = 40;
 const OPTION_NO_NAME = 'No';
@@ -7,7 +9,7 @@ const Y_OFFSET = 6;
 
 export default class RetryLevelPopup extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y) {
-    super(scene, x, y, 'retry_popup');
+    super(scene, x, y, constants.TEXTURE_ATLAS, 'retry_popup');
     this.setVisible(false);
     this.setScale(0.1);
     scene.add.existing(this);

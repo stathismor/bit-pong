@@ -1,5 +1,4 @@
 /* eslint-disable no-param-reassign */
-
 import ProjectionLine from '../component/ProjectionLine';
 import TraceLine from '../component/TraceLine';
 import * as constants from '../constants';
@@ -11,11 +10,11 @@ const IMMOBILE_SPEED = 0.2222222222229;
 const IMMOBILE_ANGULAR_SPPED = 0.03;
 const GREY_BALL_SCALE = 1.6;
 const DEATH_DELAY = 650;
-const DRAG_LENGTH = 95;
+const DRAG_RADIUS = 95;
 
 class Ball extends Phaser.Physics.Matter.Sprite {
-  constructor(scene, x, y, key) {
-    super(scene.matter.world, x, y, key, null);
+  constructor(scene, x, y, texture, frame) {
+    super(scene.matter.world, x, y, texture, frame);
     this.livesNumber = constants.MAX_LIVES;
     this.touchesTable = false;
     this.hasConstraint = false;
@@ -35,7 +34,12 @@ class Ball extends Phaser.Physics.Matter.Sprite {
     });
     this.setInteractive({ draggable: true });
 
-    const greyBall = scene.add.image(x, y, 'grey_ball');
+    const greyBall = scene.add.image(
+      x,
+      y,
+      constants.TEXTURE_ATLAS,
+      'grey_ball'
+    );
     greyBall.setAlpha(0.12);
     greyBall.setScale(GREY_BALL_SCALE);
 
@@ -67,13 +71,13 @@ class Ball extends Phaser.Physics.Matter.Sprite {
       let pointX = dragX;
       let pointY = dragY;
 
-      if (Phaser.Math.Distance.Between(x, y, dragX, dragY) >= DRAG_LENGTH) {
+      if (!util.isInCircle(x, y, dragX, dragY, DRAG_RADIUS)) {
         const position = util.closestPointToCircle(
           x,
           y,
           dragX,
           dragY,
-          DRAG_LENGTH
+          DRAG_RADIUS
         );
         pointX = position.x;
         pointY = position.y;
@@ -111,20 +115,40 @@ class Ball extends Phaser.Physics.Matter.Sprite {
     const context = this;
     scene.matter.world.on('collisionstart', (event, bodyA, bodyB) => {
       if (
-        [bodyA.id, bodyB.id].includes(context.body.id) &&
-        [bodyA.id, bodyB.id].some(r => context.scene.tableIds.includes(r))
+        !util.isInCircle(
+          x,
+          y,
+          context.body.position.x,
+          context.body.position.y,
+          DRAG_RADIUS
+        )
       ) {
-        context.scene.sound.play('table_bounce');
-        context.touchesTable = true;
+        if (
+          [bodyA.id, bodyB.id].includes(context.body.id) &&
+          [bodyA.id, bodyB.id].some(r => context.scene.tableIds.includes(r))
+        ) {
+          context.scene.sound.play('table_bounce');
+          context.touchesTable = true;
+        }
       }
     });
 
     scene.matter.world.on('collisionend', (event, bodyA, bodyB) => {
       if (
-        [bodyA.id, bodyB.id].includes(context.body.id) &&
-        [bodyA.id, bodyB.id].some(r => context.scene.tableIds.includes(r))
+        !util.isInCircle(
+          x,
+          y,
+          context.body.position.x,
+          context.body.position.y,
+          DRAG_RADIUS
+        )
       ) {
-        context.touchesTable = false;
+        if (
+          [bodyA.id, bodyB.id].includes(context.body.id) &&
+          [bodyA.id, bodyB.id].some(r => context.scene.tableIds.includes(r))
+        ) {
+          context.touchesTable = false;
+        }
       }
     });
   }

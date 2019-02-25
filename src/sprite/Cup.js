@@ -1,4 +1,5 @@
 import behaviour from '../behaviour';
+import * as constants from '../constants';
 
 const M = Phaser.Physics.Matter.Matter;
 const SIDE_WITH = 10;
@@ -6,7 +7,7 @@ const SENSOR_WIDTH = 25;
 
 export default class Cup extends Phaser.Physics.Matter.Sprite {
   constructor(scene, x, y, angleRad, ballId, behaviourName) {
-    super(scene.matter.world, x, y, 'cup');
+    super(scene.matter.world, x, y, constants.TEXTURE_ATLAS, 'cup');
     this.behaviour = behaviour[behaviourName];
 
     // The player's body is going to be a compound body.

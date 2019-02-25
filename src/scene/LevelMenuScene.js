@@ -1,4 +1,5 @@
-import _LEVELS from '../../config/levels.json';
+import LEVELS from '../../config/levels.json';
+import * as constants from '../constants';
 
 const LEVELS_PER_ROW = 4;
 const ROW_HEIGHT = 96;
@@ -19,7 +20,7 @@ export default class LevelMenuScene extends Phaser.Scene {
     ) || [0];
     const nextLevel = Math.max(...completedLevels) + 1;
 
-    for (let levelNumber = 1; levelNumber <= _LEVELS.length; levelNumber += 1) {
+    for (let levelNumber = 1; levelNumber <= LEVELS.length; levelNumber += 1) {
       const isCompleted = completedLevels.includes(levelNumber);
       const isNextLevel = levelNumber === nextLevel;
 
@@ -33,7 +34,12 @@ export default class LevelMenuScene extends Phaser.Scene {
         imageKey = 'level_locked';
       }
 
-      const levelImage = this.add.image(0, 0, imageKey);
+      const levelImage = this.add.image(
+        0,
+        0,
+        constants.TEXTURE_ATLAS,
+        imageKey
+      );
       levelImage.x = levelPos.x - levelWidthDistance / 2;
       levelImage.y = levelPos.y - levelImage.height;
 

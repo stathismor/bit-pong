@@ -1,3 +1,5 @@
+import * as constants from '../constants';
+
 const MAX_PROJECTION_POINTS = 30;
 const PROJECTION_LINE_LENGTH = 250;
 const SKIP_UPDATE_NUM = 2;
@@ -5,7 +7,8 @@ const SKIP_UPDATE_NUM = 2;
 export default class ProjectionLine {
   constructor(scene, x, y, speed, dragLength, offset) {
     this.projectionPointsGroup = scene.add.group({
-      key: 'projection_point',
+      key: constants.TEXTURE_ATLAS,
+      frame: 'projection_point',
       repeat: MAX_PROJECTION_POINTS,
       active: false,
       visible: false,
