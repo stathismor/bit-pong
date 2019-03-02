@@ -16,7 +16,7 @@ export default class LevelMenuScene extends Phaser.Scene {
     const levelWidthDistance = config.width / LEVELS_PER_ROW;
     const levelPos = { x: levelWidthDistance, y: 128 };
     const completedLevels = JSON.parse(
-      localStorage.getItem('completed-levels')
+      localStorage.getItem(constants.LOGAL_STORAGE_KEY)
     ) || [0];
     const nextLevel = Math.max(...completedLevels) + 1;
 
