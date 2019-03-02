@@ -5,6 +5,7 @@
 ### New Features
 
 - Ball leaves a trace of itself that fades out.
+- New level with cup move behaviour.
 
 ### Updates
 

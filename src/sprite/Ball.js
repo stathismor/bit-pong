@@ -6,7 +6,7 @@ import * as constants from '../constants';
 import util from '../utils';
 
 const SPEED = 0.15;
-const RESET_DISTANCE = 500;
+const RESET_DISTANCE = 650;
 const IMMOBILE_SPEED = 0.2222222222229;
 const IMMOBILE_ANGULAR_SPPED = 0.03;
 const GREY_BALL_SCALE = 1.6;
