@@ -33,5 +33,9 @@
   {
     "name": "6",
     "cup": { "x": 400, "y": 190, "angle": 0, "behaviour": "rotate" }
+  },
+  {
+    "name": "7",
+    "cup": { "x": 400, "y": 190, "angle": 0, "behaviour": "move" }
   }
 ]

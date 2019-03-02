@@ -1,4 +1,4 @@
-import behaviour from '../behaviour';
+import BEHAVIOUR_MAPPER from '../behaviour';
 import * as constants from '../constants';
 
 const M = Phaser.Physics.Matter.Matter;
@@ -11,7 +11,10 @@ const COLLISION_PERIOD = 200;
 export default class Cup extends Phaser.Physics.Matter.Sprite {
   constructor(scene, x, y, angleRad, ballId, behaviourName) {
     super(scene.matter.world, x, y, constants.TEXTURE_ATLAS, 'cup');
-    this.behaviour = behaviour[behaviourName];
+    this.behaviour = null;
+    if (behaviourName in BEHAVIOUR_MAPPER) {
+      this.behaviour = new BEHAVIOUR_MAPPER[behaviourName](scene, this);
+    }
     let collisionTime = new Date();
 
     // The player's body is going to be a compound body.
@@ -84,7 +87,7 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
 
   update(delta) {
     if (this.behaviour) {
-      this.behaviour(this, delta);
+      this.behaviour.update(delta);
     }
   }
 }
