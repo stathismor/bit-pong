@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
 import ProjectionLine from '../component/ProjectionLine';
 import TraceLine from '../component/TraceLine';
+import BallTrace from '../component/BallTrace';
 import * as constants from '../constants';
 import util from '../utils';
 
@@ -48,6 +49,7 @@ class Ball extends Phaser.Physics.Matter.Sprite {
     (() => new ProjectionLine(scene, x, y, SPEED, 100, throwOffset))();
 
     this.traceLine = new TraceLine(scene, this, throwOffset);
+    this.ballTrace = new BallTrace(scene, this);
 
     this.constraint = Phaser.Physics.Matter.Matter.Constraint.create({
       pointA: { x, y },
@@ -176,6 +178,7 @@ class Ball extends Phaser.Physics.Matter.Sprite {
     }
 
     this.traceLine.update();
+    this.ballTrace.update();
   }
 
   kill() {
