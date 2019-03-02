@@ -19,6 +19,7 @@ class Ball extends Phaser.Physics.Matter.Sprite {
     this.touchesTable = false;
     this.hasConstraint = false;
     this.isDead = false;
+    this.launched = false;
 
     this.startPos = { x, y };
 
@@ -57,6 +58,7 @@ class Ball extends Phaser.Physics.Matter.Sprite {
 
     scene.input.on('dragstart', (pointer, gameObject) => {
       gameObject.isPressed = true;
+      gameObject.launched = false;
       gameObject.dragX = gameObject.x;
       gameObject.dragY = gameObject.y;
 
@@ -89,6 +91,7 @@ class Ball extends Phaser.Physics.Matter.Sprite {
 
     scene.input.on('dragend', (pointer, gameObject) => {
       gameObject.isPressed = false;
+      gameObject.launched = true;
       const fromStartDistance = Phaser.Math.Distance.Between(
         x,
         y,
@@ -115,21 +118,12 @@ class Ball extends Phaser.Physics.Matter.Sprite {
     const context = this;
     scene.matter.world.on('collisionstart', (event, bodyA, bodyB) => {
       if (
-        !util.isInCircle(
-          x,
-          y,
-          context.body.position.x,
-          context.body.position.y,
-          DRAG_RADIUS
-        )
+        context.launched &&
+        [bodyA.id, bodyB.id].includes(context.body.id) &&
+        [bodyA.id, bodyB.id].some(r => context.scene.tableIds.includes(r))
       ) {
-        if (
-          [bodyA.id, bodyB.id].includes(context.body.id) &&
-          [bodyA.id, bodyB.id].some(r => context.scene.tableIds.includes(r))
-        ) {
-          context.scene.sound.play('table_bounce');
-          context.touchesTable = true;
-        }
+        context.scene.sound.play('table_bounce');
+        context.touchesTable = true;
       }
     });
 
