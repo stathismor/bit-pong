@@ -5,10 +5,10 @@ const TRACE_POINTS_DISTANCE = 30;
 const TRACE_ALPHA = 0.25;
 const TRACE_FADE_OUT_DURARION = 600;
 
-export default class TraceLine {
+export default class PointsTrace {
   constructor(scene, ball, offset) {
     this.ball = ball;
-    this.previousTracePos = { x: ball.x, y: ball.y };
+    this.prevTracePos = { x: ball.x, y: ball.y };
 
     this.launched = false;
     let fadeOutTween = null;
@@ -70,8 +70,8 @@ export default class TraceLine {
     if (
       this.launched &&
       Phaser.Math.Distance.Between(
-        this.previousTracePos.x,
-        this.previousTracePos.y,
+        this.prevTracePos.x,
+        this.prevTracePos.y,
         this.ball.x,
         this.ball.y
       ) > TRACE_POINTS_DISTANCE
@@ -83,7 +83,7 @@ export default class TraceLine {
         tracePoint.setActive(true);
         tracePoint.setVisible(true);
 
-        this.previousTracePos = { x: this.ball.x, y: this.ball.y };
+        this.prevTracePos = { x: this.ball.x, y: this.ball.y };
       }
     }
   }
