@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import * as constants from '../constants';
 
-const BALL_TRACE_DISTANCE = 40;
+const BALL_TRACE_DISTANCE = 30;
 
 export default class BallTrace {
   constructor(scene, ball) {
@@ -12,7 +12,7 @@ export default class BallTrace {
     this.ballTraceGroup = scene.add.group({
       key: constants.TEXTURE_ATLAS,
       frame: 'ball',
-      repeat: 10,
+      repeat: 12,
       active: false,
       visible: false,
     });
@@ -35,21 +35,21 @@ export default class BallTrace {
         ballTrace.y = this.ball.y;
         ballTrace.setActive(true);
         ballTrace.setVisible(true);
-      }
 
-      this.scene.tweens.add({
-        targets: ballTrace,
-        ease: 'Sine.easeOut',
-        duration: 500,
-        delay: 0,
-        pause: false,
-        onComplete: BallTrace.onComplete,
-        alpha: {
-          getStart: () => 0.2,
-          getEnd: () => 0,
-        },
-      });
-      this.prevBallTracePos = { x: this.ball.x, y: this.ball.y };
+        this.scene.tweens.add({
+          targets: ballTrace,
+          ease: 'Sine.easeOut',
+          duration: 550,
+          delay: 0,
+          pause: false,
+          onComplete: BallTrace.onComplete,
+          alpha: {
+            getStart: () => 0.17,
+            getEnd: () => 0,
+          },
+        });
+        this.prevBallTracePos = { x: this.ball.x, y: this.ball.y };
+      }
     }
   }
 
