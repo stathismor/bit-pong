@@ -1,5 +1,19 @@
 # Change Log
 
+## Version 0.0.2 - 3rd March 2019
+
+### New Features
+
+- Add start menu scene.
+
+### Updates
+
+N/A
+
+### Bug Fixes
+
+- Fixed issue with dragging the ball from the edge (removed matter spring, did not seem to be needed).
+
 ## Version 0.0.1 - 2nd March 2019
 
 ### New Features
