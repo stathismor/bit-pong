@@ -30,10 +30,6 @@ class Ball extends Phaser.Physics.Matter.Sprite {
 
     this.setCircle();
 
-    this.spring = scene.matter.add.mouseSpring({
-      length: 0.1,
-      stiffness: 1,
-    });
     this.setInteractive({ draggable: true });
 
     const greyBall = scene.add.image(
@@ -113,7 +109,6 @@ class Ball extends Phaser.Physics.Matter.Sprite {
         (gameObject.startPos.y - gameObject.y) * SPEED
       );
 
-      gameObject.spring.destroy();
       gameObject.removeInteractive();
     });
 
@@ -191,10 +186,6 @@ class Ball extends Phaser.Physics.Matter.Sprite {
   }
 
   reset() {
-    this.spring = this.scene.matter.add.mouseSpring({
-      length: 0.1,
-      stiffness: 1,
-    });
     this.setInteractive({ draggable: true });
 
     this.touchesTable = false;
