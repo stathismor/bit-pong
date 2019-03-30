@@ -1,5 +1,20 @@
 # Change Log
 
+## Version 0.0.3 - 30rd March 2019
+
+### New Features
+
+- Add water splash effect.
+
+### Updates
+
+- A bit of delay before moving on to the next level.
+- Update Phaser version to 3.16.2.
+
+### Bug Fixes
+
+N/A
+
 ## Version 0.0.2 - 3rd March 2019
 
 ### New Features
