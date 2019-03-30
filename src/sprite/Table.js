@@ -1,3 +1,5 @@
+import { tableCategory } from '../collision';
+
 export default class Table extends Phaser.Physics.Matter.Sprite {
   constructor(scene, x, y, texture, frame, angleDeg) {
     super(scene.matter.world, x, y, texture, frame, {
@@ -5,6 +7,6 @@ export default class Table extends Phaser.Physics.Matter.Sprite {
       angle: angleDeg,
     });
     this.setBounce(0.7);
-    this.setCollisionCategory(scene.tableCategory);
+    this.setCollisionCategory(tableCategory);
   }
 }

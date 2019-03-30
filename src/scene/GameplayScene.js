@@ -5,6 +5,7 @@ import Table from '../sprite/Table';
 import RetryLevelPopup from '../sprite/RetryLevelPopup';
 import HealthBar from '../hud/HealthBar';
 import * as constants from '../constants';
+import { initCategories } from '../collision';
 
 class GameplayScene extends Phaser.Scene {
   constructor() {
@@ -23,10 +24,7 @@ class GameplayScene extends Phaser.Scene {
     const level = LEVELS[this.levelNumber - 1];
     const { tables: confTables = [], cup: confCup } = level;
 
-    this.cupCategory = this.matter.world.nextCategory();
-    this.ballCategory = this.matter.world.nextCategory();
-    this.waterCategory = this.matter.world.nextCategory();
-    this.tableCategory = this.matter.world.nextCategory();
+    initCategories(this);
 
     this.ball = new Ball(this, 400, 100, constants.TEXTURE_ATLAS, 'ball');
     this.add.existing(this.ball);
