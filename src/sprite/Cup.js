@@ -10,13 +10,6 @@ const OFFSET = 2;
 const CHAMFER_RADIUS = 7;
 const COLLISION_PERIOD = 200;
 
-const DROPS_COUNT = 80;
-const DROP_ROTATION_OFFSET = 0.5;
-const DROP_VELOCITY = 5;
-const DROP_VELOCITY_OFFSET = 1;
-const DROP_POSITION_OFFSET_X = 12;
-const DROP_POSITION_OFFSET_Y = 6;
-
 const LEVEL_MENU_DELAY = 3000;
 
 export default class Cup extends Phaser.Physics.Matter.Sprite {
