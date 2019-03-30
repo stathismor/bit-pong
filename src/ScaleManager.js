@@ -18,7 +18,6 @@ class ScaleManager {
       );
       canvas.style.width = `${multiple * configWidth}px`;
       canvas.style.height = `${multiple * configHeight}px`;
-      return;
     }
 
     // Width-height-ratio of game resolution
