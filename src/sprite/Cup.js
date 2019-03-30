@@ -1,5 +1,7 @@
 import BEHAVIOUR_MAPPER from '../behaviour';
 import * as constants from '../constants';
+import { cupCategory, tableCategory, dropCategory } from '../collision';
+import BitDrops from '../component/BitDrops';
 
 const M = Phaser.Physics.Matter.Matter;
 const SIDE_WITH = 10;
@@ -8,9 +10,9 @@ const OFFSET = 2;
 const CHAMFER_RADIUS = 7;
 const COLLISION_PERIOD = 200;
 
-const DROPS_COUNT = 60;
+const DROPS_COUNT = 80;
 const DROP_ROTATION_OFFSET = 0.5;
-const DROP_VELOCITY = 4;
+const DROP_VELOCITY = 5;
 const DROP_VELOCITY_OFFSET = 1;
 const DROP_POSITION_OFFSET_X = 12;
 const DROP_POSITION_OFFSET_Y = 6;
@@ -20,30 +22,15 @@ const LEVEL_MENU_DELAY = 3000;
 export default class Cup extends Phaser.Physics.Matter.Sprite {
   constructor(scene, x, y, angleRad, ballId, behaviourName) {
     super(scene.matter.world, x, y, constants.TEXTURE_ATLAS, 'cup');
-    this.angleRad = angleRad;
+    this.setCollisionCategory(cupCategory);
+
     this.behaviour = null;
     if (behaviourName in BEHAVIOUR_MAPPER) {
       this.behaviour = new BEHAVIOUR_MAPPER[behaviourName](scene, this);
     }
     let collisionTime = new Date();
-    this.setCollisionCategory(scene.cupCategory);
 
-    const drops = [];
-    const config = scene.sys.game.CONFIG;
-    for (let i = 0; i < DROPS_COUNT; i += 1) {
-      const drop = scene.matter.add.sprite(
-        config.width * 2,
-        config.height * 2,
-        constants.TEXTURE_ATLAS,
-        'drop',
-        { shape: { type: 'rectangle', radius: 8 }, ignorePointer: true }
-      );
-      drop.setCollisionCategory(scene.waterCategory);
-      drop.setCollidesWith([scene.tableCategory, scene.cupCategory]);
-      // drop.setActive(false);
-      // drop.setStatic(true);
-      drops[i] = drop;
-    }
+    const bitDrops = new BitDrops(scene);
 
     // The player's body is going to be a compound body.
     const cupLeft = M.Bodies.rectangle(
@@ -75,7 +62,7 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
     this.setExistingBody(compoundBody)
       .setAngle(angleRad)
       .setPosition(x, y)
-      .setFriction(2)
+      .setFriction(0)
       .setStatic(true);
 
     const context = this;
@@ -92,7 +79,7 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
           if (firstBodyA.id === ballId) {
             firstBodyA.destroy();
 
-            Cup.spillDrops(drops, x, y, context.rotation);
+            bitDrops.spill(x, y, context.rotation);
 
             if (!completedLevels.includes(currentLevel)) {
               localStorage.setItem(
@@ -130,50 +117,5 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
     if (this.behaviour) {
       this.behaviour.update(delta);
     }
-    // console.log(Math.cos(this.angle));
-    // console.log('ROTATION', this.rotation);
-    // console.log(Math.cos(this.rotation));
-  }
-
-  static spillDrops(drops, x, y, rotation) {
-    const dropStartPosY = y - 8;
-    drops.forEach(drop => {
-      const dropTemp = drop;
-      dropTemp.setActive(true);
-      dropTemp.setStatic(false);
-      dropTemp.x = Phaser.Math.FloatBetween(
-        x - DROP_POSITION_OFFSET_X,
-        x + DROP_POSITION_OFFSET_X
-      );
-      dropTemp.y = Phaser.Math.FloatBetween(
-        dropStartPosY,
-        dropStartPosY - DROP_POSITION_OFFSET_Y
-      );
-      const dropX =
-        Math.sin(
-          Phaser.Math.FloatBetween(
-            rotation - DROP_ROTATION_OFFSET,
-            rotation + DROP_ROTATION_OFFSET
-          )
-        ) *
-        Phaser.Math.FloatBetween(
-          DROP_VELOCITY - DROP_VELOCITY_OFFSET,
-          DROP_VELOCITY + DROP_VELOCITY_OFFSET
-        );
-      // console.log(rotation, dropX);
-      const dropY =
-        -Math.cos(
-          Phaser.Math.FloatBetween(
-            rotation - DROP_ROTATION_OFFSET,
-            rotation + DROP_ROTATION_OFFSET
-          )
-        ) *
-        Phaser.Math.FloatBetween(
-          DROP_VELOCITY - DROP_VELOCITY_OFFSET,
-          DROP_VELOCITY + DROP_VELOCITY_OFFSET
-        );
-      // console.log(dropTemp.x, dropTemp.y, dropX, dropY);
-      drop.setVelocity(dropX, dropY);
-    });
   }
 }
