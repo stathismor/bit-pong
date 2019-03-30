@@ -5,5 +5,6 @@ export default class Table extends Phaser.Physics.Matter.Sprite {
       angle: angleDeg,
     });
     this.setBounce(0.7);
+    this.setCollisionCategory(scene.tableCategory);
   }
 }
