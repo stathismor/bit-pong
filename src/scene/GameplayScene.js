@@ -26,7 +26,13 @@ class GameplayScene extends Phaser.Scene {
 
     initCategories(this);
 
-    this.ball = new Ball(this, 400, 100, constants.TEXTURE_ATLAS, 'ball');
+    this.ball = new Ball(
+      this,
+      125,
+      config.centerY,
+      constants.TEXTURE_ATLAS,
+      'ball'
+    );
     this.add.existing(this.ball);
 
     confTables.forEach(confTable => {
