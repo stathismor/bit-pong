@@ -70,6 +70,7 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
             JSON.parse(localStorage.getItem(constants.LOGAL_STORAGE_KEY)) || [];
 
           if (firstBodyA.id === ballId) {
+            context.scene.sound.play('splash');
             firstBodyA.destroy();
 
             bitDrops.spill(x, y, context.rotation);
