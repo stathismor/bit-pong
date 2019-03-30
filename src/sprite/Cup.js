@@ -1,5 +1,7 @@
 import BEHAVIOUR_MAPPER from '../behaviour';
 import * as constants from '../constants';
+import { cupCategory, tableCategory, dropCategory } from '../collision';
+import BitDrops from '../component/BitDrops';
 
 const M = Phaser.Physics.Matter.Matter;
 const SIDE_WITH = 10;
@@ -8,14 +10,27 @@ const OFFSET = 2;
 const CHAMFER_RADIUS = 7;
 const COLLISION_PERIOD = 200;
 
+const DROPS_COUNT = 80;
+const DROP_ROTATION_OFFSET = 0.5;
+const DROP_VELOCITY = 5;
+const DROP_VELOCITY_OFFSET = 1;
+const DROP_POSITION_OFFSET_X = 12;
+const DROP_POSITION_OFFSET_Y = 6;
+
+const LEVEL_MENU_DELAY = 3000;
+
 export default class Cup extends Phaser.Physics.Matter.Sprite {
   constructor(scene, x, y, angleRad, ballId, behaviourName) {
     super(scene.matter.world, x, y, constants.TEXTURE_ATLAS, 'cup');
+    this.setCollisionCategory(cupCategory);
+
     this.behaviour = null;
     if (behaviourName in BEHAVIOUR_MAPPER) {
       this.behaviour = new BEHAVIOUR_MAPPER[behaviourName](scene, this);
     }
     let collisionTime = new Date();
+
+    const bitDrops = new BitDrops(scene);
 
     // The player's body is going to be a compound body.
     const cupLeft = M.Bodies.rectangle(
@@ -60,13 +75,26 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
           const currentLevel = scene.levelNumber;
           const completedLevels =
             JSON.parse(localStorage.getItem(constants.LOGAL_STORAGE_KEY)) || [];
-          if (!completedLevels.includes(currentLevel)) {
-            localStorage.setItem(
-              constants.LOGAL_STORAGE_KEY,
-              JSON.stringify([currentLevel, ...completedLevels])
-            );
+
+          if (firstBodyA.id === ballId) {
+            firstBodyA.destroy();
+
+            bitDrops.spill(x, y, context.rotation);
+
+            if (!completedLevels.includes(currentLevel)) {
+              localStorage.setItem(
+                constants.LOGAL_STORAGE_KEY,
+                JSON.stringify([currentLevel, ...completedLevels])
+              );
+            }
           }
-          scene.scene.start('LevelMenuScene');
+
+          this.scene.time.delayedCall(
+            LEVEL_MENU_DELAY,
+            () => scene.scene.start('LevelMenuScene'),
+            null,
+            null
+          );
         }
       }
 
