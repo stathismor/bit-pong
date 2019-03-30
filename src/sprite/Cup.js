@@ -8,9 +8,10 @@ const OFFSET = 2;
 const CHAMFER_RADIUS = 7;
 const COLLISION_PERIOD = 200;
 
-const DROPS_COUNT = 50;
-const DROP_ROTATION_OFFSET = 0.1;
+const DROPS_COUNT = 60;
+const DROP_ROTATION_OFFSET = 0.5;
 const DROP_VELOCITY = 4;
+const DROP_VELOCITY_OFFSET = 1;
 const DROP_POSITION_OFFSET_X = 12;
 const DROP_POSITION_OFFSET_Y = 6;
 
@@ -25,6 +26,7 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
       this.behaviour = new BEHAVIOUR_MAPPER[behaviourName](scene, this);
     }
     let collisionTime = new Date();
+    this.setCollisionCategory(scene.cupCategory);
 
     const drops = [];
     const config = scene.sys.game.CONFIG;
@@ -36,6 +38,8 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
         'drop',
         { shape: { type: 'rectangle', radius: 8 }, ignorePointer: true }
       );
+      drop.setCollisionCategory(scene.waterCategory);
+      drop.setCollidesWith([scene.tableCategory, scene.cupCategory]);
       // drop.setActive(false);
       // drop.setStatic(true);
       drops[i] = drop;
@@ -137,29 +141,38 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
       const dropTemp = drop;
       dropTemp.setActive(true);
       dropTemp.setStatic(false);
-      dropTemp.x = Phaser.Math.Between(
+      dropTemp.x = Phaser.Math.FloatBetween(
         x - DROP_POSITION_OFFSET_X,
         x + DROP_POSITION_OFFSET_X
       );
-      dropTemp.y = Phaser.Math.Between(
+      dropTemp.y = Phaser.Math.FloatBetween(
         dropStartPosY,
         dropStartPosY - DROP_POSITION_OFFSET_Y
       );
       const dropX =
         Math.sin(
-          Phaser.Math.Between(
+          Phaser.Math.FloatBetween(
             rotation - DROP_ROTATION_OFFSET,
             rotation + DROP_ROTATION_OFFSET
           )
-        ) * DROP_VELOCITY;
+        ) *
+        Phaser.Math.FloatBetween(
+          DROP_VELOCITY - DROP_VELOCITY_OFFSET,
+          DROP_VELOCITY + DROP_VELOCITY_OFFSET
+        );
+      // console.log(rotation, dropX);
       const dropY =
         -Math.cos(
-          Phaser.Math.Between(
+          Phaser.Math.FloatBetween(
             rotation - DROP_ROTATION_OFFSET,
             rotation + DROP_ROTATION_OFFSET
           )
-        ) * DROP_VELOCITY;
-      console.log(dropTemp.x, dropTemp.y, dropX, dropY);
+        ) *
+        Phaser.Math.FloatBetween(
+          DROP_VELOCITY - DROP_VELOCITY_OFFSET,
+          DROP_VELOCITY + DROP_VELOCITY_OFFSET
+        );
+      // console.log(dropTemp.x, dropTemp.y, dropX, dropY);
       drop.setVelocity(dropX, dropY);
     });
   }

@@ -23,13 +23,12 @@ class GameplayScene extends Phaser.Scene {
     const level = LEVELS[this.levelNumber - 1];
     const { tables: confTables = [], cup: confCup } = level;
 
-    this.ball = new Ball(
-      this,
-      125,
-      config.centerY,
-      constants.TEXTURE_ATLAS,
-      'ball'
-    );
+    this.cupCategory = this.matter.world.nextCategory();
+    this.ballCategory = this.matter.world.nextCategory();
+    this.waterCategory = this.matter.world.nextCategory();
+    this.tableCategory = this.matter.world.nextCategory();
+
+    this.ball = new Ball(this, 400, 100, constants.TEXTURE_ATLAS, 'ball');
     this.add.existing(this.ball);
 
     confTables.forEach(confTable => {
