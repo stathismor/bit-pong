@@ -13,12 +13,14 @@ const COLLISION_PERIOD = 200;
 const LEVEL_MENU_DELAY = 3000;
 
 export default class Cup extends Phaser.Physics.Matter.Sprite {
-  constructor(scene, x, y, angleRad, ballId, behaviourName) {
+  constructor(scene, x, y, angleRad, ballId, behaviourNames) {
     super(scene.matter.world, x, y, constants.TEXTURE_ATLAS, 'cup');
 
-    this.behaviour = null;
-    if (behaviourName in BEHAVIOUR_MAPPER) {
-      this.behaviour = new BEHAVIOUR_MAPPER[behaviourName](scene, this);
+    this.behaviours = [];
+    if (behaviourNames) {
+      behaviourNames.forEach(behaviourName =>
+        this.behaviours.push(new BEHAVIOUR_MAPPER[behaviourName](scene, this))
+      );
     }
     let collisionTime = new Date();
 
@@ -72,7 +74,7 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
           if (firstBodyA.id === ballId) {
             context.scene.sound.play('splash');
 
-            bitDrops.spill(x, y, context.rotation);
+            bitDrops.spill(context.x, context.y, context.rotation);
 
             if (!completedLevels.includes(currentLevel)) {
               localStorage.setItem(
@@ -107,8 +109,6 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
   }
 
   update(delta) {
-    if (this.behaviour) {
-      this.behaviour.update(delta);
-    }
+    this.behaviours.forEach(behaviour => behaviour.update(delta));
   }
 }
