@@ -22,8 +22,8 @@ export default class BitDrops {
       );
       drop.setCollisionCategory(dropCategory);
       drop.setCollidesWith([tableCategory, cupCategory]);
-      // drop.setActive(false);
-      // drop.setStatic(true);
+      drop.setActive(false);
+      drop.setStatic(true);
       this.drops[i] = drop;
     }
   }

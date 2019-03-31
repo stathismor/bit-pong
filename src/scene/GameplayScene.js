@@ -54,7 +54,7 @@ class GameplayScene extends Phaser.Scene {
       confCup.y,
       confCup.angle,
       this.ball.body.id,
-      confCup.behaviour
+      confCup.behaviours
     );
     this.add.existing(this.cup);
 

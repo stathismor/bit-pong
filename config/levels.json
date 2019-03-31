@@ -26,16 +26,20 @@
     "name": "5",
     "tables": [
       { "x": 420, "y": 290, "angle": 345 },
-      { "x": 250, "y": 200, "angle": 300 }
+      { "x": 260, "y": 210, "angle": 290 }
     ],
     "cup": { "x": 350, "y": 276, "angle": 345 }
   },
   {
     "name": "6",
-    "cup": { "x": 400, "y": 190, "angle": 0, "behaviour": "rotate" }
+    "cup": { "x": 400, "y": 190, "angle": 0, "behaviours": ["rotate"] }
   },
   {
     "name": "7",
-    "cup": { "x": 400, "y": 190, "angle": 0, "behaviour": "move" }
+    "cup": { "x": 350, "y": 190, "angle": 0, "behaviours": ["move"] }
+  },
+  {
+    "name": "8",
+    "cup": { "x": 350, "y": 190, "angle": 0, "behaviours": ["move", "rotate"] }
   }
 ]
