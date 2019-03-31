@@ -9,6 +9,7 @@ class ScaleManager {
   static resize(configWidth, configHeight, isDesktop) {
     // Check if device DPI messes up the width-height-ratio
     const canvas = document.getElementsByTagName('canvas')[0];
+    const content = document.getElementById('content');
 
     // For desktop, only multiply with integer number
     if (isDesktop) {
@@ -18,18 +19,21 @@ class ScaleManager {
       );
       canvas.style.width = `${multiple * configWidth}px`;
       canvas.style.height = `${multiple * configHeight}px`;
+
+      content.style.width = canvas.style.width;
+      content.style.height = canvas.style.height;
+      return;
     }
 
     // Width-height-ratio of game resolution
     const gameRatio = configWidth / configHeight;
 
-    // Make div full height of browser and keep the ratio of game resolution
-    const div = document.getElementById('content');
-    div.style.width = `${window.innerHeight * gameRatio}px`;
-    div.style.height = `${window.innerHeight}px`;
+    // Make content full height of browser and keep the ratio of game resolution
+    content.style.width = `${window.innerHeight * gameRatio}px`;
+    content.style.height = `${window.innerHeight}px`;
 
-    const dpiW = parseInt(div.style.width, 10) / canvas.width;
-    const dpiH = parseInt(div.style.height, 10) / canvas.height;
+    const dpiW = parseInt(content.style.width, 10) / canvas.width;
+    const dpiH = parseInt(content.style.height, 10) / canvas.height;
 
     const height = window.innerHeight * (dpiW / dpiH);
     const width = height * gameRatio;

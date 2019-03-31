@@ -5,6 +5,8 @@
 ### New Features
 
 - Add water splash effect.
+- Add new level, with multiple behaviours.
+- Add level number on the HUD.
 
 ### Updates
 
@@ -13,7 +15,7 @@
 
 ### Bug Fixes
 
-N/A
+Fix ball being static and visible when cup moves.
 
 ## Version 0.0.2 - 3rd March 2019
 
