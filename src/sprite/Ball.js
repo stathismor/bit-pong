@@ -114,17 +114,35 @@ class Ball extends Phaser.Physics.Matter.Sprite {
 
     const context = this;
     scene.matter.world.on('collisionstart', (event, bodyA, bodyB) => {
+      if (context.isDead || !context.launched) {
+        return;
+      }
+
       if (
-        context.launched &&
         [bodyA.id, bodyB.id].includes(context.body.id) &&
         [bodyA.id, bodyB.id].some(r => context.scene.tableIds.includes(r))
       ) {
         context.scene.sound.play('table_bounce');
         context.touchesTable = true;
       }
+
+      const { pairs } = event;
+      for (let i = 0; i < pairs.length; i += 1) {
+        //  We only want sensor collisions
+        if (pairs[i].isSensor) {
+          if (bodyA.id === context.body.id) {
+            context.destroy();
+            context.isDead = true;
+          }
+        }
+      }
     });
 
     scene.matter.world.on('collisionend', (event, bodyA, bodyB) => {
+      if (context.isDead || !context.launched) {
+        return;
+      }
+
       if (
         !util.isInCircle(
           x,

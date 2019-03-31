@@ -1,6 +1,6 @@
 import BEHAVIOUR_MAPPER from '../behaviour';
 import * as constants from '../constants';
-import { cupCategory, tableCategory, dropCategory } from '../collision';
+import { cupCategory } from '../collision';
 import BitDrops from '../component/BitDrops';
 
 const M = Phaser.Physics.Matter.Matter;
@@ -15,7 +15,6 @@ const LEVEL_MENU_DELAY = 3000;
 export default class Cup extends Phaser.Physics.Matter.Sprite {
   constructor(scene, x, y, angleRad, ballId, behaviourName) {
     super(scene.matter.world, x, y, constants.TEXTURE_ATLAS, 'cup');
-    this.setCollisionCategory(cupCategory);
 
     this.behaviour = null;
     if (behaviourName in BEHAVIOUR_MAPPER) {
@@ -57,6 +56,7 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
       .setPosition(x, y)
       .setFriction(0)
       .setStatic(true);
+    // this.setCollisionCategory(cupCategory);
 
     const context = this;
     scene.matter.world.on('collisionstart', (event, firstBodyA, firstBodyB) => {
@@ -71,7 +71,6 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
 
           if (firstBodyA.id === ballId) {
             context.scene.sound.play('splash');
-            firstBodyA.destroy();
 
             bitDrops.spill(x, y, context.rotation);
 
