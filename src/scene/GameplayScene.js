@@ -4,6 +4,7 @@ import Cup from '../sprite/Cup';
 import Table from '../sprite/Table';
 import RetryLevelPopup from '../sprite/RetryLevelPopup';
 import HealthBar from '../hud/HealthBar';
+import LevelBar from '../hud/LevelBar';
 import * as constants from '../constants';
 import { initCategories } from '../collision';
 
@@ -57,6 +58,8 @@ class GameplayScene extends Phaser.Scene {
       confCup.behaviours
     );
     this.add.existing(this.cup);
+
+    (() => new LevelBar(this, this.levelNumber))();
 
     const healthBar = new HealthBar(this, this.ball.livesNumber);
     const retryLevelPopup = new RetryLevelPopup(
