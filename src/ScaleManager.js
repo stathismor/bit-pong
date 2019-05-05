@@ -13,10 +13,16 @@ class ScaleManager {
 
     // For desktop, only multiply with integer number
     if (isDesktop) {
-      const multiple = Math.max(
+      const multipleHeight = Math.max(
         1,
         Math.floor(window.innerHeight / configHeight)
       );
+      const multipleWidth = Math.max(
+        1,
+        Math.floor(window.innerWidth / configWidth)
+      );
+      const multiple = Math.min(multipleWidth, multipleHeight);
+
       canvas.style.width = `${multiple * configWidth}px`;
       canvas.style.height = `${multiple * configHeight}px`;
 
