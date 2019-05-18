@@ -86,7 +86,7 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
 
           this.scene.time.delayedCall(
             LEVEL_MENU_DELAY,
-            () => scene.scene.start('LevelMenuScene'),
+            () => context.emit('complete'),
             null,
             null
           );

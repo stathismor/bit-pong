@@ -3,6 +3,7 @@ import Ball from '../sprite/Ball';
 import Cup from '../sprite/Cup';
 import Table from '../sprite/Table';
 import RetryLevelPopup from '../sprite/RetryLevelPopup';
+import CompleteLevelPopup from '../sprite/CompleteLevelPopup';
 import HealthBar from '../hud/HealthBar';
 import LevelBar from '../hud/LevelBar';
 import * as constants from '../constants';
@@ -73,6 +74,16 @@ class GameplayScene extends Phaser.Scene {
       if (this.ball.livesNumber === 0) {
         retryLevelPopup.popup();
       }
+    });
+
+    const completeLevelPopup = new CompleteLevelPopup(
+      this,
+      config.centerX,
+      config.centerY
+    );
+
+    this.cup.on('complete', () => {
+      completeLevelPopup.popup();
     });
 
     if (__DEV__) {
