@@ -1,6 +1,21 @@
 # Change Log
 
-## Version 0.0.3 - 30rd March 2019
+## Version 0.0.4 - 18th May 2019
+
+### New Features
+
+- Add new level complete popup.
+- Change fluid colour.
+
+### Updates
+
+- N/A
+
+### Bug Fixes
+
+- N/A
+
+## Version 0.0.3 - 30th March 2019
 
 ### New Features
 
@@ -15,7 +30,7 @@
 
 ### Bug Fixes
 
-Fix ball being static and visible when cup moves.
+- Fix ball being static and visible when cup moves.
 
 ## Version 0.0.2 - 3rd March 2019
 
@@ -25,7 +40,7 @@ Fix ball being static and visible when cup moves.
 
 ### Updates
 
-N/A
+- N/A
 
 ### Bug Fixes
 
