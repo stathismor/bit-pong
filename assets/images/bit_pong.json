@@ -304,7 +304,7 @@
 					}
 				},
 				{
-					"filename": "drop",
+					"filename": "drop_dark",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -325,7 +325,7 @@
 					}
 				},
 				{
-					"filename": "projection_point",
+					"filename": "drop_light",
 					"rotated": false,
 					"trimmed": false,
 					"sourceSize": {
@@ -341,6 +341,27 @@
 					"frame": {
 						"x": 628,
 						"y": 67,
+						"w": 4,
+						"h": 4
+					}
+				},
+				{
+					"filename": "projection_point",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 4,
+						"h": 4
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 4,
+						"h": 4
+					},
+					"frame": {
+						"x": 401,
+						"y": 165,
 						"w": 4,
 						"h": 4
 					}

@@ -11,13 +11,15 @@ const DROP_POSITION_OFFSET_Y = 6;
 export default class BitDrops {
   constructor(scene) {
     this.drops = [];
+    const dropTextures = ['drop_light', 'drop_dark'];
     const config = scene.sys.game.CONFIG;
     for (let i = 0; i < DROPS_COUNT; i += 1) {
+      const dropTexture = dropTextures[Phaser.Math.Between(0, 1)];
       const drop = scene.matter.add.sprite(
         config.width * 2,
         config.height * 2,
         constants.TEXTURE_ATLAS,
-        'drop',
+        dropTexture,
         { shape: { type: 'rectangle', radius: 8 }, ignorePointer: true }
       );
       drop.setCollisionCategory(dropCategory);
