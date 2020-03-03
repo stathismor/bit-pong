@@ -28,8 +28,8 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
 
     // The player's body is going to be a compound body.
     const cupLeft = M.Bodies.rectangle(
-      -this.width / 2 + SIDE_WITH + OFFSET,
-      0,
+      SIDE_WITH + OFFSET,
+      this.height / 2,
       SIDE_WITH,
       this.height,
       {
@@ -38,8 +38,8 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
       }
     );
     const cupRight = M.Bodies.rectangle(
-      this.width / 2 - SIDE_WITH - OFFSET,
-      0,
+      this.width - SIDE_WITH - OFFSET,
+      this.height / 2,
       SIDE_WITH,
       this.height,
       {
@@ -47,7 +47,7 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
         chamfer: { radius: CHAMFER_RADIUS },
       }
     );
-    const sensor = M.Bodies.rectangle(0, 15, 20, 25, { isSensor: true });
+    const sensor = M.Bodies.rectangle(this.width / 2, this.height - 15, 20, 25, { isSensor: true });
 
     const compoundBody = M.Body.create({
       parts: [cupLeft, cupRight, sensor],
