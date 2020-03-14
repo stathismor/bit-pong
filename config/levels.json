@@ -1,0 +1,45 @@
+[
+  {
+    "name": "1",
+    "tables": [{ "x": 400, "y": 220, "angle": 0 }],
+    "cup": { "x": 400, "y": 188, "angle": 0 }
+  },
+  {
+    "name": "2",
+    "tables": [{ "x": 400, "y": 200, "angle": 345 }],
+    "cup": { "x": 400, "y": 167, "angle": 345 }
+  },
+  {
+    "name": "3",
+    "tables": [{ "x": 480, "y": 180, "angle": 90 }],
+    "cup": { "x": 448, "y": 180, "angle": -90 }
+  },
+  {
+    "name": "4",
+    "tables": [
+      { "x": 420, "y": 290, "angle": 0 },
+      { "x": 250, "y": 200, "angle": 90 }
+    ],
+    "cup": { "x": 350, "y": 258, "angle": 0 }
+  },
+  {
+    "name": "5",
+    "tables": [
+      { "x": 420, "y": 290, "angle": 345 },
+      { "x": 260, "y": 210, "angle": 290 }
+    ],
+    "cup": { "x": 350, "y": 276, "angle": 345 }
+  },
+  {
+    "name": "6",
+    "cup": { "x": 400, "y": 190, "angle": 0, "behaviours": ["rotate"] }
+  },
+  {
+    "name": "7",
+    "cup": { "x": 350, "y": 190, "angle": 0, "behaviours": ["move"] }
+  },
+  {
+    "name": "8",
+    "cup": { "x": 350, "y": 190, "angle": 0, "behaviours": ["move", "rotate"] }
+  }
+]
