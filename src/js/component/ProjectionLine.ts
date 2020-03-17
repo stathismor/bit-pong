@@ -11,10 +11,10 @@ export default class ProjectionLine {
       frame: 'projection_point',
       repeat: MAX_PROJECTION_POINTS,
       active: false,
-      visible: false,
+      visible: false
     });
     this.hiddenBall = scene.matter.add.sprite(x, y, null, null, {
-      visible: false,
+      visible: false
     });
     this.hiddenBall.setVisible(false);
     this.hiddenBall.setCircle();
@@ -72,7 +72,7 @@ export default class ProjectionLine {
     this.hiddenBall.setStatic(false);
     const previousPos = {
       x: this.hiddenBall.x,
-      y: this.hiddenBall.y,
+      y: this.hiddenBall.y
     };
 
     this.hiddenBall.body.force.y = 0;
@@ -85,8 +85,8 @@ export default class ProjectionLine {
     const projectionLineData = [
       {
         x: [this.hiddenBall.x],
-        y: [this.hiddenBall.y],
-      },
+        y: [this.hiddenBall.y]
+      }
     ];
     let projectionLineLength = 0;
     let updateCounter = 0;

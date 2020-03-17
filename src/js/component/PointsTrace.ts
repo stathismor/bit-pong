@@ -18,7 +18,7 @@ export default class PointsTrace {
       frame: 'trace_point',
       repeat: 140,
       active: false,
-      visible: false,
+      visible: false
     });
 
     const context = this;
@@ -38,8 +38,8 @@ export default class PointsTrace {
           delay: 0,
           alpha: {
             getStart: () => points[0].alpha,
-            getEnd: () => TRACE_ALPHA,
-          },
+            getEnd: () => TRACE_ALPHA
+          }
         });
       }
     });

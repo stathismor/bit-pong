@@ -12,14 +12,14 @@ export default class HealthBar {
       frame: 'empty_life',
       repeat: constants.MAX_LIVES,
       active: false,
-      visible: false,
+      visible: false
     });
     this.fullLives = scene.add.group({
       key: constants.TEXTURE_ATLAS,
       frame: 'full_life',
       repeat: constants.MAX_LIVES,
       active: false,
-      visible: false,
+      visible: false
     });
 
     this.update(livesNumber);
