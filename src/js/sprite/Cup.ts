@@ -34,7 +34,7 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
       this.height,
       {
         angle: Phaser.Math.DegToRad(-SIDES_ANGLE),
-        chamfer: { radius: CHAMFER_RADIUS },
+        chamfer: { radius: CHAMFER_RADIUS }
       }
     );
     const cupRight = M.Bodies.rectangle(
@@ -44,13 +44,19 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
       this.height,
       {
         angle: Phaser.Math.DegToRad(SIDES_ANGLE),
-        chamfer: { radius: CHAMFER_RADIUS },
+        chamfer: { radius: CHAMFER_RADIUS }
       }
     );
-    const sensor = M.Bodies.rectangle(this.width / 2, this.height - 15, 20, 25, { isSensor: true });
+    const sensor = M.Bodies.rectangle(
+      this.width / 2,
+      this.height - 15,
+      20,
+      25,
+      { isSensor: true }
+    );
 
     const compoundBody = M.Body.create({
-      parts: [cupLeft, cupRight, sensor],
+      parts: [cupLeft, cupRight, sensor]
     });
 
     this.setExistingBody(compoundBody)

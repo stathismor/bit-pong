@@ -1,18 +1,18 @@
-import LEVELS from "../../../config/levels.json";
-import Ball from "../sprite/Ball";
-import Cup from "../sprite/Cup";
-import Table from "../sprite/Table";
-import RetryLevelPopup from "../sprite/RetryLevelPopup";
-import CompleteLevelPopup from "../sprite/CompleteLevelPopup";
-import HealthBar from "../hud/HealthBar";
-import LevelBar from "../hud/LevelBar";
-import * as constants from "../constants";
-import { initCategories } from "../collision";
+import LEVELS from '../../../config/levels.json';
+import Ball from '../sprite/Ball';
+import Cup from '../sprite/Cup';
+import Table from '../sprite/Table';
+import RetryLevelPopup from '../sprite/RetryLevelPopup';
+import CompleteLevelPopup from '../sprite/CompleteLevelPopup';
+import HealthBar from '../hud/HealthBar';
+import LevelBar from '../hud/LevelBar';
+import * as constants from '../constants';
+import { initCategories } from '../collision';
 
 export class GameplayScene extends Phaser.Scene {
   constructor() {
     super({
-      key: "GameplayScene"
+      key: 'GameplayScene'
     });
     this.levelNumber = 1;
     this.tableIds = [];
@@ -33,7 +33,7 @@ export class GameplayScene extends Phaser.Scene {
       125,
       config.centerY,
       constants.TEXTURE_ATLAS,
-      "ball"
+      'ball'
     );
     this.add.existing(this.ball);
 
@@ -43,7 +43,7 @@ export class GameplayScene extends Phaser.Scene {
         confTable.x,
         confTable.y,
         constants.TEXTURE_ATLAS,
-        "table",
+        'table',
         Phaser.Math.DegToRad(confTable.angle)
       );
       this.add.existing(table);
@@ -69,7 +69,7 @@ export class GameplayScene extends Phaser.Scene {
       config.centerY
     );
 
-    this.ball.on("dead", () => {
+    this.ball.on('dead', () => {
       healthBar.update(this.ball.livesNumber);
       if (this.ball.livesNumber === 0) {
         retryLevelPopup.popup();
@@ -82,7 +82,7 @@ export class GameplayScene extends Phaser.Scene {
       config.centerY
     );
 
-    this.cup.on("complete", () => {
+    this.cup.on('complete', () => {
       completeLevelPopup.popup();
     });
 
@@ -104,9 +104,9 @@ export class GameplayScene extends Phaser.Scene {
     }
 
     switch (result) {
-      case "fail":
+      case 'fail':
         return this.levelNumber;
-      case "success":
+      case 'success':
         return this.levelNumber + 1;
       default:
         return this.levelNumber;
@@ -123,6 +123,6 @@ export class GameplayScene extends Phaser.Scene {
       config.width - size,
       config.height - size
     );
-    border.setStrokeStyle(size, "0xFF0000");
+    border.setStrokeStyle(size, '0xFF0000');
   }
 }
