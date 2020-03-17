@@ -4,7 +4,7 @@ import { BootScene } from "./scene/BootScene";
 import { GameplayScene } from "./scene/GameplayScene";
 import { LevelMenuScene } from "./scene/LevelMenuScene";
 import { StartMenuScene } from "./scene/StartMenuScene";
-// import ScaleManager from './ScaleManager';
+import { ScaleManager } from "./ScaleManager";
 
 const WIDTH = 640;
 const HEIGHT = 360;
@@ -26,13 +26,12 @@ const game = new Game({
     }
   },
 
-  // scene: [BootScene, StartMenuScene, LevelMenuScene, GameplayScene],
   scene: [BootScene, StartMenuScene, LevelMenuScene, GameplayScene],
-  // callbacks: {
-  //   postBoot: () => {
-  //     (() => new ScaleManager(WIDTH, HEIGHT, game.device.os.desktop))();
-  //   },
-  // },
+  callbacks: {
+    postBoot: () => {
+      (() => new ScaleManager(WIDTH, HEIGHT, game.device.os.desktop))();
+    }
+  },
   audio: {
     disableWebAudio: true
   }

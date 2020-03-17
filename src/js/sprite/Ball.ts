@@ -106,34 +106,33 @@ class Ball extends Phaser.Physics.Matter.Sprite {
       gameObject.removeInteractive();
     });
 
-    const context = this;
     scene.matter.world.on("collisionstart", (event, bodyA, bodyB) => {
-      if (context.isDead || !context.launched) {
+      if (this.isDead || !this.launched) {
         return;
       }
 
       if (
-        [bodyA.id, bodyB.id].includes(context.body.id) &&
-        [bodyA.id, bodyB.id].some(r => context.scene.tableIds.includes(r))
+        [bodyA.id, bodyB.id].includes(this.body.id) &&
+        [bodyA.id, bodyB.id].some(r => this.scene.tableIds.includes(r))
       ) {
-        context.scene.sound.play("table_bounce");
-        context.touchesTable = true;
+        this.scene.sound.play("table_bounce");
+        this.touchesTable = true;
       }
 
       const { pairs } = event;
       for (let i = 0; i < pairs.length; i += 1) {
         //  We only want sensor collisions
         if (pairs[i].isSensor) {
-          if (bodyA.id === context.body.id) {
-            context.destroy();
-            context.isDead = true;
+          if (bodyA.id === this.body.id) {
+            this.destroy();
+            this.isDead = true;
           }
         }
       }
     });
 
     scene.matter.world.on("collisionend", (event, bodyA, bodyB) => {
-      if (context.isDead || !context.launched) {
+      if (this.isDead || !this.launched) {
         return;
       }
 
@@ -141,16 +140,16 @@ class Ball extends Phaser.Physics.Matter.Sprite {
         !isInCircle(
           x,
           y,
-          context.body.position.x,
-          context.body.position.y,
+          this.body.position.x,
+          this.body.position.y,
           DRAG_RADIUS
         )
       ) {
         if (
-          [bodyA.id, bodyB.id].includes(context.body.id) &&
-          [bodyA.id, bodyB.id].some(r => context.scene.tableIds.includes(r))
+          [bodyA.id, bodyB.id].includes(this.body.id) &&
+          [bodyA.id, bodyB.id].some(r => this.scene.tableIds.includes(r))
         ) {
-          context.touchesTable = false;
+          this.touchesTable = false;
         }
       }
     });
