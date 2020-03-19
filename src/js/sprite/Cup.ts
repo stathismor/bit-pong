@@ -26,7 +26,7 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
 
     const bitDrops = new BitDrops(scene);
 
-    // The player's body is going to be a compound body.
+    // The cup's body is going to be a compound body.
     const cupLeft = M.Bodies.rectangle(
       SIDE_WITH + OFFSET,
       this.height / 2,
