@@ -3,8 +3,8 @@ export function iterate(obj, stack) {
   function _iterate(objInner, stackInner) {
     for (const property in objInner) {
       if (objInner.hasOwnProperty(property)) {
-        if (typeof objInner[property] === 'object') {
-          _iterate(objInner[property], stackInner + '.' + property);
+        if (typeof objInner[property] === "object") {
+          _iterate(objInner[property], stackInner + "." + property);
         } else {
           const keys = {};
           keys[property] = objInner[property];

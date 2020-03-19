@@ -1,2 +1,2 @@
-import * as Data from '../../assets/data/*.json';
+import * as Data from "../../assets/data/*.json";
 export default Data;

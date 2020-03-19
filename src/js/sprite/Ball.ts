@@ -1,9 +1,9 @@
 /* eslint-disable no-param-reassign */
-import ProjectionLine from '../component/ProjectionLine';
-import PointsTrace from '../component/PointsTrace';
-import BallTrace from '../component/BallTrace';
-import * as constants from '../constants';
-import { isInCircle, closestPointToCircle } from '../utils';
+import ProjectionLine from "../component/ProjectionLine";
+import PointsTrace from "../component/PointsTrace";
+import BallTrace from "../component/BallTrace";
+import * as constants from "../constants";
+import { isInCircle, closestPointToCircle } from "../utils";
 
 const SPEED = 0.15;
 const RESET_DISTANCE = 650;
@@ -36,7 +36,7 @@ class Ball extends Phaser.Physics.Matter.Sprite {
       x,
       y,
       constants.TEXTURE_ATLAS,
-      'grey_ball'
+      "grey_ball"
     );
     greyBall.setAlpha(0.12);
     greyBall.setScale(GREY_BALL_SCALE);
@@ -54,7 +54,7 @@ class Ball extends Phaser.Physics.Matter.Sprite {
     });
     this.setStatic(true);
 
-    scene.input.on('dragstart', (pointer, gameObject) => {
+    scene.input.on("dragstart", (pointer, gameObject) => {
       gameObject.isPressed = true;
       gameObject.launched = false;
       gameObject.dragX = gameObject.x;
@@ -66,7 +66,7 @@ class Ball extends Phaser.Physics.Matter.Sprite {
       gameObject.setStatic(false);
     });
 
-    scene.input.on('drag', (pointer, gameObject, dragX, dragY) => {
+    scene.input.on("drag", (pointer, gameObject, dragX, dragY) => {
       gameObject.isPressed = true;
       let pointX = dragX;
       let pointY = dragY;
@@ -81,7 +81,7 @@ class Ball extends Phaser.Physics.Matter.Sprite {
       gameObject.dragY = pointY;
     });
 
-    scene.input.on('dragend', (pointer, gameObject) => {
+    scene.input.on("dragend", (pointer, gameObject) => {
       gameObject.isPressed = false;
       gameObject.launched = true;
       const fromStartDistance = Phaser.Math.Distance.Between(
@@ -106,7 +106,7 @@ class Ball extends Phaser.Physics.Matter.Sprite {
       gameObject.removeInteractive();
     });
 
-    scene.matter.world.on('collisionstart', (event, bodyA, bodyB) => {
+    scene.matter.world.on("collisionstart", (event, bodyA, bodyB) => {
       if (this.isDead || !this.launched) {
         return;
       }
@@ -115,7 +115,7 @@ class Ball extends Phaser.Physics.Matter.Sprite {
         [bodyA.id, bodyB.id].includes(this.body.id) &&
         [bodyA.id, bodyB.id].some(r => this.scene.tableIds.includes(r))
       ) {
-        this.scene.sound.play('table_bounce');
+        this.scene.sound.play("table_bounce");
         this.touchesTable = true;
       }
 
@@ -131,7 +131,7 @@ class Ball extends Phaser.Physics.Matter.Sprite {
       }
     });
 
-    scene.matter.world.on('collisionend', (event, bodyA, bodyB) => {
+    scene.matter.world.on("collisionend", (event, bodyA, bodyB) => {
       if (this.isDead || !this.launched) {
         return;
       }
@@ -189,7 +189,7 @@ class Ball extends Phaser.Physics.Matter.Sprite {
 
   kill() {
     this.livesNumber -= 1;
-    this.emit('dead');
+    this.emit("dead");
     if (this.livesNumber !== 0) {
       this.reset();
     }

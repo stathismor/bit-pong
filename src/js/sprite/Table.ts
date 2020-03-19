@@ -1,4 +1,4 @@
-import { tableCategory } from '../collision';
+import { tableCategory } from "../collision";
 
 export default class Table extends Phaser.Physics.Matter.Sprite {
   constructor(scene, x, y, texture, frame, angleDeg) {

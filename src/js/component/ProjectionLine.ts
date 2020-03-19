@@ -1,4 +1,4 @@
-import * as constants from '../constants';
+import * as constants from "../constants";
 
 const MAX_PROJECTION_POINTS = 30;
 const PROJECTION_LINE_LENGTH = 250;
@@ -8,7 +8,7 @@ export default class ProjectionLine {
   constructor(scene, x, y, speed, dragLength, offset) {
     this.projectionPointsGroup = scene.add.group({
       key: constants.TEXTURE_ATLAS,
-      frame: 'projection_point',
+      frame: "projection_point",
       repeat: MAX_PROJECTION_POINTS,
       active: false,
       visible: false
@@ -21,7 +21,7 @@ export default class ProjectionLine {
     this.hiddenBall.setStatic(true);
     this.hideHiddenBall(); // Needs to be done here because it interacts with constraint
 
-    scene.input.on('drag', (pointer, gameObject, dragX, dragY) => {
+    scene.input.on("drag", (pointer, gameObject, dragX, dragY) => {
       this.updateProjectionPoints(
         gameObject,
         dragX,
@@ -33,7 +33,7 @@ export default class ProjectionLine {
       );
     });
 
-    scene.input.on('dragend', () => {
+    scene.input.on("dragend", () => {
       this.projectionPointsGroup.children.each(point => {
         point.setVisible(false);
         point.setActive(false);

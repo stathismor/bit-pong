@@ -1,15 +1,15 @@
-import * as constants from '../constants';
+import * as constants from "../constants";
 
 const OPTION_WIDTH = 100;
 const OPTION_HEIGHT = 40;
-const OPTION_NO_NAME = 'No';
-const OPTION_YES_NAME = 'Yes';
+const OPTION_NO_NAME = "No";
+const OPTION_YES_NAME = "Yes";
 const X_OFFSET = 6;
 const Y_OFFSET = 6;
 
 export default class RetryLevelPopup extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y) {
-    super(scene, x, y, constants.TEXTURE_ATLAS, 'retry_popup');
+    super(scene, x, y, constants.TEXTURE_ATLAS, "retry_popup");
     this.setVisible(false);
     this.setScale(0.1);
     scene.add.existing(this);
@@ -18,7 +18,7 @@ export default class RetryLevelPopup extends Phaser.GameObjects.Sprite {
       targets: this,
       scaleX: 1,
       scaleY: 1,
-      ease: 'Elastic',
+      ease: "Elastic",
       easeParams: [1.2, 0.5],
       duration: 650,
       repeat: 0,
@@ -59,7 +59,7 @@ export default class RetryLevelPopup extends Phaser.GameObjects.Sprite {
 
   static onComplete(tween, gameObjects) {
     const retryLevelPopup = gameObjects[0];
-    retryLevelPopup.scene.input.on('gameobjectdown', (pointer, gameObject) => {
+    retryLevelPopup.scene.input.on("gameobjectdown", (pointer, gameObject) => {
       if (
         gameObject.name === OPTION_YES_NAME ||
         gameObject.name === OPTION_NO_NAME
@@ -67,9 +67,9 @@ export default class RetryLevelPopup extends Phaser.GameObjects.Sprite {
         retryLevelPopup.zoneNo.removeInteractive();
         retryLevelPopup.zoneYes.removeInteractive();
         if (gameObject.name === OPTION_NO_NAME) {
-          gameObject.scene.scene.start('LevelMenuScene');
+          gameObject.scene.scene.start("LevelMenuScene");
         } else {
-          gameObject.scene.scene.restart({ result: 'retry' });
+          gameObject.scene.scene.restart({ result: "retry" });
         }
       }
     });
@@ -87,7 +87,7 @@ export default class RetryLevelPopup extends Phaser.GameObjects.Sprite {
         boundsNo.width,
         boundsNo.height
       );
-      borderNo.setStrokeStyle(size, '0xFF0000');
+      borderNo.setStrokeStyle(size, "0xFF0000");
 
       const boundsYes = retryLevelPopup.zoneYes.getBounds();
       const borderYes = retryLevelPopup.scene.add.rectangle(
@@ -96,7 +96,7 @@ export default class RetryLevelPopup extends Phaser.GameObjects.Sprite {
         boundsYes.width,
         boundsYes.height
       );
-      borderYes.setStrokeStyle(size, '0xFF0000');
+      borderYes.setStrokeStyle(size, "0xFF0000");
     }
   }
 }
