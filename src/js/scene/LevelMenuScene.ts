@@ -1,5 +1,5 @@
-import LEVELS from '../../../config/levels.json';
-import * as constants from '../constants';
+import LEVELS from "../../../config/levels.json";
+import * as constants from "../constants";
 
 const LEVELS_PER_ROW = 4;
 const ROW_HEIGHT = 96;
@@ -7,7 +7,7 @@ const ROW_HEIGHT = 96;
 export class LevelMenuScene extends Phaser.Scene {
   constructor() {
     super({
-      key: 'LevelMenuScene'
+      key: "LevelMenuScene"
     });
   }
 
@@ -24,14 +24,14 @@ export class LevelMenuScene extends Phaser.Scene {
       const isCompleted = completedLevels.includes(levelNumber);
       const isNextLevel = levelNumber === nextLevel;
 
-      const colour = isCompleted ? '#1b8b1b' : 'black';
-      let imageKey = '';
+      const colour = isCompleted ? "#1b8b1b" : "black";
+      let imageKey = "";
       if (isCompleted) {
-        imageKey = 'level_completed';
+        imageKey = "level_completed";
       } else if (isNextLevel) {
-        imageKey = 'level_empty';
+        imageKey = "level_empty";
       } else {
-        imageKey = 'level_locked';
+        imageKey = "level_locked";
       }
 
       const levelImage = this.add.image(
@@ -44,7 +44,7 @@ export class LevelMenuScene extends Phaser.Scene {
       levelImage.y = levelPos.y - levelImage.height;
 
       const levelText = this.add.text(0, 0, levelNumber.toString(), {
-        fontFamily: 'Arial',
+        fontFamily: "Arial",
         fill: colour,
         fontSize: 32
       });
@@ -68,8 +68,8 @@ export class LevelMenuScene extends Phaser.Scene {
           Phaser.Geom.Rectangle.Contains
         );
 
-        levelImage.on('pointerdown', () =>
-          this.scene.start('GameplayScene', { levelNumber })
+        levelImage.on("pointerdown", () =>
+          this.scene.start("GameplayScene", { levelNumber })
         );
       }
     }

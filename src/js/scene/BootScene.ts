@@ -1,13 +1,14 @@
-import * as constants from '../constants';
-import { StartMenuScene } from './StartMenuScene';
-import Images from '../images';
-import Sounds from '../sounds';
-import Data from '../data';
+import * as constants from "../constants";
+import { StartMenuScene } from "./StartMenuScene";
+import Images from "../images";
+import Sounds from "../sounds";
+import Data from "../data";
+import Fonts from "../fonts";
 
 export class BootScene extends Phaser.Scene {
   constructor() {
     super({
-      key: 'BootScene'
+      key: "BootScene"
     });
   }
 
@@ -19,12 +20,14 @@ export class BootScene extends Phaser.Scene {
     this.load.multiatlas(constants.TEXTURE_ATLAS, atlasData);
 
     // Audio
-    this.load.audio('table_bounce', Sounds.table_bounce);
-    this.load.audio('cup_bounce', Sounds.cup_bounce);
-    this.load.audio('splash', Sounds.splash);
+    this.load.audio("table_bounce", Sounds.table_bounce);
+    this.load.audio("cup_bounce", Sounds.cup_bounce);
+    this.load.audio("splash", Sounds.splash);
+
+    this.load.bitmapFont("nokia", Images.nokia, Fonts.nokia);
   }
 
   create() {
-    this.scene.start('StartMenuScene');
+    this.scene.start("StartMenuScene");
   }
 }

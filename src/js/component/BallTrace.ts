@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import * as constants from '../constants';
+import * as constants from "../constants";
 
 const BALL_TRACE_DISTANCE = 30;
 
@@ -11,7 +11,7 @@ export default class BallTrace {
 
     this.ballTraceGroup = scene.add.group({
       key: constants.TEXTURE_ATLAS,
-      frame: 'ball',
+      frame: "ball",
       repeat: 12,
       active: false,
       visible: false
@@ -38,7 +38,7 @@ export default class BallTrace {
 
         this.scene.tweens.add({
           targets: ballTrace,
-          ease: 'Sine.easeOut',
+          ease: "Sine.easeOut",
           duration: 550,
           delay: 0,
           pause: false,

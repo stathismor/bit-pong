@@ -1,5 +1,5 @@
-import * as constants from '../constants';
-import { cupCategory, tableCategory, dropCategory } from '../collision';
+import * as constants from "../constants";
+import { cupCategory, tableCategory, dropCategory } from "../collision";
 
 const DROPS_COUNT = 80;
 const DROP_ROTATION_OFFSET = 0.35;
@@ -11,7 +11,7 @@ const DROP_POSITION_OFFSET_Y = 6;
 export default class BitDrops {
   constructor(scene) {
     this.drops = [];
-    const dropTextures = ['drop_light', 'drop_dark'];
+    const dropTextures = ["drop_light", "drop_dark"];
     const config = scene.sys.game.CONFIG;
     for (let i = 0; i < DROPS_COUNT; i += 1) {
       const dropTexture = dropTextures[Phaser.Math.Between(0, 1)];
@@ -20,7 +20,7 @@ export default class BitDrops {
         config.height * 2,
         constants.TEXTURE_ATLAS,
         dropTexture,
-        { shape: { type: 'rectangle', radius: 8 }, ignorePointer: true }
+        { shape: { type: "rectangle", radius: 8 }, ignorePointer: true }
       );
       drop.setCollisionCategory(dropCategory);
       drop.setCollidesWith([tableCategory, cupCategory]);

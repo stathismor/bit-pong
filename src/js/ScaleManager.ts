@@ -1,6 +1,6 @@
 export class ScaleManager {
   constructor(width, height, isDesktop) {
-    window.addEventListener('resize', () =>
+    window.addEventListener("resize", () =>
       ScaleManager.resize(width, height, isDesktop)
     );
     ScaleManager.resize(width, height, isDesktop);
@@ -8,8 +8,8 @@ export class ScaleManager {
 
   static resize(configWidth, configHeight, isDesktop) {
     // Check if device DPI messes up the width-height-ratio
-    const canvas = document.getElementsByTagName('canvas')[0];
-    const content = document.getElementById('content');
+    const canvas = document.getElementsByTagName("canvas")[0];
+    const content = document.getElementById("content");
 
     // For desktop, only multiply with integer number
     if (isDesktop) {

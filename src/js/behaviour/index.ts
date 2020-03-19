@@ -1,5 +1,5 @@
-import Rotate from './Rotate';
-import Move from './Move';
+import Rotate from "./Rotate";
+import Move from "./Move";
 
 const BEHAVIOUR_MAPPER = {
   rotate: Rotate,
