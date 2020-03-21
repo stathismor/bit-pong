@@ -1,4 +1,4 @@
-import * as constants from '../constants';
+import * as constants from "../constants";
 
 const HEALTH_BAR_Y = 16;
 const LIVES_DISTANCE = 16;
@@ -9,17 +9,17 @@ export default class HealthBar {
 
     this.emptyLives = scene.add.group({
       key: constants.TEXTURE_ATLAS,
-      frame: 'empty_life',
+      frame: "empty_life",
       repeat: constants.MAX_LIVES,
       active: false,
-      visible: false,
+      visible: false
     });
     this.fullLives = scene.add.group({
       key: constants.TEXTURE_ATLAS,
-      frame: 'full_life',
+      frame: "full_life",
       repeat: constants.MAX_LIVES,
       active: false,
-      visible: false,
+      visible: false
     });
 
     this.update(livesNumber);

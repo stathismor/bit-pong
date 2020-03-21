@@ -3,6 +3,7 @@ import { StartMenuScene } from "./StartMenuScene";
 import Images from "../images";
 import Sounds from "../sounds";
 import Data from "../data";
+import Fonts from "../fonts";
 
 export class BootScene extends Phaser.Scene {
   constructor() {
@@ -22,6 +23,8 @@ export class BootScene extends Phaser.Scene {
     this.load.audio("table_bounce", Sounds.table_bounce);
     this.load.audio("cup_bounce", Sounds.cup_bounce);
     this.load.audio("splash", Sounds.splash);
+
+    this.load.bitmapFont("nokia", Images.nokia, Fonts.nokia);
   }
 
   create() {

@@ -5,8 +5,8 @@ export default class LevelBar {
     const config = scene.sys.game.CONFIG;
 
     const levelText = scene.add.text(0, 0, `Level: ${levelNumber}`, {
-      font: '12px Monospace',
-      fill: '#000000',
+      font: "12px Monospace",
+      fill: "#000000"
     });
 
     levelText.setPosition(config.width - levelText.width - OFFSET, OFFSET);

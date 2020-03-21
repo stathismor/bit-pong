@@ -1,7 +1,7 @@
-import BEHAVIOUR_MAPPER from '../behaviour';
-import * as constants from '../constants';
-import { cupCategory } from '../collision';
-import BitDrops from '../component/BitDrops';
+import BEHAVIOUR_MAPPER from "../behaviour";
+import * as constants from "../constants";
+import { cupCategory } from "../collision";
+import BitDrops from "../component/BitDrops";
 
 const M = Phaser.Physics.Matter.Matter;
 const SIDE_WITH = 10;
@@ -14,7 +14,7 @@ const LEVEL_MENU_DELAY = 3000;
 
 export default class Cup extends Phaser.Physics.Matter.Sprite {
   constructor(scene, x, y, angleRad, ballId, behaviourNames) {
-    super(scene.matter.world, x, y, constants.TEXTURE_ATLAS, 'cup');
+    super(scene.matter.world, x, y, constants.TEXTURE_ATLAS, "cup");
 
     this.behaviours = [];
     if (behaviourNames) {
@@ -26,7 +26,7 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
 
     const bitDrops = new BitDrops(scene);
 
-    // The player's body is going to be a compound body.
+    // The cup's body is going to be a compound body.
     const cupLeft = M.Bodies.rectangle(
       SIDE_WITH + OFFSET,
       this.height / 2,
@@ -34,7 +34,7 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
       this.height,
       {
         angle: Phaser.Math.DegToRad(-SIDES_ANGLE),
-        chamfer: { radius: CHAMFER_RADIUS },
+        chamfer: { radius: CHAMFER_RADIUS }
       }
     );
     const cupRight = M.Bodies.rectangle(
@@ -44,13 +44,19 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
       this.height,
       {
         angle: Phaser.Math.DegToRad(SIDES_ANGLE),
-        chamfer: { radius: CHAMFER_RADIUS },
+        chamfer: { radius: CHAMFER_RADIUS }
       }
     );
-    const sensor = M.Bodies.rectangle(this.width / 2, this.height - 15, 20, 25, { isSensor: true });
+    const sensor = M.Bodies.rectangle(
+      this.width / 2,
+      this.height - 15,
+      20,
+      25,
+      { isSensor: true }
+    );
 
     const compoundBody = M.Body.create({
-      parts: [cupLeft, cupRight, sensor],
+      parts: [cupLeft, cupRight, sensor]
     });
 
     this.setExistingBody(compoundBody)
@@ -61,7 +67,7 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
     // this.setCollisionCategory(cupCategory);
 
     const context = this;
-    scene.matter.world.on('collisionstart', (event, firstBodyA, firstBodyB) => {
+    scene.matter.world.on("collisionstart", (event, firstBodyA, firstBodyB) => {
       const { pairs } = event;
 
       for (let i = 0; i < pairs.length; i += 1) {
@@ -72,7 +78,7 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
             JSON.parse(localStorage.getItem(constants.LOGAL_STORAGE_KEY)) || [];
 
           if (firstBodyA.id === ballId) {
-            context.scene.sound.play('splash');
+            context.scene.sound.play("splash");
 
             bitDrops.spill(context.x, context.y, context.rotation);
 
@@ -86,7 +92,7 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
 
           this.scene.time.delayedCall(
             LEVEL_MENU_DELAY,
-            () => context.emit('complete'),
+            () => context.emit("complete"),
             null,
             null
           );
@@ -101,7 +107,7 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
       ) {
         const timeDiff = new Date() - collisionTime;
         if (timeDiff > COLLISION_PERIOD) {
-          context.scene.sound.play('cup_bounce');
+          context.scene.sound.play("cup_bounce");
         }
         collisionTime = new Date();
       }
