@@ -6,6 +6,7 @@
     "deploy": "yarn build && gh-pages -d dist",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "lint:fix": "tslint -c tslint.json --fix 'src/**/*.ts'",
+    "tslint-check": "tslint-config-prettier-check ./tslint.json",
     "prettier:base": "prettier --parser typescript",
     "prettier:check": "npm run prettier:base -- --list-different \"src/**/*.{ts,tsx}\"",
     "prettier:write": "npm run prettier:base -- --write \"src/**/*.{ts,tsx}\""
