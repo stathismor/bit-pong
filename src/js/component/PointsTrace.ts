@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import * as constants from '../constants';
+import * as constants from "../constants";
 
 const TRACE_POINTS_DISTANCE = 30;
 const TRACE_ALPHA = 0.25;
@@ -15,14 +15,14 @@ export default class PointsTrace {
 
     this.tracePointsGroup = scene.add.group({
       key: constants.TEXTURE_ATLAS,
-      frame: 'trace_point',
+      frame: "trace_point",
       repeat: 140,
       active: false,
-      visible: false,
+      visible: false
     });
 
     const context = this;
-    scene.input.on('dragstart', (pointer, gameObject) => {
+    scene.input.on("dragstart", (pointer, gameObject) => {
       context.launched = false;
       const points = context.tracePointsGroup.children.entries.filter(
         point => point.active
@@ -33,18 +33,18 @@ export default class PointsTrace {
         }
         fadeOutTween = gameObject.scene.add.tween({
           targets: points,
-          ease: 'Sine.easeOut',
+          ease: "Sine.easeOut",
           duration: TRACE_FADE_OUT_DURARION,
           delay: 0,
           alpha: {
             getStart: () => points[0].alpha,
-            getEnd: () => TRACE_ALPHA,
-          },
+            getEnd: () => TRACE_ALPHA
+          }
         });
       }
     });
 
-    scene.input.on('dragend', (pointer, gameObject) => {
+    scene.input.on("dragend", (pointer, gameObject) => {
       const fromStartDistance = Phaser.Math.Distance.Between(
         ball.startPos.x,
         ball.startPos.y,
