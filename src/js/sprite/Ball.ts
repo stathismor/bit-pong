@@ -4,6 +4,7 @@ import PointsTrace from "../component/PointsTrace";
 import BallTrace from "../component/BallTrace";
 import * as constants from "../constants";
 import { isInCircle, closestPointToCircle } from "../utils";
+import SetBody from "../behaviour/SetBody";
 
 const SPEED = 0.15;
 const RESET_DISTANCE = 650;
@@ -28,16 +29,12 @@ class Ball extends Phaser.Physics.Matter.Sprite {
     this.dragX = x;
     this.dragY = y;
 
-    this.setCircle();
+    this.behaviours = [SetBody(scene, this, frame, x, y)];
 
     this.setInteractive({ draggable: true });
 
-    const greyBall = scene.add.image(
-      x,
-      y,
-      constants.TEXTURE_ATLAS,
-      "grey_ball"
-    );
+    // TODO: Use "grey_" + frame
+    const greyBall = scene.add.image(x, y, constants.TEXTURE_ATLAS, frame);
     greyBall.setAlpha(0.12);
     greyBall.setScale(GREY_BALL_SCALE);
 
@@ -53,6 +50,8 @@ class Ball extends Phaser.Physics.Matter.Sprite {
       stiffness: 0.05
     });
     this.setStatic(true);
+
+    const ballIds = this.body.parts.map(part => part.id);
 
     scene.input.on("dragstart", (pointer, gameObject) => {
       gameObject.isPressed = true;
@@ -112,7 +111,7 @@ class Ball extends Phaser.Physics.Matter.Sprite {
       }
 
       if (
-        [bodyA.id, bodyB.id].includes(this.body.id) &&
+        [bodyA.id, bodyB.id].some(r => ballIds.includes(r)) &&
         [bodyA.id, bodyB.id].some(r => this.scene.tableIds.includes(r))
       ) {
         this.scene.sound.play("table_bounce");
@@ -123,7 +122,7 @@ class Ball extends Phaser.Physics.Matter.Sprite {
       for (let i = 0; i < pairs.length; i += 1) {
         //  We only want sensor collisions
         if (pairs[i].isSensor) {
-          if (bodyA.id === this.body.id) {
+          if (ballIds.includes(bodyA.id)) {
             this.destroy();
             this.isDead = true;
           }
@@ -146,7 +145,7 @@ class Ball extends Phaser.Physics.Matter.Sprite {
         )
       ) {
         if (
-          [bodyA.id, bodyB.id].includes(this.body.id) &&
+          [bodyA.id, bodyB.id].some(r => ballIds.includes(r)) &&
           [bodyA.id, bodyB.id].some(r => this.scene.tableIds.includes(r))
         ) {
           this.touchesTable = false;
