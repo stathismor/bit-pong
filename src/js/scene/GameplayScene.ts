@@ -36,6 +36,7 @@ export class GameplayScene extends Phaser.Scene {
       "ball"
     );
     this.add.existing(this.ball);
+    const ballIds = this.ball.body.parts.map(part => part.id);
 
     confTables.forEach(confTable => {
       const table = new Table(
@@ -55,7 +56,7 @@ export class GameplayScene extends Phaser.Scene {
       confCup.x,
       confCup.y,
       confCup.angle,
-      this.ball.body.id,
+      ballIds,
       confCup.behaviours
     );
     this.add.existing(this.cup);
