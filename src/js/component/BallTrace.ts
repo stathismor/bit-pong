@@ -14,7 +14,7 @@ export default class BallTrace {
       frame: "ball",
       repeat: 12,
       active: false,
-      visible: false
+      visible: false,
     });
   }
 
@@ -45,8 +45,8 @@ export default class BallTrace {
           onComplete: BallTrace.onComplete,
           alpha: {
             getStart: () => 0.17,
-            getEnd: () => 0
-          }
+            getEnd: () => 0,
+          },
         });
         this.prevBallTracePos = { x: this.ball.x, y: this.ball.y };
       }

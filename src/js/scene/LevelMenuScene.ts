@@ -7,7 +7,7 @@ const ROW_HEIGHT = 96;
 export class LevelMenuScene extends Phaser.Scene {
   constructor() {
     super({
-      key: "LevelMenuScene"
+      key: "LevelMenuScene",
     });
   }
 
@@ -46,7 +46,7 @@ export class LevelMenuScene extends Phaser.Scene {
       const levelText = this.add.text(0, 0, levelNumber.toString(), {
         fontFamily: "Arial",
         fill: colour,
-        fontSize: 32
+        fontSize: 32,
       });
       levelText.setPosition(
         levelPos.x - levelWidthDistance / 2 - levelText.width / 2,

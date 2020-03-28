@@ -5,7 +5,7 @@ const OFFSET = 2;
 const CHAMFER_RADIUS = 7;
 
 export default class SetBody {
-  constructor(scene, owner, shape, x, y, sensor) {
+  constructor(scene, owner, shape, x, y, angle, sensor) {
     switch (shape) {
       case "ball":
         owner.setCircle();
@@ -18,7 +18,7 @@ export default class SetBody {
           owner.height,
           {
             angle: Phaser.Math.DegToRad(-SIDES_ANGLE),
-            chamfer: { radius: CHAMFER_RADIUS }
+            chamfer: { radius: CHAMFER_RADIUS },
           }
         );
         const cupRight = M.Bodies.rectangle(
@@ -28,7 +28,7 @@ export default class SetBody {
           owner.height,
           {
             angle: Phaser.Math.DegToRad(SIDES_ANGLE),
-            chamfer: { radius: CHAMFER_RADIUS }
+            chamfer: { radius: CHAMFER_RADIUS },
           }
         );
 
@@ -38,13 +38,10 @@ export default class SetBody {
         }
 
         const compoundBody = M.Body.create({
-          parts
+          parts,
         });
 
-        owner
-          .setExistingBody(compoundBody)
-          .setAngle(0)
-          .setPosition(x, y);
+        owner.setExistingBody(compoundBody).setAngle(angle).setPosition(x, y);
         break;
       default:
         // OOPs

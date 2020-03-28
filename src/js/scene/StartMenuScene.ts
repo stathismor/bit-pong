@@ -5,11 +5,13 @@ import * as constants from "../constants";
 export class StartMenuScene extends Scene {
   constructor() {
     super({
-      key: "StartMenuScene"
+      key: "StartMenuScene",
     });
   }
 
   create() {
+    this.scene.start("GameplayScene", { levelNumber: 2 });
+
     const config = this.sys.game.CONFIG;
     this.add.image(
       config.centerX,

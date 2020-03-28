@@ -24,11 +24,11 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
       25,
       { isSensor: true }
     );
-    this.behaviours = [SetBody(scene, this, "cup", x, y, sensor)];
+    this.behaviours = [SetBody(scene, this, "cup", x, y, angleRad, sensor)];
 
     this.behaviours = [];
     if (behaviourNames) {
-      behaviourNames.forEach(behaviourName =>
+      behaviourNames.forEach((behaviourName) =>
         this.behaviours.push(new BEHAVIOUR_MAPPER[behaviourName](scene, this))
       );
     }
@@ -71,10 +71,10 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
         }
       }
 
-      const partIds = this.body.parts.map(part => part.id);
+      const partIds = this.body.parts.map((part) => part.id);
       if (
-        [firstBodyA.id, firstBodyB.id].some(r => ballIds.includes(r)) &&
-        [firstBodyA.id, firstBodyB.id].some(r => partIds.includes(r))
+        [firstBodyA.id, firstBodyB.id].some((r) => ballIds.includes(r)) &&
+        [firstBodyA.id, firstBodyB.id].some((r) => partIds.includes(r))
       ) {
         const timeDiff = new Date() - collisionTime;
         if (timeDiff > COLLISION_PERIOD) {
@@ -86,6 +86,6 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
   }
 
   update(delta) {
-    this.behaviours.forEach(behaviour => behaviour.update(delta));
+    this.behaviours.forEach((behaviour) => behaviour.update(delta));
   }
 }

@@ -24,7 +24,7 @@ export default class RetryLevelPopup extends Phaser.GameObjects.Sprite {
       repeat: 0,
       delay: 0,
       paused: true,
-      onComplete: RetryLevelPopup.onComplete
+      onComplete: RetryLevelPopup.onComplete,
     });
 
     this.zoneNo = this.scene.add

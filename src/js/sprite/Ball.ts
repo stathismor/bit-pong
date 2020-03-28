@@ -15,7 +15,7 @@ const DEATH_DELAY = 650;
 const DRAG_RADIUS = 95;
 
 class Ball extends Phaser.Physics.Matter.Sprite {
-  constructor(scene, x, y, texture, frame) {
+  constructor(scene, x, y, texture, frame, angleRad) {
     super(scene.matter.world, x, y, texture, frame);
     this.livesNumber = constants.MAX_LIVES;
     this.touchesTable = false;
@@ -29,7 +29,7 @@ class Ball extends Phaser.Physics.Matter.Sprite {
     this.dragX = x;
     this.dragY = y;
 
-    this.behaviours = [SetBody(scene, this, frame, x, y)];
+    this.behaviours = [SetBody(scene, this, frame, x, y, angleRad)];
 
     this.setInteractive({ draggable: true });
 
@@ -47,11 +47,11 @@ class Ball extends Phaser.Physics.Matter.Sprite {
     this.constraint = Phaser.Physics.Matter.Matter.Constraint.create({
       pointA: { x, y },
       bodyB: this.body,
-      stiffness: 0.05
+      stiffness: 0.05,
     });
     this.setStatic(true);
 
-    const ballIds = this.body.parts.map(part => part.id);
+    const ballIds = this.body.parts.map((part) => part.id);
 
     scene.input.on("dragstart", (pointer, gameObject) => {
       gameObject.isPressed = true;
@@ -111,8 +111,8 @@ class Ball extends Phaser.Physics.Matter.Sprite {
       }
 
       if (
-        [bodyA.id, bodyB.id].some(r => ballIds.includes(r)) &&
-        [bodyA.id, bodyB.id].some(r => this.scene.tableIds.includes(r))
+        [bodyA.id, bodyB.id].some((r) => ballIds.includes(r)) &&
+        [bodyA.id, bodyB.id].some((r) => this.scene.tableIds.includes(r))
       ) {
         this.scene.sound.play("table_bounce");
         this.touchesTable = true;
@@ -145,8 +145,8 @@ class Ball extends Phaser.Physics.Matter.Sprite {
         )
       ) {
         if (
-          [bodyA.id, bodyB.id].some(r => ballIds.includes(r)) &&
-          [bodyA.id, bodyB.id].some(r => this.scene.tableIds.includes(r))
+          [bodyA.id, bodyB.id].some((r) => ballIds.includes(r)) &&
+          [bodyA.id, bodyB.id].some((r) => this.scene.tableIds.includes(r))
         ) {
           this.touchesTable = false;
         }
