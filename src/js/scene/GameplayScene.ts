@@ -12,7 +12,7 @@ import { initCategories } from "../collision";
 export class GameplayScene extends Phaser.Scene {
   constructor() {
     super({
-      key: "GameplayScene"
+      key: "GameplayScene",
     });
     this.levelNumber = 1;
     this.tableIds = [];
@@ -33,12 +33,13 @@ export class GameplayScene extends Phaser.Scene {
       125,
       config.centerY,
       constants.TEXTURE_ATLAS,
-      "ball"
+      "ball",
+      Phaser.Math.DegToRad(0)
     );
     this.add.existing(this.ball);
-    const ballIds = this.ball.body.parts.map(part => part.id);
+    const ballIds = this.ball.body.parts.map((part) => part.id);
 
-    confTables.forEach(confTable => {
+    confTables.forEach((confTable) => {
       const table = new Table(
         this,
         confTable.x,

@@ -18,14 +18,14 @@ export default class PointsTrace {
       frame: "trace_point",
       repeat: 140,
       active: false,
-      visible: false
+      visible: false,
     });
 
     const context = this;
     scene.input.on("dragstart", (pointer, gameObject) => {
       context.launched = false;
       const points = context.tracePointsGroup.children.entries.filter(
-        point => point.active
+        (point) => point.active
       );
       if (points.length) {
         if (fadeOutTween) {
@@ -38,8 +38,8 @@ export default class PointsTrace {
           delay: 0,
           alpha: {
             getStart: () => points[0].alpha,
-            getEnd: () => TRACE_ALPHA
-          }
+            getEnd: () => TRACE_ALPHA,
+          },
         });
       }
     });
@@ -58,7 +58,7 @@ export default class PointsTrace {
 
       context.launched = true;
 
-      context.tracePointsGroup.children.each(point => {
+      context.tracePointsGroup.children.each((point) => {
         point.setVisible(false);
         point.setActive(false);
         point.alpha = 1;

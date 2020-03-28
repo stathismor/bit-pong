@@ -4,24 +4,23 @@
     "start": "parcel ./src/index.html --open",
     "build": "parcel build src/index.html --no-source-maps --public-url .",
     "deploy": "yarn build && gh-pages -d dist",
-    "lint": "tslint -c tslint.json 'src/**/*.ts'",
-    "lint:fix": "tslint -c tslint.json --fix 'src/**/*.ts'",
-    "tslint-check": "tslint-config-prettier-check ./tslint.json",
-    "prettier:base": "prettier --parser typescript",
-    "prettier:check": "npm run prettier:base -- --list-different \"src/**/*.{ts,tsx}\"",
-    "prettier:write": "npm run prettier:base -- --write \"src/**/*.{ts,tsx}\""
+    "lint": "eslint 'src/**/*.ts'",
+    "lint:fix": "eslint --fix 'src/**/*.ts'"
   },
   "license": "MIT",
   "version": "1.1.0",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.25.0",
+    "@typescript-eslint/parser": "^2.25.0",
     "cssnano": "^4.1.10",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-prettier": "^3.1.2",
     "gh-pages": "^2.2.0",
     "husky": "^3.0.9",
     "node-sass": "^4.13.0",
     "parcel-plugin-clean-dist": "0.0.6",
-    "prettier": "1.18.2",
-    "tslint": "^6.0.0-beta0",
-    "tslint-config-prettier": "^1.18.0",
+    "prettier": "^2.0.2",
     "typescript": "^3.6.4"
   },
   "dependencies": {

@@ -8,7 +8,7 @@ import Fonts from "../fonts";
 export class BootScene extends Phaser.Scene {
   constructor() {
     super({
-      key: "BootScene"
+      key: "BootScene",
     });
   }
 

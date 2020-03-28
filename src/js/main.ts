@@ -22,24 +22,24 @@ const game = new Game({
     default: "matter",
     matter: {
       gravity: { y: 0.8 },
-      debug: false
-    }
+      debug: false,
+    },
   },
 
   scene: [BootScene, StartMenuScene, LevelMenuScene, GameplayScene],
   callbacks: {
     postBoot: () => {
       (() => new ScaleManager(WIDTH, HEIGHT, game.device.os.desktop))();
-    }
+    },
   },
   audio: {
-    disableWebAudio: true
-  }
+    disableWebAudio: true,
+  },
 });
 
 game.CONFIG = {
   width: WIDTH,
   height: HEIGHT,
   centerX: Math.round(0.5 * WIDTH),
-  centerY: Math.round(0.5 * HEIGHT)
+  centerY: Math.round(0.5 * HEIGHT),
 };

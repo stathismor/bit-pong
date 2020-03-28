@@ -32,7 +32,7 @@ export default class BitDrops {
 
   spill(x, y, rotation) {
     const dropStartPosY = y - 8;
-    this.drops.forEach(drop => {
+    this.drops.forEach((drop) => {
       const dropTemp = drop;
       dropTemp.setActive(true);
       dropTemp.setStatic(false);
