@@ -1,30 +1,16 @@
 import BEHAVIOUR_MAPPER from "../behaviour";
 import * as constants from "../constants";
-import { cupCategory } from "../collision";
 import BitDrops from "../component/BitDrops";
 import SetBody from "../behaviour/SetBody";
 
-const M = Phaser.Physics.Matter.Matter;
-const SIDE_WITH = 10;
-const SIDES_ANGLE = 13;
-const OFFSET = 2;
-const CHAMFER_RADIUS = 7;
 const COLLISION_PERIOD = 200;
-
 const LEVEL_MENU_DELAY = 3000;
 
 export default class Cup extends Phaser.Physics.Matter.Sprite {
   constructor(scene, x, y, angleRad, ballIds, behaviourNames) {
     super(scene.matter.world, x, y, constants.TEXTURE_ATLAS, "cup");
 
-    const sensor = M.Bodies.rectangle(
-      this.width / 2,
-      this.height - 15,
-      20,
-      25,
-      { isSensor: true }
-    );
-    this.behaviours = [SetBody(scene, this, "cup", x, y, angleRad, sensor)];
+    this.behaviours = [SetBody(scene, this, "cup", x, y, angleRad, true)];
 
     this.behaviours = [];
     if (behaviourNames) {
@@ -38,6 +24,7 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
 
     this.setFriction(0);
     this.setStatic(true);
+    this.setBounce(0.6);
 
     scene.matter.world.on("collisionstart", (event, firstBodyA, firstBodyB) => {
       const { pairs } = event;
