@@ -5,7 +5,7 @@ const PROJECTION_LINE_LENGTH = 250;
 const SKIP_UPDATE_NUM = 2;
 
 export default class ProjectionLine {
-  constructor(scene, x, y, speed, dragLength, offset) {
+  constructor(scene, x, y, speed, dragLength, container, player) {
     this.projectionPointsGroup = scene.add.group({
       key: constants.TEXTURE_ATLAS,
       frame: "projection_point",
@@ -13,13 +13,12 @@ export default class ProjectionLine {
       active: false,
       visible: false,
     });
-    this.hiddenBall = scene.matter.add.sprite(x, y, null, null, {
+    this.hiddenPlayer = scene.matter.add.sprite(x, y, null, null, {
       visible: false,
     });
-    this.hiddenBall.setVisible(false);
-    this.hiddenBall.setCircle();
-    this.hiddenBall.setStatic(true);
-    this.hideHiddenBall(); // Needs to be done here because it interacts with constraint
+    this.hiddenPlayer.setVisible(false);
+    this.hiddenPlayer.setStatic(true);
+    this.hideHiddenPlayer(); // Needs to be done here because it interacts with constraint
 
     scene.input.on("drag", (pointer, gameObject, dragX, dragY) => {
       this.updateProjectionPoints(
@@ -29,7 +28,8 @@ export default class ProjectionLine {
         speed,
         x,
         y,
-        offset
+        container,
+        player
       );
     });
 
@@ -48,83 +48,95 @@ export default class ProjectionLine {
     speed,
     startX,
     startY,
-    offset
-  ) {
+    container,
+    player
+  ): void {
     this.projectionPointsGroup.children.each((point) => {
       point.setVisible(false);
       point.setActive(false);
     });
-    const fromStartDistance = Phaser.Math.Distance.Between(
-      startX,
-      startY,
-      gameObject.x,
-      gameObject.y
-    );
 
-    if (fromStartDistance < offset) {
+    // @TODO: Skip check after a certain distance
+    // const fromStartDistance = Phaser.Math.Distance.Between(
+    //   startX,
+    //   startY,
+    //   gameObject.x,
+    //   gameObject.y
+    // );
+
+    if (
+      Phaser.Geom.Rectangle.ContainsRect(
+        container.getBounds(),
+        player.getBounds()
+      )
+    ) {
       return;
     }
 
-    this.hiddenBall.x = gameObject.x;
-    this.hiddenBall.y = gameObject.y;
-    this.hiddenBall.setVisible(false);
-    this.hiddenBall.setCircle();
-    this.hiddenBall.setStatic(false);
+    this.hiddenPlayer.x = gameObject.x;
+    this.hiddenPlayer.y = gameObject.y;
+    this.hiddenPlayer.setVisible(false);
+
+    this.hiddenPlayer.setStatic(false);
     const previousPos = {
-      x: this.hiddenBall.x,
-      y: this.hiddenBall.y,
+      x: this.hiddenPlayer.x,
+      y: this.hiddenPlayer.y,
     };
 
-    this.hiddenBall.body.force.y = 0;
-    this.hiddenBall.body.force.x = 0;
-    this.hiddenBall.setVelocity(
+    this.hiddenPlayer.body.force.y = 0;
+    this.hiddenPlayer.body.force.x = 0;
+    this.hiddenPlayer.setVelocity(
       (startX - gameObject.x) * speed,
       (startY - gameObject.y) * speed
     );
 
     const projectionLineData = [
       {
-        x: [this.hiddenBall.x],
-        y: [this.hiddenBall.y],
+        x: [this.hiddenPlayer.x],
+        y: [this.hiddenPlayer.y],
       },
     ];
     let projectionLineLength = 0;
     let updateCounter = 0;
     do {
       updateCounter += 1;
-      this.hiddenBall.body.force.y += this.hiddenBall.body.mass * 0.8 * 0.001; // gravityScale;
+      this.hiddenPlayer.body.force.y +=
+        this.hiddenPlayer.body.mass * 0.8 * 0.001; // gravityScale;
 
       // Run matterjs engine's update on our body
       Phaser.Physics.Matter.Matter.Body.update(
-        this.hiddenBall.body,
+        this.hiddenPlayer.body,
         16.666666666666668,
         1,
         1
       );
 
-      this.hiddenBall.body.force.x = 0;
-      this.hiddenBall.body.force.y = 0;
-      this.hiddenBall.body.torque = 0;
+      this.hiddenPlayer.body.force.x = 0;
+      this.hiddenPlayer.body.force.y = 0;
+      this.hiddenPlayer.body.torque = 0;
 
       if (updateCounter >= SKIP_UPDATE_NUM) {
         const ballUpdateDistance = Phaser.Math.Distance.Between(
           previousPos.x,
           previousPos.y,
-          this.hiddenBall.x,
-          this.hiddenBall.y
+          this.hiddenPlayer.x,
+          this.hiddenPlayer.y
         );
 
-        projectionLineData.push({ x: this.hiddenBall.x, y: this.hiddenBall.y });
+        projectionLineData.push({
+          x: this.hiddenPlayer.x,
+          y: this.hiddenPlayer.y,
+        });
 
-        previousPos.x = this.hiddenBall.x;
-        previousPos.y = this.hiddenBall.y;
+        previousPos.x = this.hiddenPlayer.x;
+        previousPos.y = this.hiddenPlayer.y;
 
         projectionLineLength += ballUpdateDistance;
         updateCounter = 0;
       }
     } while (projectionLineLength < PROJECTION_LINE_LENGTH);
 
-    this.hideHiddenBall();
+    this.hideHiddenPlayer();
 
     for (let index = 0; index < projectionLineData.length - 1; index += 1) {
       const point = projectionLineData[index];
@@ -138,9 +150,9 @@ export default class ProjectionLine {
     }
   }
 
-  hideHiddenBall() {
+  hideHiddenPlayer(): void {
     // HACK: Move the object further away, to use it later (cannot find away to temporarily remove)
-    this.hiddenBall.x = this.hiddenBall.scene.sys.game.CONFIG.width * 2;
-    this.hiddenBall.y = this.hiddenBall.scene.sys.game.CONFIG.height * 2;
+    this.hiddenPlayer.x = this.hiddenPlayer.scene.sys.game.CONFIG.width * 2;
+    this.hiddenPlayer.y = this.hiddenPlayer.scene.sys.game.CONFIG.height * 2;
   }
 }

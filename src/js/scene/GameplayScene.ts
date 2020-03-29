@@ -19,21 +19,21 @@ export class GameplayScene extends Phaser.Scene {
     this.ball = null;
   }
 
-  create(data) {
+  create(data): void {
     const config = this.sys.game.CONFIG;
     this.levelNumber = this.getLevelNumber(data);
 
     const level = LEVELS[this.levelNumber - 1];
-    const { tables: confTables = [], cup: confCup } = level;
+    const { tables: confTables = [], cup: confCup, player } = level;
 
     initCategories(this);
 
     this.ball = new Ball(
       this,
-      125,
-      config.centerY,
+      player.x,
+      player.y,
       constants.TEXTURE_ATLAS,
-      "ball",
+      player.name,
       Phaser.Math.DegToRad(0)
     );
     this.add.existing(this.ball);
@@ -62,7 +62,7 @@ export class GameplayScene extends Phaser.Scene {
     );
     this.add.existing(this.cup);
 
-    (() => new LevelBar(this, this.levelNumber))();
+    ((): void => new LevelBar(this, this.levelNumber))();
 
     const healthBar = new HealthBar(this, this.ball.livesNumber);
     const retryLevelPopup = new RetryLevelPopup(
@@ -93,12 +93,12 @@ export class GameplayScene extends Phaser.Scene {
     }
   }
 
-  update(time, delta) {
+  update(time, delta): void {
     this.ball.update();
     this.cup.update(delta);
   }
 
-  getLevelNumber(data) {
+  getLevelNumber(data): void {
     const { result, levelNumber } = data;
 
     if (levelNumber) {
@@ -115,7 +115,7 @@ export class GameplayScene extends Phaser.Scene {
     }
   }
 
-  debug() {
+  debug(): void {
     // Add a red border
     const config = this.sys.game.CONFIG;
     const size = 2;

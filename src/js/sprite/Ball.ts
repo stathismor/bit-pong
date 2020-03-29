@@ -28,6 +28,7 @@ class Ball extends Phaser.Physics.Matter.Sprite {
     this.isPressed = false;
     this.dragX = x;
     this.dragY = y;
+    this.angleRad = angleRad;
 
     this.behaviours = [SetBody(scene, this, frame, x, y, angleRad)];
 
@@ -38,10 +39,9 @@ class Ball extends Phaser.Physics.Matter.Sprite {
     greyBall.setAlpha(0.12);
     greyBall.setScale(GREY_BALL_SCALE);
 
-    const throwOffset = greyBall.width * GREY_BALL_SCALE - this.width;
-    (() => new ProjectionLine(scene, x, y, SPEED, 100, throwOffset))();
+    ((): void => new ProjectionLine(scene, x, y, SPEED, 100, greyBall, this))();
 
-    this.pointsTrace = new PointsTrace(scene, this, throwOffset);
+    this.pointsTrace = new PointsTrace(scene, this, greyBall, this);
     this.ballTrace = new BallTrace(scene, this);
 
     this.constraint = Phaser.Physics.Matter.Matter.Constraint.create({
@@ -83,14 +83,13 @@ class Ball extends Phaser.Physics.Matter.Sprite {
     scene.input.on("dragend", (pointer, gameObject) => {
       gameObject.isPressed = false;
       gameObject.launched = true;
-      const fromStartDistance = Phaser.Math.Distance.Between(
-        x,
-        y,
-        gameObject.x,
-        gameObject.y
-      );
 
-      if (fromStartDistance < throwOffset) {
+      if (
+        Phaser.Geom.Rectangle.ContainsRect(
+          greyBall.getBounds(),
+          this.getBounds()
+        )
+      ) {
         gameObject.scene.matter.world.add(gameObject.constraint);
         gameObject.hasConstraint = true;
         return;
@@ -154,7 +153,7 @@ class Ball extends Phaser.Physics.Matter.Sprite {
     });
   }
 
-  update() {
+  update(): void {
     if (this.isDead || this.livesNumber === 0) {
       return;
     }
@@ -186,7 +185,7 @@ class Ball extends Phaser.Physics.Matter.Sprite {
     this.ballTrace.update();
   }
 
-  kill() {
+  kill(): void {
     this.livesNumber -= 1;
     this.emit("dead");
     if (this.livesNumber !== 0) {
@@ -195,7 +194,7 @@ class Ball extends Phaser.Physics.Matter.Sprite {
     this.isDead = false;
   }
 
-  reset() {
+  reset(): void {
     this.setInteractive({ draggable: true });
 
     this.touchesTable = false;
@@ -203,6 +202,7 @@ class Ball extends Phaser.Physics.Matter.Sprite {
     this.setStatic(true);
     this.x = this.startPos.x;
     this.y = this.startPos.y;
+    this.rotation = this.angleRad;
   }
 }
 
