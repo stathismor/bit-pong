@@ -28,8 +28,8 @@ const game = new Game({
 
   scene: [BootScene, StartMenuScene, LevelMenuScene, GameplayScene],
   callbacks: {
-    postBoot: () => {
-      (() => new ScaleManager(WIDTH, HEIGHT, game.device.os.desktop))();
+    postBoot: (): void => {
+      ((): void => new ScaleManager(WIDTH, HEIGHT, game.device.os.desktop))();
     },
   },
   audio: {
