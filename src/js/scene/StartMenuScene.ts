@@ -10,8 +10,7 @@ export class StartMenuScene extends Scene {
   }
 
   create() {
-    this.scene.start("GameplayScene", { levelNumber: 2 });
-
+    // this.scene.start("GameplayScene", { levelNumber: 1 });
     const config = this.sys.game.CONFIG;
     this.add.image(
       config.centerX,

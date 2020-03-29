@@ -6,7 +6,7 @@ const TRACE_ALPHA = 0.25;
 const TRACE_FADE_OUT_DURARION = 600;
 
 export default class PointsTrace {
-  constructor(scene, ball, offset) {
+  constructor(scene, ball, container, player) {
     this.ball = ball;
     this.prevTracePos = { x: ball.x, y: ball.y };
 
@@ -21,10 +21,9 @@ export default class PointsTrace {
       visible: false,
     });
 
-    const context = this;
     scene.input.on("dragstart", (pointer, gameObject) => {
-      context.launched = false;
-      const points = context.tracePointsGroup.children.entries.filter(
+      this.launched = false;
+      const points = this.tracePointsGroup.children.entries.filter(
         (point) => point.active
       );
       if (points.length) {
@@ -37,28 +36,26 @@ export default class PointsTrace {
           duration: TRACE_FADE_OUT_DURARION,
           delay: 0,
           alpha: {
-            getStart: () => points[0].alpha,
-            getEnd: () => TRACE_ALPHA,
+            getStart: (): void => points[0].alpha,
+            getEnd: (): void => TRACE_ALPHA,
           },
         });
       }
     });
 
-    scene.input.on("dragend", (pointer, gameObject) => {
-      const fromStartDistance = Phaser.Math.Distance.Between(
-        ball.startPos.x,
-        ball.startPos.y,
-        gameObject.x,
-        gameObject.y
-      );
-
-      if (fromStartDistance < offset) {
+    scene.input.on("dragend", () => {
+      if (
+        Phaser.Geom.Rectangle.ContainsRect(
+          container.getBounds(),
+          player.getBounds()
+        )
+      ) {
         return;
       }
 
-      context.launched = true;
+      this.launched = true;
 
-      context.tracePointsGroup.children.each((point) => {
+      this.tracePointsGroup.children.each((point) => {
         point.setVisible(false);
         point.setActive(false);
         point.alpha = 1;
@@ -66,7 +63,7 @@ export default class PointsTrace {
     });
   }
 
-  update() {
+  update(): void {
     if (
       this.launched &&
       Phaser.Math.Distance.Between(
