@@ -19,8 +19,8 @@ export class BootScene extends Phaser.Scene {
     this.load.multiatlas(constants.TEXTURE_ATLAS, atlasData);
 
     // Audio
-    this.load.audio("table_bounce", Sounds.table_bounce);
-    this.load.audio("cup_bounce", Sounds.cup_bounce);
+    this.load.audio("table_bounce", Sounds.table_bounce, { instances: 2 });
+    this.load.audio("cup_bounce", Sounds.cup_bounce, { instances: 2 });
     this.load.audio("splash", Sounds.splash);
 
     this.load.bitmapFont("nokia", Images.nokia, Fonts.nokia);
