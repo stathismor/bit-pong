@@ -1,5 +1,4 @@
 import * as constants from "../constants";
-import { StartMenuScene } from "./StartMenuScene";
 import Images from "../images";
 import Sounds from "../sounds";
 import Data from "../data";
@@ -12,7 +11,7 @@ export class BootScene extends Phaser.Scene {
     });
   }
 
-  preload() {
+  preload(): void {
     // HACK: parcel changes the asset names in dist directory, so
     // we dynamically get the new image names for the atlas
     const atlasData = Data.bit_pong_data;
@@ -27,7 +26,7 @@ export class BootScene extends Phaser.Scene {
     this.load.bitmapFont("nokia", Images.nokia, Fonts.nokia);
   }
 
-  create() {
+  create(): void {
     this.scene.start("StartMenuScene");
   }
 }

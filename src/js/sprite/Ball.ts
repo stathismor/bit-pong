@@ -34,9 +34,11 @@ class Ball extends Phaser.Physics.Matter.Sprite {
 
     this.setInteractive({ draggable: true });
 
-    // TODO: Use "grey_" + frame
+    // TODO: REMOVE grey asseets
     const greyBall = scene.add.image(x, y, constants.TEXTURE_ATLAS, frame);
-    greyBall.setAlpha(0.12);
+    greyBall.tint = "#d9d9d9";
+
+    greyBall.setAlpha(0.07);
     greyBall.setScale(GREY_BALL_SCALE);
 
     ((): void => new ProjectionLine(scene, x, y, SPEED, 100, greyBall, this))();
