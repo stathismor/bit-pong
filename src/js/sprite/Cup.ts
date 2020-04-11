@@ -2,22 +2,30 @@ import BEHAVIOUR_MAPPER from "../behaviour";
 import * as constants from "../constants";
 import BitDrops from "../component/BitDrops";
 import SetBody from "../behaviour/SetBody";
+import { ComponentManager } from "../behaviour/ComponentManager";
 
 const COLLISION_PERIOD = 200;
 const LEVEL_MENU_DELAY = 3000;
 
-export default class Cup extends Phaser.Physics.Matter.Sprite {
+export class Cup extends Phaser.Physics.Matter.Sprite {
   constructor(scene, x, y, angleRad, ballIds, behaviourNames) {
     super(scene.matter.world, x, y, constants.TEXTURE_ATLAS, "cup");
 
-    this.behaviours = [SetBody(scene, this, "cup", x, y, angleRad, true)];
-
-    this.behaviours = [];
+    ComponentManager.Add(
+      scene,
+      this,
+      new SetBody(scene, this, "cup", x, y, angleRad, true)
+    );
     if (behaviourNames) {
       behaviourNames.forEach((behaviourName) =>
-        this.behaviours.push(new BEHAVIOUR_MAPPER[behaviourName](scene, this))
+        ComponentManager.Add(
+          scene,
+          this,
+          new BEHAVIOUR_MAPPER[behaviourName](scene, this)
+        )
       );
     }
+
     let collisionTime = new Date();
 
     const bitDrops = new BitDrops(scene);
@@ -70,9 +78,5 @@ export default class Cup extends Phaser.Physics.Matter.Sprite {
         collisionTime = new Date();
       }
     });
-  }
-
-  update(delta) {
-    this.behaviours.forEach((behaviour) => behaviour.update(delta));
   }
 }
