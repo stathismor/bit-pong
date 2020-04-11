@@ -1,9 +1,11 @@
 import LEVELS from "../../../config/levels.json";
-import Ball from "../sprite/Ball";
-import Cup from "../sprite/Cup";
-import Table from "../sprite/Table";
+import { Ball } from "../sprite/Ball";
+import { Player } from "../sprite/Player";
+import { Cup } from "../sprite/Cup";
+import { Table } from "../sprite/Table";
 import RetryLevelPopup from "../sprite/RetryLevelPopup";
 import CompleteLevelPopup from "../sprite/CompleteLevelPopup";
+import { ComponentManager } from "../behaviour/ComponentManager";
 import HealthBar from "../hud/HealthBar";
 import LevelBar from "../hud/LevelBar";
 import * as constants from "../constants";
@@ -16,7 +18,7 @@ export class GameplayScene extends Phaser.Scene {
     });
     this.levelNumber = 1;
     this.tableIds = [];
-    this.ball = null;
+    this.player = null;
   }
 
   create(data): void {
@@ -24,11 +26,27 @@ export class GameplayScene extends Phaser.Scene {
     this.levelNumber = this.getLevelNumber(data);
 
     const level = LEVELS[this.levelNumber - 1];
-    const { tables: confTables = [], cup: confCup, player } = level;
+    const {
+      tables: confTables = [],
+      cups: confCups,
+      balls: ballsConf = [],
+      player,
+    } = level;
 
     initCategories(this);
 
-    this.ball = new Ball(
+    ballsConf.forEach((ballConf) => {
+      const ball = new Ball(
+        this,
+        ballConf.x,
+        ballConf.y,
+        constants.TEXTURE_ATLAS,
+        "ball"
+      );
+      this.add.existing(ball);
+    });
+
+    this.player = new Player(
       this,
       player.x,
       player.y,
@@ -36,8 +54,8 @@ export class GameplayScene extends Phaser.Scene {
       player.name,
       Phaser.Math.DegToRad(0)
     );
-    this.add.existing(this.ball);
-    const ballIds = this.ball.body.parts.map((part) => part.id);
+    this.add.existing(this.player);
+    const ballIds = this.player.body.parts.map((part) => part.id);
 
     confTables.forEach((confTable) => {
       const table = new Table(
@@ -52,28 +70,31 @@ export class GameplayScene extends Phaser.Scene {
       this.tableIds.push(table.body.id);
     });
 
-    this.cup = new Cup(
-      this,
-      confCup.x,
-      confCup.y,
-      confCup.angle,
-      ballIds,
-      confCup.behaviours
-    );
-    this.add.existing(this.cup);
+    confCups.forEach((confCup) => {
+      this.cup = new Cup(
+        this,
+        confCup.x,
+        confCup.y,
+        confCup.angle,
+        ballIds,
+        confCup.behaviours
+      );
+      this.add.existing(this.cup);
+    });
 
     ((): void => new LevelBar(this, this.levelNumber))();
 
-    const healthBar = new HealthBar(this, this.ball.livesNumber);
+    // @TODO: How do I get lives number here
+    const healthBar = new HealthBar(this, this.player.livesNumber);
     const retryLevelPopup = new RetryLevelPopup(
       this,
       config.centerX,
       config.centerY
     );
 
-    this.ball.on("dead", () => {
-      healthBar.update(this.ball.livesNumber);
-      if (this.ball.livesNumber === 0) {
+    this.player.on("dead", () => {
+      healthBar.update(this.player.livesNumber);
+      if (this.player.livesNumber === 0) {
         retryLevelPopup.popup();
       }
     });
@@ -94,8 +115,7 @@ export class GameplayScene extends Phaser.Scene {
   }
 
   update(time, delta): void {
-    this.ball.update();
-    this.cup.update(delta);
+    ComponentManager.Update(delta);
   }
 
   getLevelNumber(data): void {
