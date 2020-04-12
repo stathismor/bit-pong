@@ -1,4 +1,4 @@
-export default class Move {
+export class Move {
   constructor(scene, owner) {
     scene.tweens.add({
       targets: owner,

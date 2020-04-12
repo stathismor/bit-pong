@@ -5,7 +5,7 @@ const OFFSET = 2;
 const CHAMFER_RADIUS = 7;
 const CHAMFER_RADIUS_BOTTOM = 2;
 
-export default class SetBody {
+export class SetBody {
   constructor(scene, owner, shape, x, y, angle, hasSensor) {
     switch (shape) {
       case "ball":

@@ -1,6 +1,6 @@
 const ROTATION_SPEED = 0.002;
 
-export default class Rotate {
+export class Rotate {
   constructor(scene, owner) {
     this.owner = owner;
   }

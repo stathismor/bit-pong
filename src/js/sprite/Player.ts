@@ -1,4 +1,4 @@
-import SetBody from "../behaviour/SetBody";
+import { SetBody } from "../behaviour/SetBody";
 import Drag from "../behaviour/Drag";
 import { ComponentManager } from "../behaviour/ComponentManager";
 import * as constants from "../constants";
