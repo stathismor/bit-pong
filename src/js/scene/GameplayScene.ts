@@ -70,8 +70,9 @@ export class GameplayScene extends Phaser.Scene {
       this.tableIds.push(table.body.id);
     });
 
+    const cups = [];
     confCups.forEach((confCup) => {
-      this.cup = new Cup(
+      const cup = new Cup(
         this,
         confCup.x,
         confCup.y,
@@ -79,7 +80,8 @@ export class GameplayScene extends Phaser.Scene {
         ballIds,
         confCup.behaviours
       );
-      this.add.existing(this.cup);
+      this.add.existing(cup);
+      cups.push(cup);
     });
 
     ((): void => new LevelBar(this, this.levelNumber))();
@@ -105,8 +107,10 @@ export class GameplayScene extends Phaser.Scene {
       config.centerY
     );
 
-    this.cup.on("complete", () => {
-      completeLevelPopup.popup();
+    cups.forEach((cup) => {
+      cup.on("complete", () => {
+        completeLevelPopup.popup();
+      });
     });
 
     if (process.env.DEBUG) {

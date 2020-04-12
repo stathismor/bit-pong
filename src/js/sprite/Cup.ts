@@ -34,17 +34,19 @@ export class Cup extends Phaser.Physics.Matter.Sprite {
     this.setStatic(true);
     this.setBounce(0.6);
 
-    scene.matter.world.on("collisionstart", (event, firstBodyA, firstBodyB) => {
+    scene.matter.world.on("collisionstart", (event, bodyA, bodyB) => {
       const { pairs } = event;
+      const partIds = this.body.parts.map((part) => part.id);
 
       for (let i = 0; i < pairs.length; i += 1) {
         //  We only want sensor collisions
-        if (pairs[i].isSensor) {
+        const pair = pairs[i];
+        if (pair.isSensor && partIds.includes(bodyB.id)) {
           const currentLevel = scene.levelNumber;
           const completedLevels =
             JSON.parse(localStorage.getItem(constants.LOGAL_STORAGE_KEY)) || [];
 
-          if (ballIds.includes(firstBodyA.id)) {
+          if ([bodyA.id, bodyB.id].some((r) => ballIds.includes(r))) {
             this.scene.sound.play("splash");
 
             bitDrops.spill(this.x, this.y, this.rotation);
@@ -66,10 +68,9 @@ export class Cup extends Phaser.Physics.Matter.Sprite {
         }
       }
 
-      const partIds = this.body.parts.map((part) => part.id);
       if (
-        [firstBodyA.id, firstBodyB.id].some((r) => ballIds.includes(r)) &&
-        [firstBodyA.id, firstBodyB.id].some((r) => partIds.includes(r))
+        [bodyA.id, bodyB.id].some((r) => ballIds.includes(r)) &&
+        [bodyA.id, bodyB.id].some((r) => partIds.includes(r))
       ) {
         const timeDiff = new Date() - collisionTime;
         if (timeDiff > COLLISION_PERIOD) {
