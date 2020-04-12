@@ -1,7 +1,7 @@
 import BEHAVIOUR_MAPPER from "../behaviour";
 import * as constants from "../constants";
 import BitDrops from "../component/BitDrops";
-import SetBody from "../behaviour/SetBody";
+import { SetBody } from "../behaviour/SetBody";
 import { ComponentManager } from "../behaviour/ComponentManager";
 
 const COLLISION_PERIOD = 200;
