@@ -5,7 +5,7 @@ import * as constants from "../constants";
 import { isInCircle, closestPointToCircle } from "../utils";
 
 const SPEED = 0.15;
-const RESET_DISTANCE = 650;
+const RESET_DISTANCE = 600;
 const IMMOBILE_SPEED = 0.2222222222229;
 const IMMOBILE_ANGULAR_SPPED = 0.03;
 const GREY_BALL_SCALE = 1.6;
@@ -169,8 +169,8 @@ export class Drag {
       Phaser.Math.Distance.Between(
         this.owner.x,
         this.owner.y,
-        this.owner.scene.cup.x,
-        this.owner.scene.cup.y
+        this.owner.scene.sys.game.CONFIG.centerX,
+        this.owner.scene.sys.game.CONFIG.centerY
       ) > RESET_DISTANCE ||
       isImmobile
     ) {
