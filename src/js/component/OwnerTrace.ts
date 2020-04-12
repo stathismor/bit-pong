@@ -32,6 +32,7 @@ export class OwnerTrace {
       if (ownerTrace) {
         ownerTrace.x = this.owner.x;
         ownerTrace.y = this.owner.y;
+        ownerTrace.rotation = this.owner.rotation;
         ownerTrace.setActive(true);
         ownerTrace.setVisible(true);
 

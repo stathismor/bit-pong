@@ -12,7 +12,7 @@ const GREY_BALL_SCALE = 1.6;
 const DEATH_DELAY = 650;
 const DRAG_RADIUS = 95;
 
-export default class Drag {
+export class Drag {
   constructor(scene, owner, x, y, frame, angleRad) {
     this.owner = owner;
     owner.touchesTable = false;
@@ -31,10 +31,9 @@ export default class Drag {
 
     // TODO: REMOVE grey asseets
     const greyBall = scene.add.image(x, y, constants.TEXTURE_ATLAS, frame);
-    greyBall.tint = "#d9d9d9";
-
-    greyBall.setAlpha(0.07);
     greyBall.setScale(GREY_BALL_SCALE);
+    greyBall.setAlpha(0.07);
+    greyBall.tint = "#d9d9d9";
 
     ((): void =>
       new ProjectionLine(scene, x, y, SPEED, 100, greyBall, owner))();
