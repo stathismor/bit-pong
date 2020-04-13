@@ -1,4 +1,5 @@
 import { tableCategory } from "../collision";
+import { uuidv4 } from "../utils";
 
 export class Table extends Phaser.Physics.Matter.Sprite {
   constructor(scene, x, y, texture, frame, angleDeg) {
@@ -6,6 +7,8 @@ export class Table extends Phaser.Physics.Matter.Sprite {
       isStatic: true,
       angle: angleDeg,
     });
+    this.setData("name", "table_" + uuidv4());
+
     this.setBounce(0.9);
 
     this.setCollisionCategory(tableCategory);

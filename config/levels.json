@@ -3,7 +3,7 @@
     "name": "1",
     "tables": [{ "x": 400, "y": 220, "angle": 0 }],
     "cups": [{ "x": 400, "y": 188, "angle": 0 }],
-    "player": { "name": "ball", "x": 125, "y": 185 }
+    "player": { "name": "cup", "x": 125, "y": 185 }
   },
   {
     "name": "2",
