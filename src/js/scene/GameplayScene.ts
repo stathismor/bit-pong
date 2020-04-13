@@ -25,6 +25,8 @@ export class GameplayScene extends Phaser.Scene {
     const config = this.sys.game.CONFIG;
     this.levelNumber = this.getLevelNumber(data);
 
+    ComponentManager.Clear();
+
     const level = LEVELS[this.levelNumber - 1];
     const {
       tables: confTables = [],

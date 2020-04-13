@@ -16,6 +16,7 @@ export class Cup extends Phaser.Physics.Matter.Sprite {
       this,
       new SetBody(scene, this, "cup", x, y, angleRad, true)
     );
+
     if (behaviourNames) {
       behaviourNames.forEach((behaviourName) =>
         ComponentManager.Add(
