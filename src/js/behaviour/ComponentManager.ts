@@ -5,6 +5,10 @@ export class ComponentManager {
     this.components.push(component);
   }
 
+  static Clear(): void {
+    this.components.length = 0;
+  }
+
   static Update(delta): void {
     this.components.forEach((component) => component.update(delta));
   }
