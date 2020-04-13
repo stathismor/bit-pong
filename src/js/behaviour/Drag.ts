@@ -4,7 +4,7 @@ import { OwnerTrace } from "../component/OwnerTrace";
 import * as constants from "../constants";
 import { isInCircle, closestPointToCircle } from "../utils";
 
-const SPEED = 0.15;
+const SPEED = 0.16;
 const RESET_DISTANCE = 600;
 const IMMOBILE_SPEED = 0.2222222222229;
 const IMMOBILE_ANGULAR_SPPED = 0.03;
@@ -15,6 +15,8 @@ const DRAG_RADIUS = 95;
 export class Drag {
   constructor(scene, owner, x, y, frame, angleRad) {
     this.owner = owner;
+    this.angleRad = angleRad;
+
     owner.touchesTable = false;
     owner.hasConstraint = false;
     owner.isDead = false;
@@ -25,7 +27,7 @@ export class Drag {
     owner.isPressed = false;
     owner.dragX = x;
     owner.dragY = y;
-    owner.angleRad = angleRad;
+    owner.rotation = angleRad;
 
     owner.setInteractive({ draggable: true });
 
@@ -34,6 +36,7 @@ export class Drag {
     greyBall.setScale(GREY_BALL_SCALE);
     greyBall.setAlpha(0.07);
     greyBall.tint = "#d9d9d9";
+    greyBall.rotation = angleRad;
 
     ((): void =>
       new ProjectionLine(scene, x, y, SPEED, 100, greyBall, owner))();
@@ -99,31 +102,6 @@ export class Drag {
       );
 
       gameObject.removeInteractive();
-    });
-
-    scene.matter.world.on("collisionstart", (event, bodyA, bodyB) => {
-      if (owner.isDead || !owner.launched) {
-        return;
-      }
-
-      if (
-        [bodyA.id, bodyB.id].some((r) => ballIds.includes(r)) &&
-        [bodyA.id, bodyB.id].some((r) => owner.scene.tableIds.includes(r))
-      ) {
-        owner.scene.sound.play("table_bounce");
-        owner.touchesTable = true;
-      }
-
-      const { pairs } = event;
-      for (let i = 0; i < pairs.length; i += 1) {
-        //  We only want sensor collisions
-        if (pairs[i].isSensor) {
-          if (ballIds.includes(bodyA.id)) {
-            owner.destroy();
-            owner.isDead = true;
-          }
-        }
-      }
     });
 
     scene.matter.world.on("collisionend", (event, bodyA, bodyB) => {
@@ -199,6 +177,6 @@ export class Drag {
     this.owner.setStatic(true);
     this.owner.x = this.owner.startPos.x;
     this.owner.y = this.owner.startPos.y;
-    this.owner.rotation = this.owner.angleRad;
+    this.owner.rotation = this.angleRad;
   }
 }

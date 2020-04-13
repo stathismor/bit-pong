@@ -1,5 +1,6 @@
-import * as constants from "../constants";
 import { cupCategory, tableCategory, dropCategory } from "../collision";
+import { uuidv4 } from "../utils";
+import * as constants from "../constants";
 
 const DROPS_COUNT = 80;
 const DROP_ROTATION_OFFSET = 0.35;
@@ -22,6 +23,7 @@ export default class BitDrops {
         dropTexture,
         { shape: { type: "rectangle", radius: 8 }, ignorePointer: true }
       );
+      drop.setData("name", "drop_" + uuidv4());
       drop.setCollisionCategory(dropCategory);
       drop.setCollidesWith([tableCategory, cupCategory]);
       drop.setActive(false);

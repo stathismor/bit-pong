@@ -10,6 +10,7 @@ import HealthBar from "../hud/HealthBar";
 import LevelBar from "../hud/LevelBar";
 import * as constants from "../constants";
 import { initCategories } from "../collision";
+import { initCollisions } from "../CollisionManager";
 
 export class GameplayScene extends Phaser.Scene {
   constructor() {
@@ -24,18 +25,18 @@ export class GameplayScene extends Phaser.Scene {
   create(data): void {
     const config = this.sys.game.CONFIG;
     this.levelNumber = this.getLevelNumber(data);
+    initCategories(this);
 
     ComponentManager.Clear();
+    initCollisions(this);
 
     const level = LEVELS[this.levelNumber - 1];
     const {
       tables: confTables = [],
-      cups: confCups,
+      cups: confCups = [],
       balls: ballsConf = [],
-      player,
+      player: playerConf,
     } = level;
-
-    initCategories(this);
 
     ballsConf.forEach((ballConf) => {
       const ball = new Ball(
@@ -43,18 +44,19 @@ export class GameplayScene extends Phaser.Scene {
         ballConf.x,
         ballConf.y,
         constants.TEXTURE_ATLAS,
-        "ball"
+        "ball",
+        ballConf.isStatic
       );
       this.add.existing(ball);
     });
 
     this.player = new Player(
       this,
-      player.x,
-      player.y,
+      playerConf.x,
+      playerConf.y,
       constants.TEXTURE_ATLAS,
-      player.name,
-      Phaser.Math.DegToRad(0)
+      playerConf.name,
+      Phaser.Math.DegToRad(playerConf.angle || 0)
     );
     this.add.existing(this.player);
     const ballIds = this.player.body.parts.map((part) => part.id);
