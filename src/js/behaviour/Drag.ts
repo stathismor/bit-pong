@@ -17,7 +17,6 @@ export class Drag {
     this.owner = owner;
     this.angleRad = angleRad;
 
-    owner.touchesTable = false;
     owner.hasConstraint = false;
     owner.isDead = false;
     owner.launched = false;
@@ -103,29 +102,6 @@ export class Drag {
 
       gameObject.removeInteractive();
     });
-
-    scene.matter.world.on("collisionend", (event, bodyA, bodyB) => {
-      if (owner.isDead || !owner.launched) {
-        return;
-      }
-
-      if (
-        !isInCircle(
-          x,
-          y,
-          owner.body.position.x,
-          owner.body.position.y,
-          DRAG_RADIUS
-        )
-      ) {
-        if (
-          [bodyA.id, bodyB.id].some((r) => ballIds.includes(r)) &&
-          [bodyA.id, bodyB.id].some((r) => owner.scene.tableIds.includes(r))
-        ) {
-          owner.touchesTable = false;
-        }
-      }
-    });
   }
 
   update(): void {
@@ -139,10 +115,14 @@ export class Drag {
       this.owner.y = this.owner.dragY;
     }
 
+    if (!this.owner.launched) {
+      return;
+    }
+
     const isImmobile =
       this.owner.body.speed < IMMOBILE_SPEED &&
-      this.owner.body.angularSpeed < IMMOBILE_ANGULAR_SPPED &&
-      this.owner.touchesTable;
+      this.owner.body.angularSpeed < IMMOBILE_ANGULAR_SPPED;
+
     if (
       Phaser.Math.Distance.Between(
         this.owner.x,
@@ -172,11 +152,10 @@ export class Drag {
   reset(): void {
     this.owner.setInteractive({ draggable: true });
 
-    this.owner.touchesTable = false;
-
     this.owner.setStatic(true);
     this.owner.x = this.owner.startPos.x;
     this.owner.y = this.owner.startPos.y;
     this.owner.rotation = this.angleRad;
+    this.owner.launched = false;
   }
 }

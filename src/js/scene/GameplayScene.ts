@@ -19,7 +19,6 @@ export class GameplayScene extends Phaser.Scene {
     });
     this.levelNumber = 1;
     this.tableIds = [];
-    this.player = null;
   }
 
   create(data): void {
@@ -50,7 +49,7 @@ export class GameplayScene extends Phaser.Scene {
       this.add.existing(ball);
     });
 
-    this.player = new Player(
+    const player = new Player(
       this,
       playerConf.x,
       playerConf.y,
@@ -58,8 +57,8 @@ export class GameplayScene extends Phaser.Scene {
       playerConf.name,
       Phaser.Math.DegToRad(playerConf.angle || 0)
     );
-    this.add.existing(this.player);
-    const ballIds = this.player.body.parts.map((part) => part.id);
+    this.add.existing(player);
+    const ballIds = player.body.parts.map((part) => part.id);
 
     confTables.forEach((confTable) => {
       const table = new Table(
@@ -91,16 +90,16 @@ export class GameplayScene extends Phaser.Scene {
     ((): void => new LevelBar(this, this.levelNumber))();
 
     // @TODO: How do I get lives number here
-    const healthBar = new HealthBar(this, this.player.livesNumber);
+    const healthBar = new HealthBar(this, player.livesNumber);
     const retryLevelPopup = new RetryLevelPopup(
       this,
       config.centerX,
       config.centerY
     );
 
-    this.player.on("dead", () => {
-      healthBar.update(this.player.livesNumber);
-      if (this.player.livesNumber === 0) {
+    player.on("dead", () => {
+      healthBar.update(player.livesNumber);
+      if (player.livesNumber === 0) {
         retryLevelPopup.popup();
       }
     });
@@ -111,10 +110,8 @@ export class GameplayScene extends Phaser.Scene {
       config.centerY
     );
 
-    cups.forEach((cup) => {
-      cup.on("complete", () => {
-        completeLevelPopup.popup();
-      });
+    player.on("complete", () => {
+      completeLevelPopup.popup();
     });
 
     if (process.env.DEBUG) {
@@ -154,5 +151,19 @@ export class GameplayScene extends Phaser.Scene {
       config.height - size
     );
     border.setStrokeStyle(size, "0xFF0000");
+
+    const levelMap = {
+      1: "ONE",
+      2: "TWO",
+      3: "THREE",
+      4: "FOUR",
+      5: "FIVE",
+    };
+    for (const [key, value] of Object.entries(levelMap)) {
+      const keyObj = this.input.keyboard.addKey(value); // Get key object
+      keyObj.on("down", () => {
+        this.scene.start("GameplayScene", { levelNumber: key });
+      });
+    }
   }
 }
