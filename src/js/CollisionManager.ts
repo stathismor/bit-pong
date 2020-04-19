@@ -19,9 +19,13 @@ export function initCollisions(scene): void {
       if (pair.isSensor) {
         if (
           [
-            bodyA.gameObject.getData("isPlayer"),
-            bodyB.gameObject.getData("isPlayer"),
-          ].some((isPlayer) => isPlayer)
+            bodyA.gameObject.getData("name"),
+            bodyB.gameObject.getData("name"),
+          ].some((name) => name.startsWith("cup")) &&
+          [
+            bodyA.gameObject.getData("name"),
+            bodyB.gameObject.getData("name"),
+          ].some((name) => name.startsWith("ball"))
         ) {
           const currentLevel = scene.levelNumber;
           const completedLevels =
@@ -42,11 +46,6 @@ export function initCollisions(scene): void {
           const { x, y, rotation } = cup;
           bitDrops.spill(x, y, rotation);
 
-          if (player.getData("name") === ball.getData("name")) {
-            player.isDead = true;
-            player.destroy();
-          }
-
           if (!completedLevels.includes(currentLevel)) {
             localStorage.setItem(
               constants.LOGAL_STORAGE_KEY,
@@ -54,12 +53,20 @@ export function initCollisions(scene): void {
             );
           }
 
+          player.isDead = true;
           scene.time.delayedCall(
             LEVEL_MENU_DELAY,
-            () => cup.emit("complete"),
+            () => {
+              console.log("COMPLETE EMIT");
+              console.log(player);
+              player.emit("complete");
+            },
             null,
             null
           );
+          cup.setStatic(true);
+          ball.setStatic(true);
+          ball.setVisible(false);
         }
       } else {
         if (
@@ -68,7 +75,7 @@ export function initCollisions(scene): void {
             bodyB.gameObject.getData("name"),
           ].some((name) => name.startsWith("drop"))
         ) {
-          return;
+          continue;
         }
 
         if (
@@ -82,7 +89,7 @@ export function initCollisions(scene): void {
             scene.sound.play("cup_bounce");
           }
           collisionTime = new Date();
-          return;
+          continue;
         }
 
         if (
