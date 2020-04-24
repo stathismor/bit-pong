@@ -57,8 +57,6 @@ export function initCollisions(scene): void {
           scene.time.delayedCall(
             LEVEL_MENU_DELAY,
             () => {
-              console.log("COMPLETE EMIT");
-              console.log(player);
               player.emit("complete");
             },
             null,
@@ -103,8 +101,10 @@ export function initCollisions(scene): void {
           // Should not access player like that
           const player = [bodyA, bodyB].find(
             (body) => body.gameObject.getData("isPlayer") === true
-          ).gameObject;
-          player.touchesTable = true;
+          );
+          if (player && player.gameObject) {
+            player.gameObject.touchesTable = true;
+          }
         }
       }
     }

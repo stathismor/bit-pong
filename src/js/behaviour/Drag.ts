@@ -10,7 +10,7 @@ const IMMOBILE_SPEED = 0.2222222222229;
 const IMMOBILE_ANGULAR_SPPED = 0.03;
 const GREY_BALL_SCALE = 1.6;
 const DEATH_DELAY = 650;
-const DRAG_RADIUS = 95;
+const DRAG_RADIUS = 85;
 
 export class Drag {
   constructor(scene, owner, x, y, frame, angleRad) {

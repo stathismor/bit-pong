@@ -1,5 +1,4 @@
 import BEHAVIOUR_MAPPER from "../behaviour";
-import BitDrops from "../component/BitDrops";
 import { SetBody } from "../behaviour/SetBody";
 import { ComponentManager } from "../behaviour/ComponentManager";
 import { uuidv4 } from "../utils";
