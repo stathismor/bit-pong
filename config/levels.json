@@ -3,7 +3,7 @@
     "name": "1",
     "tables": [{ "x": 400, "y": 220, "angle": 0 }],
     "cups": [{ "x": 400, "y": 188, "angle": 0 }],
-    "player": { "name": "cup", "x": 125, "y": 185 }
+    "player": { "name": "ball", "x": 125, "y": 185 }
   },
   {
     "name": "2",
@@ -51,5 +51,26 @@
       { "x": 350, "y": 190, "angle": 0, "behaviours": ["move", "rotate"] }
     ],
     "player": { "name": "ball", "x": 125, "y": 185 }
+  },
+  {
+    "name": "9",
+    "balls": [{ "x": 400, "y": 188, "angle": 0, "isStatic": true }],
+    "player": { "name": "cup", "x": 125, "y": 185, "angle": 135 }
+  },
+  {
+    "name": "10",
+    "tables": [
+      { "x": 340, "y": 300, "angle": 0 },
+      { "x": 270, "y": 20, "angle": 90 }
+    ],
+    "balls": [{ "x": 450, "y": 200, "angle": 0, "isStatic": true }],
+    "player": { "name": "cup", "x": 125, "y": 150, "angle": 180 }
+  },
+  {
+    "name": "11",
+    "tables": [{ "x": 390, "y": 90 }],
+    "cups": [{ "x": 560, "y": 180 }],
+    "balls": [{ "x": 450, "y": 65, "angle": 345 }],
+    "player": { "name": "cup", "x": 125, "y": 185 }
   }
 ]

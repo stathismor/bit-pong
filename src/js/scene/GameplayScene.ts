@@ -60,6 +60,7 @@ export class GameplayScene extends Phaser.Scene {
     this.add.existing(player);
     const ballIds = player.body.parts.map((part) => part.id);
 
+    // @TODO: Table should be rendered after the cup
     confTables.forEach((confTable) => {
       const table = new Table(
         this,
@@ -67,7 +68,7 @@ export class GameplayScene extends Phaser.Scene {
         confTable.y,
         constants.TEXTURE_ATLAS,
         "table",
-        Phaser.Math.DegToRad(confTable.angle)
+        Phaser.Math.DegToRad(confTable.angle || 0)
       );
       this.add.existing(table);
       this.tableIds.push(table.body.id);
@@ -165,5 +166,13 @@ export class GameplayScene extends Phaser.Scene {
         this.scene.start("GameplayScene", { levelNumber: key });
       });
     }
+    const keyObj = this.input.keyboard.addKey("RIGHT"); // Get key object
+    keyObj.on("down", () => {
+      this.scene.start("GameplayScene", { levelNumber: this.levelNumber + 1 });
+    });
+    const keyObj = this.input.keyboard.addKey("LEFT"); // Get key object
+    keyObj.on("down", () => {
+      this.scene.start("GameplayScene", { levelNumber: this.levelNumber - 1 });
+    });
   }
 }
