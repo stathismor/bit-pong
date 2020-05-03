@@ -1,7 +1,7 @@
 {
   "name": "bit-pong",
   "scripts": {
-    "start": "parcel ./src/index.html --open",
+    "start": "parcel src/index.html --open",
     "build": "parcel build src/index.html --no-source-maps --public-url .",
     "deploy": "yarn build && gh-pages -d dist",
     "lint": "eslint 'src/**/*.ts'",

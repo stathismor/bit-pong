@@ -1,12 +1,13 @@
 import * as constants from "./constants";
 import BitDrops from "./component/BitDrops";
+import { GameplaySceneStatus } from "./scene/GameplayScene";
 
 const COLLISION_PERIOD = 200;
 const LEVEL_MENU_DELAY = 3000;
 
 let collisionTime = new Date();
 
-export function initCollisions(scene): void {
+export function initCollisions(scene, player): void {
   const bitDrops = new BitDrops(scene);
 
   scene.matter.world.on("collisionstart", (event, bodyA1, bodyB1) => {
@@ -31,9 +32,6 @@ export function initCollisions(scene): void {
           const completedLevels =
             JSON.parse(localStorage.getItem(constants.LOGAL_STORAGE_KEY)) || [];
 
-          const player = [bodyA, bodyB].find(
-            (body) => body.gameObject.getData("isPlayer") === true
-          ).gameObject;
           const cup = [bodyA, bodyB].find((body) =>
             body.gameObject.getData("name").startsWith("cup")
           ).gameObject;
@@ -53,15 +51,18 @@ export function initCollisions(scene): void {
             );
           }
 
-          player.isDead = true;
+          scene.setStatus(GameplaySceneStatus.COMPLETE);
+
           scene.time.delayedCall(
             LEVEL_MENU_DELAY,
             () => {
-              player.emit("complete");
+              // DO not attach this to player
+              scene.complete();
             },
             null,
             null
           );
+
           cup.setStatic(true);
           ball.setStatic(true);
           ball.setVisible(false);
@@ -98,13 +99,7 @@ export function initCollisions(scene): void {
         ) {
           scene.sound.play("table_bounce");
 
-          // Should not access player like that
-          const player = [bodyA, bodyB].find(
-            (body) => body.gameObject.getData("isPlayer") === true
-          );
-          if (player && player.gameObject) {
-            player.gameObject.touchesTable = true;
-          }
+          player.touchesTable = true;
         }
       }
     }

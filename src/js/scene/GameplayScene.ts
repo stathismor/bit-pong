@@ -12,26 +12,32 @@ import * as constants from "../constants";
 import { initCategories } from "../collision";
 import { initCollisions } from "../CollisionManager";
 
+export enum GameplaySceneStatus {
+  PLAY,
+  RETRY,
+  COMPLETE,
+}
+
 export class GameplayScene extends Phaser.Scene {
   constructor() {
     super({
       key: "GameplayScene",
     });
     this.levelNumber = 1;
-    this.tableIds = [];
   }
 
   create(data): void {
     const config = this.sys.game.CONFIG;
     this.levelNumber = this.getLevelNumber(data);
+    this.status = GameplaySceneStatus.PLAY;
     initCategories(this);
 
     ComponentManager.Clear();
-    initCollisions(this);
 
     const level = LEVELS[this.levelNumber - 1];
     const {
       tables: confTables = [],
+      tables_half: confTablesHalf = [],
       cups: confCups = [],
       balls: ballsConf = [],
       player: playerConf,
@@ -60,6 +66,8 @@ export class GameplayScene extends Phaser.Scene {
     this.add.existing(player);
     const ballIds = player.body.parts.map((part) => part.id);
 
+    initCollisions(this, player);
+
     // @TODO: Table should be rendered after the cup
     confTables.forEach((confTable) => {
       const table = new Table(
@@ -71,7 +79,18 @@ export class GameplayScene extends Phaser.Scene {
         Phaser.Math.DegToRad(confTable.angle || 0)
       );
       this.add.existing(table);
-      this.tableIds.push(table.body.id);
+    });
+
+    confTablesHalf.forEach((confTable) => {
+      const table = new Table(
+        this,
+        confTable.x,
+        confTable.y,
+        constants.TEXTURE_ATLAS,
+        "table_half",
+        Phaser.Math.DegToRad(confTable.angle || 0)
+      );
+      this.add.existing(table);
     });
 
     const cups = [];
@@ -105,15 +124,11 @@ export class GameplayScene extends Phaser.Scene {
       }
     });
 
-    const completeLevelPopup = new CompleteLevelPopup(
+    this.completeLevelPopup = new CompleteLevelPopup(
       this,
       config.centerX,
       config.centerY
     );
-
-    player.on("complete", () => {
-      completeLevelPopup.popup();
-    });
 
     if (process.env.DEBUG) {
       this.debug();
@@ -122,6 +137,18 @@ export class GameplayScene extends Phaser.Scene {
 
   update(time, delta): void {
     ComponentManager.Update(delta);
+  }
+
+  getStatus(): GameplaySceneStatus {
+    return this.status;
+  }
+
+  setStatus(status: GameplaySceneStatus): void {
+    this.status = status;
+  }
+
+  complete(): void {
+    this.completeLevelPopup.popup();
   }
 
   getLevelNumber(data): void {
