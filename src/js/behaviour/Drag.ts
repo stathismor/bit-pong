@@ -2,12 +2,13 @@ import ProjectionLine from "../component/ProjectionLine";
 import PointsTrace from "../component/PointsTrace";
 import { OwnerTrace } from "../component/OwnerTrace";
 import * as constants from "../constants";
+import { GameplaySceneStatus } from "../scene/GameplayScene";
 import { isInCircle, closestPointToCircle } from "../utils";
 
 const SPEED = 0.16;
 const RESET_DISTANCE = 600;
 const IMMOBILE_SPEED = 0.2222222222229;
-const IMMOBILE_ANGULAR_SPPED = 0.03;
+const IMMOBILE_ANGULAR_SPEED = 0.03;
 const GREY_BALL_SCALE = 1.6;
 const DEATH_DELAY = 650;
 const DRAG_RADIUS = 85;
@@ -121,7 +122,7 @@ export class Drag {
 
     const isImmobile =
       this.owner.body.speed < IMMOBILE_SPEED &&
-      this.owner.body.angularSpeed < IMMOBILE_ANGULAR_SPPED;
+      this.owner.body.angularSpeed < IMMOBILE_ANGULAR_SPEED;
 
     if (
       Phaser.Math.Distance.Between(
@@ -132,8 +133,10 @@ export class Drag {
       ) > RESET_DISTANCE ||
       isImmobile
     ) {
-      this.owner.isDead = true;
-      this.owner.scene.time.delayedCall(DEATH_DELAY, this.kill, null, this);
+      if (this.owner.scene.getStatus() === GameplaySceneStatus.PLAY) {
+        this.owner.isDead = true;
+        this.owner.scene.time.delayedCall(DEATH_DELAY, this.kill, null, this);
+      }
     }
 
     this.owner.pointsTrace.update();
