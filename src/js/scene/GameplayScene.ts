@@ -30,6 +30,8 @@ export class GameplayScene extends Phaser.Scene {
     const config = this.sys.game.CONFIG;
     this.levelNumber = this.getLevelNumber(data);
     this.status = GameplaySceneStatus.PLAY;
+    this.keyPressed = data.keyPressed || false; // Used for debugging
+
     initCategories(this);
 
     ComponentManager.Clear();
@@ -65,8 +67,6 @@ export class GameplayScene extends Phaser.Scene {
     );
     this.add.existing(player);
     const ballIds = player.body.parts.map((part) => part.id);
-
-    initCollisions(this, player);
 
     // @TODO: Table should be rendered after the cup
     confTables.forEach((confTable) => {
@@ -106,6 +106,8 @@ export class GameplayScene extends Phaser.Scene {
       this.add.existing(cup);
       cups.push(cup);
     });
+
+    initCollisions(this, player);
 
     ((): void => new LevelBar(this, this.levelNumber))();
 
@@ -180,26 +182,30 @@ export class GameplayScene extends Phaser.Scene {
     );
     border.setStrokeStyle(size, "0xFF0000");
 
-    const levelMap = {
-      1: "ONE",
-      2: "TWO",
-      3: "THREE",
-      4: "FOUR",
-      5: "FIVE",
-    };
-    for (const [key, value] of Object.entries(levelMap)) {
-      const keyObj = this.input.keyboard.addKey(value); // Get key object
-      keyObj.on("down", () => {
-        this.scene.start("GameplayScene", { levelNumber: key });
+    const skipLevelsData = [
+      {
+        key: this.input.keyboard.addKey("LEFT"),
+        func: (level): number => level - 1,
+      },
+      {
+        key: this.input.keyboard.addKey("RIGHT"),
+        func: (level): number => level + 1,
+      },
+    ];
+
+    for (const { key, func } of skipLevelsData) {
+      key.on("down", () => {
+        if (!this.keyPressed) {
+          this.keyPressed = true;
+          this.scene.start("GameplayScene", {
+            levelNumber: func(this.levelNumber),
+            keyPressed: true,
+          });
+        }
+      });
+      key.on("up", () => {
+        this.keyPressed = false;
       });
     }
-    const keyObj = this.input.keyboard.addKey("RIGHT"); // Get key object
-    keyObj.on("down", () => {
-      this.scene.start("GameplayScene", { levelNumber: this.levelNumber + 1 });
-    });
-    const keyObj = this.input.keyboard.addKey("LEFT"); // Get key object
-    keyObj.on("down", () => {
-      this.scene.start("GameplayScene", { levelNumber: this.levelNumber - 1 });
-    });
   }
 }
