@@ -20,11 +20,16 @@ export class LevelMenuScene extends Phaser.Scene {
     ) || [0];
     const nextLevel = Math.max(...completedLevels) + 1;
 
+    this.add.image(config.centerX, config.centerY, "background");
+
     for (let levelNumber = 1; levelNumber <= LEVELS.length; levelNumber += 1) {
       const isCompleted = completedLevels.includes(levelNumber);
       const isNextLevel = levelNumber === nextLevel;
 
-      const colour = isCompleted ? "#1b8b1b" : "black";
+      const colour = isCompleted ? "#011627" : "#fdfffc";
+      const strokeColour = isCompleted ? "#fdfffc" : "#011627";
+      const fontSize = isCompleted || isNextLevel ? 32 : 16;
+      const yOffset = isCompleted || isNextLevel ? 8 : 23;
       let imageKey = "";
       if (isCompleted) {
         imageKey = "level_completed";
@@ -46,11 +51,12 @@ export class LevelMenuScene extends Phaser.Scene {
       const levelText = this.add.text(0, 0, levelNumber.toString(), {
         fontFamily: "Arial",
         fill: colour,
-        fontSize: 32,
+        fontSize: fontSize,
       });
+      levelText.setStroke(strokeColour, 5);
       levelText.setPosition(
         levelPos.x - levelWidthDistance / 2 - levelText.width / 2,
-        levelImage.y - levelImage.height / 2
+        levelImage.y - levelImage.height / 2 + yOffset
       );
 
       if (levelNumber % LEVELS_PER_ROW === 0) {
