@@ -2,6 +2,10 @@ import { Scene } from "phaser";
 
 import * as constants from "../constants";
 
+const BUTTON_WIDTH = 222;
+const BUTTON_HEIGHT = 60;
+const BUTTON_NAME = "NEW_GAME";
+
 export class StartMenuScene extends Scene {
   constructor() {
     super({
@@ -10,23 +14,39 @@ export class StartMenuScene extends Scene {
   }
 
   create(): void {
+    // this.scene.start("GameplayScene", { levelNumber: 1 });
+    // this.scene.start("LevelMenuScene");
     const config = this.sys.game.CONFIG;
     this.add.image(
       config.centerX,
       config.centerY,
       constants.TEXTURE_ATLAS,
-      "start_menu_logo"
+      "start"
     );
 
-    const startButton = this.add.image(
-      config.centerX,
-      config.centerY + 50,
-      constants.TEXTURE_ATLAS,
-      "start_menu_start"
-    );
+    const newGameButton = this.add
+      .zone(90, 240, BUTTON_WIDTH, BUTTON_HEIGHT)
+      .setOrigin(0)
+      .setName(BUTTON_NAME);
+    newGameButton.setInteractive();
 
-    startButton.setInteractive();
+    // if (process.env.DEBUG) {
+    //   const size = 2;
+    //   const boundsNo = newGameButton.getBounds();
+    //   const borderNo = this.add.rectangle(
+    //     boundsNo.x + BUTTON_WIDTH / 2,
+    //     boundsNo.y + BUTTON_HEIGHT / 2,
+    //     boundsNo.width,
+    //     boundsNo.height
+    //   );
+    //   console.log(boundsNo);
+    //   borderNo.setStrokeStyle(size, "0xFF0000");
+    // }
 
-    startButton.on("pointerdown", () => this.scene.start("LevelMenuScene"));
+    this.input.on("gameobjectdown", (pointer, gameObject) => {
+      if (gameObject.name === BUTTON_NAME) {
+        this.scene.start("LevelMenuScene");
+      }
+    });
   }
 }

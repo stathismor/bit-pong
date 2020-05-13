@@ -36,6 +36,9 @@ export class GameplayScene extends Phaser.Scene {
 
     ComponentManager.Clear();
 
+    // Add background
+    this.add.image(config.centerX, config.centerY, "background");
+
     const level = LEVELS[this.levelNumber - 1];
     const {
       tables: confTables = [],
@@ -133,7 +136,7 @@ export class GameplayScene extends Phaser.Scene {
     );
 
     if (process.env.DEBUG) {
-      this.debug();
+      // this.debug();
     }
   }
 

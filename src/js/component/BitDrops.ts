@@ -12,6 +12,7 @@ const DROP_POSITION_OFFSET_Y = 6;
 export default class BitDrops {
   constructor(scene) {
     this.drops = [];
+    this.scene = scene;
     const dropTextures = ["drop_light", "drop_dark"];
     const config = scene.sys.game.CONFIG;
     for (let i = 0; i < DROPS_COUNT; i += 1) {
@@ -25,7 +26,7 @@ export default class BitDrops {
       );
       drop.setData("name", "drop_" + uuidv4());
       drop.setCollisionCategory(dropCategory);
-      drop.setCollidesWith([tableCategory, cupCategory]);
+      drop.setCollidesWith([tableCategory]);
       drop.setActive(false);
       drop.setStatic(true);
       this.drops[i] = drop;
@@ -68,7 +69,14 @@ export default class BitDrops {
           DROP_VELOCITY - DROP_VELOCITY_OFFSET,
           DROP_VELOCITY + DROP_VELOCITY_OFFSET
         );
+
       drop.setVelocity(dropX, dropY);
+      this.scene.time.delayedCall(
+        1000,
+        () => drop.setCollidesWith([tableCategory, cupCategory]),
+        null,
+        null
+      );
     });
   }
 }

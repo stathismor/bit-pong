@@ -1,15 +1,15 @@
 import * as constants from "../constants";
 
-const OPTION_WIDTH = 100;
-const OPTION_HEIGHT = 40;
+const OPTION_WIDTH = 54;
+const OPTION_HEIGHT = 54;
 const OPTION_RETRY_NAME = "Retry";
 const OPTION_HOME_NAME = "Home";
-const X_OFFSET = 6;
-const Y_OFFSET = 6;
+const X_OFFSET = 78;
+const Y_OFFSET = 23;
 
 export default class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y) {
-    super(scene, x, y, constants.TEXTURE_ATLAS, "complete_level_popup");
+    super(scene, x, y, constants.TEXTURE_ATLAS, "success");
     this.setVisible(false);
     this.setScale(0.1);
     scene.add.existing(this);
@@ -24,10 +24,10 @@ export default class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
       repeat: 0,
       delay: 0,
       paused: true,
-      onComplete: CompleteLevelPopup.onComplete
+      onComplete: CompleteLevelPopup.onComplete,
     });
 
-    this.zoneNo = this.scene.add
+    this.retry = this.scene.add
       .zone(
         this.x - this.width / 2 + X_OFFSET,
         this.y + this.height / 2 - OPTION_HEIGHT - Y_OFFSET,
@@ -37,7 +37,7 @@ export default class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
       .setOrigin(0)
       .setName(OPTION_RETRY_NAME);
 
-    this.zoneYes = this.scene.add
+    this.selectLevel = this.scene.add
       .zone(
         this.x + this.width / 2 - OPTION_WIDTH - X_OFFSET,
         this.y + this.height / 2 - OPTION_HEIGHT - Y_OFFSET,
@@ -51,8 +51,8 @@ export default class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
   popup() {
     this.setVisible(true);
 
-    this.zoneNo.setInteractive();
-    this.zoneYes.setInteractive();
+    this.retry.setInteractive();
+    this.selectLevel.setInteractive();
 
     this.tween.play();
   }
@@ -66,8 +66,8 @@ export default class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
           gameObject.name === OPTION_HOME_NAME ||
           gameObject.name === OPTION_RETRY_NAME
         ) {
-          completeLevelPopup.zoneNo.removeInteractive();
-          completeLevelPopup.zoneYes.removeInteractive();
+          completeLevelPopup.retry.removeInteractive();
+          completeLevelPopup.selectLevel.removeInteractive();
           if (gameObject.name === OPTION_RETRY_NAME) {
             gameObject.scene.scene.restart({ result: "retry" });
           } else {
@@ -76,14 +76,14 @@ export default class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
         }
       }
     );
-    CompleteLevelPopup.debug(completeLevelPopup);
+    // CompleteLevelPopup.debug(completeLevelPopup);
   }
 
   static debug(completeLevelPopup) {
     // Add a red border
     if (process.env.DEBUG) {
       const size = 2;
-      const boundsNo = completeLevelPopup.zoneNo.getBounds();
+      const boundsNo = completeLevelPopup.retry.getBounds();
       const borderNo = completeLevelPopup.scene.add.rectangle(
         boundsNo.x + OPTION_WIDTH / 2,
         boundsNo.y + OPTION_HEIGHT / 2,
@@ -92,7 +92,7 @@ export default class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
       );
       borderNo.setStrokeStyle(size, "0xFF0000");
 
-      const boundsYes = completeLevelPopup.zoneYes.getBounds();
+      const boundsYes = completeLevelPopup.selectLevel.getBounds();
       const borderYes = completeLevelPopup.scene.add.rectangle(
         boundsYes.x + OPTION_WIDTH / 2,
         boundsYes.y + OPTION_HEIGHT / 2,

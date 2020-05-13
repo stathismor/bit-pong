@@ -1,6 +1,7 @@
 import BEHAVIOUR_MAPPER from "../behaviour";
 import { SetBody } from "../behaviour/SetBody";
 import { ComponentManager } from "../behaviour/ComponentManager";
+import { cupCategory } from "../collision";
 import { uuidv4 } from "../utils";
 import * as constants from "../constants";
 
@@ -29,5 +30,7 @@ export class Cup extends Phaser.Physics.Matter.Sprite {
     this.setFriction(0);
     this.setStatic(true);
     this.setBounce(0.6);
+
+    this.setCollisionCategory(cupCategory);
   }
 }

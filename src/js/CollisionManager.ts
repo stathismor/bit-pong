@@ -68,21 +68,14 @@ export function initCollisions(scene, player): void {
           ball.setVisible(false);
         }
       } else {
-        if (
-          [
-            bodyA.gameObject.getData("name"),
-            bodyB.gameObject.getData("name"),
-          ].some((name) => name.startsWith("drop"))
-        ) {
+        const bodyAName = bodyA.gameObject.getData("name");
+        const bodyBName = bodyB.gameObject.getData("name");
+
+        if ([bodyAName, bodyBName].some((name) => name.startsWith("drop"))) {
           continue;
         }
 
-        if (
-          [
-            bodyA.gameObject.getData("name"),
-            bodyB.gameObject.getData("name"),
-          ].some((name) => name.startsWith("cup"))
-        ) {
+        if ([bodyAName, bodyBName].some((name) => name.startsWith("cup"))) {
           const timeDiff = new Date() - collisionTime;
           if (timeDiff > COLLISION_PERIOD) {
             scene.sound.play("cup_bounce");
@@ -91,12 +84,7 @@ export function initCollisions(scene, player): void {
           continue;
         }
 
-        if (
-          [
-            bodyA.gameObject.getData("name"),
-            bodyB.gameObject.getData("name"),
-          ].some((name) => name.startsWith("table"))
-        ) {
+        if ([bodyAName, bodyBName].some((name) => name.startsWith("table"))) {
           scene.sound.play("table_bounce");
 
           player.touchesTable = true;
