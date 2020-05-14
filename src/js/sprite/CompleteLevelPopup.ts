@@ -7,7 +7,7 @@ const OPTION_HOME_NAME = "Home";
 const X_OFFSET = 78;
 const Y_OFFSET = 23;
 
-export default class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
+export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y) {
     super(scene, x, y, constants.TEXTURE_ATLAS, "success");
     this.setVisible(false);
@@ -48,7 +48,7 @@ export default class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
       .setName(OPTION_HOME_NAME);
   }
 
-  popup() {
+  popup(): void {
     this.setVisible(true);
 
     this.retry.setInteractive();
@@ -57,7 +57,7 @@ export default class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
     this.tween.play();
   }
 
-  static onComplete(tween, gameObjects) {
+  static onComplete(tween, gameObjects): void {
     const completeLevelPopup = gameObjects[0];
     completeLevelPopup.scene.input.on(
       "gameobjectdown",
@@ -81,7 +81,7 @@ export default class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
 
   static debug(completeLevelPopup) {
     // Add a red border
-    if (process.env.DEBUG) {
+    if (process.env.DEBUG === "true") {
       const size = 2;
       const boundsNo = completeLevelPopup.retry.getBounds();
       const borderNo = completeLevelPopup.scene.add.rectangle(

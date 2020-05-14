@@ -30,18 +30,17 @@ export class StartMenuScene extends Scene {
       .setName(BUTTON_NAME);
     newGameButton.setInteractive();
 
-    // if (process.env.DEBUG) {
-    //   const size = 2;
-    //   const boundsNo = newGameButton.getBounds();
-    //   const borderNo = this.add.rectangle(
-    //     boundsNo.x + BUTTON_WIDTH / 2,
-    //     boundsNo.y + BUTTON_HEIGHT / 2,
-    //     boundsNo.width,
-    //     boundsNo.height
-    //   );
-    //   console.log(boundsNo);
-    //   borderNo.setStrokeStyle(size, "0xFF0000");
-    // }
+    if (process.env.DEBUG === "true") {
+      const size = 2;
+      const boundsNo = newGameButton.getBounds();
+      const borderNo = this.add.rectangle(
+        boundsNo.x + BUTTON_WIDTH / 2,
+        boundsNo.y + BUTTON_HEIGHT / 2,
+        boundsNo.width,
+        boundsNo.height
+      );
+      borderNo.setStrokeStyle(size, "0xFF0000");
+    }
 
     this.input.on("gameobjectdown", (pointer, gameObject) => {
       if (gameObject.name === BUTTON_NAME) {

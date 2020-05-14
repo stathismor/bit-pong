@@ -33,7 +33,7 @@ export default class BitDrops {
     }
   }
 
-  spill(x, y, rotation) {
+  spill(x, y, rotation): void {
     const dropStartPosY = y - 8;
     this.drops.forEach((drop) => {
       const dropTemp = drop;
@@ -72,7 +72,7 @@ export default class BitDrops {
 
       drop.setVelocity(dropX, dropY);
       this.scene.time.delayedCall(
-        1000,
+        100,
         () => drop.setCollidesWith([tableCategory, cupCategory]),
         null,
         null

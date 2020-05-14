@@ -4,7 +4,7 @@ import { Player } from "../sprite/Player";
 import { Cup } from "../sprite/Cup";
 import { Table } from "../sprite/Table";
 import RetryLevelPopup from "../sprite/RetryLevelPopup";
-import CompleteLevelPopup from "../sprite/CompleteLevelPopup";
+import { CompleteLevelPopup } from "../sprite/CompleteLevelPopup";
 import { ComponentManager } from "../behaviour/ComponentManager";
 import HealthBar from "../hud/HealthBar";
 import LevelBar from "../hud/LevelBar";
@@ -135,8 +135,8 @@ export class GameplayScene extends Phaser.Scene {
       config.centerY
     );
 
-    if (process.env.DEBUG) {
-      // this.debug();
+    if (process.env.DEBUG === "true") {
+      this.debug();
     }
   }
 

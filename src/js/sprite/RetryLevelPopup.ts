@@ -73,12 +73,12 @@ export default class RetryLevelPopup extends Phaser.GameObjects.Sprite {
         }
       }
     });
-    // RetryLevelPopup.debug(retryLevelPopup);
+    RetryLevelPopup.debug(retryLevelPopup);
   }
 
   static debug(retryLevelPopup): void {
     // Add a red border
-    if (process.env.DEBUG) {
+    if (process.env.DEBUG === "true") {
       const size = 2;
       const boundsNo = retryLevelPopup.retry.getBounds();
       const borderNo = retryLevelPopup.scene.add.rectangle(
