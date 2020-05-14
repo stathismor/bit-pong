@@ -6,6 +6,8 @@ const COLLISION_PERIOD = 200;
 const LEVEL_MENU_DELAY = 3000;
 
 let collisionTime = new Date();
+const cupBounceSound = scene.sound.add("cup_bounce");
+const tableBounceSound = scene.sound.add("table_bounce");
 
 export function initCollisions(scene, player): void {
   const bitDrops = new BitDrops(scene);
@@ -78,14 +80,14 @@ export function initCollisions(scene, player): void {
         if ([bodyAName, bodyBName].some((name) => name.startsWith("cup"))) {
           const timeDiff = new Date() - collisionTime;
           if (timeDiff > COLLISION_PERIOD) {
-            scene.sound.play("cup_bounce");
+            cupBounceSound.play();
           }
           collisionTime = new Date();
           continue;
         }
 
         if ([bodyAName, bodyBName].some((name) => name.startsWith("table"))) {
-          scene.sound.play("table_bounce");
+          tableBounceSound.play();
 
           player.touchesTable = true;
         }
