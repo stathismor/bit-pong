@@ -67,7 +67,7 @@ export class LevelMenuScene extends Phaser.Scene {
       }
 
       // Only allow click if it's completed or it's the next level
-      if (isCompleted || isNextLevel || process.env.DEBUG) {
+      if (isCompleted || isNextLevel || process.env.DEBUG === "true") {
         // Make the text interactive
         levelImage.setInteractive(
           new Phaser.Geom.Rectangle(0, 0, levelImage.width, levelImage.height),
