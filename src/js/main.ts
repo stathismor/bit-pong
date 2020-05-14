@@ -27,13 +27,13 @@ const game = new Game({
   },
 
   scene: [BootScene, StartMenuScene, LevelMenuScene, GameplayScene],
-  callbacks: {
-    postBoot: (): void => {
-      ((): void => new ScaleManager(WIDTH, HEIGHT, game.device.os.desktop))();
-    },
-  },
+  // callbacks: {
+  //   postBoot: (): void => {
+  //     ((): void => new ScaleManager(WIDTH, HEIGHT, game.device.os.desktop))();
+  //   },
+  // },
   audio: {
-    disableWebAudio: true,
+    disableWebAudio: false,
   },
 });
 
