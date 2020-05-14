@@ -72,7 +72,7 @@ export default class BitDrops {
 
       drop.setVelocity(dropX, dropY);
       this.scene.time.delayedCall(
-        100,
+        25,
         () => drop.setCollidesWith([tableCategory, cupCategory]),
         null,
         null
