@@ -2,7 +2,9 @@ import LEVELS from "../../../config/levels.json";
 import * as constants from "../constants";
 
 const LEVELS_PER_ROW = 4;
-const ROW_HEIGHT = 96;
+const ROW_HEIGHT = 80;
+const TITLE_OFFSET_Y = 50;
+const LEVEL_OFFSET_Y = 50;
 
 export class LevelMenuScene extends Phaser.Scene {
   constructor() {
@@ -11,7 +13,7 @@ export class LevelMenuScene extends Phaser.Scene {
     });
   }
 
-  create() {
+  create(): void {
     const config = this.sys.game.CONFIG;
     const levelWidthDistance = config.width / LEVELS_PER_ROW;
     const levelPos = { x: levelWidthDistance, y: 128 };
@@ -20,7 +22,19 @@ export class LevelMenuScene extends Phaser.Scene {
     ) || [0];
     const nextLevel = Math.max(...completedLevels) + 1;
 
-    this.add.image(config.centerX, config.centerY, "background");
+    this.add.image(
+      config.centerX,
+      config.centerY,
+      constants.TEXTURE_ATLAS,
+      "background"
+    );
+
+    this.add.image(
+      config.centerX,
+      TITLE_OFFSET_Y,
+      constants.TEXTURE_ATLAS,
+      "select_level"
+    );
 
     for (let levelNumber = 1; levelNumber <= LEVELS.length; levelNumber += 1) {
       const isCompleted = completedLevels.includes(levelNumber);
@@ -46,7 +60,7 @@ export class LevelMenuScene extends Phaser.Scene {
         imageKey
       );
       levelImage.x = levelPos.x - levelWidthDistance / 2;
-      levelImage.y = levelPos.y - levelImage.height;
+      levelImage.y = levelPos.y - levelImage.height + LEVEL_OFFSET_Y;
 
       const levelText = this.add.text(0, 0, levelNumber.toString(), {
         fontFamily: "Arial",

@@ -6,11 +6,11 @@ const COLLISION_PERIOD = 200;
 const LEVEL_MENU_DELAY = 3000;
 
 let collisionTime = new Date();
-const cupBounceSound = scene.sound.add("cup_bounce");
-const tableBounceSound = scene.sound.add("table_bounce");
 
 export function initCollisions(scene, player): void {
   const bitDrops = new BitDrops(scene);
+  const cupBounceSound = scene.sound.add("cup_bounce");
+  const tableBounceSound = scene.sound.add("table_bounce");
 
   scene.matter.world.on("collisionstart", (event, bodyA1, bodyB1) => {
     const { pairs } = event;

@@ -2,7 +2,6 @@ import * as constants from "../constants";
 import Images from "../images";
 import Sounds from "../sounds";
 import Data from "../data";
-import Fonts from "../fonts";
 
 export class BootScene extends Phaser.Scene {
   constructor() {
@@ -17,14 +16,11 @@ export class BootScene extends Phaser.Scene {
     const atlasData = Data.bit_pong_data;
     atlasData.textures[0].image = Images.bit_pong_atlas;
     this.load.multiatlas(constants.TEXTURE_ATLAS, atlasData);
-    this.load.image("background", Images.background);
 
     // Audio
     this.load.audio("table_bounce", Sounds.table_bounce, { instances: 2 });
     this.load.audio("cup_bounce", Sounds.cup_bounce, { instances: 2 });
     this.load.audio("splash", Sounds.splash);
-
-    this.load.bitmapFont("nokia", Images.nokia, Fonts.nokia);
   }
 
   create(): void {

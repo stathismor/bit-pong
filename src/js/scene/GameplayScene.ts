@@ -37,7 +37,12 @@ export class GameplayScene extends Phaser.Scene {
     ComponentManager.Clear();
 
     // Add background
-    this.add.image(config.centerX, config.centerY, "background");
+    this.add.image(
+      config.centerX,
+      config.centerY,
+      constants.TEXTURE_ATLAS,
+      "background"
+    );
 
     const level = LEVELS[this.levelNumber - 1];
     const {
