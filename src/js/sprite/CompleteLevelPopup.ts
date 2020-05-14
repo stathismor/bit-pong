@@ -76,10 +76,10 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
         }
       }
     );
-    // CompleteLevelPopup.debug(completeLevelPopup);
+    CompleteLevelPopup.debug(completeLevelPopup);
   }
 
-  static debug(completeLevelPopup) {
+  static debug(completeLevelPopup): void {
     // Add a red border
     if (process.env.DEBUG === "true") {
       const size = 2;
