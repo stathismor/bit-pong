@@ -121,6 +121,7 @@ export class LevelMenuScene extends Phaser.Scene {
 
     this.updatePage();
 
+    let pageNum = 0;
     for (let levelNumber = 1; levelNumber <= LEVELS.length; levelNumber += 1) {
       const isCompleted = completedLevels.includes(levelNumber);
       const isNextLevel = levelNumber === nextLevel;
@@ -159,13 +160,14 @@ export class LevelMenuScene extends Phaser.Scene {
       );
 
       if (levelNumber % LEVELS_PER_PAGE === 0) {
-        levelPos.x = levelWidthDistance + config.width;
+        pageNum += 1;
+        levelPos.x = levelWidthDistance + pageNum * config.width;
         levelPos.y = 128 - levelImage.height + LEVEL_OFFSET_Y;
       } else if (levelNumber % LEVELS_PER_ROW === 0) {
-        levelPos.x = levelWidthDistance;
+        levelPos.x = levelWidthDistance + pageNum * config.width;
         levelPos.y += ROW_HEIGHT;
       } else {
-        levelPos.x += levelWidthDistance;
+        levelPos.x = levelPos.x + levelWidthDistance;
       }
 
       // Only allow click if it's completed or it's the next level
