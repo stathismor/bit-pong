@@ -1,11 +1,12 @@
 import * as constants from "../constants";
 
-const OPTION_WIDTH = 54;
-const OPTION_HEIGHT = 54;
+const OPTION_WIDTH = 45;
+const OPTION_HEIGHT = 45;
 const OPTION_RETRY_NAME = "Retry";
 const OPTION_SELECT_LEVEL_NAME = "Home";
-const X_OFFSET = 78;
-const Y_OFFSET = 23;
+const SELECT_LEVEL_X_OFFSET = 78;
+const RETRY_X_OFFSET = -146;
+const Y_OFFSET = 30;
 
 export default class RetryLevelPopup extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y) {
@@ -27,25 +28,25 @@ export default class RetryLevelPopup extends Phaser.GameObjects.Sprite {
       onComplete: RetryLevelPopup.onComplete,
     });
 
-    this.retry = this.scene.add
-      .zone(
-        this.x - this.width / 2 + X_OFFSET,
-        this.y + this.height / 2 - OPTION_HEIGHT - Y_OFFSET,
-        OPTION_WIDTH,
-        OPTION_HEIGHT
-      )
-      .setOrigin(0)
-      .setName(OPTION_RETRY_NAME);
-
     this.selectLevel = this.scene.add
       .zone(
-        this.x + this.width / 2 - OPTION_WIDTH - X_OFFSET,
+        this.x - this.width / 2 + SELECT_LEVEL_X_OFFSET,
         this.y + this.height / 2 - OPTION_HEIGHT - Y_OFFSET,
         OPTION_WIDTH,
         OPTION_HEIGHT
       )
       .setOrigin(0)
       .setName(OPTION_SELECT_LEVEL_NAME);
+
+    this.retry = this.scene.add
+      .zone(
+        this.x + this.width / 2 - OPTION_WIDTH + RETRY_X_OFFSET,
+        this.y + this.height / 2 - OPTION_HEIGHT - Y_OFFSET,
+        OPTION_WIDTH,
+        OPTION_HEIGHT
+      )
+      .setOrigin(0)
+      .setName(OPTION_RETRY_NAME);
   }
 
   popup(): void {

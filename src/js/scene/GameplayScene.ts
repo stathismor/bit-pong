@@ -137,7 +137,9 @@ export class GameplayScene extends Phaser.Scene {
     this.completeLevelPopup = new CompleteLevelPopup(
       this,
       config.centerX,
-      config.centerY
+      config.centerY,
+      this.levelNumber,
+      LEVELS.length
     );
 
     if (process.env.DEBUG === "true") {
