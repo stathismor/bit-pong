@@ -92,6 +92,7 @@ export class Drag {
       ) {
         gameObject.scene.matter.world.add(gameObject.constraint);
         gameObject.hasConstraint = true;
+        gameObject.launched = false;
         return;
       }
 
