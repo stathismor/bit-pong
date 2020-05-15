@@ -1,7 +1,8 @@
 import LEVELS from "../../../config/levels.json";
 import * as constants from "../constants";
 
-const LEVELS_PER_ROW = 4;
+const LEVELS_PER_ROW = 3;
+const LEVELS_PER_PAGE = 9;
 const ROW_HEIGHT = 80;
 const TITLE_OFFSET_Y = 50;
 const LEVEL_OFFSET_Y = 50;
@@ -21,6 +22,10 @@ export class LevelMenuScene extends Phaser.Scene {
       localStorage.getItem(constants.LOGAL_STORAGE_KEY)
     ) || [0];
     const nextLevel = Math.max(...completedLevels) + 1;
+    const camera = this.scene.scene.cameras.main;
+
+    this.pagesNum = Math.ceil(LEVELS.length / LEVELS_PER_PAGE);
+    this.currentPageNum = 1;
 
     this.add.image(
       config.centerX,
@@ -28,13 +33,93 @@ export class LevelMenuScene extends Phaser.Scene {
       constants.TEXTURE_ATLAS,
       "background"
     );
-
     this.add.image(
+      config.centerX + config.width,
+      config.centerY,
+      constants.TEXTURE_ATLAS,
+      "background"
+    );
+
+    const title = this.add.image(
       config.centerX,
       TITLE_OFFSET_Y,
       constants.TEXTURE_ATLAS,
       "select_level"
     );
+    title.setScrollFactor(0);
+
+    this.leftArrowEnabled = this.add.image(
+      40,
+      config.centerY,
+      constants.TEXTURE_ATLAS,
+      "left_arrow"
+    );
+    this.rightArrowEnabled = this.add.image(
+      config.width - 40,
+      config.centerY,
+      constants.TEXTURE_ATLAS,
+      "right_arrow"
+    );
+    const navigationData = [
+      {
+        button: this.leftArrowEnabled,
+        diffX: -config.width,
+        func: (pageNum): void => pageNum - 1,
+      },
+      {
+        button: this.rightArrowEnabled,
+        diffX: config.width,
+        func: (pageNum): void => pageNum + 1,
+      },
+    ];
+    for (const { button, diffX, func } of navigationData) {
+      button.setScrollFactor(0);
+      button.setInteractive();
+      button.on("pointerdown", () => {
+        this.currentPageNum = func(this.currentPageNum);
+        this.scene.scene.tweens.add({
+          targets: camera,
+          ease: "Sine.easeInOut",
+          duration: 200,
+          scrollX: camera.scrollX + diffX,
+        });
+        this.updatePage();
+      });
+    }
+
+    this.leftArrowDisabled = this.add.image(
+      40,
+      config.centerY,
+      constants.TEXTURE_ATLAS,
+      "left_arrow_disabled"
+    );
+    this.leftArrowDisabled.setScrollFactor(0);
+    this.leftArrowDisabled.visible = false;
+    this.rightArrowDisabled = this.add.image(
+      config.width - 40,
+      config.centerY,
+      constants.TEXTURE_ATLAS,
+      "right_arrow_disabled"
+    );
+    this.rightArrowDisabled.setScrollFactor(0);
+    this.rightArrowDisabled.visible = false;
+
+    this.pageNumText = this.add.text(
+      config.centerX,
+      config.height - 20,
+      `(${this.currentPageNum}/${this.pagesNum})`,
+      {
+        font: "14px Monospace",
+        fill: "#FDFFFC",
+      }
+    );
+    this.pageNumText.setPosition(
+      config.centerX - this.pageNumText.width / 2,
+      config.height - 40
+    );
+    this.pageNumText.setScrollFactor(0);
+
+    this.updatePage();
 
     for (let levelNumber = 1; levelNumber <= LEVELS.length; levelNumber += 1) {
       const isCompleted = completedLevels.includes(levelNumber);
@@ -73,7 +158,10 @@ export class LevelMenuScene extends Phaser.Scene {
         levelImage.y - levelImage.height / 2 + yOffset
       );
 
-      if (levelNumber % LEVELS_PER_ROW === 0) {
+      if (levelNumber % LEVELS_PER_PAGE === 0) {
+        levelPos.x = levelWidthDistance + config.width;
+        levelPos.y = 128 - levelImage.height + LEVEL_OFFSET_Y;
+      } else if (levelNumber % LEVELS_PER_ROW === 0) {
         levelPos.x = levelWidthDistance;
         levelPos.y += ROW_HEIGHT;
       } else {
@@ -93,5 +181,27 @@ export class LevelMenuScene extends Phaser.Scene {
         );
       }
     }
+  }
+
+  updatePage(): void {
+    // Left arrow
+    if (this.currentPageNum < 2) {
+      this.leftArrowEnabled.visible = false;
+      this.leftArrowDisabled.visible = true;
+    } else {
+      this.leftArrowEnabled.visible = true;
+      this.leftArrowDisabled.visible = false;
+    }
+
+    // Right arrow
+    if (this.currentPageNum < this.pagesNum) {
+      this.rightArrowEnabled.visible = true;
+      this.rightArrowDisabled.visible = false;
+    } else {
+      this.rightArrowEnabled.visible = false;
+      this.rightArrowDisabled.visible = true;
+    }
+
+    this.pageNumText.setText(`(${this.currentPageNum}/${this.pagesNum})`);
   }
 }
