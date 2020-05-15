@@ -1,18 +1,23 @@
 import * as constants from "../constants";
 
-const OPTION_WIDTH = 54;
-const OPTION_HEIGHT = 54;
-const OPTION_RETRY_NAME = "Retry";
-const OPTION_HOME_NAME = "Home";
-const X_OFFSET = 78;
-const Y_OFFSET = 23;
+const OPTION_WIDTH = 45;
+const OPTION_HEIGHT = 45;
+const OPTION_RETRY_NAME = "retry";
+const OPTION_SELECT_LEVEL_NAME = "level";
+const OPTION_NEXT_LEVEL = "next";
+const LEVEL_X_OFFSET = 78;
+const RETRY_X_OFFSET = -146;
+const NEXT_X_OFFSET = -73;
+const Y_OFFSET = 30;
 
 export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
-  constructor(scene, x, y) {
+  constructor(scene, x, y, levelNum, levelsCount) {
     super(scene, x, y, constants.TEXTURE_ATLAS, "success");
     this.setVisible(false);
     this.setScale(0.1);
     scene.add.existing(this);
+    this.levelNum = levelNum;
+    this.levelsCount = levelsCount;
 
     this.tween = scene.tweens.add({
       targets: this,
@@ -27,9 +32,19 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
       onComplete: CompleteLevelPopup.onComplete,
     });
 
+    this.selectLevel = this.scene.add
+      .zone(
+        this.x - this.width / 2 + LEVEL_X_OFFSET,
+        this.y + this.height / 2 - OPTION_HEIGHT - Y_OFFSET,
+        OPTION_WIDTH,
+        OPTION_HEIGHT
+      )
+      .setOrigin(0)
+      .setName(OPTION_SELECT_LEVEL_NAME);
+
     this.retry = this.scene.add
       .zone(
-        this.x - this.width / 2 + X_OFFSET,
+        this.x + this.width / 2 - OPTION_WIDTH + RETRY_X_OFFSET,
         this.y + this.height / 2 - OPTION_HEIGHT - Y_OFFSET,
         OPTION_WIDTH,
         OPTION_HEIGHT
@@ -37,22 +52,23 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
       .setOrigin(0)
       .setName(OPTION_RETRY_NAME);
 
-    this.selectLevel = this.scene.add
+    this.nextLevel = this.scene.add
       .zone(
-        this.x + this.width / 2 - OPTION_WIDTH - X_OFFSET,
+        this.x + this.width / 2 - OPTION_WIDTH + NEXT_X_OFFSET,
         this.y + this.height / 2 - OPTION_HEIGHT - Y_OFFSET,
         OPTION_WIDTH,
         OPTION_HEIGHT
       )
       .setOrigin(0)
-      .setName(OPTION_HOME_NAME);
+      .setName(OPTION_NEXT_LEVEL);
   }
 
   popup(): void {
     this.setVisible(true);
 
-    this.retry.setInteractive();
     this.selectLevel.setInteractive();
+    this.retry.setInteractive();
+    this.nextLevel.setInteractive();
 
     this.tween.play();
   }
@@ -63,13 +79,23 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
       "gameobjectdown",
       (pointer, gameObject) => {
         if (
-          gameObject.name === OPTION_HOME_NAME ||
-          gameObject.name === OPTION_RETRY_NAME
+          gameObject.name === OPTION_SELECT_LEVEL_NAME ||
+          gameObject.name === OPTION_RETRY_NAME ||
+          gameObject.name === OPTION_NEXT_LEVEL
         ) {
           completeLevelPopup.retry.removeInteractive();
           completeLevelPopup.selectLevel.removeInteractive();
+          completeLevelPopup.nextLevel.removeInteractive();
+
           if (gameObject.name === OPTION_RETRY_NAME) {
             gameObject.scene.scene.restart({ result: "retry" });
+          } else if (gameObject.name === OPTION_NEXT_LEVEL) {
+            const nextLevel = completeLevelPopup.levelNum + 1;
+            if (nextLevel <= completeLevelPopup.levelsCount) {
+              gameObject.scene.scene.restart({
+                levelNumber: completeLevelPopup.levelNum + 1,
+              });
+            }
           } else {
             gameObject.scene.scene.start("LevelMenuScene");
           }
@@ -83,23 +109,32 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
     // Add a red border
     if (process.env.DEBUG === "true") {
       const size = 2;
-      const boundsNo = completeLevelPopup.retry.getBounds();
-      const borderNo = completeLevelPopup.scene.add.rectangle(
-        boundsNo.x + OPTION_WIDTH / 2,
-        boundsNo.y + OPTION_HEIGHT / 2,
-        boundsNo.width,
-        boundsNo.height
+      const selectLevelBounds = completeLevelPopup.retry.getBounds();
+      const selectLevelBorder = completeLevelPopup.scene.add.rectangle(
+        selectLevelBounds.x + OPTION_WIDTH / 2,
+        selectLevelBounds.y + OPTION_HEIGHT / 2,
+        selectLevelBounds.width,
+        selectLevelBounds.height
       );
-      borderNo.setStrokeStyle(size, "0xFF0000");
+      selectLevelBorder.setStrokeStyle(size, "0xFF0000");
 
-      const boundsYes = completeLevelPopup.selectLevel.getBounds();
-      const borderYes = completeLevelPopup.scene.add.rectangle(
-        boundsYes.x + OPTION_WIDTH / 2,
-        boundsYes.y + OPTION_HEIGHT / 2,
-        boundsYes.width,
-        boundsYes.height
+      const retryBounds = completeLevelPopup.selectLevel.getBounds();
+      const retryBorder = completeLevelPopup.scene.add.rectangle(
+        retryBounds.x + OPTION_WIDTH / 2,
+        retryBounds.y + OPTION_HEIGHT / 2,
+        retryBounds.width,
+        retryBounds.height
       );
-      borderYes.setStrokeStyle(size, "0xFF0000");
+      retryBorder.setStrokeStyle(size, "0xFF0000");
+
+      const nextLevelBounds = completeLevelPopup.nextLevel.getBounds();
+      const nextLevelBorder = completeLevelPopup.scene.add.rectangle(
+        nextLevelBounds.x + OPTION_WIDTH / 2,
+        nextLevelBounds.y + OPTION_HEIGHT / 2,
+        nextLevelBounds.width,
+        nextLevelBounds.height
+      );
+      nextLevelBorder.setStrokeStyle(size, "0xFF0000");
     }
   }
 }
