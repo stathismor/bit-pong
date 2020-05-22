@@ -44,13 +44,22 @@
   },
   {
     "name": "7",
+    "tables_half": [
+      { "x": 385, "y": 150, "angle": 90 },
+      { "x": 305, "y": 200, "angle": 330 }
+    ],
+    "cups": [{ "x": 435, "y": 280, "angle": 0 }],
+    "player": { "name": "ball", "x": 125, "y": 185 }
+  },
+  {
+    "name": "8",
     "cups": [
       { "x": 350, "y": 190, "angle": 0, "behaviours": [{ "name": "move" }] }
     ],
     "player": { "name": "ball", "x": 125, "y": 185 }
   },
   {
-    "name": "8",
+    "name": "9",
     "cups": [
       {
         "x": 350,
@@ -62,12 +71,12 @@
     "player": { "name": "ball", "x": 125, "y": 185 }
   },
   {
-    "name": "9",
+    "name": "10",
     "balls": [{ "x": 400, "y": 188, "angle": 0, "isStatic": true }],
     "player": { "name": "cup", "x": 125, "y": 185, "angle": 135 }
   },
   {
-    "name": "10",
+    "name": "11",
     "description": "Rotating blades",
     "tables_half": [
       {
@@ -89,7 +98,7 @@
     "player": { "name": "ball", "x": 125, "y": 185 }
   },
   {
-    "name": "11",
+    "name": "12",
     "tables": [
       { "x": 340, "y": 300, "angle": 0 },
       { "x": 270, "y": 20, "angle": 90 }
@@ -98,14 +107,14 @@
     "player": { "name": "cup", "x": 125, "y": 150, "angle": 180 }
   },
   {
-    "name": "12",
+    "name": "13",
     "tables_half": [{ "x": 310, "y": 90 }],
     "cups": [{ "x": 410, "y": 180 }],
     "balls": [{ "x": 350, "y": 65, "angle": 345 }],
     "player": { "name": "cup", "x": 125, "y": 185 }
   },
   {
-    "name": "13",
+    "name": "14",
     "tables_half": [
       { "x": 420, "y": 320 },
       { "x": 337, "y": 264, "angle": 77 },
@@ -118,7 +127,7 @@
     "player": { "name": "ball", "x": 125, "y": 185 }
   },
   {
-    "name": "14",
+    "name": "15",
     "tables_half": [
       { "x": 400, "y": 162 },
       { "x": 370, "y": 135 },
@@ -133,7 +142,7 @@
     "player": { "name": "table_half", "x": 125, "y": 185 }
   },
   {
-    "name": "15",
+    "name": "16",
     "tables_half": [
       { "x": 470, "y": 70, "angle": 340 },
       { "x": 350, "y": 115, "angle": 20 },
