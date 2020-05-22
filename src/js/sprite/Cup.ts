@@ -6,7 +6,7 @@ import { uuidv4 } from "../utils";
 import * as constants from "../constants";
 
 export class Cup extends Phaser.Physics.Matter.Sprite {
-  constructor(scene, x, y, angleRad, ballIds, behaviourNames) {
+  constructor(scene, x, y, angleRad, ballIds, behaviours) {
     super(scene.matter.world, x, y, constants.TEXTURE_ATLAS, "cup");
 
     this.setData("name", "cup_" + uuidv4());
@@ -17,12 +17,12 @@ export class Cup extends Phaser.Physics.Matter.Sprite {
       new SetBody(scene, this, "cup", x, y, angleRad, true)
     );
 
-    if (behaviourNames) {
-      behaviourNames.forEach((behaviourName) =>
+    if (behaviours) {
+      behaviours.forEach((behaviour) =>
         ComponentManager.Add(
           scene,
           this,
-          new BEHAVIOUR_MAPPER[behaviourName](scene, this)
+          new BEHAVIOUR_MAPPER[behaviour.name](scene, this, behaviour.options)
         )
       );
     }

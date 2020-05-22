@@ -86,7 +86,8 @@ export class GameplayScene extends Phaser.Scene {
         confTable.y,
         constants.TEXTURE_ATLAS,
         "table",
-        Phaser.Math.DegToRad(confTable.angle || 0)
+        Phaser.Math.DegToRad(confTable.angle || 0),
+        confTable.behaviours
       );
       this.add.existing(table);
     });
@@ -98,7 +99,8 @@ export class GameplayScene extends Phaser.Scene {
         confTable.y,
         constants.TEXTURE_ATLAS,
         "table_half",
-        Phaser.Math.DegToRad(confTable.angle || 0)
+        Phaser.Math.DegToRad(confTable.angle || 0),
+        confTable.behaviours
       );
       this.add.existing(table);
     });
