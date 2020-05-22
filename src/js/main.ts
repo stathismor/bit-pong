@@ -15,7 +15,10 @@ const game = new Game({
   title: "Bit Pong",
   width: WIDTH,
   height: HEIGHT,
-  scaleMode: 0, // Phaser.ScaleManager.EXACT_FIT,
+  // scale: {
+  //   mode: Phaser.Scale.FIT,
+  //   autoCenter: Phaser.Scale.CENTER_BOTH,
+  // },
   backgroundColor: "#ffffff",
   pixelArt: false,
   physics: {

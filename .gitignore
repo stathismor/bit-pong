@@ -1,6 +1,8 @@
 node_modules/
 dist/
-cordova/
+cordova/platforms/
+cordova/plugins/
+cordova/www/
 .cache/
 .vscode/
 .idea
