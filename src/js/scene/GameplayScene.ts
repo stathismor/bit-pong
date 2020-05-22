@@ -194,6 +194,10 @@ export class GameplayScene extends Phaser.Scene {
     );
     border.setStrokeStyle(size, "0xFF0000");
 
+    this.input.keyboard.addKey("S").on("down", () => {
+      this.scene.scene.sound.setMute(!this.scene.scene.sound.mute);
+    });
+
     const skipLevelsData = [
       {
         key: this.input.keyboard.addKey("LEFT"),
