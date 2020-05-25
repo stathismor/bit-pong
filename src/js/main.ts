@@ -5,9 +5,17 @@ import { GameplayScene } from "./scene/GameplayScene";
 import { LevelMenuScene } from "./scene/LevelMenuScene";
 import { StartMenuScene } from "./scene/StartMenuScene";
 import { ScaleManager } from "./ScaleManager";
+import { mobileAndTabletCheck } from "./utils";
 
 const WIDTH = 640;
 const HEIGHT = 360;
+
+const scale = mobileAndTabletCheck()
+  ? {
+      mode: Phaser.Scale.FIT,
+      autoCenter: Phaser.Scale.CENTER_BOTH,
+    }
+  : {};
 
 const game = new Game({
   type: Phaser.AUTO,
@@ -15,10 +23,7 @@ const game = new Game({
   title: "Bit Pong",
   width: WIDTH,
   height: HEIGHT,
-  // scale: {
-  //   mode: Phaser.Scale.FIT,
-  //   autoCenter: Phaser.Scale.CENTER_BOTH,
-  // },
+  scale,
   backgroundColor: "#ffffff",
   pixelArt: false,
   physics: {
