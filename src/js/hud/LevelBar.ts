@@ -9,6 +9,9 @@ export default class LevelBar {
       fill: "#000000",
     });
 
-    levelText.setPosition(config.width - levelText.width - OFFSET, OFFSET);
+    levelText.setPosition(
+      config.centerX - levelText.width / 2 - OFFSET,
+      OFFSET
+    );
   }
 }

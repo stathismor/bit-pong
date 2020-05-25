@@ -8,6 +8,7 @@ import { CompleteLevelPopup } from "../sprite/CompleteLevelPopup";
 import { ComponentManager } from "../behaviour/ComponentManager";
 import HealthBar from "../hud/HealthBar";
 import LevelBar from "../hud/LevelBar";
+import { AdminBar } from "../hud/AdminBar";
 import * as constants from "../constants";
 import { initCategories } from "../collision";
 import { initCollisions } from "../CollisionManager";
@@ -135,6 +136,8 @@ export class GameplayScene extends Phaser.Scene {
         retryLevelPopup.popup();
       }
     });
+
+    ((): void => new AdminBar(this))();
 
     this.completeLevelPopup = new CompleteLevelPopup(
       this,

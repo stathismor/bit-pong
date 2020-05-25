@@ -1,4 +1,6 @@
 import LEVELS from "../../../config/levels.json";
+import { AdminBar } from "../hud/AdminBar";
+
 import * as constants from "../constants";
 
 const LEVELS_PER_ROW = 3;
@@ -183,6 +185,8 @@ export class LevelMenuScene extends Phaser.Scene {
         );
       }
     }
+
+    ((): void => new AdminBar(this))();
   }
 
   updatePage(): void {

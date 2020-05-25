@@ -16,11 +16,17 @@ export class BootScene extends Phaser.Scene {
     const atlasData = Data.bit_pong_data;
     atlasData.textures[0].image = Images.bit_pong_atlas;
     this.load.multiatlas(constants.TEXTURE_ATLAS, atlasData);
+    this.load.image("sound_on", Images.sound_on);
+    this.load.image("sound_off", Images.sound_off);
 
     // Audio
     this.load.audio("table_bounce", Sounds.table_bounce, { instances: 2 });
     this.load.audio("cup_bounce", Sounds.cup_bounce, { instances: 2 });
     this.load.audio("splash", Sounds.splash);
+
+    if (this.game.registry.get("sound") === undefined) {
+      this.game.registry.set("sound", true);
+    }
   }
 
   create(): void {

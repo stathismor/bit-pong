@@ -1,4 +1,4 @@
-import { Scene } from "phaser";
+import { AdminBar } from "../hud/AdminBar";
 
 import * as constants from "../constants";
 
@@ -6,7 +6,7 @@ const BUTTON_WIDTH = 222;
 const BUTTON_HEIGHT = 60;
 const BUTTON_NAME = "NEW_GAME";
 
-export class StartMenuScene extends Scene {
+export class StartMenuScene extends Phaser.Scene {
   constructor() {
     super({
       key: "StartMenuScene",
@@ -47,5 +47,7 @@ export class StartMenuScene extends Scene {
         this.scene.start("LevelMenuScene");
       }
     });
+
+    ((): void => new AdminBar(this))();
   }
 }
