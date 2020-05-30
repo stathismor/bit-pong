@@ -65,6 +65,8 @@ export default class BitDrops {
   }
 
   spill(x, y, rotation): void {
+    this.emitParticles(x, y, rotation);
+
     const dropStartPosY = y - 8;
     this.drops.forEach((drop) => {
       const dropTemp = drop;
