@@ -60,7 +60,7 @@ export class GameplayScene extends Phaser.Scene {
         ballConf.x,
         ballConf.y,
         constants.TEXTURE_ATLAS,
-        "ball",
+        "ball_white",
         ballConf.isStatic
       );
       this.add.existing(ball);

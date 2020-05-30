@@ -1,3 +1,5 @@
+import * as constants from "../constants";
+
 export class AdminBar {
   constructor(scene) {
     this.scene = scene;
@@ -19,7 +21,10 @@ export class AdminBar {
 
   updateSoundTexture(): void {
     const soundOn = this.scene.game.registry.get("sound");
-    this.image.setTexture(soundOn ? "sound_on" : "sound_off");
+    this.image.setTexture(
+      constants.TEXTURE_ATLAS,
+      soundOn ? "sound_on" : "sound_off"
+    );
   }
 
   updateSoundRegistry(): void {

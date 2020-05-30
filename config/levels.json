@@ -3,19 +3,19 @@
     "name": "1",
     "tables": [{ "x": 400, "y": 220, "angle": 0 }],
     "cups": [{ "x": 400, "y": 188, "angle": 0 }],
-    "player": { "name": "ball", "x": 125, "y": 185 }
+    "player": { "name": "ball_white", "x": 125, "y": 185 }
   },
   {
     "name": "2",
     "tables": [{ "x": 400, "y": 200, "angle": 345 }],
     "cups": [{ "x": 400, "y": 167, "angle": 345 }],
-    "player": { "name": "ball", "x": 125, "y": 185 }
+    "player": { "name": "ball_white", "x": 125, "y": 185 }
   },
   {
     "name": "3",
     "tables": [{ "x": 480, "y": 180, "angle": 90 }],
     "cups": [{ "x": 448, "y": 180, "angle": -90 }],
-    "player": { "name": "ball", "x": 125, "y": 185 }
+    "player": { "name": "ball_white", "x": 125, "y": 185 }
   },
   {
     "name": "4",
@@ -24,7 +24,7 @@
       { "x": 250, "y": 200, "angle": 90 }
     ],
     "cups": [{ "x": 350, "y": 258, "angle": 0 }],
-    "player": { "name": "ball", "x": 125, "y": 185 }
+    "player": { "name": "ball_white", "x": 125, "y": 185 }
   },
   {
     "name": "5",
@@ -33,21 +33,21 @@
       { "x": 260, "y": 210, "angle": 290 }
     ],
     "cups": [{ "x": 350, "y": 276, "angle": 345 }],
-    "player": { "name": "ball", "x": 125, "y": 185 }
+    "player": { "name": "ball_white", "x": 125, "y": 185 }
   },
   {
     "name": "6",
     "description": "Down and up again",
     "tables": [{ "x": 300, "y": 310, "angle": 0 }],
     "cups": [{ "x": 270, "y": 180, "angle": 180 }],
-    "player": { "name": "ball", "x": 125, "y": 185 }
+    "player": { "name": "ball_white", "x": 125, "y": 185 }
   },
   {
     "name": "7",
     "cups": [
       { "x": 400, "y": 190, "angle": 0, "behaviours": [{ "name": "rotate" }] }
     ],
-    "player": { "name": "ball", "x": 125, "y": 185 }
+    "player": { "name": "ball_white", "x": 125, "y": 185 }
   },
   {
     "name": "8",
@@ -56,14 +56,14 @@
       { "x": 305, "y": 200, "angle": 330 }
     ],
     "cups": [{ "x": 435, "y": 280, "angle": 0 }],
-    "player": { "name": "ball", "x": 125, "y": 185 }
+    "player": { "name": "ball_white", "x": 125, "y": 185 }
   },
   {
     "name": "9",
     "cups": [
       { "x": 350, "y": 190, "angle": 0, "behaviours": [{ "name": "move" }] }
     ],
-    "player": { "name": "ball", "x": 125, "y": 185 }
+    "player": { "name": "ball_white", "x": 125, "y": 185 }
   },
   {
     "name": "10",
@@ -75,7 +75,7 @@
         "behaviours": [{ "name": "move" }, { "name": "rotate" }]
       }
     ],
-    "player": { "name": "ball", "x": 125, "y": 185 }
+    "player": { "name": "ball_white", "x": 125, "y": 185 }
   },
   {
     "name": "11",
@@ -102,7 +102,7 @@
       }
     ],
     "cups": [{ "x": 410, "y": 260 }],
-    "player": { "name": "ball", "x": 125, "y": 185 }
+    "player": { "name": "ball_white", "x": 125, "y": 185 }
   },
   {
     "name": "13",
@@ -129,7 +129,7 @@
     ],
     "tables": [{ "x": 420, "y": 42 }],
     "cups": [{ "x": 420, "y": 287, "angle": 0 }],
-    "player": { "name": "ball", "x": 125, "y": 185 }
+    "player": { "name": "ball_white", "x": 125, "y": 185 }
   },
   {
     "name": "16",
@@ -155,6 +155,6 @@
       { "x": 350, "y": 205, "angle": 20 }
     ],
     "cups": [{ "x": 510, "y": 280, "angle": 0 }],
-    "player": { "name": "ball", "x": 125, "y": 185 }
+    "player": { "name": "ball_white", "x": 125, "y": 185 }
   }
 ]
