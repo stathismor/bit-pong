@@ -5,6 +5,7 @@
     "build": "parcel build src/index.html --no-source-maps --public-url .",
     "deploy": "yarn build && gh-pages -d dist",
     "cordova:emulate": "cd cordova && cordova emulate android",
+    "cordova:run": "cd cordova && cordova run android",
     "cordova:build": "yarn build && rm -rf cordova/www/* && cp -r dist/* cordova/www/",
     "lint": "eslint 'src/**/*.ts'",
     "lint:fix": "eslint --fix 'src/**/*.ts'"

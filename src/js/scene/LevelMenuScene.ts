@@ -26,21 +26,17 @@ export class LevelMenuScene extends Phaser.Scene {
     const nextLevel = Math.max(...completedLevels) + 1;
     const camera = this.scene.scene.cameras.main;
 
-    this.pagesNum = Math.ceil(LEVELS.length / LEVELS_PER_PAGE);
+    this.pagesCount = Math.ceil(LEVELS.length / LEVELS_PER_PAGE);
     this.currentPageNum = 1;
 
-    this.add.image(
-      config.centerX,
-      config.centerY,
-      constants.TEXTURE_ATLAS,
-      "background"
-    );
-    this.add.image(
-      config.centerX + config.width,
-      config.centerY,
-      constants.TEXTURE_ATLAS,
-      "background"
-    );
+    for (let i = 0; i < this.pagesCount; i += 1) {
+      this.add.image(
+        config.centerX + i * config.width,
+        config.centerY,
+        constants.TEXTURE_ATLAS,
+        "background"
+      );
+    }
 
     const title = this.add.image(
       config.centerX,
@@ -109,7 +105,7 @@ export class LevelMenuScene extends Phaser.Scene {
     this.pageNumText = this.add.text(
       config.centerX,
       config.height - 20,
-      `(${this.currentPageNum}/${this.pagesNum})`,
+      `(${this.currentPageNum}/${this.pagesCount})`,
       {
         font: "14px Monospace",
         fill: "#FDFFFC",
@@ -200,7 +196,7 @@ export class LevelMenuScene extends Phaser.Scene {
     }
 
     // Right arrow
-    if (this.currentPageNum < this.pagesNum) {
+    if (this.currentPageNum < this.pagesCount) {
       this.rightArrowEnabled.visible = true;
       this.rightArrowDisabled.visible = false;
     } else {
@@ -208,6 +204,6 @@ export class LevelMenuScene extends Phaser.Scene {
       this.rightArrowDisabled.visible = true;
     }
 
-    this.pageNumText.setText(`(${this.currentPageNum}/${this.pagesNum})`);
+    this.pageNumText.setText(`(${this.currentPageNum}/${this.pagesCount})`);
   }
 }

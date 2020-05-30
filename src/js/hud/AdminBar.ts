@@ -14,7 +14,7 @@ export class AdminBar {
       this.updateSoundTexture();
     });
 
-    this.image.setPosition(config.width - 20, 15);
+    this.image.setPosition(config.width - 30, 20);
 
     this.updateSoundTexture();
   }
