@@ -106,10 +106,8 @@
   },
   {
     "name": "13",
-    "tables": [
-      { "x": 340, "y": 300, "angle": 0 },
-      { "x": 270, "y": 20, "angle": 90 }
-    ],
+    "tables": [{ "x": 340, "y": 300, "angle": 0 }],
+    "tables_half": [{ "x": 270, "y": 107, "angle": 90 }],
     "balls": [{ "x": 450, "y": 200, "angle": 0, "isStatic": true }],
     "player": { "name": "cup", "x": 125, "y": 150, "angle": 180 }
   },
