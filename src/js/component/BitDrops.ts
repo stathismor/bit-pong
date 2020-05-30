@@ -8,6 +8,7 @@ const DROP_VELOCITY = 5;
 const DROP_VELOCITY_OFFSET = 1;
 const DROP_POSITION_OFFSET_X = 12;
 const DROP_POSITION_OFFSET_Y = 6;
+const EMITTER_OFFSET = 35;
 
 export default class BitDrops {
   constructor(scene) {
@@ -31,6 +32,36 @@ export default class BitDrops {
       drop.setStatic(true);
       this.drops[i] = drop;
     }
+
+    const particles = scene.add.particles(constants.TEXTURE_ATLAS);
+    this.emitter = particles.createEmitter({
+      alpha: { start: 1, end: 0, ease: "Quint.easeIn" },
+      speed: { min: 290, max: 320 },
+      accelerationY: 800,
+      lifespan: { min: 500, max: 700 },
+      quantity: 10,
+      maxParticles: 50,
+      on: false,
+    });
+    this.emitter.setFrame(["drop_dark", "drop_light"]);
+    this.emitter.setPosition(400, 160);
+    const angle = Phaser.Math.RadToDeg(0.34) - 90;
+    this.emitter.setAngle({
+      min: angle - EMITTER_OFFSET,
+      max: angle + EMITTER_OFFSET,
+    });
+
+    scene.events.once("shutdown", particles.destroy);
+  }
+
+  emitParticles(x, y, rotation): void {
+    this.emitter.setPosition(x, y);
+    const angle = Phaser.Math.RadToDeg(rotation) - 90;
+    this.emitter.setAngle({
+      min: angle - EMITTER_OFFSET,
+      max: angle + EMITTER_OFFSET,
+    });
+    this.emitter.start();
   }
 
   spill(x, y, rotation): void {
