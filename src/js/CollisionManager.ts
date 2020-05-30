@@ -28,7 +28,7 @@ export function initCollisions(scene, player): void {
           [
             bodyA.gameObject.getData("name"),
             bodyB.gameObject.getData("name"),
-          ].some((name) => name.startsWith("ball"))
+          ].some((name) => name.startsWith("ball_white"))
         ) {
           const currentLevel = scene.levelNumber;
           const completedLevels =
@@ -38,7 +38,7 @@ export function initCollisions(scene, player): void {
             body.gameObject.getData("name").startsWith("cup")
           ).gameObject;
           const ball = [bodyA, bodyB].find((body) =>
-            body.gameObject.getData("name").startsWith("ball")
+            body.gameObject.getData("name").startsWith("ball_white")
           ).gameObject;
 
           scene.sound.play("splash");

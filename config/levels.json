@@ -156,5 +156,35 @@
     ],
     "cups": [{ "x": 510, "y": 280, "angle": 0 }],
     "player": { "name": "ball_white", "x": 125, "y": 185 }
+  },
+  {
+    "name": "18",
+    "description": "Snooker rookie",
+    "cups": [{ "x": 561, "y": 251 }],
+    "tables": [{ "x": 380, "y": 220, "angle": 0 }],
+    "balls": [{ "x": 500, "y": 188, "angle": 0 }],
+    "player": { "name": "ball_orange", "x": 125, "y": 185 }
+  },
+  {
+    "name": "19",
+    "description": "Snooker pro",
+    "cups": [{ "x": 265, "y": 280 }],
+    "tables_half": [
+      { "x": 410, "y": 220, "angle": 0 },
+      { "x": 478, "y": 163, "angle": 90 }
+    ],
+    "balls": [{ "x": 365, "y": 188, "angle": 0 }],
+    "player": { "name": "ball_orange", "x": 125, "y": 185 }
+  },
+  {
+    "name": "20",
+    "description": "Snooker god",
+    "cups": [{ "x": 281, "y": 251 }],
+    "tables_half": [
+      { "x": 375, "y": 220 },
+      { "x": 460, "y": 130 }
+    ],
+    "balls": [{ "x": 320, "y": 188, "angle": 0 }],
+    "player": { "name": "ball_orange", "x": 125, "y": 185 }
   }
 ]

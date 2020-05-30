@@ -14,6 +14,6 @@ export class Ball extends Phaser.Physics.Matter.Sprite {
 
     this.setFriction(0.06);
     this.setStatic(isStatic);
-    this.setData("name", "ball_" + uuidv4());
+    this.setData("name", `${frame}_${uuidv4()}`);
   }
 }

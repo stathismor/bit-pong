@@ -5,7 +5,7 @@ import * as constants from "../constants";
 import { GameplaySceneStatus } from "../scene/GameplayScene";
 import { isInCircle, closestPointToCircle } from "../utils";
 
-const SPEED = 0.16;
+const SPEED = 0.185;
 const RESET_DISTANCE = 600;
 const IMMOBILE_SPEED = 0.2222222222229;
 const IMMOBILE_ANGULAR_SPEED = 0.03;
