@@ -4,6 +4,7 @@ import { OwnerTrace } from "../component/OwnerTrace";
 import * as constants from "../constants";
 import { GameplaySceneStatus } from "../scene/GameplayScene";
 import { isInCircle, closestPointToCircle } from "../utils";
+import { SpriteManager } from "../sprite/SpriteManager";
 
 const SPEED = 0.185;
 const RESET_DISTANCE = 600;
@@ -161,5 +162,7 @@ export class Drag {
     this.owner.y = this.owner.startPos.y;
     this.owner.rotation = this.angleRad;
     this.owner.launched = false;
+
+    SpriteManager.ResetPositions();
   }
 }

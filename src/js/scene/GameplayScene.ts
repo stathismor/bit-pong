@@ -5,6 +5,7 @@ import { Cup } from "../sprite/Cup";
 import { Table } from "../sprite/Table";
 import RetryLevelPopup from "../sprite/RetryLevelPopup";
 import { CompleteLevelPopup } from "../sprite/CompleteLevelPopup";
+import { SpriteManager } from "../sprite/SpriteManager";
 import { ComponentManager } from "../behaviour/ComponentManager";
 import HealthBar from "../hud/HealthBar";
 import LevelBar from "../hud/LevelBar";
@@ -34,7 +35,7 @@ export class GameplayScene extends Phaser.Scene {
     this.keyPressed = data.keyPressed || false; // Used for debugging
 
     initCategories(this);
-
+    SpriteManager.Clear();
     ComponentManager.Clear();
 
     // Add background
@@ -64,6 +65,7 @@ export class GameplayScene extends Phaser.Scene {
         ballConf.isStatic
       );
       this.add.existing(ball);
+      SpriteManager.Add(ball, "ball", ballConf);
     });
 
     const player = new Player(
@@ -118,6 +120,7 @@ export class GameplayScene extends Phaser.Scene {
       );
       this.add.existing(cup);
       cups.push(cup);
+      // SpriteManager.Add(cup, "cup", confCup);
     });
 
     ((): void => new LevelBar(this, this.levelNumber))();
