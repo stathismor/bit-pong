@@ -30,10 +30,6 @@ export function initCollisions(scene, player): void {
             bodyB.gameObject.getData("name"),
           ].some((name) => name.startsWith("ball_white"))
         ) {
-          const currentLevel = scene.levelNumber;
-          const completedLevels =
-            JSON.parse(localStorage.getItem(constants.LOGAL_STORAGE_KEY)) || [];
-
           const cup = [bodyA, bodyB].find((body) =>
             body.gameObject.getData("name").startsWith("cup")
           ).gameObject;
@@ -46,10 +42,18 @@ export function initCollisions(scene, player): void {
           const { x, y, rotation } = cup;
           bitDrops.spill(x, y, rotation);
 
-          if (!completedLevels.includes(currentLevel)) {
+          const currentLevel = scene.levelNumber;
+          const completedLevels =
+            JSON.parse(localStorage.getItem(constants.LOGAL_STORAGE_KEY)) || {};
+          if (
+            !(currentLevel in completedLevels) ||
+            (currentLevel in completedLevels &&
+              completedLevels[currentLevel] < player.livesNumber)
+          ) {
+            completedLevels[currentLevel] = player.livesNumber;
             localStorage.setItem(
               constants.LOGAL_STORAGE_KEY,
-              JSON.stringify([currentLevel, ...completedLevels])
+              JSON.stringify(completedLevels)
             );
           }
 
