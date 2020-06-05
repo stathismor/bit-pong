@@ -22,7 +22,11 @@ export class LevelMenuScene extends Phaser.Scene {
     const levelPos = { x: levelWidthDistance, y: 128 };
     const completedLevels =
       JSON.parse(localStorage.getItem(constants.LOGAL_STORAGE_KEY)) || {};
-    const nextLevel = Math.max(...Object.keys(completedLevels)) + 1;
+    const levelNumbers = Object.keys(completedLevels);
+    const nextLevel =
+      levelNumbers.length === 0
+        ? 1
+        : Math.max(Object.keys(completedLevels)) + 1;
     const camera = this.scene.scene.cameras.main;
 
     this.pagesCount = Math.ceil(LEVELS.length / LEVELS_PER_PAGE);
