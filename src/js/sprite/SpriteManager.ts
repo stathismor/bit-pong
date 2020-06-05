@@ -49,4 +49,8 @@ export class SpriteManager {
       sprite.setStatic(conf.isStatic);
     }
   }
+
+  static GetPlayer(): Phaser.sprite {
+    return SpriteManager.player.sprite;
+  }
 }

@@ -224,5 +224,22 @@
     ],
     "balls": [{ "x": 320, "y": 188, "angle": 0 }],
     "player": { "name": "ball_orange", "x": 125, "y": 185 }
+  },
+  {
+    "name": "22",
+    "description": "Fountain shot",
+    "tables": [{ "x": 400, "y": 70 }],
+    "cups": [
+      {
+        "x": 360,
+        "y": 200,
+        "behaviours": [{ "name": "fountain" }]
+      },
+      {
+        "x": 518,
+        "y": 260
+      }
+    ],
+    "player": { "name": "ball_white", "x": 125, "y": 185 }
   }
 ]
