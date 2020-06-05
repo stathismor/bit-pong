@@ -11,6 +11,8 @@ export class BootScene extends Phaser.Scene {
   }
 
   preload(): void {
+    const config = this.sys.game.CONFIG;
+
     // HACK: parcel changes the asset names in dist directory, so
     // we dynamically get the new image names for the atlas
     const atlasData = Data.bit_pong_data;
@@ -28,6 +30,9 @@ export class BootScene extends Phaser.Scene {
     if (this.game.registry.get("sound") === undefined) {
       this.game.registry.set("sound", true);
     }
+
+    const camera = this.cameras.main;
+    camera.setBounds(0, 0, config.width, config.height);
   }
 
   create(): void {

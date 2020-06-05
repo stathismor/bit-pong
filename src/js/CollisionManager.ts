@@ -42,6 +42,9 @@ export function initCollisions(scene, player): void {
           const { x, y, rotation } = cup;
           bitDrops.spill(x, y, rotation);
 
+          const camera = scene.cameras.main;
+          camera.shake(160, 0.004);
+
           const currentLevel = scene.levelNumber;
           const completedLevels =
             JSON.parse(localStorage.getItem(constants.LOGAL_STORAGE_KEY)) || {};
