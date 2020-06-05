@@ -241,5 +241,47 @@
       }
     ],
     "player": { "name": "ball_white", "x": 125, "y": 185 }
+  },
+  {
+    "name": "23",
+    "description": "Fountain pool shot",
+    "cups": [
+      {
+        "x": 360,
+        "y": 200,
+        "behaviours": [{ "name": "fountain" }]
+      },
+      {
+        "x": 450,
+        "y": 200
+      }
+    ],
+    "balls": [{ "x": 360, "y": 128 }],
+    "player": { "name": "ball_orange", "x": 125, "y": 185 }
+  },
+  {
+    "name": "24",
+    "description": "Fountain pool shot",
+    "cups": [
+      {
+        "x": 300,
+        "y": 200,
+        "behaviours": [{ "name": "fountain" }]
+      },
+      {
+        "x": 430,
+        "y": 200,
+        "behaviours": [{ "name": "fountain" }]
+      },
+      {
+        "x": 560,
+        "y": 200
+      }
+    ],
+    "balls": [
+      { "name": "ball_orange", "x": 300, "y": 128 },
+      { "x": 430, "y": 128 }
+    ],
+    "player": { "name": "ball_orange", "x": 125, "y": 185 }
   }
 ]

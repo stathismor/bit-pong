@@ -1,22 +1,25 @@
 import * as constants from "../constants";
 import { SpriteManager } from "../sprite/SpriteManager";
 
-const EMITTER_OFFSET = 30;
+const EMITTER_OFFSET = 25;
 
 export class Fountain {
   constructor(scene, owner) {
-    const player = SpriteManager.GetPlayer();
+    const balls = [...SpriteManager.GetBalls(), SpriteManager.GetPlayer()];
 
     const source = {
       contains: (x, y): void => {
-        if (scene.matter.containsPoint(player.body, x, y)) {
+        const ball = balls.filter((ball) => {
+          return scene.matter.containsPoint(ball.body, x, y);
+        })[0];
+        if (ball) {
           const beerVelocity = new Phaser.Math.Vector2(0, -0.012);
-          const playerVelocity = new Phaser.Math.Vector2(
-            player.body.velocity.x,
-            player.body.velocity.y
+          const ballVelocity = new Phaser.Math.Vector2(
+            ball.body.velocity.x,
+            ball.body.velocity.y
           );
-          const newVelocity = playerVelocity.add(beerVelocity);
-          player.setVelocity(newVelocity.x, newVelocity.y);
+          const newVelocity = ballVelocity.add(beerVelocity);
+          ball.setVelocity(newVelocity.x, newVelocity.y);
         }
       },
     };

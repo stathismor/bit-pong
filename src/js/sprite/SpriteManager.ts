@@ -53,4 +53,8 @@ export class SpriteManager {
   static GetPlayer(): Phaser.sprite {
     return SpriteManager.player.sprite;
   }
+
+  static GetBalls(): Phaser.sprite {
+    return SpriteManager.balls.map((ball) => ball.sprite);
+  }
 }
