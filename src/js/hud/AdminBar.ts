@@ -1,12 +1,14 @@
 import * as constants from "../constants";
 
+const BUTTONS_Y_OFFSET = 20;
+
 export class AdminBar {
-  constructor(scene) {
+  constructor(scene, showLevel = false) {
     this.scene = scene;
     const config = scene.sys.game.CONFIG;
 
-    this.image = this.scene.add
-      .image(0, 0, "sound_off")
+    this.image = scene.add
+      .image(config.width - 30, BUTTONS_Y_OFFSET, "sound_off")
       .setScrollFactor(0)
       .setInteractive();
     this.image.on("pointerdown", () => {
@@ -14,7 +16,15 @@ export class AdminBar {
       this.updateSoundTexture();
     });
 
-    this.image.setPosition(config.width - 30, 20);
+    if (showLevel) {
+      const selectLevelButton = scene.add
+        .image(config.width - 65, BUTTONS_Y_OFFSET, "select_level_button")
+        .setScrollFactor(0)
+        .setInteractive();
+      selectLevelButton.on("pointerdown", () => {
+        this.scene.scene.start("LevelMenuScene");
+      });
+    }
 
     this.updateSoundTexture();
   }
