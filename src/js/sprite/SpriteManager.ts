@@ -44,6 +44,8 @@ export class SpriteManager {
       sprite.x = conf.x;
       sprite.y = conf.y;
       sprite.rotation = Phaser.Math.DegToRad(conf.angle || 0);
+      sprite.body.speed = 0;
+      sprite.setStatic(true); // Needed to reset any momentum
       sprite.setStatic(conf.isStatic);
     }
   }

@@ -17,6 +17,8 @@ export class BootScene extends Phaser.Scene {
     atlasData.textures[0].image = Images.bit_pong_atlas;
     this.load.multiatlas(constants.TEXTURE_ATLAS, atlasData);
     this.load.image("select_level_button", Images.select_level_button);
+    this.load.image("award_gold", Images.award_gold);
+    this.load.image("award_silver", Images.award_silver);
 
     // Audio
     this.load.audio("table_bounce", Sounds.table_bounce, { instances: 2 });

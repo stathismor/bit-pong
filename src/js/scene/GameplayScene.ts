@@ -79,7 +79,7 @@ export class GameplayScene extends Phaser.Scene {
     this.add.existing(player);
     const ballIds = player.body.parts.map((part) => part.id);
 
-    initCollisions(this, player);
+    initCollisions(this, player, this.levelNumber);
 
     // @TODO: Table should be rendered after the cup
     confTables.forEach((confTable) => {

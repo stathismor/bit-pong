@@ -20,10 +20,9 @@ export class LevelMenuScene extends Phaser.Scene {
     const config = this.sys.game.CONFIG;
     const levelWidthDistance = config.width / LEVELS_PER_ROW;
     const levelPos = { x: levelWidthDistance, y: 128 };
-    const completedLevels = JSON.parse(
-      localStorage.getItem(constants.LOGAL_STORAGE_KEY)
-    ) || [0];
-    const nextLevel = Math.max(...completedLevels) + 1;
+    const completedLevels =
+      JSON.parse(localStorage.getItem(constants.LOGAL_STORAGE_KEY)) || {};
+    const nextLevel = Math.max(...Object.keys(completedLevels)) + 1;
     const camera = this.scene.scene.cameras.main;
 
     this.pagesCount = Math.ceil(LEVELS.length / LEVELS_PER_PAGE);
@@ -121,7 +120,7 @@ export class LevelMenuScene extends Phaser.Scene {
 
     let pageNum = 0;
     for (let levelNumber = 1; levelNumber <= LEVELS.length; levelNumber += 1) {
-      const isCompleted = completedLevels.includes(levelNumber);
+      const isCompleted = levelNumber in completedLevels;
       const isNextLevel = levelNumber === nextLevel;
 
       const colour = isCompleted ? "#011627" : "#fdfffc";
@@ -156,6 +155,11 @@ export class LevelMenuScene extends Phaser.Scene {
         levelPos.x - levelWidthDistance / 2 - levelText.width / 2,
         levelImage.y - levelImage.height / 2 + yOffset
       );
+      if (isCompleted) {
+        const level = completedLevels[levelNumber];
+        const awardKey = level > 2 ? "award_gold" : "award_silver";
+        this.add.image(levelImage.x, levelImage.y + 28, awardKey);
+      }
 
       if (levelNumber % LEVELS_PER_PAGE === 0) {
         pageNum += 1;
