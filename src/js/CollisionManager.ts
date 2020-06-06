@@ -74,8 +74,7 @@ export function initCollisions(scene, player): void {
 
           cup.setStatic(true);
           ball.setStatic(true);
-          // @TODO: Do I need this?
-          // ball.setVisible(false);
+          ball.setVisible(false);
         }
       } else {
         const bodyAName = bodyA.gameObject.getData("name");

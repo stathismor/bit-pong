@@ -314,5 +314,51 @@
     "tables": [{ "x": 411, "y": 279 }],
     "balls": [{ "x": 350, "y": 90 }],
     "player": { "name": "ball_orange", "x": 125, "y": 185 }
+  },
+  {
+    "name": "26",
+    "description": "Rotating fountains",
+    "cups": [
+      {
+        "x": 300,
+        "y": 100,
+        "behaviours": [
+          { "name": "fountain" },
+          { "name": "rotate", "options": { "speed": 0.0006 } }
+        ]
+      },
+      {
+        "x": 300,
+        "y": 250,
+        "angle": 90,
+        "behaviours": [
+          { "name": "fountain" },
+          { "name": "rotate", "options": { "speed": 0.0006, "direction": -1 } }
+        ]
+      },
+      {
+        "x": 550,
+        "y": 100,
+        "angle": 90,
+        "behaviours": [
+          { "name": "fountain" },
+          { "name": "rotate", "options": { "speed": 0.0006, "direction": -1 } }
+        ]
+      },
+      {
+        "x": 550,
+        "y": 250,
+        "behaviours": [
+          { "name": "fountain" },
+          { "name": "rotate", "options": { "speed": 0.0006 } }
+        ]
+      },
+      {
+        "x": 425,
+        "y": 175,
+        "behaviours": [{ "name": "rotate", "options": { "speed": 0.005 } }]
+      }
+    ],
+    "player": { "name": "ball_white", "x": 125, "y": 185 }
   }
 ]
