@@ -1,10 +1,11 @@
 import * as constants from "../constants";
 import { SpriteManager } from "../sprite/SpriteManager";
 
-const EMITTER_OFFSET = 25;
+const EMITTER_OFFSET = 24;
 
 export class Fountain {
   constructor(scene, owner) {
+    this.owner = owner;
     const balls = [...SpriteManager.GetBalls(), SpriteManager.GetPlayer()];
 
     const source = {
@@ -13,7 +14,13 @@ export class Fountain {
           return scene.matter.containsPoint(ball.body, x, y);
         })[0];
         if (ball) {
-          const beerVelocity = new Phaser.Math.Vector2(0, -0.012);
+          const angle = owner.angle - 90;
+          const rotation = Phaser.Math.DegToRad(angle);
+          const speed = 0.01;
+          const beerVelocity = new Phaser.Math.Vector2(
+            Math.cos(rotation) * speed,
+            Math.sin(rotation) * speed
+          );
           const ballVelocity = new Phaser.Math.Vector2(
             ball.body.velocity.x,
             ball.body.velocity.y
@@ -27,16 +34,17 @@ export class Fountain {
     const particles = scene.add.particles(constants.TEXTURE_ATLAS);
     this.emitter = particles.createEmitter({
       alpha: { start: 1, end: 0, ease: "Quint.easeIn" },
-      speed: { min: 200, max: 320 },
-      accelerationY: 800,
+      speed: { min: 200, max: 300 },
+      accelerationY: 500,
       lifespan: { min: 500, max: 700 },
       quantity: 20,
       on: false,
+      follow: owner,
       deathZone: { type: "onEnter", source: source },
     });
     this.emitter.setFrame(["drop_dark", "drop_light"]);
-    this.emitter.setPosition(owner.x, owner.y - 18);
-    const angle = Phaser.Math.RadToDeg(0) - 90;
+
+    const angle = owner.angle - 90;
     this.emitter.setAngle({
       min: angle - EMITTER_OFFSET,
       max: angle + EMITTER_OFFSET,
@@ -46,5 +54,11 @@ export class Fountain {
     this.emitter.start();
   }
 
-  update(): void {}
+  update(): void {
+    const angle = this.owner.angle - 90;
+    this.emitter.setAngle({
+      min: angle - EMITTER_OFFSET,
+      max: angle + EMITTER_OFFSET,
+    });
+  }
 }

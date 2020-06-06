@@ -231,7 +231,7 @@
     "tables": [{ "x": 400, "y": 70 }],
     "cups": [
       {
-        "x": 360,
+        "x": 335,
         "y": 200,
         "behaviours": [{ "name": "fountain" }]
       },
@@ -261,7 +261,7 @@
   },
   {
     "name": "24",
-    "description": "Fountain pool shot",
+    "description": "Fountain pool shot with three cups",
     "cups": [
       {
         "x": 300,
@@ -282,6 +282,37 @@
       { "name": "ball_orange", "x": 300, "y": 128 },
       { "x": 430, "y": 128 }
     ],
+    "player": { "name": "ball_orange", "x": 125, "y": 185 }
+  },
+  {
+    "name": "25",
+    "description": "Fountain domino",
+    "cups": [
+      {
+        "x": 300,
+        "y": 170,
+        "angle": 20,
+        "behaviours": [{ "name": "fountain" }]
+      },
+      {
+        "x": 400,
+        "y": 170,
+        "angle": 340,
+        "behaviours": [{ "name": "fountain" }]
+      },
+      {
+        "x": 562,
+        "y": 250,
+        "angle": 310,
+        "behaviours": [{ "name": "fountain" }]
+      },
+      {
+        "x": 230,
+        "y": 310
+      }
+    ],
+    "tables": [{ "x": 411, "y": 279 }],
+    "balls": [{ "x": 350, "y": 90 }],
     "player": { "name": "ball_orange", "x": 125, "y": 185 }
   }
 ]
