@@ -18,8 +18,6 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
     scene.add.existing(this);
     this.levelNum = levelNum;
     this.levelsCount = levelsCount;
-    const completedLevels =
-      JSON.parse(localStorage.getItem(constants.LOGAL_STORAGE_KEY)) || {};
 
     this.tween = scene.tweens.add({
       targets: this,
@@ -34,9 +32,7 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
       onComplete: CompleteLevelPopup.onComplete,
     });
 
-    const level = completedLevels[levelNum];
-    const awardKey = level > 2 ? "award_gold" : "award_silver";
-    this.award = scene.add.image(this.x + 140, this.y - 35, awardKey);
+    this.award = scene.add.image(this.x + 140, this.y - 35, "award_silver");
     this.award.setVisible(false);
     this.award.setScale(0.1);
     scene.add.existing(this.award);
@@ -97,6 +93,11 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
 
     this.tween.play();
 
+    const completedLevels =
+      JSON.parse(localStorage.getItem(constants.LOGAL_STORAGE_KEY)) || {};
+    const level = completedLevels[this.levelNum];
+    const awardKey = level >= 2 ? "award_gold" : "award_silver";
+    this.award = this.scene.add.image(this.x + 140, this.y - 35, awardKey);
     this.award.setVisible(true);
     this.awardTween.play();
   }
