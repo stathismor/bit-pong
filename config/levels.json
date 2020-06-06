@@ -360,5 +360,16 @@
       }
     ],
     "player": { "name": "ball_white", "x": 125, "y": 185 }
+  },
+  {
+    "name": "27",
+    "description": "Rotating player cup",
+    "balls": [{ "x": 400, "y": 190, "isStatic": true }],
+    "player": {
+      "name": "cup",
+      "x": 125,
+      "y": 185,
+      "behaviours": [{ "name": "rotate" }]
+    }
   }
 ]

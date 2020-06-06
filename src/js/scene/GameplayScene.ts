@@ -74,7 +74,8 @@ export class GameplayScene extends Phaser.Scene {
       playerConf.y,
       constants.TEXTURE_ATLAS,
       playerConf.name,
-      Phaser.Math.DegToRad(playerConf.angle || 0)
+      Phaser.Math.DegToRad(playerConf.angle || 0),
+      playerConf.behaviours
     );
     this.add.existing(player);
     SpriteManager.Add(player, "player", playerConf);

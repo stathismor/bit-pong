@@ -1,3 +1,4 @@
+import BEHAVIOUR_MAPPER from "../behaviour";
 import { SetBody } from "../behaviour/SetBody";
 import { Drag } from "../behaviour/Drag";
 import { ComponentManager } from "../behaviour/ComponentManager";
@@ -5,7 +6,7 @@ import { uuidv4 } from "../utils";
 import * as constants from "../constants";
 
 export class Player extends Phaser.Physics.Matter.Sprite {
-  constructor(scene, x, y, texture, frame, angleRad) {
+  constructor(scene, x, y, texture, frame, angleRad, behaviours) {
     super(scene.matter.world, x, y, texture, frame);
 
     this.setData("name", frame + "_" + uuidv4());
@@ -22,5 +23,15 @@ export class Player extends Phaser.Physics.Matter.Sprite {
       this,
       new Drag(scene, this, x, y, frame, angleRad)
     );
+
+    if (behaviours) {
+      behaviours.forEach((behaviour) =>
+        ComponentManager.Add(
+          scene,
+          this,
+          new BEHAVIOUR_MAPPER[behaviour.name](scene, this, behaviour.options)
+        )
+      );
+    }
   }
 }
