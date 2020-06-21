@@ -12,6 +12,7 @@ import LevelBar from "../hud/LevelBar";
 import { AdminBar } from "../hud/AdminBar";
 import * as constants from "../constants";
 import { initCategories } from "../collision";
+import { initParticles } from "../particles";
 import { initCollisions } from "../CollisionManager";
 
 export enum GameplaySceneStatus {
@@ -124,6 +125,8 @@ export class GameplayScene extends Phaser.Scene {
       cups.push(cup);
       // SpriteManager.Add(cup, "cup", confCup);
     });
+
+    initParticles(this);
 
     ((): void => new LevelBar(this, this.levelNumber))();
 

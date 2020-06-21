@@ -1,4 +1,5 @@
 import * as constants from "../constants";
+import { successEmitter } from "../particles";
 
 const OPTION_WIDTH = 90;
 const OPTION_HEIGHT = 90;
@@ -18,6 +19,8 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
     scene.add.existing(this);
     this.levelNum = levelNum;
     this.levelsCount = levelsCount;
+
+    this.emitter = successEmitter;
 
     this.tween = scene.tweens.add({
       targets: this,
@@ -48,7 +51,7 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
       paused: true,
     });
 
-    this.selectLevel = this.scene.add
+    this.selectLevel = scene.add
       .zone(
         this.x - this.width / 2 + LEVEL_X_OFFSET,
         this.y + this.height / 2 - OPTION_HEIGHT - Y_OFFSET,
@@ -58,7 +61,7 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
       .setOrigin(0)
       .setName(OPTION_SELECT_LEVEL_NAME);
 
-    this.retry = this.scene.add
+    this.retry = scene.add
       .zone(
         this.x + this.width / 2 - OPTION_WIDTH + RETRY_X_OFFSET,
         this.y + this.height / 2 - OPTION_HEIGHT - Y_OFFSET,
@@ -68,7 +71,7 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
       .setOrigin(0)
       .setName(OPTION_RETRY_NAME);
 
-    this.nextLevel = this.scene.add
+    this.nextLevel = scene.add
       .zone(
         this.x + this.width / 2 - OPTION_WIDTH + NEXT_X_OFFSET,
         this.y + this.height / 2 - OPTION_HEIGHT - Y_OFFSET,
@@ -85,6 +88,7 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
   }
 
   popup(): void {
+    this.emitter.start();
     this.setVisible(true);
 
     this.selectLevel.setInteractive();
