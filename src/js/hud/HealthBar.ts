@@ -1,7 +1,7 @@
 import * as constants from "../constants";
 
-const HEALTH_BAR_Y = 16;
-const LIVES_DISTANCE = 16;
+const HEALTH_BAR_Y = 32;
+const LIVES_DISTANCE = 32;
 
 export default class HealthBar {
   constructor(scene, livesNumber) {

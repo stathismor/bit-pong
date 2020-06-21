@@ -1,6 +1,6 @@
 import * as constants from "../constants";
 
-const BUTTONS_Y_OFFSET = 20;
+const BUTTONS_Y_OFFSET = 30;
 
 export class AdminBar {
   constructor(scene, showLevel = false) {
@@ -8,7 +8,12 @@ export class AdminBar {
     const config = scene.sys.game.CONFIG;
 
     this.image = scene.add
-      .image(config.width - 30, BUTTONS_Y_OFFSET, "sound_off")
+      .image(
+        config.width - 30,
+        BUTTONS_Y_OFFSET,
+        constants.TEXTURE_ATLAS,
+        "sound_off"
+      )
       .setScrollFactor(0)
       .setInteractive();
     this.image.on("pointerdown", () => {
@@ -18,7 +23,7 @@ export class AdminBar {
 
     if (showLevel) {
       const selectLevelButton = scene.add
-        .image(config.width - 65, BUTTONS_Y_OFFSET, "select_level_button")
+        .image(config.width - 80, BUTTONS_Y_OFFSET, "select_level_button")
         .setScrollFactor(0)
         .setInteractive();
       selectLevelButton.on("pointerdown", () => {

@@ -7,12 +7,12 @@ import { isInCircle, closestPointToCircle } from "../utils";
 import { SpriteManager } from "../sprite/SpriteManager";
 
 const SPEED = 0.185;
-const RESET_DISTANCE = 600;
+const RESET_DISTANCE = 1200;
 const IMMOBILE_SPEED = 0.2222222222229;
 const IMMOBILE_ANGULAR_SPEED = 0.03;
 const GREY_BALL_SCALE = 1.6;
 const DEATH_DELAY = 650;
-const DRAG_RADIUS = 85;
+const DRAG_RADIUS = 170;
 
 export class Drag {
   constructor(scene, owner, x, y, frame, angleRad) {

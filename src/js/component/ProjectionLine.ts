@@ -1,7 +1,7 @@
 import * as constants from "../constants";
 
 const MAX_PROJECTION_POINTS = 30;
-const PROJECTION_LINE_LENGTH = 250;
+const PROJECTION_LINE_LENGTH = 500;
 const SKIP_UPDATE_NUM = 2;
 
 export default class ProjectionLine {

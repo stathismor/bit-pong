@@ -1,6 +1,6 @@
 import * as constants from "../constants";
 
-const TRACE_DISTANCE = 30;
+const TRACE_DISTANCE = 60;
 
 export class OwnerTrace {
   constructor(scene, owner, frame) {

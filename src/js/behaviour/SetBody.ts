@@ -1,9 +1,9 @@
 const M = Phaser.Physics.Matter.Matter;
-const SIDE_WITH = 10;
+const SIDE_WITH = 20;
 const SIDES_ANGLE = 13;
-const OFFSET = 2;
-const CHAMFER_RADIUS = 7;
-const CHAMFER_RADIUS_BOTTOM = 2;
+const OFFSET = 4;
+const CHAMFER_RADIUS = 14;
+const CHAMFER_RADIUS_BOTTOM = 4;
 
 export class SetBody {
   constructor(scene, owner, shape, x, y, angle, hasSensor) {
@@ -45,9 +45,9 @@ export class SetBody {
       if (hasSensor) {
         const sensor = M.Bodies.rectangle(
           owner.width / 2,
-          owner.height - 25,
-          20,
-          25,
+          owner.height - 50,
+          40,
+          50,
           { isSensor: true }
         );
         parts.push(sensor);

@@ -1,385 +1,946 @@
 [
   {
     "name": "1",
-    "tables": [{ "x": 400, "y": 220, "angle": 0 }],
-    "cups": [{ "x": 400, "y": 188, "angle": 0 }],
-    "player": { "name": "ball_white", "x": 125, "y": 185 }
+    "tables": [
+      {
+        "x": 800,
+        "y": 440,
+        "angle": 0
+      }
+    ],
+    "cups": [
+      {
+        "x": 800,
+        "y": 376,
+        "angle": 0
+      }
+    ],
+    "player": {
+      "name": "ball_white",
+      "x": 850,
+      "y": 170
+    }
   },
   {
     "name": "2",
-    "tables": [{ "x": 400, "y": 200, "angle": 345 }],
-    "cups": [{ "x": 400, "y": 167, "angle": 345 }],
-    "player": { "name": "ball_white", "x": 125, "y": 185 }
+    "tables": [
+      {
+        "x": 800,
+        "y": 400,
+        "angle": 345
+      }
+    ],
+    "cups": [
+      {
+        "x": 800,
+        "y": 334,
+        "angle": 345
+      }
+    ],
+    "player": {
+      "name": "ball_white",
+      "x": 250,
+      "y": 370
+    }
   },
   {
     "name": "3",
-    "tables": [{ "x": 480, "y": 180, "angle": 90 }],
-    "cups": [{ "x": 448, "y": 180, "angle": -90 }],
-    "player": { "name": "ball_white", "x": 125, "y": 185 }
+    "tables": [
+      {
+        "x": 960,
+        "y": 360,
+        "angle": 90
+      }
+    ],
+    "cups": [
+      {
+        "x": 896,
+        "y": 360,
+        "angle": -90
+      }
+    ],
+    "player": {
+      "name": "ball_white",
+      "x": 250,
+      "y": 370
+    }
   },
   {
     "name": "4",
     "tables": [
-      { "x": 420, "y": 290, "angle": 0 },
-      { "x": 250, "y": 200, "angle": 90 }
+      {
+        "x": 840,
+        "y": 580,
+        "angle": 0
+      },
+      {
+        "x": 500,
+        "y": 400,
+        "angle": 90
+      }
     ],
-    "cups": [{ "x": 350, "y": 258, "angle": 0 }],
-    "player": { "name": "ball_white", "x": 125, "y": 185 }
+    "cups": [
+      {
+        "x": 700,
+        "y": 516,
+        "angle": 0
+      }
+    ],
+    "player": {
+      "name": "ball_white",
+      "x": 250,
+      "y": 370
+    }
   },
   {
     "name": "5",
     "tables": [
-      { "x": 420, "y": 290, "angle": 345 },
-      { "x": 260, "y": 210, "angle": 290 }
+      {
+        "x": 840,
+        "y": 580,
+        "angle": 345
+      },
+      {
+        "x": 520,
+        "y": 420,
+        "angle": 290
+      }
     ],
-    "cups": [{ "x": 350, "y": 276, "angle": 345 }],
-    "player": { "name": "ball_white", "x": 125, "y": 185 }
+    "cups": [
+      {
+        "x": 700,
+        "y": 552,
+        "angle": 345
+      }
+    ],
+    "player": {
+      "name": "ball_white",
+      "x": 250,
+      "y": 370
+    }
   },
   {
     "name": "6",
     "description": "Down and up again",
-    "tables": [{ "x": 300, "y": 310, "angle": 0 }],
-    "cups": [{ "x": 270, "y": 180, "angle": 180 }],
-    "player": { "name": "ball_white", "x": 125, "y": 185 }
+    "tables": [
+      {
+        "x": 600,
+        "y": 620,
+        "angle": 0
+      }
+    ],
+    "cups": [
+      {
+        "x": 540,
+        "y": 360,
+        "angle": 180
+      }
+    ],
+    "player": {
+      "name": "ball_white",
+      "x": 250,
+      "y": 370
+    }
   },
   {
     "name": "7",
     "tables_half": [
-      { "x": 385, "y": 150, "angle": 90 },
-      { "x": 305, "y": 200, "angle": 330 }
+      {
+        "x": 770,
+        "y": 300,
+        "angle": 90
+      },
+      {
+        "x": 610,
+        "y": 400,
+        "angle": 330
+      }
     ],
-    "cups": [{ "x": 435, "y": 280, "angle": 0 }],
-    "player": { "name": "ball_white", "x": 125, "y": 185 }
+    "cups": [
+      {
+        "x": 870,
+        "y": 560,
+        "angle": 0
+      }
+    ],
+    "player": {
+      "name": "ball_white",
+      "x": 250,
+      "y": 370
+    }
   },
   {
     "name": "8",
     "tables_half": [
-      { "x": 10, "y": 160, "angle": 90 },
-      { "x": 180, "y": 100 },
-      { "x": 248, "y": 157, "angle": 90 }
+      {
+        "x": 20,
+        "y": 320,
+        "angle": 90
+      },
+      {
+        "x": 360,
+        "y": 200
+      },
+      {
+        "x": 496,
+        "y": 314,
+        "angle": 90
+      }
     ],
-    "cups": [{ "x": 375, "y": 255, "angle": 0 }],
-    "player": { "name": "ball_white", "x": 125, "y": 215 }
+    "cups": [
+      {
+        "x": 750,
+        "y": 510,
+        "angle": 0
+      }
+    ],
+    "player": {
+      "name": "ball_white",
+      "x": 250,
+      "y": 430
+    }
   },
   {
     "name": "9",
     "tables_half": [
-      { "x": 420, "y": 320 },
-      { "x": 337, "y": 264, "angle": 77 },
-      { "x": 503, "y": 264, "angle": 283 },
-      { "x": 298, "y": 147, "angle": 77 },
-      { "x": 542, "y": 145, "angle": 283 }
+      {
+        "x": 840,
+        "y": 640
+      },
+      {
+        "x": 674,
+        "y": 528,
+        "angle": 77
+      },
+      {
+        "x": 1006,
+        "y": 528,
+        "angle": 283
+      },
+      {
+        "x": 596,
+        "y": 294,
+        "angle": 77
+      },
+      {
+        "x": 1084,
+        "y": 290,
+        "angle": 283
+      }
     ],
-    "tables": [{ "x": 420, "y": 42 }],
-    "cups": [{ "x": 420, "y": 287, "angle": 0 }],
-    "player": { "name": "ball_white", "x": 125, "y": 185 }
+    "tables": [
+      {
+        "x": 840,
+        "y": 84
+      }
+    ],
+    "cups": [
+      {
+        "x": 840,
+        "y": 574,
+        "angle": 0
+      }
+    ],
+    "player": {
+      "name": "ball_white",
+      "x": 250,
+      "y": 370
+    }
   },
   {
     "name": "10",
     "cups": [
-      { "x": 400, "y": 190, "angle": 0, "behaviours": [{ "name": "rotate" }] }
+      {
+        "x": 800,
+        "y": 380,
+        "angle": 0,
+        "behaviours": [
+          {
+            "name": "rotate"
+          }
+        ]
+      }
     ],
-    "player": { "name": "ball_white", "x": 125, "y": 185 }
+    "player": {
+      "name": "ball_white",
+      "x": 250,
+      "y": 370
+    }
   },
   {
     "name": "11",
     "cups": [
       {
-        "x": 350,
-        "y": 190,
+        "x": 700,
+        "y": 380,
         "angle": 0,
         "behaviours": [
-          { "name": "move", "options": { "x": 550, "direction": "horizontal" } }
+          {
+            "name": "move",
+            "options": {
+              "x": 550,
+              "direction": "horizontal"
+            }
+          }
         ]
       }
     ],
-    "player": { "name": "ball_white", "x": 125, "y": 185 }
+    "player": {
+      "name": "ball_white",
+      "x": 250,
+      "y": 370
+    }
   },
   {
     "name": "12",
     "cups": [
       {
-        "x": 350,
-        "y": 190,
+        "x": 700,
+        "y": 380,
         "angle": 0,
         "behaviours": [
           {
             "name": "move",
-            "options": { "x": 550, "direction": "horizontal" }
+            "options": {
+              "x": 550,
+              "direction": "horizontal"
+            }
           },
-          { "name": "rotate" }
+          {
+            "name": "rotate"
+          }
         ]
       }
     ],
-    "player": { "name": "ball_white", "x": 125, "y": 185 }
+    "player": {
+      "name": "ball_white",
+      "x": 250,
+      "y": 370
+    }
   },
   {
     "name": "13",
     "description": "Rotating blades",
     "tables_half": [
       {
-        "x": 350,
-        "y": 140,
-        "angle": 0,
-        "behaviours": [{ "name": "rotate", "options": { "speed": 0.004 } }]
-      },
-      {
-        "x": 475,
-        "y": 140,
+        "x": 700,
+        "y": 280,
         "angle": 0,
         "behaviours": [
-          { "name": "rotate", "options": { "speed": 0.004, "direction": -1 } }
+          {
+            "name": "rotate",
+            "options": {
+              "speed": 0.004
+            }
+          }
+        ]
+      },
+      {
+        "x": 950,
+        "y": 280,
+        "angle": 0,
+        "behaviours": [
+          {
+            "name": "rotate",
+            "options": {
+              "speed": 0.004,
+              "direction": -1
+            }
+          }
         ]
       }
     ],
-    "cups": [{ "x": 410, "y": 260 }],
-    "player": { "name": "ball_white", "x": 125, "y": 185 }
+    "cups": [
+      {
+        "x": 820,
+        "y": 520
+      }
+    ],
+    "player": {
+      "name": "ball_white",
+      "x": 250,
+      "y": 370
+    }
   },
   {
     "name": "14",
     "description": "Shoot through blades",
-    "tables": [{ "x": 520, "y": 180, "angle": 90 }],
+    "tables": [
+      {
+        "x": 1040,
+        "y": 360,
+        "angle": 90
+      }
+    ],
     "tables_half": [
       {
-        "x": 420,
-        "y": 267,
+        "x": 840,
+        "y": 534,
         "angle": 90,
         "behaviours": [
-          { "name": "move", "options": { "y": 92, "direction": "horizontal" } }
+          {
+            "name": "move",
+            "options": {
+              "y": 92,
+              "direction": "horizontal"
+            }
+          }
         ]
       },
       {
-        "x": 360,
-        "y": 92,
+        "x": 720,
+        "y": 184,
         "angle": 90,
         "behaviours": [
-          { "name": "move", "options": { "y": 267, "direction": "horizontal" } }
+          {
+            "name": "move",
+            "options": {
+              "y": 267,
+              "direction": "horizontal"
+            }
+          }
         ]
       }
     ],
-    "cups": [{ "x": 488, "y": 180, "angle": -90 }],
-    "player": { "name": "ball_white", "x": 125, "y": 185 }
+    "cups": [
+      {
+        "x": 976,
+        "y": 360,
+        "angle": -90
+      }
+    ],
+    "player": {
+      "name": "ball_white",
+      "x": 250,
+      "y": 370
+    }
   },
   {
     "name": "15",
-    "balls": [{ "x": 400, "y": 188, "angle": 0, "isStatic": true }],
-    "player": { "name": "cup", "x": 125, "y": 185, "angle": 135 }
+    "balls": [
+      {
+        "x": 800,
+        "y": 376,
+        "angle": 0,
+        "isStatic": true
+      }
+    ],
+    "player": {
+      "name": "cup",
+      "x": 250,
+      "y": 370,
+      "angle": 135
+    }
   },
   {
     "name": "16",
-    "tables": [{ "x": 340, "y": 300, "angle": 0 }],
-    "tables_half": [{ "x": 270, "y": 107, "angle": 90 }],
-    "balls": [{ "x": 450, "y": 200, "angle": 0, "isStatic": true }],
-    "player": { "name": "cup", "x": 125, "y": 150, "angle": 180 }
+    "tables": [
+      {
+        "x": 680,
+        "y": 600,
+        "angle": 0
+      }
+    ],
+    "tables_half": [
+      {
+        "x": 540,
+        "y": 214,
+        "angle": 90
+      }
+    ],
+    "balls": [
+      {
+        "x": 900,
+        "y": 400,
+        "angle": 0,
+        "isStatic": true
+      }
+    ],
+    "player": {
+      "name": "cup",
+      "x": 250,
+      "y": 300,
+      "angle": 180
+    }
   },
   {
     "name": "17",
-    "tables_half": [{ "x": 310, "y": 90 }],
-    "cups": [{ "x": 410, "y": 180 }],
-    "balls": [{ "x": 350, "y": 65, "angle": 345 }],
-    "player": { "name": "cup", "x": 125, "y": 185 }
+    "tables_half": [
+      {
+        "x": 620,
+        "y": 180
+      }
+    ],
+    "cups": [
+      {
+        "x": 820,
+        "y": 360
+      }
+    ],
+    "balls": [
+      {
+        "x": 700,
+        "y": 130,
+        "angle": 345
+      }
+    ],
+    "player": {
+      "name": "cup",
+      "x": 250,
+      "y": 370
+    }
   },
   {
     "name": "18",
     "description": "Rotating player cup",
-    "balls": [{ "x": 400, "y": 190, "isStatic": true }],
+    "balls": [
+      {
+        "x": 800,
+        "y": 380,
+        "isStatic": true
+      }
+    ],
     "player": {
       "name": "cup",
-      "x": 125,
-      "y": 185,
-      "behaviours": [{ "name": "rotate" }]
+      "x": 250,
+      "y": 370,
+      "behaviours": [
+        {
+          "name": "rotate"
+        }
+      ]
     }
   },
   {
     "name": "19",
     "tables_half": [
-      { "x": 400, "y": 165 },
-      { "x": 370, "y": 133 },
-      { "x": 370, "y": 122 },
-      { "x": 370, "y": 111 },
-      { "x": 370, "y": 100 },
-      { "x": 370, "y": 89 },
-      { "x": 370, "y": 80 }
+      {
+        "x": 800,
+        "y": 330
+      },
+      {
+        "x": 740,
+        "y": 266
+      },
+      {
+        "x": 740,
+        "y": 244
+      },
+      {
+        "x": 740,
+        "y": 222
+      },
+      {
+        "x": 740,
+        "y": 200
+      },
+      {
+        "x": 740,
+        "y": 178
+      },
+      {
+        "x": 740,
+        "y": 160
+      }
     ],
-    "cups": [{ "x": 480, "y": 220, "angle": 0 }],
-    "balls": [{ "x": 455, "y": 135, "angle": 345 }],
-    "player": { "name": "table_half", "x": 125, "y": 185 }
+    "cups": [
+      {
+        "x": 960,
+        "y": 440,
+        "angle": 0
+      }
+    ],
+    "balls": [
+      {
+        "x": 910,
+        "y": 270,
+        "angle": 345
+      }
+    ],
+    "player": {
+      "name": "table_half",
+      "x": 250,
+      "y": 370
+    }
   },
   {
     "name": "20",
     "tables_half": [
-      { "x": 430, "y": 60, "angle": 340 },
-      { "x": 350, "y": 130, "angle": 20 },
-      { "x": 430, "y": 200, "angle": 340 },
-      { "x": 350, "y": 270, "angle": 20 }
+      {
+        "x": 860,
+        "y": 120,
+        "angle": 340
+      },
+      {
+        "x": 700,
+        "y": 260,
+        "angle": 20
+      },
+      {
+        "x": 860,
+        "y": 400,
+        "angle": 340
+      },
+      {
+        "x": 700,
+        "y": 540,
+        "angle": 20
+      }
     ],
-    "cups": [{ "x": 490, "y": 320, "angle": 0 }],
-    "player": { "name": "ball_white", "x": 125, "y": 185 }
+    "cups": [
+      {
+        "x": 980,
+        "y": 640,
+        "angle": 0
+      }
+    ],
+    "player": {
+      "name": "ball_white",
+      "x": 250,
+      "y": 370
+    }
   },
   {
     "name": "21",
     "description": "Snooker rookie",
-    "cups": [{ "x": 561, "y": 251 }],
-    "tables": [{ "x": 380, "y": 220, "angle": 0 }],
-    "balls": [{ "x": 500, "y": 188, "angle": 0 }],
-    "player": { "name": "ball_orange", "x": 125, "y": 185 }
+    "cups": [
+      {
+        "x": 1122,
+        "y": 502
+      }
+    ],
+    "tables": [
+      {
+        "x": 760,
+        "y": 440,
+        "angle": 0
+      }
+    ],
+    "balls": [
+      {
+        "x": 1000,
+        "y": 376,
+        "angle": 0
+      }
+    ],
+    "player": {
+      "name": "ball_orange",
+      "x": 250,
+      "y": 370
+    }
   },
   {
     "name": "22",
     "description": "Snooker pro",
-    "cups": [{ "x": 265, "y": 280 }],
-    "tables_half": [
-      { "x": 410, "y": 220, "angle": 0 },
-      { "x": 478, "y": 163, "angle": 90 }
+    "cups": [
+      {
+        "x": 530,
+        "y": 560
+      }
     ],
-    "balls": [{ "x": 365, "y": 188, "angle": 0 }],
-    "player": { "name": "ball_orange", "x": 125, "y": 185 }
+    "tables_half": [
+      {
+        "x": 820,
+        "y": 440,
+        "angle": 0
+      },
+      {
+        "x": 956,
+        "y": 326,
+        "angle": 90
+      }
+    ],
+    "balls": [
+      {
+        "x": 730,
+        "y": 376,
+        "angle": 0
+      }
+    ],
+    "player": {
+      "name": "ball_orange",
+      "x": 250,
+      "y": 370
+    }
   },
   {
     "name": "23",
     "description": "Snooker god",
-    "cups": [{ "x": 281, "y": 251 }],
-    "tables_half": [
-      { "x": 375, "y": 220 },
-      { "x": 460, "y": 130 }
+    "cups": [
+      {
+        "x": 562,
+        "y": 502
+      }
     ],
-    "balls": [{ "x": 320, "y": 188, "angle": 0 }],
-    "player": { "name": "ball_orange", "x": 125, "y": 185 }
+    "tables_half": [
+      {
+        "x": 750,
+        "y": 440
+      },
+      {
+        "x": 920,
+        "y": 260
+      }
+    ],
+    "balls": [
+      {
+        "x": 640,
+        "y": 376,
+        "angle": 0
+      }
+    ],
+    "player": {
+      "name": "ball_orange",
+      "x": 250,
+      "y": 370
+    }
   },
   {
     "name": "24",
     "description": "Fountain shot",
-    "tables": [{ "x": 400, "y": 70 }],
-    "cups": [
+    "tables": [
       {
-        "x": 335,
-        "y": 200,
-        "behaviours": [{ "name": "fountain" }]
-      },
-      {
-        "x": 518,
-        "y": 260
+        "x": 800,
+        "y": 140
       }
     ],
-    "player": { "name": "ball_white", "x": 125, "y": 185 }
+    "cups": [
+      {
+        "x": 670,
+        "y": 400,
+        "behaviours": [
+          {
+            "name": "fountain"
+          }
+        ]
+      },
+      {
+        "x": 1036,
+        "y": 520
+      }
+    ],
+    "player": {
+      "name": "ball_white",
+      "x": 250,
+      "y": 370
+    }
   },
   {
     "name": "25",
     "description": "Fountain pool shot",
     "cups": [
       {
-        "x": 360,
-        "y": 200,
-        "behaviours": [{ "name": "fountain" }]
+        "x": 720,
+        "y": 400,
+        "behaviours": [
+          {
+            "name": "fountain"
+          }
+        ]
       },
       {
-        "x": 450,
-        "y": 200
+        "x": 900,
+        "y": 400
       }
     ],
-    "balls": [{ "x": 360, "y": 128 }],
-    "player": { "name": "ball_orange", "x": 125, "y": 185 }
+    "balls": [
+      {
+        "x": 720,
+        "y": 256
+      }
+    ],
+    "player": {
+      "name": "ball_orange",
+      "x": 250,
+      "y": 370
+    }
   },
   {
     "name": "26",
     "description": "Fountain pool shot with three cups",
     "cups": [
       {
-        "x": 300,
-        "y": 200,
-        "behaviours": [{ "name": "fountain" }]
+        "x": 600,
+        "y": 400,
+        "behaviours": [
+          {
+            "name": "fountain"
+          }
+        ]
       },
       {
-        "x": 430,
-        "y": 200,
-        "behaviours": [{ "name": "fountain" }]
+        "x": 860,
+        "y": 400,
+        "behaviours": [
+          {
+            "name": "fountain"
+          }
+        ]
       },
       {
-        "x": 560,
-        "y": 200
+        "x": 1120,
+        "y": 400
       }
     ],
     "balls": [
-      { "name": "ball_orange", "x": 300, "y": 128 },
-      { "x": 430, "y": 128 }
+      {
+        "name": "ball_orange",
+        "x": 600,
+        "y": 256
+      },
+      {
+        "x": 860,
+        "y": 256
+      }
     ],
-    "player": { "name": "ball_orange", "x": 125, "y": 185 }
+    "player": {
+      "name": "ball_orange",
+      "x": 250,
+      "y": 370
+    }
   },
   {
     "name": "27",
     "description": "Fountain domino",
     "cups": [
       {
-        "x": 300,
-        "y": 170,
+        "x": 600,
+        "y": 340,
         "angle": 20,
-        "behaviours": [{ "name": "fountain" }]
+        "behaviours": [
+          {
+            "name": "fountain"
+          }
+        ]
       },
       {
-        "x": 400,
-        "y": 170,
+        "x": 800,
+        "y": 340,
         "angle": 340,
-        "behaviours": [{ "name": "fountain" }]
+        "behaviours": [
+          {
+            "name": "fountain"
+          }
+        ]
       },
       {
-        "x": 562,
-        "y": 250,
+        "x": 1124,
+        "y": 500,
         "angle": 310,
-        "behaviours": [{ "name": "fountain" }]
+        "behaviours": [
+          {
+            "name": "fountain"
+          }
+        ]
       },
       {
-        "x": 230,
-        "y": 310
+        "x": 460,
+        "y": 620
       }
     ],
-    "tables": [{ "x": 411, "y": 279 }],
-    "balls": [{ "x": 350, "y": 90 }],
-    "player": { "name": "ball_orange", "x": 125, "y": 185 }
+    "tables": [
+      {
+        "x": 822,
+        "y": 558
+      }
+    ],
+    "balls": [
+      {
+        "x": 700,
+        "y": 180
+      }
+    ],
+    "player": {
+      "name": "ball_orange",
+      "x": 250,
+      "y": 300
+    }
   },
   {
     "name": "28",
     "description": "Rotating fountains",
     "cups": [
       {
-        "x": 300,
-        "y": 100,
+        "x": 600,
+        "y": 200,
         "behaviours": [
-          { "name": "fountain" },
-          { "name": "rotate", "options": { "speed": 0.0006 } }
+          {
+            "name": "fountain"
+          },
+          {
+            "name": "rotate",
+            "options": {
+              "speed": 0.0006
+            }
+          }
         ]
       },
       {
-        "x": 300,
-        "y": 250,
+        "x": 600,
+        "y": 500,
         "angle": 90,
         "behaviours": [
-          { "name": "fountain" },
-          { "name": "rotate", "options": { "speed": 0.0006, "direction": -1 } }
+          {
+            "name": "fountain"
+          },
+          {
+            "name": "rotate",
+            "options": {
+              "speed": 0.0006,
+              "direction": -1
+            }
+          }
         ]
       },
       {
-        "x": 550,
-        "y": 100,
+        "x": 1100,
+        "y": 200,
         "angle": 90,
         "behaviours": [
-          { "name": "fountain" },
-          { "name": "rotate", "options": { "speed": 0.0006, "direction": -1 } }
+          {
+            "name": "fountain"
+          },
+          {
+            "name": "rotate",
+            "options": {
+              "speed": 0.0006,
+              "direction": -1
+            }
+          }
         ]
       },
       {
-        "x": 550,
-        "y": 250,
+        "x": 1100,
+        "y": 500,
         "behaviours": [
-          { "name": "fountain" },
-          { "name": "rotate", "options": { "speed": 0.0006 } }
+          {
+            "name": "fountain"
+          },
+          {
+            "name": "rotate",
+            "options": {
+              "speed": 0.0006
+            }
+          }
         ]
       },
       {
-        "x": 425,
-        "y": 175,
-        "behaviours": [{ "name": "rotate", "options": { "speed": 0.005 } }]
+        "x": 850,
+        "y": 350,
+        "behaviours": [
+          {
+            "name": "rotate",
+            "options": {
+              "speed": 0.005
+            }
+          }
+        ]
       }
     ],
-    "player": { "name": "ball_white", "x": 125, "y": 185 }
+    "player": {
+      "name": "ball_white",
+      "x": 250,
+      "y": 370
+    }
   }
 ]

@@ -2,6 +2,7 @@ import * as constants from "../constants";
 import { SpriteManager } from "../sprite/SpriteManager";
 
 const EMITTER_OFFSET = 24;
+const MULTI = 1.3;
 
 export class Fountain {
   constructor(scene, owner) {
@@ -16,7 +17,7 @@ export class Fountain {
         if (ball) {
           const angle = owner.angle - 90;
           const rotation = Phaser.Math.DegToRad(angle);
-          const speed = 0.01;
+          const speed = 0.017;
           const beerVelocity = new Phaser.Math.Vector2(
             Math.cos(rotation) * speed,
             Math.sin(rotation) * speed
@@ -34,7 +35,7 @@ export class Fountain {
     const particles = scene.add.particles(constants.TEXTURE_ATLAS);
     this.emitter = particles.createEmitter({
       alpha: { start: 1, end: 0, ease: "Quint.easeIn" },
-      speed: { min: 200, max: 300 },
+      speed: { min: 200 * MULTI, max: 300 * MULTI },
       accelerationY: 500,
       lifespan: { min: 500, max: 700 },
       quantity: 20,

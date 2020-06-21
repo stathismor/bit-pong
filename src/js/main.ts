@@ -7,8 +7,8 @@ import { StartMenuScene } from "./scene/StartMenuScene";
 import { ScaleManager } from "./ScaleManager";
 import { mobileAndTabletCheck } from "./utils";
 
-const WIDTH = 640;
-const HEIGHT = 360;
+const WIDTH = 640 * 2;
+const HEIGHT = 360 * 2;
 
 const scale = mobileAndTabletCheck()
   ? {

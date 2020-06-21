@@ -5,9 +5,9 @@ import * as constants from "../constants";
 
 const LEVELS_PER_ROW = 3;
 const LEVELS_PER_PAGE = 9;
-const ROW_HEIGHT = 80;
-const TITLE_OFFSET_Y = 50;
-const LEVEL_OFFSET_Y = 50;
+const ROW_HEIGHT = 160;
+const TITLE_OFFSET_Y = 100;
+const LEVEL_OFFSET_Y = 100;
 
 export class LevelMenuScene extends Phaser.Scene {
   constructor() {
@@ -19,7 +19,7 @@ export class LevelMenuScene extends Phaser.Scene {
   create(): void {
     const config = this.sys.game.CONFIG;
     const levelWidthDistance = config.width / LEVELS_PER_ROW;
-    const levelPos = { x: levelWidthDistance, y: 128 };
+    const levelPos = { x: levelWidthDistance, y: 252 };
     const completedLevels =
       JSON.parse(localStorage.getItem(constants.LOGAL_STORAGE_KEY)) || {};
     const levelNumbers = Object.keys(completedLevels);
@@ -89,7 +89,7 @@ export class LevelMenuScene extends Phaser.Scene {
     }
 
     this.leftArrowDisabled = this.add.image(
-      40,
+      80,
       config.centerY,
       constants.TEXTURE_ATLAS,
       "left_arrow_disabled"
@@ -97,7 +97,7 @@ export class LevelMenuScene extends Phaser.Scene {
     this.leftArrowDisabled.setScrollFactor(0);
     this.leftArrowDisabled.visible = false;
     this.rightArrowDisabled = this.add.image(
-      config.width - 40,
+      config.width - 80,
       config.centerY,
       constants.TEXTURE_ATLAS,
       "right_arrow_disabled"
@@ -107,7 +107,7 @@ export class LevelMenuScene extends Phaser.Scene {
 
     this.pageNumText = this.add.text(
       config.centerX,
-      config.height - 20,
+      config.height - 40,
       `(${this.currentPageNum}/${this.pagesCount})`,
       {
         font: "14px Monospace",
@@ -116,7 +116,7 @@ export class LevelMenuScene extends Phaser.Scene {
     );
     this.pageNumText.setPosition(
       config.centerX - this.pageNumText.width / 2,
-      config.height - 40
+      config.height - 80
     );
     this.pageNumText.setScrollFactor(0);
 
@@ -168,7 +168,7 @@ export class LevelMenuScene extends Phaser.Scene {
       if (levelNumber % LEVELS_PER_PAGE === 0) {
         pageNum += 1;
         levelPos.x = levelWidthDistance + pageNum * config.width;
-        levelPos.y = 128 - levelImage.height + LEVEL_OFFSET_Y;
+        levelPos.y = 256 - levelImage.height + LEVEL_OFFSET_Y;
       } else if (levelNumber % LEVELS_PER_ROW === 0) {
         levelPos.x = levelWidthDistance + pageNum * config.width;
         levelPos.y += ROW_HEIGHT;

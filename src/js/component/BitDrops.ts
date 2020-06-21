@@ -4,10 +4,11 @@ import * as constants from "../constants";
 
 const DROPS_COUNT = 80;
 const DROP_ROTATION_OFFSET = 0.35;
-const DROP_VELOCITY = 5;
+const MULTI = 1.5;
+const DROP_VELOCITY = 5 * MULTI;
 const DROP_VELOCITY_OFFSET = 1;
-const DROP_POSITION_OFFSET_X = 12;
-const DROP_POSITION_OFFSET_Y = 6;
+const DROP_POSITION_OFFSET_X = 24;
+const DROP_POSITION_OFFSET_Y = 12;
 const EMITTER_OFFSET = 35;
 
 export default class BitDrops {
@@ -36,7 +37,7 @@ export default class BitDrops {
     const particles = scene.add.particles(constants.TEXTURE_ATLAS);
     this.emitter = particles.createEmitter({
       alpha: { start: 1, end: 0, ease: "Quint.easeIn" },
-      speed: { min: 290, max: 320 },
+      speed: { min: 290 * MULTI, max: 320 * MULTI },
       accelerationY: 800,
       lifespan: { min: 500, max: 700 },
       quantity: 10,
@@ -67,7 +68,7 @@ export default class BitDrops {
   spill(x, y, rotation): void {
     this.emitParticles(x, y, rotation);
 
-    const dropStartPosY = y - 8;
+    const dropStartPosY = y - 16;
     this.drops.forEach((drop) => {
       const dropTemp = drop;
       dropTemp.setActive(true);

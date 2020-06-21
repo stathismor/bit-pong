@@ -1,14 +1,14 @@
 import * as constants from "../constants";
 
-const OPTION_WIDTH = 45;
-const OPTION_HEIGHT = 45;
+const OPTION_WIDTH = 90;
+const OPTION_HEIGHT = 90;
 const OPTION_RETRY_NAME = "retry";
 const OPTION_SELECT_LEVEL_NAME = "level";
 const OPTION_NEXT_LEVEL = "next";
-const LEVEL_X_OFFSET = 78;
-const RETRY_X_OFFSET = -146;
-const NEXT_X_OFFSET = -73;
-const Y_OFFSET = 30;
+const LEVEL_X_OFFSET = 156;
+const RETRY_X_OFFSET = -292;
+const NEXT_X_OFFSET = -146;
+const Y_OFFSET = 60;
 
 export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, levelNum, levelsCount) {
