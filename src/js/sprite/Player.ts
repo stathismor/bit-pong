@@ -3,6 +3,7 @@ import { SetBody } from "../behaviour/SetBody";
 import { Drag } from "../behaviour/Drag";
 import { ComponentManager } from "../behaviour/ComponentManager";
 import { uuidv4 } from "../utils";
+
 import * as constants from "../constants";
 
 export class Player extends Phaser.Physics.Matter.Sprite {
@@ -33,5 +34,7 @@ export class Player extends Phaser.Physics.Matter.Sprite {
         )
       );
     }
+
+    this.body.timeScale = constants.TIME_SCALE;
   }
 }

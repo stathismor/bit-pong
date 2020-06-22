@@ -8,8 +8,6 @@ import { SpriteManager } from "../sprite/SpriteManager";
 
 const SPEED = 0.185;
 const RESET_DISTANCE = 1200;
-const IMMOBILE_SPEED = 0.2222222222229;
-const IMMOBILE_ANGULAR_SPEED = 0.03;
 const GREY_BALL_SCALE = 1.6;
 const DEATH_DELAY = 650;
 const DRAG_RADIUS = 170;
@@ -51,8 +49,6 @@ export class Drag {
       stiffness: 0.05,
     });
     owner.setStatic(true);
-
-    const ballIds = owner.body.parts.map((part) => part.id);
 
     scene.input.on("dragstart", (pointer, gameObject) => {
       gameObject.isPressed = true;
@@ -122,18 +118,13 @@ export class Drag {
       return;
     }
 
-    const isImmobile =
-      this.owner.body.speed < IMMOBILE_SPEED &&
-      this.owner.body.angularSpeed < IMMOBILE_ANGULAR_SPEED;
-
     if (
       Phaser.Math.Distance.Between(
         this.owner.x,
         this.owner.y,
         this.owner.scene.sys.game.CONFIG.centerX,
         this.owner.scene.sys.game.CONFIG.centerY
-      ) > RESET_DISTANCE ||
-      isImmobile
+      ) > RESET_DISTANCE
     ) {
       if (this.owner.scene.getStatus() === GameplaySceneStatus.PLAY) {
         this.owner.isDead = true;

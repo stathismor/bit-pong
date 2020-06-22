@@ -106,7 +106,7 @@ export default class ProjectionLine {
       // Run matterjs engine's update on our body
       Phaser.Physics.Matter.Matter.Body.update(
         this.hiddenPlayer.body,
-        16.666666666666668,
+        16.666666666666668 * constants.TIME_SCALE,
         1,
         1
       );
