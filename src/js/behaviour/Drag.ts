@@ -11,6 +11,10 @@ const RESET_DISTANCE = 1200;
 const GREY_BALL_SCALE = 1.6;
 const DEATH_DELAY = 650;
 const DRAG_RADIUS = 170;
+const IMMOBILE_CHECK_PERIOD = 200;
+const IMMOBILE_DIST = 40;
+const IMMOBILE_SPEED = 0.3217;
+const IMMOBILE_ANGULAR_SPEED = 0.0006;
 
 export class Drag {
   constructor(scene, owner, x, y, frame, angleRad) {
@@ -22,6 +26,8 @@ export class Drag {
     owner.launched = false;
 
     owner.startPos = { x, y };
+    this.previousX = x;
+    this.checkImmobileTime = new Date();
 
     owner.isPressed = false;
     owner.dragX = x;
@@ -118,13 +124,31 @@ export class Drag {
       return;
     }
 
+    let isImmobile = false;
+    const timeDiff = new Date() - this.checkImmobileTime;
+    if (timeDiff > IMMOBILE_CHECK_PERIOD) {
+      this.checkImmobileTime = new Date();
+      const immobileDist = Math.abs(this.owner.x - this.previousX);
+
+      if (
+        immobileDist < IMMOBILE_DIST &&
+        this.owner.body.speed < IMMOBILE_SPEED &&
+        this.owner.body.angularVelocity < IMMOBILE_ANGULAR_SPEED
+      ) {
+        isImmobile = true;
+      } else {
+        this.previousX = this.owner.x;
+      }
+    }
+
     if (
       Phaser.Math.Distance.Between(
         this.owner.x,
         this.owner.y,
         this.owner.scene.sys.game.CONFIG.centerX,
         this.owner.scene.sys.game.CONFIG.centerY
-      ) > RESET_DISTANCE
+      ) > RESET_DISTANCE ||
+      isImmobile
     ) {
       if (this.owner.scene.getStatus() === GameplaySceneStatus.PLAY) {
         this.owner.isDead = true;
