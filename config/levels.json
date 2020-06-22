@@ -942,5 +942,49 @@
       "x": 250,
       "y": 370
     }
+  },
+  {
+    "name": "29",
+    "description": "Who's a big ball",
+    "tables": [
+      {
+        "x": 735,
+        "y": 439
+      }
+    ],
+    "cups": [
+      {
+        "x": 1100,
+        "y": 520
+      }
+    ],
+    "balls": [
+      {
+        "x": 847,
+        "y": 360,
+        "angle": 0
+      },
+      {
+        "x": 921,
+        "y": 360,
+        "angle": 0
+      },
+      {
+        "x": 794,
+        "y": 360,
+        "angle": 0
+      },
+      {
+        "x": 985,
+        "y": 360,
+        "angle": 0
+      }
+    ],
+    "player": {
+      "name": "ball_white",
+      "x": 250,
+      "y": 225,
+      "behaviours": [{ "name": "scale", "options": { "value": 2 } }]
+    }
   }
 ]
