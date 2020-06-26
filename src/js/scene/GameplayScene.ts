@@ -79,6 +79,7 @@ export class GameplayScene extends Phaser.Scene {
       playerConf.behaviours
     );
     SpriteManager.Add(player, "player", playerConf);
+    this.add.existing(player);
 
     initCollisions(this, player, this.levelNumber);
 
@@ -122,8 +123,6 @@ export class GameplayScene extends Phaser.Scene {
       cups.push(cup);
       // SpriteManager.Add(cup, "cup", confCup);
     });
-
-    this.add.existing(player);
 
     initParticles(this);
 

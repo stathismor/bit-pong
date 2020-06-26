@@ -17,7 +17,11 @@ export class BootScene extends Phaser.Scene {
     // we dynamically get the new image names for the atlas
     const atlasData = Data.bit_pong_data;
     atlasData.textures[0].image = Images.bit_pong_atlas;
-    this.load.multiatlas(constants.TEXTURE_ATLAS, atlasData);
+    const multiAtlasFileConfig = {
+      key: constants.TEXTURE_ATLAS,
+      url: atlasData,
+    };
+    this.load.multiatlas(multiAtlasFileConfig);
     this.load.image("select_level_button", Images.select_level_button);
     this.load.image("award_gold", Images.award_gold);
     this.load.image("award_silver", Images.award_silver);
