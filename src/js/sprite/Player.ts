@@ -14,15 +14,11 @@ export class Player extends Phaser.Physics.Matter.Sprite {
     this.setData("isPlayer", true);
 
     this.livesNumber = constants.MAX_LIVES;
+
     ComponentManager.Add(
       scene,
       this,
       new SetBody(scene, this, frame, x, y, angleRad, true)
-    );
-    ComponentManager.Add(
-      scene,
-      this,
-      new Drag(scene, this, x, y, frame, angleRad)
     );
 
     if (behaviours) {
@@ -34,6 +30,12 @@ export class Player extends Phaser.Physics.Matter.Sprite {
         )
       );
     }
+
+    ComponentManager.Add(
+      scene,
+      this,
+      new Drag(scene, this, x, y, frame, angleRad)
+    );
 
     this.body.timeScale = constants.TIME_SCALE;
   }

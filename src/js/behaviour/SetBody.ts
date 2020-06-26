@@ -1,8 +1,10 @@
 const M = Phaser.Physics.Matter.Matter;
-const SIDE_WITH = 20;
+const SIDE_WITH = 10;
 const SIDES_ANGLE = 13;
-const OFFSET = 4;
-const CHAMFER_RADIUS = 14;
+const OFFSET = 8;
+const SIDES_OFFSET_X = 10;
+const SIDES_OFFSET_Y = 4;
+const CHAMFER_RADIUS = 7;
 const CHAMFER_RADIUS_BOTTOM = 4;
 
 export class SetBody {
@@ -11,8 +13,8 @@ export class SetBody {
       owner.setCircle();
     } else if (shape.startsWith("cup")) {
       const cupLeft = M.Bodies.rectangle(
-        SIDE_WITH + OFFSET,
-        owner.height / 2 - OFFSET,
+        SIDE_WITH + SIDES_OFFSET_X,
+        owner.height / 2 - OFFSET + SIDES_OFFSET_Y,
         SIDE_WITH,
         owner.height - OFFSET,
         {
@@ -21,8 +23,8 @@ export class SetBody {
         }
       );
       const cupRight = M.Bodies.rectangle(
-        owner.width - SIDE_WITH - OFFSET,
-        owner.height / 2 - OFFSET,
+        owner.width - SIDE_WITH - SIDES_OFFSET_X,
+        owner.height / 2 - OFFSET + SIDES_OFFSET_Y,
         SIDE_WITH,
         owner.height - OFFSET,
         {
@@ -33,7 +35,7 @@ export class SetBody {
 
       const cupBottom = M.Bodies.rectangle(
         owner.width / 2,
-        owner.height - SIDE_WITH + 2 * OFFSET,
+        owner.height - SIDE_WITH + 0.5 * OFFSET,
         owner.width / 2,
         SIDE_WITH,
         {
