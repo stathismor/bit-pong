@@ -6,7 +6,7 @@ import { uuidv4 } from "../utils";
 import * as constants from "../constants";
 
 export class Cup extends Phaser.Physics.Matter.Sprite {
-  constructor(scene, x, y, angleRad, ballIds, behaviours) {
+  constructor(scene, x, y, angleRad, behaviours) {
     super(scene.matter.world, x, y, constants.TEXTURE_ATLAS, "cup");
 
     this.setData("name", "cup_" + uuidv4());
