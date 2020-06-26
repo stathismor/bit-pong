@@ -278,7 +278,7 @@
           {
             "name": "move",
             "options": {
-              "x": 550,
+              "x": 1100,
               "direction": "horizontal"
             }
           }
@@ -302,7 +302,7 @@
           {
             "name": "move",
             "options": {
-              "x": 550,
+              "x": 1100,
               "direction": "horizontal"
             }
           },
@@ -381,7 +381,7 @@
           {
             "name": "move",
             "options": {
-              "y": 92,
+              "y": 184,
               "direction": "horizontal"
             }
           }
@@ -395,7 +395,7 @@
           {
             "name": "move",
             "options": {
-              "y": 267,
+              "y": 534,
               "direction": "horizontal"
             }
           }
