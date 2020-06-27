@@ -525,8 +525,7 @@
     "tables": [
       {
         "x": 680,
-        "y": 600,
-        "angle": 0
+        "y": 600
       }
     ],
     "tables_half": [
@@ -1221,6 +1220,89 @@
       "name": "ball_white",
       "x": 870,
       "y": 330
+    }
+  },
+  {
+    "name": "37",
+    "description": "Random tables",
+    "cups": [
+      {
+        "x": 900,
+        "y": 600,
+        "angle": 0
+      }
+    ],
+    "tables_half": [
+      {
+        "x": 600,
+        "y": 370,
+        "behaviours": [
+          {
+            "name": "randomPosition",
+            "options": {
+              "x": 550,
+              "y": 100,
+              "width": 165,
+              "height": 400,
+              "delay": 2000
+            }
+          },
+          {
+            "name": "randomAngle",
+            "options": {
+              "delay": 2000
+            }
+          }
+        ]
+      },
+      {
+        "x": 1000,
+        "y": 170,
+        "behaviours": [
+          {
+            "name": "randomPosition",
+            "options": {
+              "x": 900,
+              "y": 170,
+              "width": 170,
+              "height": 242,
+              "delay": 2500
+            }
+          },
+          {
+            "name": "randomAngle",
+            "options": {
+              "delay": 2500
+            }
+          }
+        ]
+      }
+    ],
+    "player": {
+      "name": "ball_white",
+      "x": 250,
+      "y": 370
+    }
+  },
+  {
+    "name": "38",
+    "description": "Random cup",
+    "cups": [
+      {
+        "x": 1000,
+        "y": 500,
+        "behaviours": [
+          {
+            "name": "randomPosition",
+            "options": { "x": 550, "y": 200, "width": 610, "height": 430 }
+          }
+        ]
+      }
+    ],
+    "player": {
+      "name": "ball_white",
+      "x": 250,
+      "y": 370
     }
   }
 ]
