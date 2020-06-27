@@ -2,8 +2,8 @@ import { AdminBar } from "../hud/AdminBar";
 
 import * as constants from "../constants";
 
-const BUTTON_WIDTH = 222;
-const BUTTON_HEIGHT = 60;
+const BUTTON_WIDTH = 444;
+const BUTTON_HEIGHT = 120;
 const BUTTON_NAME = "NEW_GAME";
 
 export class StartMenuScene extends Phaser.Scene {
@@ -14,7 +14,7 @@ export class StartMenuScene extends Phaser.Scene {
   }
 
   create(): void {
-    this.scene.start("GameplayScene", { levelNumber: 21 });
+    // this.scene.start("GameplayScene", { levelNumber: 21 });
     // this.scene.start("LevelMenuScene");
     const config = this.sys.game.CONFIG;
     this.add.image(
@@ -25,7 +25,7 @@ export class StartMenuScene extends Phaser.Scene {
     );
 
     const newGameButton = this.add
-      .zone(90, 240, BUTTON_WIDTH, BUTTON_HEIGHT)
+      .zone(180, 480, BUTTON_WIDTH, BUTTON_HEIGHT)
       .setOrigin(0)
       .setName(BUTTON_NAME);
     newGameButton.setInteractive();
