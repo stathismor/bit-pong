@@ -1,4 +1,4 @@
-const RANDOM_POSITION_DELAY = 4450;
+const RANDOM_POSITION_DELAY = 4300;
 
 export class RandomPosition {
   constructor(scene, owner, options) {

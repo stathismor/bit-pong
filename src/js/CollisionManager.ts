@@ -3,7 +3,7 @@ import BitDrops from "./component/BitDrops";
 import { GameplaySceneStatus } from "./scene/GameplayScene";
 
 const COLLISION_PERIOD = 200;
-const LEVEL_MENU_DELAY = 3000;
+const SUCCESS_POPUP_DELAY = 2000;
 
 let collisionTime = new Date();
 
@@ -63,7 +63,7 @@ export function initCollisions(scene, player): void {
           scene.setStatus(GameplaySceneStatus.COMPLETE);
 
           scene.time.delayedCall(
-            LEVEL_MENU_DELAY,
+            SUCCESS_POPUP_DELAY,
             () => {
               // DO not attach this to player
               scene.complete();

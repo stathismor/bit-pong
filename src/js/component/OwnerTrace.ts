@@ -14,6 +14,7 @@ export class OwnerTrace {
       repeat: 12,
       active: false,
       visible: false,
+      setScale: { x: owner.scale, y: owner.scale },
     });
   }
 

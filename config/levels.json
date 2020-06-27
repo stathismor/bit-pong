@@ -600,6 +600,34 @@
   },
   {
     "name": "21",
+    "cups": [
+      {
+        "x": 856,
+        "y": 550
+      }
+    ],
+    "tables_half": [
+      {
+        "x": 670,
+        "y": 300
+      }
+    ],
+    "balls": [
+      {
+        "x": 570,
+        "y": 240,
+        "angle": 0
+      }
+    ],
+    "player": {
+      "name": "table",
+      "x": 250,
+      "y": 360,
+      "angle": 90
+    }
+  },
+  {
+    "name": "22",
     "tables_half": [
       {
         "x": 800,
@@ -651,7 +679,7 @@
     }
   },
   {
-    "name": "22",
+    "name": "23",
     "tables_half": [
       {
         "x": 860,
@@ -688,7 +716,7 @@
     }
   },
   {
-    "name": "23",
+    "name": "24",
     "description": "Snooker rookie",
     "cups": [
       {
@@ -717,7 +745,7 @@
     }
   },
   {
-    "name": "24",
+    "name": "25",
     "description": "Snooker pro",
     "cups": [
       {
@@ -751,7 +779,7 @@
     }
   },
   {
-    "name": "25",
+    "name": "26",
     "description": "Snooker god",
     "cups": [
       {
@@ -783,7 +811,7 @@
     }
   },
   {
-    "name": "26",
+    "name": "27",
     "description": "Fountain shot",
     "tables": [
       {
@@ -813,7 +841,7 @@
     }
   },
   {
-    "name": "27",
+    "name": "28",
     "description": "Fountain pool shot",
     "cups": [
       {
@@ -843,7 +871,7 @@
     }
   },
   {
-    "name": "28",
+    "name": "29",
     "description": "Fountain pool shot with three cups",
     "cups": [
       {
@@ -887,7 +915,7 @@
     }
   },
   {
-    "name": "29",
+    "name": "30",
     "description": "Fountain domino",
     "cups": [
       {
@@ -945,7 +973,7 @@
     }
   },
   {
-    "name": "30",
+    "name": "31",
     "description": "Rotating fountains",
     "cups": [
       {
@@ -1032,7 +1060,7 @@
     }
   },
   {
-    "name": "31",
+    "name": "32",
     "description": "Who's a big ball",
     "tables": [
       {
@@ -1076,7 +1104,7 @@
     }
   },
   {
-    "name": "32",
+    "name": "33",
     "description": "Swallow",
     "cups": [
       {
@@ -1101,7 +1129,7 @@
     }
   },
   {
-    "name": "33",
+    "name": "34",
     "description": "Big in big",
     "cups": [
       {
@@ -1145,7 +1173,30 @@
     }
   },
   {
-    "name": "34",
+    "name": "35",
+    "description": "Where's the ball?",
+    "tables": [
+      {
+        "x": 640,
+        "y": 360
+      }
+    ],
+    "cups": [
+      {
+        "x": 640,
+        "y": 322,
+        "behaviours": [{ "name": "scale", "options": { "value": 0.5 } }]
+      }
+    ],
+    "player": {
+      "name": "ball_white",
+      "x": 128,
+      "y": 32,
+      "behaviours": [{ "name": "scale", "options": { "value": 0.25 } }]
+    }
+  },
+  {
+    "name": "36",
     "cups": [
       {
         "x": 800,
@@ -1164,7 +1215,7 @@
     }
   },
   {
-    "name": "35",
+    "name": "37",
     "cups": [
       {
         "x": 800,
@@ -1192,7 +1243,7 @@
     }
   },
   {
-    "name": "36",
+    "name": "38",
     "tables": [
       {
         "x": 540,
@@ -1224,7 +1275,7 @@
     }
   },
   {
-    "name": "37",
+    "name": "39",
     "description": "Random tables",
     "cups": [
       {
@@ -1286,7 +1337,7 @@
     }
   },
   {
-    "name": "38",
+    "name": "40",
     "description": "Random cup",
     "cups": [
       {
