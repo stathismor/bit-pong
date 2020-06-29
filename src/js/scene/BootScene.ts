@@ -27,7 +27,10 @@ export class BootScene extends Phaser.Scene {
     this.load.image("award_silver", Images.award_silver);
 
     // Audio
-    this.load.audio("table_bounce", Sounds.table_bounce, { instances: 2 });
+    this.load.audio("bounce_table", Sounds.bounce_table, { instances: 2 });
+    this.load.audio("bounce_ball_ball", Sounds.bounce_ball_ball, {
+      instances: 2,
+    });
     this.load.audio("cup_bounce", Sounds.cup_bounce, { instances: 2 });
     this.load.audio("splash", Sounds.splash);
     this.load.audio("cheer", Sounds.cheer);

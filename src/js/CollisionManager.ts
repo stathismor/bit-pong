@@ -2,15 +2,18 @@ import * as constants from "./constants";
 import BitDrops from "./component/BitDrops";
 import { GameplaySceneStatus } from "./scene/GameplayScene";
 
-const COLLISION_PERIOD = 200;
+const BALL_CUP_COLLISION_PERIOD = 200;
+const BALL_BALL_COLLISION_PERIOD = 200;
 const SUCCESS_POPUP_DELAY = 2000;
 
-let collisionTime = new Date();
+let ballCupCollisionTime = new Date();
+let ballBallCollisionTime = new Date();
 
 export function initCollisions(scene, player): void {
   const bitDrops = new BitDrops(scene);
   const cupBounceSound = scene.sound.add("cup_bounce");
-  const tableBounceSound = scene.sound.add("table_bounce");
+  const tableBounceSound = scene.sound.add("bounce_table");
+  const ballBallBounceSound = scene.sound.add("bounce_ball_ball");
 
   scene.matter.world.on("collisionstart", (event, bodyA1, bodyB1) => {
     const { pairs } = event;
@@ -85,18 +88,24 @@ export function initCollisions(scene, player): void {
         }
 
         if ([bodyAName, bodyBName].some((name) => name.startsWith("cup"))) {
-          const timeDiff = new Date() - collisionTime;
-          if (timeDiff > COLLISION_PERIOD) {
+          const timeDiff = new Date() - ballCupCollisionTime;
+          if (timeDiff > BALL_CUP_COLLISION_PERIOD) {
             cupBounceSound.play();
           }
-          collisionTime = new Date();
-          continue;
-        }
-
-        if ([bodyAName, bodyBName].some((name) => name.startsWith("table"))) {
+          ballCupCollisionTime = new Date();
+        } else if (
+          [bodyAName, bodyBName].some((name) => name.startsWith("table"))
+        ) {
           tableBounceSound.play();
-
           player.touchesTable = true;
+        } else if (
+          [bodyAName, bodyBName].every((name) => name.startsWith("ball"))
+        ) {
+          const timeDiff = new Date() - ballBallCollisionTime;
+          if (timeDiff > BALL_BALL_COLLISION_PERIOD) {
+            ballBallBounceSound.play();
+          }
+          ballBallCollisionTime = new Date();
         }
       }
     }
