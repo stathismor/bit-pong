@@ -1,6 +1,7 @@
 import * as constants from "../constants";
 import { successEmitter } from "../particles";
 
+const DEPTH = 40;
 const OPTION_WIDTH = 90;
 const OPTION_HEIGHT = 90;
 const OPTION_RETRY_NAME = "retry";
@@ -14,6 +15,8 @@ const Y_OFFSET = 60;
 export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, levelNum, levelsCount) {
     super(scene, x, y, constants.TEXTURE_ATLAS, "success");
+    this.setDepth(DEPTH);
+
     this.setVisible(false);
     this.setScale(0.1);
     scene.add.existing(this);
@@ -36,6 +39,7 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
     });
 
     this.award = scene.add.image(this.x + 140, this.y - 35, "award_silver");
+    this.award.setDepth(DEPTH);
     this.award.setVisible(false);
     this.award.setScale(0.1);
     scene.add.existing(this.award);
@@ -104,6 +108,7 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
     const level = completedLevels[this.levelNum];
     const awardKey = level >= 2 ? "award_gold" : "award_silver";
     this.award = this.scene.add.image(this.x + 140, this.y - 35, awardKey);
+    this.award.setDepth(DEPTH);
     this.award.setVisible(true);
     this.awardTween.play();
   }

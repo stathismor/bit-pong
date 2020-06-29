@@ -25,13 +25,14 @@ export default class HealthBar {
     this.update(livesNumber);
   }
 
-  update(livesNumber) {
+  update(livesNumber): void {
     this.killAllLives();
     for (let index = 0; index < constants.MAX_LIVES; index += 1) {
       const life =
         index < livesNumber
           ? this.fullLives.getFirstDead()
           : this.emptyLives.getFirstDead();
+      life.setDepth(constants.MAX_DEPTH);
       life.setActive(true);
       life.setVisible(true);
       life.x = LIVES_DISTANCE * (index + 1);
@@ -39,7 +40,7 @@ export default class HealthBar {
     }
   }
 
-  killAllLives() {
+  killAllLives(): void {
     this.fullLives.children.each((life) => {
       this.fullLives.kill(life);
       life.setVisible(false);

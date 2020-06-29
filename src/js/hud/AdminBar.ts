@@ -15,6 +15,7 @@ export class AdminBar {
         constants.TEXTURE_ATLAS,
         "sound_off"
       )
+      .setDepth(constants.MAX_DEPTH)
       .setScrollFactor(0)
       .setInteractive();
     this.image.on("pointerdown", () => {
@@ -29,6 +30,7 @@ export class AdminBar {
           BUTTONS_Y_OFFSET,
           "select_level_button"
         )
+        .setDepth(constants.MAX_DEPTH)
         .setScrollFactor(0)
         .setInteractive();
       selectLevelButton.on("pointerdown", () => {

@@ -1,3 +1,5 @@
+import * as constants from "../constants";
+
 const OFFSET = 8;
 
 export default class LevelBar {
@@ -8,6 +10,7 @@ export default class LevelBar {
       font: "12px Monospace",
       fill: "#000000",
     });
+    levelText.setDepth(constants.MAX_DEPTH);
 
     levelText.setPosition(
       config.centerX - levelText.width / 2 - OFFSET,

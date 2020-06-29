@@ -1,12 +1,15 @@
 import * as constants from "./constants";
 
 export let successEmitter = null;
+export let spillParticles = null;
+export let rainParticles = null;
 
 export function initParticles(scene): void {
   const config = scene.sys.game.CONFIG;
-  const particles = scene.add.particles(constants.TEXTURE_ATLAS);
+  spillParticles = scene.add.particles(constants.TEXTURE_ATLAS).setDepth(10);
+  rainParticles = scene.add.particles(constants.TEXTURE_ATLAS).setDepth(30);
 
-  successEmitter = particles.createEmitter({
+  successEmitter = spillParticles.createEmitter({
     speedY: { min: 200, max: 400 },
     lifespan: { min: 1500, max: 2500 },
     quantity: 3,
@@ -18,5 +21,6 @@ export function initParticles(scene): void {
   });
   successEmitter.setFrame(["drop_dark", "drop_light"]);
 
-  scene.events.once("shutdown", particles.destroy);
+  scene.events.once("shutdown", spillParticles.destroy);
+  scene.events.once("shutdown", rainParticles.destroy);
 }

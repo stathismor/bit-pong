@@ -1,5 +1,6 @@
 import * as constants from "../constants";
 import { SpriteManager } from "../sprite/SpriteManager";
+import { spillParticles } from "../particles";
 
 const EMITTER_OFFSET = 24;
 const MULTI = 1.3;
@@ -32,8 +33,7 @@ export class Fountain {
       },
     };
 
-    const particles = scene.add.particles(constants.TEXTURE_ATLAS);
-    this.emitter = particles.createEmitter({
+    this.emitter = spillParticles.createEmitter({
       alpha: { start: 1, end: 0, ease: "Quint.easeIn" },
       speed: { min: 200 * MULTI, max: 300 * MULTI },
       accelerationY: 500,
@@ -51,7 +51,6 @@ export class Fountain {
       max: angle + EMITTER_OFFSET,
     });
 
-    scene.events.once("shutdown", particles.destroy);
     this.emitter.start();
   }
 

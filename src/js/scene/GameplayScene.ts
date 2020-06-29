@@ -36,6 +36,7 @@ export class GameplayScene extends Phaser.Scene {
     this.keyPressed = data.keyPressed || false; // Used for debugging
 
     initCategories(this);
+
     SpriteManager.Clear();
     ComponentManager.Clear();
 
@@ -46,6 +47,8 @@ export class GameplayScene extends Phaser.Scene {
       constants.TEXTURE_ATLAS,
       "background"
     );
+
+    initParticles(this);
 
     const level = LEVELS[this.levelNumber - 1];
     const {
@@ -123,8 +126,6 @@ export class GameplayScene extends Phaser.Scene {
       cups.push(cup);
       // SpriteManager.Add(cup, "cup", confCup);
     });
-
-    initParticles(this);
 
     ((): void => new LevelBar(this, this.levelNumber))();
 
