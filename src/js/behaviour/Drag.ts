@@ -13,7 +13,7 @@ const DEATH_DELAY = 650;
 const DRAG_RADIUS = 170;
 const IMMOBILE_CHECK_PERIOD = 200;
 const IMMOBILE_DIST = 40;
-const IMMOBILE_SPEED = 0.3217;
+const IMMOBILE_SPEED = 0.362;
 const IMMOBILE_ANGULAR_SPEED = 0.0006;
 
 export class Drag {
