@@ -106,6 +106,8 @@ export class Drag {
       );
 
       gameObject.removeInteractive();
+
+      gameObject.scene.sound.play("swoosh");
     });
   }
 
