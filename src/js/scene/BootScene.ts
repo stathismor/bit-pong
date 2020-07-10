@@ -25,6 +25,34 @@ export class BootScene extends Phaser.Scene {
     this.load.image("select_level_button", Images.select_level_button);
     this.load.image("award_gold", Images.award_gold);
     this.load.image("award_silver", Images.award_silver);
+    this.load.image("select_level_text", Images.select_level_text);
+    this.load.image("select_level_border", Images.select_level_border);
+    this.load.image("digit_zero", Images.digit_zero);
+    this.load.image("digit_one", Images.digit_one);
+    this.load.image("digit_two", Images.digit_two);
+    this.load.image("digit_three", Images.digit_three);
+    this.load.image("digit_four", Images.digit_four);
+    this.load.image("digit_five", Images.digit_five);
+    this.load.image("digit_six", Images.digit_six);
+    this.load.image("digit_seven", Images.digit_seven);
+    this.load.image("digit_eight", Images.digit_eight);
+    this.load.image("digit_nine", Images.digit_nine);
+    this.load.image("digit_medium_zero", Images.digit_medium_zero);
+    this.load.image("digit_medium_one", Images.digit_medium_one);
+    this.load.image("digit_medium_two", Images.digit_medium_two);
+    this.load.image("digit_medium_three", Images.digit_medium_three);
+    this.load.image("digit_medium_four", Images.digit_medium_four);
+    this.load.image("digit_medium_five", Images.digit_medium_five);
+    this.load.image("digit_medium_six", Images.digit_medium_six);
+    this.load.image("digit_medium_seven", Images.digit_medium_seven);
+    this.load.image("digit_medium_eight", Images.digit_medium_eight);
+    this.load.image("digit_medium_nine", Images.digit_medium_nine);
+    this.load.image("level_tile_grey", Images.level_tile_grey);
+    this.load.image("level_tile_green", Images.level_tile_green);
+    this.load.image("trophy_gold", Images.trophy_gold);
+    this.load.image("trophy_silver", Images.trophy_silver);
+    this.load.image("trophy_empty", Images.trophy_empty);
+    this.load.image("level_tile_locked", Images.level_tile_locked);
 
     // Audio
     this.load.audio("bounce_table", Sounds.bounce_table, { instances: 2 });
