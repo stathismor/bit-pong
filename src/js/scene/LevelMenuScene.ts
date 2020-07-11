@@ -11,6 +11,11 @@ const BORDER_OFFSET_Y = 410;
 const LEVEL_OFFSET_Y = 120;
 const TILE_OFFSET_X = 291;
 const TILE_DISTANCE_X = 180;
+const ARROW_OFFSET_X = 137;
+const ARROW_OFFSET_Y = 420;
+const PAGE_NUMBER_OFFSET_X = 25;
+const PAGE_NUMBER_OFFSET_Y = 650;
+const PAGE_NUMBER_DISTANCE = 14;
 
 const LEVEL_DIGIT_BIG_MAP = {
   0: "digit_zero",
@@ -79,91 +84,40 @@ export class LevelMenuScene extends Phaser.Scene {
     );
     title.setScrollFactor(0);
 
-    const border = this.add.image(
-      config.centerX,
-      BORDER_OFFSET_Y,
-      "select_level_border"
-    );
-    border.setScrollFactor(0);
+    this.pagesCountKey = constants.LEVEL_DIGIT_SMALL_MAP[this.pagesCount];
+    this.currentPageNumKey =
+      constants.LEVEL_DIGIT_SMALL_MAP[this.currentPageNum];
 
-    this.leftArrowEnabled = this.add.image(
-      40,
-      config.centerY,
-      constants.TEXTURE_ATLAS,
-      "left_arrow"
+    const leftBracket = this.add.image(
+      config.centerX - PAGE_NUMBER_OFFSET_X,
+      PAGE_NUMBER_OFFSET_Y,
+      "bracket_left"
     );
-    this.rightArrowEnabled = this.add.image(
-      config.width - 40,
-      config.centerY,
-      constants.TEXTURE_ATLAS,
-      "right_arrow"
+    leftBracket.setScrollFactor(0);
+    this.currentPageNumImage = this.add.image(
+      config.centerX - PAGE_NUMBER_OFFSET_X + PAGE_NUMBER_DISTANCE,
+      PAGE_NUMBER_OFFSET_Y,
+      this.currentPageNumKey
     );
-    const navigationData = [
-      {
-        button: this.leftArrowEnabled,
-        diffX: -config.width,
-        func: (pageNum): void => pageNum - 1,
-      },
-      {
-        button: this.rightArrowEnabled,
-        diffX: config.width,
-        func: (pageNum): void => pageNum + 1,
-      },
-    ];
-    for (const { button, diffX, func } of navigationData) {
-      button.setScrollFactor(0);
-      button.setInteractive();
-      button.on("pointerdown", () => {
-        this.currentPageNum = func(this.currentPageNum);
-        this.leftArrowEnabled.removeInteractive();
-        this.rightArrowEnabled.removeInteractive();
-        this.scene.scene.tweens.add({
-          targets: camera,
-          ease: "Sine.easeInOut",
-          duration: 200,
-          scrollX: camera.scrollX + diffX,
-          onComplete: () => {
-            this.leftArrowEnabled.setInteractive();
-            this.rightArrowEnabled.setInteractive();
-          },
-        });
-        this.updatePage();
-      });
-    }
-
-    this.leftArrowDisabled = this.add.image(
-      80,
-      config.centerY,
-      constants.TEXTURE_ATLAS,
-      "left_arrow_disabled"
+    this.currentPageNumImage.setScrollFactor(0);
+    const slash = this.add.image(
+      config.centerX - PAGE_NUMBER_OFFSET_X + PAGE_NUMBER_DISTANCE * 2,
+      PAGE_NUMBER_OFFSET_Y,
+      "digit_small_slash"
     );
-    this.leftArrowDisabled.setScrollFactor(0);
-    this.leftArrowDisabled.visible = false;
-    this.rightArrowDisabled = this.add.image(
-      config.width - 80,
-      config.centerY,
-      constants.TEXTURE_ATLAS,
-      "right_arrow_disabled"
+    slash.setScrollFactor(0);
+    const pagesCountImage = this.add.image(
+      config.centerX - PAGE_NUMBER_OFFSET_X + PAGE_NUMBER_DISTANCE * 3,
+      PAGE_NUMBER_OFFSET_Y,
+      this.pagesCountKey
     );
-    this.rightArrowDisabled.setScrollFactor(0);
-    this.rightArrowDisabled.visible = false;
-
-    this.pageNumText = this.add.text(
-      config.centerX,
-      config.height - 40,
-      `(${this.currentPageNum}/${this.pagesCount})`,
-      {
-        font: "14px Monospace",
-        fill: "#FDFFFC",
-      }
+    pagesCountImage.setScrollFactor(0);
+    const rightBracket = this.add.image(
+      config.centerX - PAGE_NUMBER_OFFSET_X + PAGE_NUMBER_DISTANCE * 4,
+      PAGE_NUMBER_OFFSET_Y,
+      "bracket_right"
     );
-    this.pageNumText.setPosition(
-      config.centerX - this.pageNumText.width / 2,
-      config.height - 80
-    );
-    this.pageNumText.setScrollFactor(0);
-
-    this.updatePage();
+    rightBracket.setScrollFactor(0);
 
     let pageNum = 0;
     for (let levelNumber = 1; levelNumber <= LEVELS.length; levelNumber += 1) {
@@ -263,6 +217,73 @@ export class LevelMenuScene extends Phaser.Scene {
       }
     }
 
+    const border = this.add.image(
+      config.centerX,
+      BORDER_OFFSET_Y,
+      "select_level_border"
+    );
+    border.setScrollFactor(0);
+
+    this.leftArrowEnabled = this.add.image(
+      ARROW_OFFSET_X,
+      ARROW_OFFSET_Y,
+      "left_arrow_enabled"
+    );
+    this.rightArrowEnabled = this.add.image(
+      config.width - ARROW_OFFSET_X,
+      ARROW_OFFSET_Y,
+      "right_arrow_enabled"
+    );
+    const navigationData = [
+      {
+        button: this.leftArrowEnabled,
+        diffX: -config.width,
+        func: (pageNum): void => pageNum - 1,
+      },
+      {
+        button: this.rightArrowEnabled,
+        diffX: config.width,
+        func: (pageNum): void => pageNum + 1,
+      },
+    ];
+    for (const { button, diffX, func } of navigationData) {
+      button.setScrollFactor(0);
+      button.setInteractive();
+      button.on("pointerdown", () => {
+        this.currentPageNum = func(this.currentPageNum);
+        this.leftArrowEnabled.removeInteractive();
+        this.rightArrowEnabled.removeInteractive();
+        this.scene.scene.tweens.add({
+          targets: camera,
+          ease: "Sine.easeInOut",
+          duration: 200,
+          scrollX: camera.scrollX + diffX,
+          onComplete: () => {
+            this.leftArrowEnabled.setInteractive();
+            this.rightArrowEnabled.setInteractive();
+          },
+        });
+        this.updatePage();
+      });
+    }
+
+    this.leftArrowDisabled = this.add.image(
+      ARROW_OFFSET_X,
+      ARROW_OFFSET_Y,
+      "left_arrow_disabled"
+    );
+    this.leftArrowDisabled.setScrollFactor(0);
+    this.leftArrowDisabled.visible = false;
+    this.rightArrowDisabled = this.add.image(
+      config.width - ARROW_OFFSET_X,
+      ARROW_OFFSET_Y,
+      "right_arrow_disabled"
+    );
+    this.rightArrowDisabled.setScrollFactor(0);
+    this.rightArrowDisabled.visible = false;
+
+    this.updatePage();
+
     ((): void => new AdminBar(this, true))();
   }
 
@@ -285,6 +306,8 @@ export class LevelMenuScene extends Phaser.Scene {
       this.rightArrowDisabled.visible = true;
     }
 
-    this.pageNumText.setText(`(${this.currentPageNum}/${this.pagesCount})`);
+    this.currentPageNumKey =
+      constants.LEVEL_DIGIT_SMALL_MAP[this.currentPageNum];
+    this.currentPageNumImage.setTexture(this.currentPageNumKey);
   }
 }

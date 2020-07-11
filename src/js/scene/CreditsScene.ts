@@ -1,11 +1,5 @@
 import { AdminBar } from "../hud/AdminBar";
 
-import * as constants from "../constants";
-
-const BUTTON_WIDTH = 444;
-const BUTTON_HEIGHT = 120;
-const BUTTON_NAME = "NEW_GAME";
-
 export class CreditsScene extends Phaser.Scene {
   constructor() {
     super({
@@ -21,6 +15,7 @@ export class CreditsScene extends Phaser.Scene {
     this.add.image(config.centerX, 320, "credits_stathis");
     this.add.image(config.centerX, 470, "credits_art");
     this.add.image(config.centerX, 540, "credits_stathis");
+    this.add.image(config.centerX, 610, "credits_antony");
 
     ((): void => new AdminBar(this, true))();
   }

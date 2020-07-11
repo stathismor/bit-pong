@@ -47,6 +47,17 @@ export class BootScene extends Phaser.Scene {
     this.load.image("digit_medium_seven", Images.digit_medium_seven);
     this.load.image("digit_medium_eight", Images.digit_medium_eight);
     this.load.image("digit_medium_nine", Images.digit_medium_nine);
+    this.load.image("digit_small_zero", Images.digit_small_zero);
+    this.load.image("digit_small_one", Images.digit_small_one);
+    this.load.image("digit_small_two", Images.digit_small_two);
+    this.load.image("digit_small_three", Images.digit_small_three);
+    this.load.image("digit_small_four", Images.digit_small_four);
+    this.load.image("digit_small_five", Images.digit_small_five);
+    this.load.image("digit_small_six", Images.digit_small_six);
+    this.load.image("digit_small_seven", Images.digit_small_seven);
+    this.load.image("digit_small_eight", Images.digit_small_eight);
+    this.load.image("digit_small_nine", Images.digit_small_nine);
+    this.load.image("digit_small_slash", Images.digit_small_slash);
     this.load.image("level_tile_grey", Images.level_tile_grey);
     this.load.image("level_tile_green", Images.level_tile_green);
     this.load.image("trophy_gold", Images.trophy_gold);
@@ -57,7 +68,15 @@ export class BootScene extends Phaser.Scene {
     this.load.image("credits_art", Images.credits_art);
     this.load.image("credits_concept", Images.credits_concept);
     this.load.image("credits_stathis", Images.credits_stathis);
+    this.load.image("credits_antony", Images.credits_antony);
     this.load.image("exit", Images.exit);
+    this.load.image("right_arrow_enabled", Images.right_arrow_enabled);
+    this.load.image("right_arrow_disabled", Images.right_arrow_disabled);
+    this.load.image("left_arrow_enabled", Images.left_arrow_enabled);
+    this.load.image("left_arrow_disabled", Images.left_arrow_disabled);
+    this.load.image("level_text", Images.level_text);
+    this.load.image("bracket_left", Images.bracket_left);
+    this.load.image("bracket_right", Images.bracket_right);
 
     // Audio
     this.load.audio("bounce_table", Sounds.bounce_table, { instances: 2 });
