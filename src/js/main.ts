@@ -4,6 +4,7 @@ import { BootScene } from "./scene/BootScene";
 import { GameplayScene } from "./scene/GameplayScene";
 import { LevelMenuScene } from "./scene/LevelMenuScene";
 import { StartMenuScene } from "./scene/StartMenuScene";
+import { CreditsScene } from "./scene/CreditsScene";
 import { ScaleManager } from "./ScaleManager";
 import { mobileAndTabletCheck } from "./utils";
 
@@ -34,7 +35,13 @@ const game = new Game({
     },
   },
 
-  scene: [BootScene, StartMenuScene, LevelMenuScene, GameplayScene],
+  scene: [
+    BootScene,
+    StartMenuScene,
+    CreditsScene,
+    LevelMenuScene,
+    GameplayScene,
+  ],
   // callbacks: {
   //   postBoot: (): void => {
   //     ((): void => new ScaleManager(WIDTH, HEIGHT, game.device.os.desktop))();

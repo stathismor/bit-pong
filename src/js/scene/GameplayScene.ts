@@ -144,7 +144,7 @@ export class GameplayScene extends Phaser.Scene {
       }
     });
 
-    ((): void => new AdminBar(this, true))();
+    ((): void => new AdminBar(this, true, true))();
 
     this.completeLevelPopup = new CompleteLevelPopup(
       this,

@@ -1,16 +1,17 @@
 import * as constants from "../constants";
 
-const BUTTONS_X_OFFSET = 120;
+const BUTTONS_X_OFFSET = 60;
+const BUTTONS_X_DISTANCE = 48;
 const BUTTONS_Y_OFFSET = 40;
 
 export class AdminBar {
-  constructor(scene, showLevel = false) {
+  constructor(scene, showExit = false, showLevel = false) {
     this.scene = scene;
     const config = scene.sys.game.CONFIG;
 
     this.image = scene.add
       .image(
-        config.width - BUTTONS_X_OFFSET / 2,
+        config.width - BUTTONS_X_OFFSET,
         BUTTONS_Y_OFFSET,
         constants.TEXTURE_ATLAS,
         "sound_off"
@@ -23,10 +24,25 @@ export class AdminBar {
       this.updateSoundTexture();
     });
 
+    if (showExit) {
+      const exitButton = scene.add
+        .image(
+          config.width - BUTTONS_X_OFFSET - BUTTONS_X_DISTANCE,
+          BUTTONS_Y_OFFSET,
+          "exit"
+        )
+        .setDepth(constants.MAX_DEPTH)
+        .setScrollFactor(0)
+        .setInteractive();
+      exitButton.on("pointerdown", () => {
+        this.scene.scene.start("StartMenuScene");
+      });
+    }
+
     if (showLevel) {
       const selectLevelButton = scene.add
         .image(
-          config.width - BUTTONS_X_OFFSET,
+          config.width - BUTTONS_X_OFFSET - 2 * BUTTONS_X_DISTANCE,
           BUTTONS_Y_OFFSET,
           "select_level_button"
         )

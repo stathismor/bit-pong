@@ -257,7 +257,7 @@ export class LevelMenuScene extends Phaser.Scene {
       }
     }
 
-    ((): void => new AdminBar(this))();
+    ((): void => new AdminBar(this, true))();
   }
 
   updatePage(): void {
