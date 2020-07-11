@@ -115,11 +115,17 @@ export class LevelMenuScene extends Phaser.Scene {
       button.setInteractive();
       button.on("pointerdown", () => {
         this.currentPageNum = func(this.currentPageNum);
+        this.leftArrowEnabled.removeInteractive();
+        this.rightArrowEnabled.removeInteractive();
         this.scene.scene.tweens.add({
           targets: camera,
           ease: "Sine.easeInOut",
           duration: 200,
           scrollX: camera.scrollX + diffX,
+          onComplete: () => {
+            this.leftArrowEnabled.setInteractive();
+            this.rightArrowEnabled.setInteractive();
+          },
         });
         this.updatePage();
       });
