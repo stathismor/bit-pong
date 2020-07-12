@@ -85,7 +85,8 @@ export class BootScene extends Phaser.Scene {
     });
     this.load.audio("cup_bounce", Sounds.cup_bounce, { instances: 2 });
     this.load.audio("splash", Sounds.splash);
-    this.load.audio("cheer", Sounds.cheer);
+    this.load.audio("success", Sounds.success);
+    this.load.audio("whoops", Sounds.whoops);
     this.load.audio("swoosh", Sounds.swoosh);
 
     if (this.game.registry.get("sound") === undefined) {

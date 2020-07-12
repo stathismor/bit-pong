@@ -101,7 +101,7 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
 
     this.tween.play();
 
-    this.scene.sound.play("cheer");
+    this.scene.sound.play("success");
 
     const completedLevels =
       JSON.parse(localStorage.getItem(constants.LOGAL_STORAGE_KEY)) || {};

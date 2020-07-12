@@ -59,6 +59,8 @@ export default class RetryLevelPopup extends Phaser.GameObjects.Sprite {
     this.selectLevel.setInteractive();
 
     this.tween.play();
+
+    this.scene.sound.play("whoops");
   }
 
   static onComplete(tween, gameObjects): void {
