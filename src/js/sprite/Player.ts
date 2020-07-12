@@ -31,8 +31,8 @@ export class Player extends Phaser.Physics.Matter.Sprite {
       );
     }
 
-    // @HACK: If A bigger cup fits a smaller cup
-    if (frame.startsWith("cup") && this.scale > 1) {
+    // @HACK: Change order for this case
+    if (frame.startsWith("cup")) {
       this.setDepth(21);
     }
 
