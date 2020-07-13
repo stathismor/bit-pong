@@ -98,6 +98,7 @@ export class BootScene extends Phaser.Scene {
     this.load.audio("success", Sounds.success);
     this.load.audio("whoops", Sounds.whoops);
     this.load.audio("swoosh", Sounds.swoosh);
+    this.load.audio("button_click", Sounds.button_click);
 
     if (this.game.registry.get("sound") === undefined) {
       this.game.registry.set("sound", true);

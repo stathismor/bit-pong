@@ -119,6 +119,7 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
     completeLevelPopup.scene.input.on(
       "gameobjectdown",
       (pointer, gameObject) => {
+        gameObject.scene.sound.play("button_click");
         if (
           gameObject.name === OPTION_SELECT_LEVEL_NAME ||
           gameObject.name === OPTION_RETRY_NAME ||

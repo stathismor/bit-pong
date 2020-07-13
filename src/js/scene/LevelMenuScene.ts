@@ -211,9 +211,10 @@ export class LevelMenuScene extends Phaser.Scene {
           Phaser.Geom.Rectangle.Contains
         );
 
-        levelImage.on("pointerdown", () =>
-          this.scene.start("GameplayScene", { levelNumber })
-        );
+        levelImage.on("pointerdown", () => {
+          this.scene.scene.sound.play("button_click");
+          this.scene.start("GameplayScene", { levelNumber });
+        });
       }
     }
 
@@ -250,6 +251,7 @@ export class LevelMenuScene extends Phaser.Scene {
       button.setScrollFactor(0);
       button.setInteractive();
       button.on("pointerdown", () => {
+        this.scene.scene.sound.play("button_click");
         this.currentPageNum = func(this.currentPageNum);
         this.leftArrowEnabled.removeInteractive();
         this.rightArrowEnabled.removeInteractive();

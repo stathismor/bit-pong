@@ -1,6 +1,6 @@
 import * as constants from "../constants";
 
-const BUTTONS_X_OFFSET = 60;
+const BUTTONS_X_OFFSET = 70;
 const BUTTONS_X_DISTANCE = 64;
 const BUTTONS_Y_OFFSET = 40;
 
@@ -20,6 +20,7 @@ export class AdminBar {
       .setScrollFactor(0)
       .setInteractive();
     this.image.on("pointerdown", () => {
+      this.scene.sound.play("button_click");
       this.updateSoundRegistry();
       this.updateSoundTexture();
     });
@@ -35,6 +36,7 @@ export class AdminBar {
         .setScrollFactor(0)
         .setInteractive();
       exitButton.on("pointerdown", () => {
+        this.scene.sound.play("button_click");
         this.scene.scene.start("StartMenuScene");
       });
     }
@@ -50,6 +52,7 @@ export class AdminBar {
         .setScrollFactor(0)
         .setInteractive();
       selectLevelButton.on("pointerdown", () => {
+        this.scene.sound.play("button_click");
         this.scene.scene.start("LevelMenuScene");
       });
     }
