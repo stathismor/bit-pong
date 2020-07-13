@@ -2,8 +2,8 @@ import { AdminBar } from "../hud/AdminBar";
 
 import * as constants from "../constants";
 
-const BUTTON_WIDTH = 400;
-const BUTTON_HEIGHT = 77;
+const BUTTON_WIDTH = 407;
+const BUTTON_HEIGHT = 85;
 const BUTTON_PLAY_NAME = "PLAY";
 const BUTTON_CREDITS_NAME = "CREDITS";
 
@@ -22,13 +22,13 @@ export class StartMenuScene extends Phaser.Scene {
     this.add.image(config.centerX, config.centerY, "start");
 
     const playButton = this.add
-      .zone(350, 445, BUTTON_WIDTH, BUTTON_HEIGHT)
+      .zone(185, 461, BUTTON_WIDTH, BUTTON_HEIGHT)
       .setOrigin(0)
       .setName(BUTTON_PLAY_NAME);
     playButton.setInteractive();
 
     const creditsButton = this.add
-      .zone(350, 550, BUTTON_WIDTH, BUTTON_HEIGHT)
+      .zone(185, 569, BUTTON_WIDTH, BUTTON_HEIGHT)
       .setOrigin(0)
       .setName(BUTTON_CREDITS_NAME);
     creditsButton.setInteractive();
