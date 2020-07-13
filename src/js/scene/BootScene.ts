@@ -77,6 +77,7 @@ export class BootScene extends Phaser.Scene {
     this.load.image("level_text", Images.level_text);
     this.load.image("bracket_left", Images.bracket_left);
     this.load.image("bracket_right", Images.bracket_right);
+    this.load.image("start", Images.start);
 
     // Audio
     this.load.audio("bounce_table", Sounds.bounce_table, { instances: 2 });
