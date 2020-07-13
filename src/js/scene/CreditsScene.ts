@@ -1,5 +1,9 @@
 import { AdminBar } from "../hud/AdminBar";
 
+const TITLE_OFFSET_Y = 100;
+const NAME_OFFSET_Y = 70;
+const DEPARTMENT_OFFSET_Y = 160;
+
 export class CreditsScene extends Phaser.Scene {
   constructor() {
     super({
@@ -10,12 +14,32 @@ export class CreditsScene extends Phaser.Scene {
   create(): void {
     const config = this.sys.game.CONFIG;
     this.cameras.main.setBackgroundColor("#011627");
-    this.add.image(config.centerX, 70, "credits_title");
-    this.add.image(config.centerX, 250, "credits_concept");
-    this.add.image(config.centerX, 320, "credits_stathis");
-    this.add.image(config.centerX, 470, "credits_art");
-    this.add.image(config.centerX, 540, "credits_stathis");
-    this.add.image(config.centerX, 610, "credits_antony");
+    this.add.image(config.centerX, TITLE_OFFSET_Y, "credits_title");
+    this.add.image(
+      config.centerX,
+      TITLE_OFFSET_Y + DEPARTMENT_OFFSET_Y,
+      "credits_concept"
+    );
+    this.add.image(
+      config.centerX,
+      TITLE_OFFSET_Y + DEPARTMENT_OFFSET_Y + NAME_OFFSET_Y,
+      "credits_stathis"
+    );
+    this.add.image(
+      config.centerX,
+      TITLE_OFFSET_Y + 2 * DEPARTMENT_OFFSET_Y + NAME_OFFSET_Y,
+      "credits_art"
+    );
+    this.add.image(
+      config.centerX,
+      TITLE_OFFSET_Y + 2 * DEPARTMENT_OFFSET_Y + 2 * NAME_OFFSET_Y,
+      "credits_stathis"
+    );
+    this.add.image(
+      config.centerX,
+      TITLE_OFFSET_Y + 2 * DEPARTMENT_OFFSET_Y + 3 * NAME_OFFSET_Y,
+      "credits_antony"
+    );
 
     ((): void => new AdminBar(this, true))();
   }
