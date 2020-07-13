@@ -2,19 +2,19 @@ import * as constants from "../constants";
 import { successEmitter } from "../particles";
 
 const DEPTH = 40;
-const OPTION_WIDTH = 90;
-const OPTION_HEIGHT = 90;
+const OPTION_WIDTH = 94;
+const OPTION_HEIGHT = 94;
 const OPTION_RETRY_NAME = "retry";
 const OPTION_SELECT_LEVEL_NAME = "level";
 const OPTION_NEXT_LEVEL = "next";
-const LEVEL_X_OFFSET = 156;
+const LEVEL_X_OFFSET = 126;
 const RETRY_X_OFFSET = -292;
-const NEXT_X_OFFSET = -146;
-const Y_OFFSET = 60;
+const NEXT_X_OFFSET = -125;
+const Y_OFFSET = 46;
 
 export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, levelNum, levelsCount) {
-    super(scene, x, y, constants.TEXTURE_ATLAS, "success");
+    super(scene, x, y, "popup_success");
     this.setDepth(DEPTH);
 
     this.setVisible(false);
@@ -38,7 +38,7 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
       onComplete: CompleteLevelPopup.onComplete,
     });
 
-    this.award = scene.add.image(this.x + 140, this.y - 35, "award_silver");
+    this.award = scene.add.image(this.x, this.y - 25, "award_silver_big");
     this.award.setDepth(DEPTH);
     this.award.setVisible(false);
     this.award.setScale(0.1);
@@ -106,8 +106,8 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
     const completedLevels =
       JSON.parse(localStorage.getItem(constants.LOGAL_STORAGE_KEY)) || {};
     const level = completedLevels[this.levelNum];
-    const awardKey = level >= 2 ? "award_gold" : "award_silver";
-    this.award = this.scene.add.image(this.x + 140, this.y - 35, awardKey);
+    const awardKey = level >= 2 ? "award_gold_big" : "award_silver_big";
+    this.award.setTexture(awardKey);
     this.award.setDepth(DEPTH);
     this.award.setVisible(true);
     this.awardTween.play();
@@ -157,6 +157,7 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
         selectLevelBounds.height
       );
       selectLevelBorder.setStrokeStyle(size, "0xFF0000");
+      selectLevelBorder.setDepth(100);
 
       const retryBounds = completeLevelPopup.selectLevel.getBounds();
       const retryBorder = completeLevelPopup.scene.add.rectangle(
@@ -166,6 +167,7 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
         retryBounds.height
       );
       retryBorder.setStrokeStyle(size, "0xFF0000");
+      retryBorder.setDepth(100);
 
       const nextLevelBounds = completeLevelPopup.nextLevel.getBounds();
       const nextLevelBorder = completeLevelPopup.scene.add.rectangle(
@@ -175,6 +177,7 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
         nextLevelBounds.height
       );
       nextLevelBorder.setStrokeStyle(size, "0xFF0000");
+      nextLevelBorder.setDepth(100);
     }
   }
 }
