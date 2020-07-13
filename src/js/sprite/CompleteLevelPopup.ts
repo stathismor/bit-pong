@@ -88,6 +88,7 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
     // @TODO. This sisable zone for last level, need to remove texture
     if (levelNum >= levelsCount) {
       this.nextLevel.setVisible(false);
+      this.setTexture("popup_success_no_next");
     }
   }
 
