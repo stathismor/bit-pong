@@ -1,6 +1,7 @@
 import * as constants from "../constants";
 
-const HEALTH_BAR_Y = 32;
+const HEALD_BAR_OFFSET_X = 0;
+const HEALTH_BAR_OFFSET_Y = 32;
 const LIVES_DISTANCE = 32;
 
 export default class HealthBar {
@@ -35,8 +36,8 @@ export default class HealthBar {
       life.setDepth(constants.MAX_DEPTH);
       life.setActive(true);
       life.setVisible(true);
-      life.x = LIVES_DISTANCE * (index + 1);
-      life.y = HEALTH_BAR_Y;
+      life.x = HEALD_BAR_OFFSET_X + LIVES_DISTANCE * (index + 1);
+      life.y = HEALTH_BAR_OFFSET_Y;
     }
   }
 

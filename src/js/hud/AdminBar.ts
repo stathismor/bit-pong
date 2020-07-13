@@ -1,6 +1,6 @@
 import * as constants from "../constants";
 
-const BUTTONS_X_OFFSET = 70;
+const BUTTONS_X_OFFSET = 75;
 const BUTTONS_X_DISTANCE = 64;
 const BUTTONS_Y_OFFSET = 40;
 
