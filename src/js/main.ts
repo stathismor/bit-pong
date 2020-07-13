@@ -25,7 +25,7 @@ const game = new Game({
   width: WIDTH,
   height: HEIGHT,
   scale,
-  backgroundColor: "#ffffff",
+  backgroundColor: "#1a4f67",
   pixelArt: true,
   physics: {
     default: "matter",
