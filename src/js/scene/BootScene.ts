@@ -78,6 +78,10 @@ export class BootScene extends Phaser.Scene {
     this.load.image("bracket_left", Images.bracket_left);
     this.load.image("bracket_right", Images.bracket_right);
     this.load.image("start", Images.start);
+    this.load.image("admin_select_level", Images.admin_select_level);
+    this.load.image("admin_sound_on", Images.admin_sound_on);
+    this.load.image("admin_sound_off", Images.admin_sound_off);
+    this.load.image("admin_exit", Images.admin_exit);
 
     // Audio
     this.load.audio("bounce_table", Sounds.bounce_table, { instances: 2 });

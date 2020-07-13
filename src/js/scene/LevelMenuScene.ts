@@ -6,15 +6,15 @@ import * as constants from "../constants";
 const LEVELS_PER_ROW = 5;
 const LEVELS_PER_PAGE = 15;
 const ROW_HEIGHT = 160;
-const TITLE_OFFSET_Y = 70;
-const BORDER_OFFSET_Y = 410;
-const LEVEL_OFFSET_Y = 120;
+const TITLE_OFFSET_Y = 100;
+const BORDER_OFFSET_Y = 420;
+const LEVEL_OFFSET_Y = 130;
 const TILE_OFFSET_X = 291;
 const TILE_DISTANCE_X = 180;
 const ARROW_OFFSET_X = 137;
-const ARROW_OFFSET_Y = 420;
+const ARROW_OFFSET_Y = 414;
 const PAGE_NUMBER_OFFSET_X = 25;
-const PAGE_NUMBER_OFFSET_Y = 650;
+const PAGE_NUMBER_OFFSET_Y = 664;
 const PAGE_NUMBER_DISTANCE = 14;
 
 const LEVEL_DIGIT_BIG_MAP = {
