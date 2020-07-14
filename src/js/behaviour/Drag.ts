@@ -18,6 +18,7 @@ const IMMOBILE_ANGULAR_SPEED = 0.0006;
 
 export class Drag {
   constructor(scene, owner, x, y, frame, angleRad) {
+    this.scene = scene;
     this.owner = owner;
     this.angleRad = angleRad;
 
@@ -34,7 +35,7 @@ export class Drag {
     owner.dragY = y;
     owner.rotation = angleRad;
 
-    owner.setInteractive({ draggable: true });
+    this.setInteractive();
 
     // TODO: REMOVE grey asseets
     const greyBall = scene.add.image(x, y, constants.TEXTURE_ATLAS, frame);
@@ -171,8 +172,24 @@ export class Drag {
     this.owner.isDead = false;
   }
 
+  setInteractive(): void {
+    // @HACK: A major one! I think Phaser/matter is buggy when setting
+    // the hitArea (definidely enableDebug is) and it's hard to find
+    // a consistent way of setting a larget hit area.
+    if (this.scene.levelNumber === 35) {
+      this.owner.setInteractive(
+        new Phaser.Geom.Circle(50, 50, 100),
+        Phaser.Geom.Circle.Contains
+      );
+      // this.scene.input.enableDebug(this.owner, 0xff00ff);
+      this.scene.input.setDraggable(this.owner);
+    } else {
+      this.owner.setInteractive({ draggable: true });
+    }
+  }
+
   reset(): void {
-    this.owner.setInteractive({ draggable: true });
+    this.setInteractive({ draggable: true });
 
     this.owner.setStatic(true);
     this.owner.x = this.owner.startPos.x;
