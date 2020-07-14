@@ -14,7 +14,7 @@ export class AdminBar {
         config.width - BUTTONS_X_OFFSET,
         BUTTONS_Y_OFFSET,
         constants.TEXTURE_ATLAS,
-        "sound_off"
+        "admin_sound_off"
       )
       .setDepth(constants.MAX_DEPTH)
       .setScrollFactor(0)
@@ -30,6 +30,7 @@ export class AdminBar {
         .image(
           config.width - BUTTONS_X_OFFSET - BUTTONS_X_DISTANCE,
           BUTTONS_Y_OFFSET,
+          constants.TEXTURE_ATLAS,
           "admin_home"
         )
         .setDepth(constants.MAX_DEPTH)
@@ -46,6 +47,7 @@ export class AdminBar {
         .image(
           config.width - BUTTONS_X_OFFSET - 2 * BUTTONS_X_DISTANCE,
           BUTTONS_Y_OFFSET,
+          constants.TEXTURE_ATLAS,
           "admin_select_level"
         )
         .setDepth(constants.MAX_DEPTH)
@@ -62,7 +64,7 @@ export class AdminBar {
 
   updateSoundTexture(): void {
     const soundOn = this.scene.game.registry.get("sound");
-    this.image.setTexture(soundOn ? "admin_sound_on" : "admin_sound_off");
+    this.image.setFrame(soundOn ? "admin_sound_on" : "admin_sound_off");
   }
 
   updateSoundRegistry(): void {

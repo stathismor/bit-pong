@@ -11,7 +11,7 @@ const RETRY_X_OFFSET = -292;
 
 export default class RetryLevelPopup extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y) {
-    super(scene, x, y, "popup_whoops");
+    super(scene, x, y, constants.TEXTURE_ATLAS, "popup_whoops");
     this.setDepth(DEPTH);
 
     this.setVisible(false);

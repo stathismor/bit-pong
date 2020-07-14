@@ -11,6 +11,7 @@ export default class LevelBar {
     scene.add.image(
       config.centerX + LEVEL_TEXT_OFFSET_X,
       OFFSET_Y,
+      constants.TEXTURE_ATLAS,
       "level_text"
     );
 
@@ -23,13 +24,19 @@ export default class LevelBar {
     const firstDigitImage = scene.add.image(
       config.centerX + LEVEL_NUMBER_OFFSET_X,
       OFFSET_Y,
+      constants.TEXTURE_ATLAS,
       firstDigitKey
     );
 
     if (levelNumber > 9) {
       secondDigit = parseInt(levelNumberText[1]);
       const secondDigitKey = constants.LEVEL_DIGIT_SMALL_MAP[secondDigit];
-      const secondDigitImage = scene.add.image(0, 0, secondDigitKey);
+      const secondDigitImage = scene.add.image(
+        0,
+        0,
+        constants.TEXTURE_ATLAS,
+        secondDigitKey
+      );
 
       const secondDigitOffsetX = secondDigitImage.width;
       firstDigitOffsetX = firstDigitImage.width;

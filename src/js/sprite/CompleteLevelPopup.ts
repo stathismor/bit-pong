@@ -14,7 +14,7 @@ const Y_OFFSET = 46;
 
 export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
   constructor(scene, x, y, levelNum, levelsCount) {
-    super(scene, x, y, "popup_success");
+    super(scene, x, y, constants.TEXTURE_ATLAS, "popup_success");
     this.setDepth(DEPTH);
 
     this.setVisible(false);
@@ -38,11 +38,30 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
       onComplete: CompleteLevelPopup.onComplete,
     });
 
-    this.award = scene.add.image(this.x, this.y - 25, "award_silver_big");
+    this.award = scene.add.image(
+      this.x,
+      this.y - 25,
+      constants.TEXTURE_ATLAS,
+      "trophy_silver_big"
+    );
     this.award.setDepth(DEPTH);
     this.award.setVisible(false);
     this.award.setScale(0.1);
     scene.add.existing(this.award);
+
+    const test = scene.tweens.add({
+      targets: this.award,
+      scaleX: 0.85,
+      scaleY: 0.85,
+      ease: "Sine.easeInOut",
+      duration: 1650,
+      repeat: 0,
+      delay: 0,
+      paused: true,
+      yoyo: true,
+      repeat: -1,
+    });
+
     this.awardTween = scene.tweens.add({
       targets: this.award,
       scaleX: 1,
@@ -53,6 +72,7 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
       repeat: 0,
       delay: 0,
       paused: true,
+      onComplete: () => test.play(),
     });
 
     this.selectLevel = scene.add
@@ -88,7 +108,7 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
     // @TODO. This sisable zone for last level, need to remove texture
     if (levelNum >= levelsCount) {
       this.nextLevel.setVisible(false);
-      this.setTexture("popup_success_no_next");
+      this.setFrame("popup_success_no_next");
     }
   }
 
@@ -107,8 +127,8 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
     const completedLevels =
       JSON.parse(localStorage.getItem(constants.LOGAL_STORAGE_KEY)) || {};
     const level = completedLevels[this.levelNum];
-    const awardKey = level >= 2 ? "award_gold_big" : "award_silver_big";
-    this.award.setTexture(awardKey);
+    const awardKey = level >= 2 ? "trophy_gold_big" : "trophy_silver_big";
+    this.award.setFrame(awardKey);
     this.award.setDepth(DEPTH);
     this.award.setVisible(true);
     this.awardTween.play();

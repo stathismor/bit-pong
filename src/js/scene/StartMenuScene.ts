@@ -9,7 +9,6 @@ const BUTTON_CREDITS_NAME = "CREDITS";
 const VERSION_OFFSET_X = 20;
 const VERSION_OFFSET_Y = 20;
 const VERSION_DIGIT_DISTANCE = 14;
-const VERSION_DIGIT_DOT_OFFSET_Y = 5;
 
 export class StartMenuScene extends Phaser.Scene {
   constructor() {
@@ -19,11 +18,16 @@ export class StartMenuScene extends Phaser.Scene {
   }
 
   create(): void {
-    // this.scene.start("GameplayScene", { levelNumber: 35 });
+    // this.scene.start("GameplayScene", { levelNumber: 24 });
     // this.scene.start("LevelMenuScene");
     // this.scene.start("CreditsScene");
     const config = this.sys.game.CONFIG;
-    this.add.image(config.centerX, config.centerY, "start");
+    this.add.image(
+      config.centerX,
+      config.centerY,
+      constants.TEXTURE_ATLAS,
+      "start"
+    );
 
     const playButton = this.add
       .zone(185, 461, BUTTON_WIDTH, BUTTON_HEIGHT)
@@ -72,31 +76,37 @@ export class StartMenuScene extends Phaser.Scene {
     this.add.image(
       VERSION_OFFSET_X,
       config.height - VERSION_OFFSET_Y,
+      constants.TEXTURE_ATLAS,
       constants.LEVEL_DIGIT_SMALL_MAP["v"]
     );
     this.add.image(
       VERSION_OFFSET_X + VERSION_DIGIT_DISTANCE + 2,
       config.height - VERSION_OFFSET_Y - 1,
+      constants.TEXTURE_ATLAS,
       constants.LEVEL_DIGIT_SMALL_MAP["0"]
     );
     this.add.image(
       VERSION_OFFSET_X + 2 * VERSION_DIGIT_DISTANCE,
       config.height - VERSION_OFFSET_Y + 4,
+      constants.TEXTURE_ATLAS,
       constants.LEVEL_DIGIT_SMALL_MAP["dot"]
     );
     this.add.image(
       VERSION_OFFSET_X + 3 * VERSION_DIGIT_DISTANCE - 2,
       config.height - VERSION_OFFSET_Y - 1,
+      constants.TEXTURE_ATLAS,
       constants.LEVEL_DIGIT_SMALL_MAP["0"]
     );
     this.add.image(
       VERSION_OFFSET_X + 4 * VERSION_DIGIT_DISTANCE - 4,
       config.height - VERSION_OFFSET_Y + 4,
+      constants.TEXTURE_ATLAS,
       constants.LEVEL_DIGIT_SMALL_MAP["dot"]
     );
     this.add.image(
       VERSION_OFFSET_X + 5 * VERSION_DIGIT_DISTANCE - 6,
       config.height - VERSION_OFFSET_Y - 1,
+      constants.TEXTURE_ATLAS,
       constants.LEVEL_DIGIT_SMALL_MAP["3"]
     );
 

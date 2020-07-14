@@ -23,8 +23,6 @@ export class BootScene extends Phaser.Scene {
     };
     this.load.multiatlas(multiAtlasFileConfig);
     this.load.image("select_level_button", Images.select_level_button);
-    this.load.image("award_gold", Images.award_gold);
-    this.load.image("award_silver", Images.award_silver);
     this.load.image("select_level_text", Images.select_level_text);
     this.load.image("select_level_border", Images.select_level_border);
     this.load.image("digit_zero", Images.digit_zero);
@@ -72,21 +70,27 @@ export class BootScene extends Phaser.Scene {
     this.load.image("credits_stathis", Images.credits_stathis);
     this.load.image("credits_antony", Images.credits_antony);
     this.load.image("exit", Images.exit);
-    this.load.image("right_arrow_enabled", Images.right_arrow_enabled);
-    this.load.image("right_arrow_disabled", Images.right_arrow_disabled);
-    this.load.image("left_arrow_enabled", Images.left_arrow_enabled);
-    this.load.image("left_arrow_disabled", Images.left_arrow_disabled);
+    this.load.image("arrow_right_enabled", Images.arrow_right_enabled);
+    this.load.image("arrow_right_disabled", Images.arrow_right_disabled);
+    this.load.image("arrow_left_enabled", Images.arrow_left_enabled);
+    this.load.image("arrow_left_disabled", Images.arrow_left_disabled);
     this.load.image("level_text", Images.level_text);
-    this.load.image("bracket_left", Images.bracket_left);
-    this.load.image("bracket_right", Images.bracket_right);
+    this.load.image(
+      "digit_small_bracket_left",
+      Images.digit_small_bracket_left
+    );
+    this.load.image(
+      "digit_small_bracket_right",
+      Images.digit_small_bracket_right
+    );
     this.load.image("start", Images.start);
     this.load.image("admin_select_level", Images.admin_select_level);
     this.load.image("admin_sound_on", Images.admin_sound_on);
     this.load.image("admin_sound_off", Images.admin_sound_off);
     this.load.image("admin_exit", Images.admin_exit);
     this.load.image("admin_home", Images.admin_home);
-    this.load.image("award_gold_big", Images.award_gold_big);
-    this.load.image("award_silver_big", Images.award_silver_big);
+    this.load.image("trophy_gold_big", Images.trophy_gold_big);
+    this.load.image("trophy_silver_big", Images.trophy_silver_big);
     this.load.image("popup_success", Images.popup_success);
     this.load.image("popup_success_no_next", Images.popup_success_no_next);
     this.load.image("popup_whoops", Images.popup_whoops);

@@ -18,16 +18,16 @@ const PAGE_NUMBER_OFFSET_Y = 664;
 const PAGE_NUMBER_DISTANCE = 14;
 
 const LEVEL_DIGIT_BIG_MAP = {
-  0: "digit_zero",
-  1: "digit_one",
-  2: "digit_two",
-  3: "digit_three",
-  4: "digit_four",
-  5: "digit_five",
-  6: "digit_six",
-  7: "digit_seven",
-  8: "digit_eight",
-  9: "digit_nine",
+  0: "digit_big_zero",
+  1: "digit_big_one",
+  2: "digit_big_two",
+  3: "digit_big_three",
+  4: "digit_big_four",
+  5: "digit_big_five",
+  6: "digit_big_six",
+  7: "digit_big_seven",
+  8: "digit_big_eight",
+  9: "digit_big_nine",
 };
 
 const LEVEL_DIGIT_MEDIUM_MAP = {
@@ -80,6 +80,7 @@ export class LevelMenuScene extends Phaser.Scene {
     const title = this.add.image(
       config.centerX,
       TITLE_OFFSET_Y,
+      constants.TEXTURE_ATLAS,
       "select_level_text"
     );
     title.setScrollFactor(0);
@@ -91,31 +92,36 @@ export class LevelMenuScene extends Phaser.Scene {
     const leftBracket = this.add.image(
       config.centerX - PAGE_NUMBER_OFFSET_X,
       PAGE_NUMBER_OFFSET_Y,
-      "bracket_left"
+      constants.TEXTURE_ATLAS,
+      "digit_small_bracket_left"
     );
     leftBracket.setScrollFactor(0);
     this.currentPageNumImage = this.add.image(
       config.centerX - PAGE_NUMBER_OFFSET_X + PAGE_NUMBER_DISTANCE,
       PAGE_NUMBER_OFFSET_Y,
+      constants.TEXTURE_ATLAS,
       this.currentPageNumKey
     );
     this.currentPageNumImage.setScrollFactor(0);
     const slash = this.add.image(
       config.centerX - PAGE_NUMBER_OFFSET_X + PAGE_NUMBER_DISTANCE * 2,
       PAGE_NUMBER_OFFSET_Y,
+      constants.TEXTURE_ATLAS,
       "digit_small_slash"
     );
     slash.setScrollFactor(0);
     const pagesCountImage = this.add.image(
       config.centerX - PAGE_NUMBER_OFFSET_X + PAGE_NUMBER_DISTANCE * 3,
       PAGE_NUMBER_OFFSET_Y,
+      constants.TEXTURE_ATLAS,
       this.pagesCountKey
     );
     pagesCountImage.setScrollFactor(0);
     const rightBracket = this.add.image(
       config.centerX - PAGE_NUMBER_OFFSET_X + PAGE_NUMBER_DISTANCE * 4,
       PAGE_NUMBER_OFFSET_Y,
-      "bracket_right"
+      constants.TEXTURE_ATLAS,
+      "digit_small_bracket_right"
     );
     rightBracket.setScrollFactor(0);
 
@@ -132,7 +138,12 @@ export class LevelMenuScene extends Phaser.Scene {
         imageKey = "level_tile_locked";
       }
 
-      const levelImage = this.add.image(0, 0, imageKey);
+      const levelImage = this.add.image(
+        0,
+        0,
+        constants.TEXTURE_ATLAS,
+        imageKey
+      );
       levelImage.x = levelPos.x - levelWidthDistance / 2;
       levelImage.y = levelPos.y - levelImage.height + LEVEL_OFFSET_Y;
 
@@ -145,7 +156,12 @@ export class LevelMenuScene extends Phaser.Scene {
         isCompleted || isNextLevel
           ? LEVEL_DIGIT_BIG_MAP[firstDigit]
           : LEVEL_DIGIT_MEDIUM_MAP[firstDigit];
-      const firstDigitImage = this.add.image(0, 0, firstDigitKey);
+      const firstDigitImage = this.add.image(
+        0,
+        0,
+        constants.TEXTURE_ATLAS,
+        firstDigitKey
+      );
 
       if (levelNumber > 9) {
         const secondDigit = parseInt(levelNumberText[1]);
@@ -153,7 +169,12 @@ export class LevelMenuScene extends Phaser.Scene {
           isCompleted || isNextLevel
             ? LEVEL_DIGIT_BIG_MAP[secondDigit]
             : LEVEL_DIGIT_MEDIUM_MAP[secondDigit];
-        const secondDigitImage = this.add.image(0, 0, secondDigitKey);
+        const secondDigitImage = this.add.image(
+          0,
+          0,
+          constants.TEXTURE_ATLAS,
+          secondDigitKey
+        );
 
         const secondDigitOffsetX = secondDigitImage.width;
         firstDigitOffsetX = firstDigitImage.width;
@@ -187,9 +208,14 @@ export class LevelMenuScene extends Phaser.Scene {
         const awardKey = isNextLevel
           ? "trophy_empty"
           : level >= 2
-          ? "trophy_gold"
-          : "trophy_silver";
-        this.add.image(levelImage.x, levelImage.y + 30, awardKey);
+          ? "trophy_gold_small"
+          : "trophy_silver_small";
+        this.add.image(
+          levelImage.x,
+          levelImage.y + 30,
+          constants.TEXTURE_ATLAS,
+          awardKey
+        );
       }
 
       if (levelNumber % LEVELS_PER_PAGE === 0) {
@@ -221,6 +247,7 @@ export class LevelMenuScene extends Phaser.Scene {
     const border = this.add.image(
       config.centerX,
       BORDER_OFFSET_Y,
+      constants.TEXTURE_ATLAS,
       "select_level_border"
     );
     border.setScrollFactor(0);
@@ -228,12 +255,14 @@ export class LevelMenuScene extends Phaser.Scene {
     this.leftArrowEnabled = this.add.image(
       ARROW_OFFSET_X,
       ARROW_OFFSET_Y,
-      "left_arrow_enabled"
+      constants.TEXTURE_ATLAS,
+      "arrow_left_enabled"
     );
     this.rightArrowEnabled = this.add.image(
       config.width - ARROW_OFFSET_X,
       ARROW_OFFSET_Y,
-      "right_arrow_enabled"
+      constants.TEXTURE_ATLAS,
+      "arrow_right_enabled"
     );
     const navigationData = [
       {
@@ -272,14 +301,16 @@ export class LevelMenuScene extends Phaser.Scene {
     this.leftArrowDisabled = this.add.image(
       ARROW_OFFSET_X,
       ARROW_OFFSET_Y,
-      "left_arrow_disabled"
+      constants.TEXTURE_ATLAS,
+      "arrow_left_disabled"
     );
     this.leftArrowDisabled.setScrollFactor(0);
     this.leftArrowDisabled.visible = false;
     this.rightArrowDisabled = this.add.image(
       config.width - ARROW_OFFSET_X,
       ARROW_OFFSET_Y,
-      "right_arrow_disabled"
+      constants.TEXTURE_ATLAS,
+      "arrow_right_disabled"
     );
     this.rightArrowDisabled.setScrollFactor(0);
     this.rightArrowDisabled.visible = false;
@@ -310,6 +341,6 @@ export class LevelMenuScene extends Phaser.Scene {
 
     this.currentPageNumKey =
       constants.LEVEL_DIGIT_SMALL_MAP[this.currentPageNum];
-    this.currentPageNumImage.setTexture(this.currentPageNumKey);
+    this.currentPageNumImage.setFrame(this.currentPageNumKey);
   }
 }
