@@ -30,7 +30,7 @@ export class AdminBar {
         .image(
           config.width - BUTTONS_X_OFFSET - BUTTONS_X_DISTANCE,
           BUTTONS_Y_OFFSET,
-          "admin_exit"
+          "admin_home"
         )
         .setDepth(constants.MAX_DEPTH)
         .setScrollFactor(0)
