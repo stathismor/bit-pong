@@ -6,6 +6,10 @@ const BUTTON_WIDTH = 407;
 const BUTTON_HEIGHT = 85;
 const BUTTON_PLAY_NAME = "PLAY";
 const BUTTON_CREDITS_NAME = "CREDITS";
+const VERSION_OFFSET_X = 20;
+const VERSION_OFFSET_Y = 20;
+const VERSION_DIGIT_DISTANCE = 14;
+const VERSION_DIGIT_DOT_OFFSET_Y = 5;
 
 export class StartMenuScene extends Phaser.Scene {
   constructor() {
@@ -63,6 +67,38 @@ export class StartMenuScene extends Phaser.Scene {
         this.scene.start("CreditsScene");
       }
     });
+
+    // @HACK: I am sooo lazyyy right now to do this properly
+    this.add.image(
+      VERSION_OFFSET_X,
+      config.height - VERSION_OFFSET_Y,
+      constants.LEVEL_DIGIT_SMALL_MAP["v"]
+    );
+    this.add.image(
+      VERSION_OFFSET_X + VERSION_DIGIT_DISTANCE + 2,
+      config.height - VERSION_OFFSET_Y - 1,
+      constants.LEVEL_DIGIT_SMALL_MAP["0"]
+    );
+    this.add.image(
+      VERSION_OFFSET_X + 2 * VERSION_DIGIT_DISTANCE,
+      config.height - VERSION_OFFSET_Y + 4,
+      constants.LEVEL_DIGIT_SMALL_MAP["dot"]
+    );
+    this.add.image(
+      VERSION_OFFSET_X + 3 * VERSION_DIGIT_DISTANCE - 2,
+      config.height - VERSION_OFFSET_Y - 1,
+      constants.LEVEL_DIGIT_SMALL_MAP["0"]
+    );
+    this.add.image(
+      VERSION_OFFSET_X + 4 * VERSION_DIGIT_DISTANCE - 4,
+      config.height - VERSION_OFFSET_Y + 4,
+      constants.LEVEL_DIGIT_SMALL_MAP["dot"]
+    );
+    this.add.image(
+      VERSION_OFFSET_X + 5 * VERSION_DIGIT_DISTANCE - 6,
+      config.height - VERSION_OFFSET_Y - 1,
+      constants.LEVEL_DIGIT_SMALL_MAP["3"]
+    );
 
     ((): void => new AdminBar(this))();
   }

@@ -15,4 +15,6 @@ export const LEVEL_DIGIT_SMALL_MAP = {
   7: "digit_small_seven",
   8: "digit_small_eight",
   9: "digit_small_nine",
+  v: "digit_small_v",
+  dot: "digit_small_dot",
 };

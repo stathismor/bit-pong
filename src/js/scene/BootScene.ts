@@ -58,6 +58,8 @@ export class BootScene extends Phaser.Scene {
     this.load.image("digit_small_eight", Images.digit_small_eight);
     this.load.image("digit_small_nine", Images.digit_small_nine);
     this.load.image("digit_small_slash", Images.digit_small_slash);
+    this.load.image("digit_small_v", Images.digit_small_v);
+    this.load.image("digit_small_dot", Images.digit_small_dot);
     this.load.image("level_tile_grey", Images.level_tile_grey);
     this.load.image("level_tile_green", Images.level_tile_green);
     this.load.image("trophy_gold", Images.trophy_gold);
