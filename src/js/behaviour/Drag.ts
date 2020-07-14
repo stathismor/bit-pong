@@ -178,7 +178,7 @@ export class Drag {
     // a consistent way of setting a larget hit area.
     if (this.scene.levelNumber === 35) {
       this.owner.setInteractive(
-        new Phaser.Geom.Circle(50, 50, 100),
+        new Phaser.Geom.Circle(55, 55, 110),
         Phaser.Geom.Circle.Contains
       );
       // this.scene.input.enableDebug(this.owner, 0xff00ff);
