@@ -315,6 +315,10 @@ export class LevelMenuScene extends Phaser.Scene {
     this.rightArrowDisabled.setScrollFactor(0);
     this.rightArrowDisabled.visible = false;
 
+    // Move page to current level number
+    this.currentPageNum = Math.ceil(nextLevel / LEVELS_PER_PAGE);
+    camera.scrollX += config.width * (this.currentPageNum - 1);
+
     this.updatePage();
 
     ((): void => new AdminBar(this, true))();
