@@ -4,7 +4,7 @@ const SIDES_ANGLE = 13;
 const OFFSET = 8;
 const SIDES_OFFSET_X = 10;
 const SIDES_OFFSET_Y = 4;
-const CHAMFER_RADIUS = 14;
+const CHAMFER_RADIUS = 5;
 const CHAMFER_RADIUS_BOTTOM = 4;
 
 export class SetBody {
@@ -61,7 +61,7 @@ export class SetBody {
 
       owner.setExistingBody(compoundBody).setAngle(angle).setPosition(x, y);
     } else {
-      // OOPs
+      // oops
     }
   }
 
