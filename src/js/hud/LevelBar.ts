@@ -8,12 +8,14 @@ export default class LevelBar {
   constructor(scene, levelNumber) {
     const config = scene.sys.game.CONFIG;
 
-    scene.add.image(
-      config.centerX + LEVEL_TEXT_OFFSET_X,
-      OFFSET_Y,
-      constants.TEXTURE_ATLAS,
-      "level_text"
-    );
+    scene.add
+      .image(
+        config.centerX + LEVEL_TEXT_OFFSET_X,
+        OFFSET_Y,
+        constants.TEXTURE_ATLAS,
+        "level_text"
+      )
+      .setDepth(constants.MAX_DEPTH);
 
     const levelNumberText = levelNumber.toString();
     const firstDigit = parseInt(levelNumberText[0]);
@@ -21,22 +23,21 @@ export default class LevelBar {
     let offsetDiff = 0;
     let firstDigitOffsetX = 0;
     const firstDigitKey = constants.LEVEL_DIGIT_SMALL_MAP[firstDigit];
-    const firstDigitImage = scene.add.image(
-      config.centerX + LEVEL_NUMBER_OFFSET_X,
-      OFFSET_Y,
-      constants.TEXTURE_ATLAS,
-      firstDigitKey
-    );
+    const firstDigitImage = scene.add
+      .image(
+        config.centerX + LEVEL_NUMBER_OFFSET_X,
+        OFFSET_Y,
+        constants.TEXTURE_ATLAS,
+        firstDigitKey
+      )
+      .setDepth(constants.MAX_DEPTH);
 
     if (levelNumber > 9) {
       secondDigit = parseInt(levelNumberText[1]);
       const secondDigitKey = constants.LEVEL_DIGIT_SMALL_MAP[secondDigit];
-      const secondDigitImage = scene.add.image(
-        0,
-        0,
-        constants.TEXTURE_ATLAS,
-        secondDigitKey
-      );
+      const secondDigitImage = scene.add
+        .image(0, 0, constants.TEXTURE_ATLAS, secondDigitKey)
+        .setDepth(constants.MAX_DEPTH);
 
       const secondDigitOffsetX = secondDigitImage.width;
       firstDigitOffsetX = firstDigitImage.width;
