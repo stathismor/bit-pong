@@ -51,7 +51,7 @@ export class SpriteManager {
   }
 
   static GetPlayer(): Phaser.sprite {
-    return SpriteManager.player.sprite;
+    return SpriteManager.player ? SpriteManager.player.sprite : undefined;
   }
 
   static GetBalls(): Phaser.sprite {

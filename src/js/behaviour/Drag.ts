@@ -5,22 +5,23 @@ import * as constants from "../constants";
 import { GameplaySceneStatus } from "../scene/GameplayScene";
 import { isInCircle, closestPointToCircle } from "../utils";
 import { SpriteManager } from "../sprite/SpriteManager";
+import { isSpriteImmobile, isOutsideWorld } from "../utils";
 
 const SPEED = 0.185;
-const RESET_DISTANCE = 1200;
 const GREY_BALL_SCALE = 1.6;
 const DEATH_DELAY = 650;
 const DRAG_RADIUS = 170;
 const IMMOBILE_CHECK_PERIOD = 200;
 const IMMOBILE_DIST = 40;
-const IMMOBILE_SPEED = 0.362;
-const IMMOBILE_ANGULAR_SPEED = 0.0006;
+// As a failsafe, level ends after 12 seconds of throwing the ball
+const LEVEL_TIMEOUT = 12000;
 
 export class Drag {
   constructor(scene, owner, x, y, frame, angleRad) {
     this.scene = scene;
     this.owner = owner;
     this.angleRad = angleRad;
+    this.dragStartedAt = null;
 
     owner.hasConstraint = false;
     owner.isDead = false;
@@ -107,6 +108,7 @@ export class Drag {
       );
 
       gameObject.removeInteractive();
+      this.dragStartedAt = new Date();
 
       gameObject.scene.sound.play("swoosh");
     });
@@ -128,31 +130,41 @@ export class Drag {
     }
 
     let isImmobile = false;
-    const timeDiff = new Date() - this.checkImmobileTime;
+    const now = new Date();
+    const timeDiff = now - this.checkImmobileTime;
+
     if (timeDiff > IMMOBILE_CHECK_PERIOD) {
       this.checkImmobileTime = new Date();
       const immobileDist = Math.abs(this.owner.x - this.previousX);
 
-      if (
-        immobileDist < IMMOBILE_DIST &&
-        this.owner.body.speed < IMMOBILE_SPEED &&
-        this.owner.body.angularVelocity < IMMOBILE_ANGULAR_SPEED
-      ) {
-        isImmobile = true;
-      } else {
+      // Save some calculations and only do immobile checks if owner hasn't moved enough
+      // for a period of time
+      if (immobileDist < IMMOBILE_DIST) {
+        // This assumes player is the owner, which is true for now for
+        // Drag behaviour. Could also use this.owner instead of player.
+        const balls = SpriteManager.GetBalls().map((sprite) => {
+          return {
+            sprite,
+            checkFountain: true,
+          };
+        });
+        const movingSprites = [
+          ...balls,
+          { sprite: this.owner, checkFountain: false },
+        ];
+
+        isImmobile = movingSprites.every((spriteData) =>
+          isSpriteImmobile(spriteData.sprite, spriteData.checkFountain)
+        );
+      }
+      if (!isImmobile) {
         this.previousX = this.owner.x;
       }
     }
 
-    if (
-      Phaser.Math.Distance.Between(
-        this.owner.x,
-        this.owner.y,
-        this.owner.scene.sys.game.CONFIG.centerX,
-        this.owner.scene.sys.game.CONFIG.centerY
-      ) > RESET_DISTANCE ||
-      isImmobile
-    ) {
+    const levelExpired = now - this.dragStartedAt > LEVEL_TIMEOUT;
+
+    if (levelExpired || isOutsideWorld(this.owner) || isImmobile) {
       if (this.owner.scene.getStatus() === GameplaySceneStatus.PLAY) {
         this.owner.isDead = true;
         this.owner.scene.time.delayedCall(DEATH_DELAY, this.kill, null, this);
@@ -173,15 +185,17 @@ export class Drag {
   }
 
   setInteractive(): void {
-    // @HACK: A major one! I think Phaser/matter is buggy when setting
-    // the hitArea (definidely enableDebug is) and it's hard to find
-    // a consistent way of setting a larget hit area.
-    if (this.scene.levelNumber === 35) {
+    // @HACK: And a major one! Small sprites are hard to drag on mobile, so we
+    // increase the hit area a bit. But I think Phaser/matter is buggy when setting
+    // the hitArea (definidely enableDebug is, shows different area than actual one)
+    // and it's hard to find a consistent way of setting a larger hit area, so we
+    // hard-code one. At the time of writing this, this only exists for level 35.
+    if (this.owner.scale <= 0.25) {
       this.owner.setInteractive(
         new Phaser.Geom.Circle(55, 55, 110),
         Phaser.Geom.Circle.Contains
       );
-      // this.scene.input.enableDebug(this.owner, 0xff00ff);
+      // this.scene.input.enableDebug(this.owner, 0xff00ff); // Buggy :(
       this.scene.input.setDraggable(this.owner);
     } else {
       this.owner.setInteractive({ draggable: true });

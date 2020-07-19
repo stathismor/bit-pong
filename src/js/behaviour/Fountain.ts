@@ -29,6 +29,7 @@ export class Fountain {
           );
           const newVelocity = ballVelocity.add(beerVelocity);
           ball.setVelocity(newVelocity.x, newVelocity.y);
+          ball.setData("fountain_collided_at", new Date());
         }
       },
     };

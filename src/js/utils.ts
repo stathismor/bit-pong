@@ -1,4 +1,10 @@
-export function iterate(obj, stack) {
+const IMMOBILE_SPEED = 0.362;
+const IMMOBILE_ANGULAR_SPEED = 0.0006;
+const RESET_DISTANCE = 1200;
+const RESET_DISTANCE = 1200;
+const FOUNTAIN_COLLISION_TIME_DIFF = 500;
+
+export function iterate(obj, stack): void {
   const keyList = [];
   function _iterate(objInner, stackInner) {
     for (const property in objInner) {
@@ -31,7 +37,7 @@ export function closestPointToCircle(
   return { x, y };
 }
 
-export function isInCircle(x, y, currentX, currentY, radius) {
+export function isInCircle(x, y, currentX, currentY, radius): boolean {
   return Phaser.Math.Distance.Between(x, y, currentX, currentY) <= radius;
 }
 
@@ -57,4 +63,38 @@ export function mobileAndTabletCheck(): boolean {
       check = true;
   })(navigator.userAgent || navigator.vendor || window.opera);
   return check;
+}
+
+export function isOutsideWorld(sprite): boolean {
+  return (
+    Phaser.Math.Distance.Between(
+      sprite.x,
+      sprite.y,
+      sprite.scene.sys.game.CONFIG.centerX,
+      sprite.scene.sys.game.CONFIG.centerY
+    ) > RESET_DISTANCE
+  );
+}
+
+export function isSpriteImmobile(sprite, checkFountain = false): boolean {
+  if (checkFountain) {
+    // Exit quickly if ball has fallen off the level. Not super clean, but
+    // the way this is written, this branch is for non-player sprites
+    if (isOutsideWorld(sprite)) {
+      return true;
+    }
+    const now = new Date();
+    const fountainCollidedAt = sprite.getData("fountain_collided_at");
+    if (
+      fountainCollidedAt &&
+      now - fountainCollidedAt < FOUNTAIN_COLLISION_TIME_DIFF
+    ) {
+      return true;
+    }
+  }
+
+  return (
+    sprite.body.speed < IMMOBILE_SPEED &&
+    sprite.body.angularVelocity < IMMOBILE_ANGULAR_SPEED
+  );
 }
