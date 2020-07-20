@@ -7,7 +7,7 @@
     "cordova:emulate": "cd cordova && cordova emulate android",
     "cordova:run": "cd cordova && cordova run android",
     "cordova:build": "yarn build && rm -rf cordova/www/* && cp -r dist/* cordova/www/",
-    "cordova:apk": "cd cordova && cordova build --release android",
+    "cordova:apk": "yarn cordova:build && scripts/create_apk.sh",
     "lint": "eslint 'src/**/*.ts'",
     "lint:fix": "eslint --fix 'src/**/*.ts'"
   },

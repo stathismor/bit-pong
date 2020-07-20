@@ -30,16 +30,6 @@ To run the game locally, on the repo's root directory do:
 
 `$ yarn start`
 
-## Create APK
-
-```
-$ yarn cordova:build
-$ cd cordova
-$ cordova build --release android
-$ jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore ~/.keystores/android.keystore ./platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk android-app-key
-$ /home/stathis/Android/android-sdk/build-tools/29.0.3/zipalign -v 4 ./platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk app-release.apk
-```
-
 ## License
 
 ### Source code
