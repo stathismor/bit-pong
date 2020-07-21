@@ -22,78 +22,7 @@ export class BootScene extends Phaser.Scene {
       url: atlasData,
     };
     this.load.multiatlas(multiAtlasFileConfig);
-    this.load.image("select_level_button", Images.select_level_button);
-    this.load.image("select_level_text", Images.select_level_text);
-    this.load.image("select_level_border", Images.select_level_border);
-    this.load.image("digit_zero", Images.digit_zero);
-    this.load.image("digit_one", Images.digit_one);
-    this.load.image("digit_two", Images.digit_two);
-    this.load.image("digit_three", Images.digit_three);
-    this.load.image("digit_four", Images.digit_four);
-    this.load.image("digit_five", Images.digit_five);
-    this.load.image("digit_six", Images.digit_six);
-    this.load.image("digit_seven", Images.digit_seven);
-    this.load.image("digit_eight", Images.digit_eight);
-    this.load.image("digit_nine", Images.digit_nine);
-    this.load.image("digit_medium_zero", Images.digit_medium_zero);
-    this.load.image("digit_medium_one", Images.digit_medium_one);
-    this.load.image("digit_medium_two", Images.digit_medium_two);
-    this.load.image("digit_medium_three", Images.digit_medium_three);
-    this.load.image("digit_medium_four", Images.digit_medium_four);
-    this.load.image("digit_medium_five", Images.digit_medium_five);
-    this.load.image("digit_medium_six", Images.digit_medium_six);
-    this.load.image("digit_medium_seven", Images.digit_medium_seven);
-    this.load.image("digit_medium_eight", Images.digit_medium_eight);
-    this.load.image("digit_medium_nine", Images.digit_medium_nine);
-    this.load.image("digit_small_zero", Images.digit_small_zero);
-    this.load.image("digit_small_one", Images.digit_small_one);
-    this.load.image("digit_small_two", Images.digit_small_two);
-    this.load.image("digit_small_three", Images.digit_small_three);
-    this.load.image("digit_small_four", Images.digit_small_four);
-    this.load.image("digit_small_five", Images.digit_small_five);
-    this.load.image("digit_small_six", Images.digit_small_six);
-    this.load.image("digit_small_seven", Images.digit_small_seven);
-    this.load.image("digit_small_eight", Images.digit_small_eight);
-    this.load.image("digit_small_nine", Images.digit_small_nine);
-    this.load.image("digit_small_slash", Images.digit_small_slash);
-    this.load.image("digit_small_v", Images.digit_small_v);
-    this.load.image("digit_small_dot", Images.digit_small_dot);
-    this.load.image("level_tile_grey", Images.level_tile_grey);
-    this.load.image("level_tile_green", Images.level_tile_green);
-    this.load.image("trophy_gold", Images.trophy_gold);
-    this.load.image("trophy_silver", Images.trophy_silver);
-    this.load.image("trophy_empty", Images.trophy_empty);
-    this.load.image("level_tile_locked", Images.level_tile_locked);
-    this.load.image("credits_title", Images.credits_title);
-    this.load.image("credits_art", Images.credits_art);
-    this.load.image("credits_concept", Images.credits_concept);
-    this.load.image("credits_stathis", Images.credits_stathis);
-    this.load.image("credits_antony", Images.credits_antony);
-    this.load.image("exit", Images.exit);
-    this.load.image("arrow_right_enabled", Images.arrow_right_enabled);
-    this.load.image("arrow_right_disabled", Images.arrow_right_disabled);
-    this.load.image("arrow_left_enabled", Images.arrow_left_enabled);
-    this.load.image("arrow_left_disabled", Images.arrow_left_disabled);
-    this.load.image("level_text", Images.level_text);
-    this.load.image(
-      "digit_small_bracket_left",
-      Images.digit_small_bracket_left
-    );
-    this.load.image(
-      "digit_small_bracket_right",
-      Images.digit_small_bracket_right
-    );
-    this.load.image("start", Images.start);
-    this.load.image("admin_select_level", Images.admin_select_level);
-    this.load.image("admin_sound_on", Images.admin_sound_on);
-    this.load.image("admin_sound_off", Images.admin_sound_off);
-    this.load.image("admin_exit", Images.admin_exit);
-    this.load.image("admin_home", Images.admin_home);
-    this.load.image("trophy_gold_big", Images.trophy_gold_big);
-    this.load.image("trophy_silver_big", Images.trophy_silver_big);
-    this.load.image("popup_success", Images.popup_success);
-    this.load.image("popup_success_no_next", Images.popup_success_no_next);
-    this.load.image("popup_whoops", Images.popup_whoops);
+    this.load.image("ball_white_admin", Images.ball_white_admin);
 
     // Audio
     this.load.audio("bounce_table", Sounds.bounce_table, { instances: 2 });

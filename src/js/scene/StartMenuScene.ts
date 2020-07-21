@@ -18,7 +18,7 @@ export class StartMenuScene extends Phaser.Scene {
   }
 
   create(): void {
-    // this.scene.start("GameplayScene", { levelNumber: 24 });
+    this.scene.start("GameplayScene", { levelNumber: 35 });
     // this.scene.start("LevelMenuScene");
     // this.scene.start("CreditsScene");
     const config = this.sys.game.CONFIG;

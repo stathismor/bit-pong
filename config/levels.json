@@ -1189,14 +1189,13 @@
       {
         "x": 640,
         "y": 322,
-        "behaviours": [{ "name": "scale", "options": { "value": 0.5 } }]
+        "behaviours": [{ "name": "scale", "options": { "value": 1 } }]
       }
     ],
     "player": {
-      "name": "ball_white",
-      "x": 128,
-      "y": 32,
-      "behaviours": [{ "name": "scale", "options": { "value": 0.25 } }]
+      "name": "ball_white_admin",
+      "x": 1012,
+      "y": 40,
     }
   },
   {
