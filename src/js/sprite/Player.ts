@@ -8,7 +8,7 @@ import * as constants from "../constants";
 
 export class Player extends Phaser.Physics.Matter.Sprite {
   constructor(scene, x, y, texture, frame, angleRad, behaviours) {
-    super(scene.matter.world, x, y, frame);
+    super(scene.matter.world, x, y, texture, frame);
 
     this.setData("name", frame + "_" + uuidv4());
     this.setData("isPlayer", true);
