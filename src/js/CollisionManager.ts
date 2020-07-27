@@ -4,10 +4,12 @@ import { GameplaySceneStatus } from "./scene/GameplayScene";
 
 const BALL_CUP_COLLISION_PERIOD = 200;
 const BALL_BALL_COLLISION_PERIOD = 200;
+const BALL_TABLE_COLLISION_PERIOD = 50;
 const SUCCESS_POPUP_DELAY = 2000;
 
 let ballCupCollisionTime = new Date();
 let ballBallCollisionTime = new Date();
+let ballTableCollisionTime = new Date();
 
 export function initCollisions(scene, player): void {
   const bitDrops = new BitDrops(scene);
@@ -96,7 +98,11 @@ export function initCollisions(scene, player): void {
         } else if (
           [bodyAName, bodyBName].some((name) => name.startsWith("table"))
         ) {
-          tableBounceSound.play();
+          const timeDiff = new Date() - ballTableCollisionTime;
+          if (timeDiff > BALL_TABLE_COLLISION_PERIOD) {
+            tableBounceSound.play();
+          }
+          ballTableCollisionTime = new Date();
           player.touchesTable = true;
         } else if (
           [bodyAName, bodyBName].every((name) => name.startsWith("ball"))
