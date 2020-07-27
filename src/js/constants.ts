@@ -3,6 +3,7 @@ export const TEXTURE_ATLAS = "bit_pong_atlas";
 export const LOGAL_STORAGE_KEY = "bit-pong-levels";
 export const TIME_SCALE = 1.2;
 export const MAX_DEPTH = 100;
+export const FOUNTAIN_TIME_DIFF = 100;
 
 export const LEVEL_DIGIT_SMALL_MAP = {
   0: "digit_small_zero",

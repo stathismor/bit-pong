@@ -29,7 +29,19 @@ export class Fountain {
           );
           const newVelocity = ballVelocity.add(beerVelocity);
           ball.setVelocity(newVelocity.x, newVelocity.y);
-          ball.setData("fountain_collided_at", new Date());
+
+          const fountainCollidedAt = ball.getData("fountain_collided_at");
+          const fountainDuration = ball.getData("fountain_duration") || 0;
+          const now = new Date();
+          const timeDiff = now - fountainCollidedAt;
+          let newDuration = 0;
+
+          if (timeDiff < constants.FOUNTAIN_TIME_DIFF) {
+            newDuration = fountainDuration + timeDiff;
+          }
+
+          ball.setData("fountain_collided_at", now);
+          ball.setData("fountain_duration", newDuration);
         }
       },
     };
