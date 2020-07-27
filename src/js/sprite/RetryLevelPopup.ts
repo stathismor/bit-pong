@@ -10,8 +10,9 @@ const LEVEL_X_OFFSET = 126;
 const RETRY_X_OFFSET = -292;
 
 export default class RetryLevelPopup extends Phaser.GameObjects.Sprite {
-  constructor(scene, x, y) {
+  constructor(scene, x, y, levelNumber) {
     super(scene, x, y, constants.TEXTURE_ATLAS, "popup_whoops");
+    this.levelNumber = levelNumber;
     this.setDepth(DEPTH);
 
     this.setVisible(false);
@@ -74,7 +75,9 @@ export default class RetryLevelPopup extends Phaser.GameObjects.Sprite {
         retryLevelPopup.retry.removeInteractive();
         retryLevelPopup.selectLevel.removeInteractive();
         if (gameObject.name === OPTION_SELECT_LEVEL_NAME) {
-          gameObject.scene.scene.start("LevelMenuScene");
+          gameObject.scene.scene.start("LevelMenuScene", {
+            levelNumber: retryLevelPopup.levelNumber,
+          });
         } else {
           gameObject.scene.scene.restart({ result: "retry" });
         }

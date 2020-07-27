@@ -50,8 +50,9 @@ export class LevelMenuScene extends Phaser.Scene {
     });
   }
 
-  create(): void {
+  create(data): void {
     const config = this.sys.game.CONFIG;
+    let { levelNumber } = data;
     const levelWidthDistance = 22; //config.width / LEVELS_PER_ROW;
     const levelPos = { x: TILE_OFFSET_X, y: 252 };
     const completedLevels =
@@ -315,8 +316,11 @@ export class LevelMenuScene extends Phaser.Scene {
     this.rightArrowDisabled.setScrollFactor(0);
     this.rightArrowDisabled.visible = false;
 
-    // Move page to current level number
-    this.currentPageNum = Math.ceil(nextLevel / LEVELS_PER_PAGE);
+    // Move page to current level number. If coming from gameplay scene,
+    // move to that page, otherwise the last one.
+    this.currentPageNum = Math.ceil(
+      (levelNumber || nextLevel) / LEVELS_PER_PAGE
+    );
     camera.scrollX += config.width * (this.currentPageNum - 1);
 
     this.updatePage();

@@ -65,7 +65,7 @@ export class StartMenuScene extends Phaser.Scene {
     this.input.on("gameobjectdown", (pointer, gameObject) => {
       if (gameObject.name === BUTTON_PLAY_NAME) {
         this.scene.scene.sound.play("button_click");
-        this.scene.start("LevelMenuScene");
+        this.scene.start("LevelMenuScene", { levelNumber: 0 });
       } else if (gameObject.name === BUTTON_CREDITS_NAME) {
         this.scene.scene.sound.play("button_click");
         this.scene.start("CreditsScene");

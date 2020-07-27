@@ -5,7 +5,7 @@ const BUTTONS_X_DISTANCE = 64;
 const BUTTONS_Y_OFFSET = 40;
 
 export class AdminBar {
-  constructor(scene, showExit = false, showLevel = false) {
+  constructor(scene, showExit = false, levelNumber) {
     this.scene = scene;
     const config = scene.sys.game.CONFIG;
 
@@ -42,7 +42,7 @@ export class AdminBar {
       });
     }
 
-    if (showLevel) {
+    if (levelNumber) {
       const selectLevelButton = scene.add
         .image(
           config.width - BUTTONS_X_OFFSET - 2 * BUTTONS_X_DISTANCE,
@@ -55,7 +55,7 @@ export class AdminBar {
         .setInteractive();
       selectLevelButton.on("pointerdown", () => {
         this.scene.sound.play("button_click");
-        this.scene.scene.start("LevelMenuScene");
+        this.scene.scene.start("LevelMenuScene", { levelNumber });
       });
     }
 
