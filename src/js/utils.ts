@@ -1,8 +1,8 @@
+import * as constants from "./constants";
+
 const IMMOBILE_SPEED = 0.362;
 const IMMOBILE_ANGULAR_SPEED = 0.0006;
-const RESET_DISTANCE = 1200;
-const RESET_DISTANCE = 1200;
-const FOUNTAIN_COLLISION_TIME_DIFF = 500;
+const FOUNTAIN_DURATION = 500;
 
 export function iterate(obj, stack): void {
   const keyList = [];
@@ -66,31 +66,23 @@ export function mobileAndTabletCheck(): boolean {
 }
 
 export function isOutsideWorld(sprite): boolean {
-  return (
-    Phaser.Math.Distance.Between(
-      sprite.x,
-      sprite.y,
-      sprite.scene.sys.game.CONFIG.centerX,
-      sprite.scene.sys.game.CONFIG.centerY
-    ) > RESET_DISTANCE
-  );
+  const { width, height } = sprite.scene.sys.game.CONFIG;
+
+  const rect = new Phaser.Geom.Rectangle(0, -height, width, 2 * height);
+  return !rect.contains(sprite.x, sprite.y);
 }
 
-export function isSpriteImmobile(sprite, checkFountain = false): boolean {
-  if (checkFountain) {
-    // Exit quickly if ball has fallen off the level. Not super clean, but
-    // the way this is written, this branch is for non-player sprites
-    if (isOutsideWorld(sprite)) {
-      return true;
-    }
-    const now = new Date();
-    const fountainCollidedAt = sprite.getData("fountain_collided_at");
-    if (
-      fountainCollidedAt &&
-      now - fountainCollidedAt < FOUNTAIN_COLLISION_TIME_DIFF
-    ) {
-      return true;
-    }
+export function isSpriteImmobile(sprite): boolean {
+  const now = new Date();
+  const fountainCollidedAt = sprite.getData("fountain_collided_at");
+  const fountainDuration = sprite.getData("fountain_duration");
+
+  const collidedRecently =
+    fountainCollidedAt &&
+    now - fountainCollidedAt < constants.FOUNTAIN_TIME_DIFF;
+
+  if (collidedRecently && fountainDuration > FOUNTAIN_DURATION) {
+    return true;
   }
 
   return (

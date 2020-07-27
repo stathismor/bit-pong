@@ -134,7 +134,8 @@ export class GameplayScene extends Phaser.Scene {
     const retryLevelPopup = new RetryLevelPopup(
       this,
       config.centerX,
-      config.centerY
+      config.centerY,
+      this.levelNumber
     );
 
     player.on("dead", () => {
@@ -144,7 +145,7 @@ export class GameplayScene extends Phaser.Scene {
       }
     });
 
-    ((): void => new AdminBar(this, true, true))();
+    ((): void => new AdminBar(this, true, this.levelNumber))();
 
     this.completeLevelPopup = new CompleteLevelPopup(
       this,

@@ -129,42 +129,28 @@ export class Drag {
       return;
     }
 
-    let isImmobile = false;
+    // Are all sprites non being considered again for this behaviour's checks
+    let areSpritesInactive = false;
     const now = new Date();
     const timeDiff = now - this.checkImmobileTime;
 
     if (timeDiff > IMMOBILE_CHECK_PERIOD) {
       this.checkImmobileTime = new Date();
-      const immobileDist = Math.abs(this.owner.x - this.previousX);
 
-      // Save some calculations and only do immobile checks if owner hasn't moved enough
-      // for a period of time
-      if (immobileDist < IMMOBILE_DIST) {
-        // This assumes player is the owner, which is true for now for
-        // Drag behaviour. Could also use this.owner instead of player.
-        const balls = SpriteManager.GetBalls().map((sprite) => {
-          return {
-            sprite,
-            checkFountain: true,
-          };
-        });
-        const movingSprites = [
-          ...balls,
-          { sprite: this.owner, checkFountain: false },
-        ];
+      const sprites = [...SpriteManager.GetBalls(), this.owner];
 
-        isImmobile = movingSprites.every((spriteData) =>
-          isSpriteImmobile(spriteData.sprite, spriteData.checkFountain)
-        );
-      }
-      if (!isImmobile) {
+      areSpritesInactive = sprites.every(
+        (ball) => isSpriteImmobile(ball) || isOutsideWorld(ball)
+      );
+
+      if (!areSpritesInactive) {
         this.previousX = this.owner.x;
       }
     }
 
     const levelExpired = now - this.dragStartedAt > LEVEL_TIMEOUT;
 
-    if (levelExpired || isOutsideWorld(this.owner) || isImmobile) {
+    if (levelExpired || areSpritesInactive) {
       if (this.owner.scene.getStatus() === GameplaySceneStatus.PLAY) {
         this.owner.isDead = true;
         this.owner.scene.time.delayedCall(DEATH_DELAY, this.kill, null, this);

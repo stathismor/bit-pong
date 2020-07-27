@@ -22,6 +22,10 @@ export class BootScene extends Phaser.Scene {
       url: atlasData,
     };
     this.load.multiatlas(multiAtlasFileConfig);
+<<<<<<< HEAD
+    this.load.image("ball_white_admin", Images.ball_white_admin);
+=======
+>>>>>>> master
 
     // Audio
     this.load.audio("bounce_table", Sounds.bounce_table, { instances: 2 });

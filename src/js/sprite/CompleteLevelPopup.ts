@@ -13,14 +13,14 @@ const NEXT_X_OFFSET = -125;
 const Y_OFFSET = 46;
 
 export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
-  constructor(scene, x, y, levelNum, levelsCount) {
+  constructor(scene, x, y, levelNumber, levelsCount) {
     super(scene, x, y, constants.TEXTURE_ATLAS, "popup_success");
     this.setDepth(DEPTH);
 
     this.setVisible(false);
     this.setScale(0.1);
     scene.add.existing(this);
-    this.levelNum = levelNum;
+    this.levelNumber = levelNumber;
     this.levelsCount = levelsCount;
 
     this.emitter = successEmitter;
@@ -106,7 +106,7 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
       .setName(OPTION_NEXT_LEVEL);
 
     // @TODO. This sisable zone for last level, need to remove texture
-    if (levelNum >= levelsCount) {
+    if (levelNumber >= levelsCount) {
       this.nextLevel.setVisible(false);
       this.setFrame("popup_success_no_next");
     }
@@ -126,7 +126,7 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
 
     const completedLevels =
       JSON.parse(localStorage.getItem(constants.LOGAL_STORAGE_KEY)) || {};
-    const level = completedLevels[this.levelNum];
+    const level = completedLevels[this.levelNumber];
     const awardKey = level >= 2 ? "trophy_gold_big" : "trophy_silver_big";
     this.award.setFrame(awardKey);
     this.award.setDepth(DEPTH);
@@ -152,14 +152,16 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
           if (gameObject.name === OPTION_RETRY_NAME) {
             gameObject.scene.scene.restart({ result: "retry" });
           } else if (gameObject.name === OPTION_NEXT_LEVEL) {
-            const nextLevel = completeLevelPopup.levelNum + 1;
+            const nextLevel = completeLevelPopup.levelNumber + 1;
             if (nextLevel <= completeLevelPopup.levelsCount) {
               gameObject.scene.scene.restart({
-                levelNumber: completeLevelPopup.levelNum + 1,
+                levelNumber: completeLevelPopup.levelNumber + 1,
               });
             }
           } else {
-            gameObject.scene.scene.start("LevelMenuScene");
+            gameObject.scene.scene.start("LevelMenuScene", {
+              levelNumber: completeLevelPopup.levelNumber,
+            });
           }
         }
       }
