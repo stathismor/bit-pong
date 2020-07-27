@@ -90,3 +90,17 @@ export function isSpriteImmobile(sprite): boolean {
     sprite.body.angularVelocity < IMMOBILE_ANGULAR_SPEED
   );
 }
+
+export function getCompletedLevels() {
+  const root =
+    JSON.parse(localStorage.getItem(constants.LOGAL_STORAGE_ROOT)) || {};
+  const levels = root[constants.LOGAL_STORAGE_LEVELS] || {};
+  return levels;
+}
+
+export function getVersion(): string {
+  const root =
+    JSON.parse(localStorage.getItem(constants.LOGAL_STORAGE_ROOT)) || {};
+  const levels = root[constants.LOGAL_STORAGE_VERSION] || {};
+  return levels;
+}

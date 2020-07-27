@@ -52,7 +52,8 @@ export function initCollisions(scene, player): void {
 
           const currentLevel = scene.levelNumber;
           const completedLevels =
-            JSON.parse(localStorage.getItem(constants.LOGAL_STORAGE_KEY)) || {};
+            JSON.parse(localStorage.getItem(constants.LOGAL_STORAGE_ROOT)) ||
+            {};
           if (
             !(currentLevel in completedLevels) ||
             (currentLevel in completedLevels &&
@@ -60,7 +61,7 @@ export function initCollisions(scene, player): void {
           ) {
             completedLevels[currentLevel] = player.livesNumber;
             localStorage.setItem(
-              constants.LOGAL_STORAGE_KEY,
+              constants.LOGAL_STORAGE_ROOT,
               JSON.stringify(completedLevels)
             );
           }

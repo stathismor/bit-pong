@@ -2,6 +2,7 @@ import * as constants from "../constants";
 import Images from "../images";
 import Sounds from "../sounds";
 import Data from "../data";
+import { getVersion, getCompletedLevels } from "../utils";
 
 export class BootScene extends Phaser.Scene {
   constructor() {
@@ -44,6 +45,11 @@ export class BootScene extends Phaser.Scene {
   }
 
   create(): void {
+    const localVersion = getVersion();
+    const levels = getCompletedLevels();
+    const newVersion = constants.VERSION;
+    if ((!localVersion || localVersion < newVersion) && levels) {
+    }
     this.scene.start("StartMenuScene");
   }
 }

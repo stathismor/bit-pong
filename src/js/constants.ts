@@ -1,6 +1,8 @@
+export const VERSION = 5;
 export const MAX_LIVES = 3;
 export const TEXTURE_ATLAS = "bit_pong_atlas";
-export const LOGAL_STORAGE_KEY = "bit-pong-levels";
+export const LOGAL_STORAGE_ROOT = "bit-pong-levels";
+export const LOGAL_STORAGE_LEVELS = "levels";
 export const TIME_SCALE = 1.2;
 export const MAX_DEPTH = 100;
 export const FOUNTAIN_TIME_DIFF = 100;

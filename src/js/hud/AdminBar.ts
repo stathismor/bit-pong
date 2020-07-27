@@ -1,3 +1,5 @@
+import { getCompletedLevels } from "../utils";
+
 import * as constants from "../constants";
 
 const BUTTONS_X_OFFSET = 75;
@@ -58,8 +60,7 @@ export class AdminBar {
         this.scene.scene.start("LevelMenuScene", { levelNumber });
       });
 
-      const completedLevels =
-        JSON.parse(localStorage.getItem(constants.LOGAL_STORAGE_KEY)) || {};
+      const completedLevels = getCompletedLevels();
       const isEnabled = levelNumber in completedLevels;
       const key = isEnabled ? "admin_retry_enabled" : "admin_retry_disabled";
       const retryButton = scene.add

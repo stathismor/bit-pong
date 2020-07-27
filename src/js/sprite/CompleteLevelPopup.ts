@@ -125,7 +125,7 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
     this.scene.sound.play("success");
 
     const completedLevels =
-      JSON.parse(localStorage.getItem(constants.LOGAL_STORAGE_KEY)) || {};
+      JSON.parse(localStorage.getItem(constants.LOGAL_STORAGE_ROOT)) || {};
     const level = completedLevels[this.levelNumber];
     const awardKey = level >= 2 ? "trophy_gold_big" : "trophy_silver_big";
     this.award.setFrame(awardKey);
