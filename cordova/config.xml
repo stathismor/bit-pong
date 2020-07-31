@@ -34,6 +34,7 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
+    <preference name="android-minSdkVersion" value="22" />
     <preference name="Fullscreen" value="true" />
     <preference name="Orientation" value="landscape" />
 </widget>
