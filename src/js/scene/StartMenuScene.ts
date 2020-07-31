@@ -107,7 +107,7 @@ export class StartMenuScene extends Phaser.Scene {
       VERSION_OFFSET_X + 5 * VERSION_DIGIT_DISTANCE - 6,
       config.height - VERSION_OFFSET_Y - 1,
       constants.TEXTURE_ATLAS,
-      constants.LEVEL_DIGIT_SMALL_MAP["5"]
+      constants.LEVEL_DIGIT_SMALL_MAP["6"]
     );
 
     ((): void => new AdminBar(this))();
