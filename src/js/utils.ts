@@ -2,7 +2,7 @@ import * as constants from "./constants";
 
 const IMMOBILE_SPEED = 0.362;
 const IMMOBILE_ANGULAR_SPEED = 0.0006;
-const FOUNTAIN_DURATION = 500;
+const FOUNTAIN_DURATION = 2500;
 
 export function iterate(obj, stack): void {
   const keyList = [];
