@@ -1,4 +1,5 @@
 import * as constants from "./constants";
+import LEVELS from "../../config/levels.json";
 
 const IMMOBILE_SPEED = 0.362;
 const IMMOBILE_ANGULAR_SPEED = 0.0006;
@@ -91,16 +92,31 @@ export function isSpriteImmobile(sprite): boolean {
   );
 }
 
+export function getOldCompletedLevels() {
+  const levels = JSON.parse(localStorage.getItem("bit-pong-levels")) || {};
+
+  return levels;
+}
+
 export function getCompletedLevels() {
   const root =
-    JSON.parse(localStorage.getItem(constants.LOGAL_STORAGE_ROOT)) || {};
-  const levels = root[constants.LOGAL_STORAGE_LEVELS] || {};
+    JSON.parse(localStorage.getItem(constants.LOCAL_STORAGE_ROOT)) || {};
+  const levels = root[constants.LOCAL_STORAGE_LEVELS] || {};
   return levels;
+}
+
+export function getStorageRoot() {
+  const root = JSON.parse(localStorage.getItem(constants.LOCAL_STORAGE_ROOT));
+  return root;
+}
+
+export function getLevelByNumber(number) {
+  return LEVELS.filter((level) => number === level.order)[0];
 }
 
 export function getVersion(): string {
   const root =
-    JSON.parse(localStorage.getItem(constants.LOGAL_STORAGE_ROOT)) || {};
-  const levels = root[constants.LOGAL_STORAGE_VERSION] || {};
-  return levels;
+    JSON.parse(localStorage.getItem(constants.LOCAL_STORAGE_ROOT)) || {};
+  const version = root[constants.LOCAL_STORAGE_VERSION];
+  return version;
 }

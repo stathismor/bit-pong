@@ -1,5 +1,6 @@
 import * as constants from "../constants";
 import { successEmitter } from "../particles";
+import { getCompletedLevels, getLevelByNumber } from "../utils";
 
 const DEPTH = 40;
 const OPTION_WIDTH = 94;
@@ -124,10 +125,11 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
 
     this.scene.sound.play("success");
 
-    const completedLevels =
-      JSON.parse(localStorage.getItem(constants.LOGAL_STORAGE_ROOT)) || {};
-    const level = completedLevels[this.levelNumber];
-    const awardKey = level >= 2 ? "trophy_gold_big" : "trophy_silver_big";
+    const completedLevels = getCompletedLevels();
+    const configLevel = getLevelByNumber(this.levelNumber);
+    const storageLevel = completedLevels[configLevel.name];
+    const lives = storageLevel.lives;
+    const awardKey = lives >= 2 ? "trophy_gold_big" : "trophy_silver_big";
     this.award.setFrame(awardKey);
     this.award.setDepth(DEPTH);
     this.award.setVisible(true);

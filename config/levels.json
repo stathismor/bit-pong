@@ -1,6 +1,7 @@
 [
   {
     "name": "1",
+    "order": 1,
     "tables": [
       {
         "x": 800,
@@ -23,6 +24,7 @@
   },
   {
     "name": "2",
+    "order": 2,
     "tables": [
       {
         "x": 800,
@@ -45,6 +47,7 @@
   },
   {
     "name": "3",
+    "order": 3,
     "tables": [
       {
         "x": 800,
@@ -67,6 +70,7 @@
   },
   {
     "name": "4",
+    "order": 4,
     "tables": [
       {
         "x": 960,
@@ -89,6 +93,7 @@
   },
   {
     "name": "5",
+    "order": 5,
     "tables": [
       {
         "x": 840,
@@ -116,6 +121,7 @@
   },
   {
     "name": "6",
+    "order": 6,
     "tables": [
       {
         "x": 840,
@@ -143,6 +149,7 @@
   },
   {
     "name": "7",
+    "order": 7,
     "description": "Down and up again",
     "tables": [
       {
@@ -166,6 +173,7 @@
   },
   {
     "name": "8",
+    "order": 8,
     "tables_half": [
       {
         "x": 770,
@@ -197,6 +205,7 @@
   },
   {
     "name": "9",
+    "order": 9,
     "tables_half": [
       {
         "x": 20,
@@ -228,6 +237,7 @@
   },
   {
     "name": "10",
+    "order": 10,
     "tables_half": [
       {
         "x": 840,
@@ -275,6 +285,7 @@
   },
   {
     "name": "11",
+    "order": 11,
     "cups": [
       {
         "x": 800,
@@ -295,6 +306,7 @@
   },
   {
     "name": "12",
+    "order": 12,
     "cups": [
       {
         "x": 700,
@@ -319,6 +331,7 @@
   },
   {
     "name": "13",
+    "order": 13,
     "cups": [
       {
         "x": 700,
@@ -346,6 +359,7 @@
   },
   {
     "name": "14",
+    "order": 14,
     "description": "Rotating blades",
     "tables_half": [
       {
@@ -390,6 +404,7 @@
   },
   {
     "name": "15",
+    "order": 15,
     "description": "Shoot through blades",
     "tables": [
       {
@@ -443,6 +458,7 @@
   },
   {
     "name": "16",
+    "order": 16,
     "cups": [
       {
         "x": 1020,
@@ -509,6 +525,7 @@
   },
   {
     "name": "17",
+    "order": 17,
     "balls": [
       {
         "x": 800,
@@ -526,6 +543,7 @@
   },
   {
     "name": "18",
+    "order": 18,
     "tables": [
       {
         "x": 750,
@@ -560,6 +578,7 @@
   },
   {
     "name": "19",
+    "order": 19,
     "tables_half": [
       {
         "x": 620,
@@ -587,6 +606,7 @@
   },
   {
     "name": "20",
+    "order": 20,
     "description": "Rotating player cup",
     "balls": [
       {
@@ -608,6 +628,7 @@
   },
   {
     "name": "21",
+    "order": 21,
     "cups": [
       {
         "x": 856,
@@ -636,6 +657,7 @@
   },
   {
     "name": "22",
+    "order": 22,
     "tables_half": [
       {
         "x": 800,
@@ -688,6 +710,7 @@
   },
   {
     "name": "23",
+    "order": 23,
     "tables_half": [
       {
         "x": 870,
@@ -725,6 +748,7 @@
   },
   {
     "name": "24",
+    "order": 24,
     "description": "Snooker rookie",
     "cups": [
       {
@@ -754,6 +778,7 @@
   },
   {
     "name": "25",
+    "order": 25,
     "description": "Snooker pro",
     "cups": [
       {
@@ -788,6 +813,7 @@
   },
   {
     "name": "26",
+    "order": 26,
     "description": "Snooker god",
     "cups": [
       {
@@ -820,6 +846,7 @@
   },
   {
     "name": "27",
+    "order": 27,
     "description": "Fountain shot",
     "tables": [
       {
@@ -850,6 +877,7 @@
   },
   {
     "name": "28",
+    "order": 28,
     "description": "Fountain pool shot",
     "cups": [
       {
@@ -880,6 +908,7 @@
   },
   {
     "name": "29",
+    "order": 29,
     "description": "Fountain pool shot with three cups",
     "cups": [
       {
@@ -924,6 +953,7 @@
   },
   {
     "name": "30",
+    "order": 30,
     "description": "Fountain domino",
     "cups": [
       {
@@ -982,6 +1012,7 @@
   },
   {
     "name": "31",
+    "order": 31,
     "description": "Rotating fountains",
     "cups": [
       {
@@ -1069,6 +1100,7 @@
   },
   {
     "name": "32",
+    "order": 32,
     "description": "Who's a big ball",
     "tables": [
       {
@@ -1113,6 +1145,7 @@
   },
   {
     "name": "33",
+    "order": 33,
     "description": "Swallow",
     "cups": [
       {
@@ -1138,6 +1171,7 @@
   },
   {
     "name": "34",
+    "order": 34,
     "description": "Big in big",
     "cups": [
       {
@@ -1182,6 +1216,7 @@
   },
   {
     "name": "35",
+    "order": 35,
     "description": "Where's the ball?",
     "tables": [
       {
@@ -1205,6 +1240,7 @@
   },
   {
     "name": "36",
+    "order": 36,
     "description": "Where's the ball?",
     "tables_half": [
       {
@@ -1244,6 +1280,7 @@
   },
   {
     "name": "37",
+    "order": 37,
     "cups": [
       {
         "x": 800,
@@ -1263,6 +1300,7 @@
   },
   {
     "name": "38",
+    "order": 38,
     "cups": [
       {
         "x": 750,
@@ -1291,6 +1329,7 @@
   },
   {
     "name": "39",
+    "order": 39,
     "tables": [
       {
         "x": 540,
@@ -1323,6 +1362,7 @@
   },
   {
     "name": "40",
+    "order": 40,
     "description": "Random tables",
     "cups": [
       {
@@ -1385,6 +1425,7 @@
   },
   {
     "name": "41",
+    "order": 41,
     "description": "Random cup",
     "cups": [
       {

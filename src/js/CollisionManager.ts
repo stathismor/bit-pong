@@ -1,6 +1,7 @@
 import * as constants from "./constants";
 import BitDrops from "./component/BitDrops";
 import { GameplaySceneStatus } from "./scene/GameplayScene";
+import { getCompletedLevels, getLevelByNumber, getStorageRoot } from "./utils";
 
 const BALL_CUP_COLLISION_PERIOD = 200;
 const BALL_BALL_COLLISION_PERIOD = 200;
@@ -50,19 +51,21 @@ export function initCollisions(scene, player): void {
           const camera = scene.cameras.main;
           camera.shake(180, 0.015);
 
-          const currentLevel = scene.levelNumber;
-          const completedLevels =
-            JSON.parse(localStorage.getItem(constants.LOGAL_STORAGE_ROOT)) ||
-            {};
+          const currentLevelNumber = scene.levelNumber;
+          const root = getStorageRoot();
+          const completedLevels = root[constants.LOCAL_STORAGE_LEVELS] || {};
+          const level = getLevelByNumber(currentLevelNumber);
+          const levelName = level.name;
+
           if (
-            !(currentLevel in completedLevels) ||
-            (currentLevel in completedLevels &&
-              completedLevels[currentLevel] < player.livesNumber)
+            !(levelName in completedLevels) ||
+            (levelName in completedLevels &&
+              completedLevels[levelName].lives < player.livesNumber)
           ) {
-            completedLevels[currentLevel] = player.livesNumber;
+            completedLevels[levelName] = { lives: player.livesNumber };
             localStorage.setItem(
-              constants.LOGAL_STORAGE_ROOT,
-              JSON.stringify(completedLevels)
+              constants.LOCAL_STORAGE_ROOT,
+              JSON.stringify(root)
             );
           }
 

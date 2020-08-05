@@ -84,7 +84,7 @@ export class GameplayScene extends Phaser.Scene {
     SpriteManager.Add(player, "player", playerConf);
     this.add.existing(player);
 
-    initCollisions(this, player, this.levelNumber);
+    initCollisions(this, player);
 
     // @TODO: Table should be rendered after the cup
     confTables.forEach((confTable) => {

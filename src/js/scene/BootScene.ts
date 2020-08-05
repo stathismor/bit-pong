@@ -2,7 +2,11 @@ import * as constants from "../constants";
 import Images from "../images";
 import Sounds from "../sounds";
 import Data from "../data";
-import { getVersion, getCompletedLevels } from "../utils";
+import {
+  getVersion,
+  getCompletedLevels,
+  getOldCompletedLevels,
+} from "../utils";
 
 export class BootScene extends Phaser.Scene {
   constructor() {
@@ -44,12 +48,30 @@ export class BootScene extends Phaser.Scene {
     camera.setBounds(0, 0, config.width, config.height);
   }
 
-  create(): void {
+  // @TODO: Remove this after testing
+  migrate(): void {
     const localVersion = getVersion();
-    const levels = getCompletedLevels();
+    const oldLevels = getOldCompletedLevels();
     const newVersion = constants.VERSION;
-    if ((!localVersion || localVersion < newVersion) && levels) {
+    if ((!localVersion || localVersion < newVersion) && oldLevels) {
+      const root = {};
+      root["version"] = newVersion;
+      root["levels"] = {};
+
+      for (const order in oldLevels) {
+        const lives = oldLevels[order];
+        const level = { lives };
+        root["levels"][order] = level;
+      }
+
+      console.info("Bit Pong: Migrating data to version", constants.VERSION);
+
+      localStorage.setItem(constants.LOCAL_STORAGE_ROOT, JSON.stringify(root));
     }
+  }
+
+  create(): void {
+    this.migrate();
     this.scene.start("StartMenuScene");
   }
 }

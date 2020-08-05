@@ -1,5 +1,6 @@
 import LEVELS from "../../../config/levels.json";
 import { AdminBar } from "../hud/AdminBar";
+import { getCompletedLevels } from "../utils";
 
 import * as constants from "../constants";
 
@@ -55,18 +56,28 @@ export class LevelMenuScene extends Phaser.Scene {
     let { levelNumber } = data;
     const levelWidthDistance = 22; //config.width / LEVELS_PER_ROW;
     const levelPos = { x: TILE_OFFSET_X, y: 252 };
-    const completedLevels =
-      JSON.parse(localStorage.getItem(constants.LOGAL_STORAGE_ROOT)) || {};
-    const levelNumbers = Object.keys(completedLevels);
+
+    const completedLevels = getCompletedLevels();
+    const levelMap = LEVELS.reduce((accumulator, currentValue) => {
+      accumulator[currentValue.name] = currentValue;
+      return accumulator;
+    }, {});
+
+    const levelOrders = Object.keys(completedLevels).map((level) => {
+      return levelMap[level].order;
+    });
+    const sortedLevels = LEVELS.sort((a, b) => a.order - b.order);
+    const configLevelsLength = LEVELS.length;
     const nextLevel =
-      levelNumbers.length === 0
+      levelOrders.length === 0
         ? 1
-        : Math.max(
-            ...Object.keys(completedLevels).map((key) => parseInt(key))
-          ) + 1;
+        : Math.max(...levelOrders.map((order) => parseInt(order))) + 1;
     const camera = this.scene.scene.cameras.main;
 
-    this.pagesCount = Math.ceil(LEVELS.length / LEVELS_PER_PAGE);
+    console.log("levelOrders", levelOrders);
+    console.log("nextLevel", nextLevel);
+
+    this.pagesCount = Math.ceil(configLevelsLength / LEVELS_PER_PAGE);
     this.currentPageNum = 1;
 
     for (let i = 0; i < this.pagesCount; i += 1) {
@@ -127,8 +138,10 @@ export class LevelMenuScene extends Phaser.Scene {
     rightBracket.setScrollFactor(0);
 
     let pageNum = 0;
-    for (let levelNumber = 1; levelNumber <= LEVELS.length; levelNumber += 1) {
-      const isCompleted = levelNumber in completedLevels;
+    sortedLevels.forEach((level) => {
+      const levelNumber = level.order;
+      const levelName = level.name;
+      const isCompleted = levelName in completedLevels;
       const isNextLevel = levelNumber === nextLevel;
 
       const yOffset = isCompleted || isNextLevel ? 32 : 82;
@@ -205,10 +218,12 @@ export class LevelMenuScene extends Phaser.Scene {
       );
 
       if (isCompleted || isNextLevel) {
-        const level = completedLevels[levelNumber];
+        const lives = completedLevels[levelName]
+          ? completedLevels[levelName]["lives"]
+          : 0;
         const awardKey = isNextLevel
           ? "trophy_empty"
-          : level >= 2
+          : lives >= 2
           ? "trophy_gold_small"
           : "trophy_silver_small";
         this.add.image(
@@ -243,7 +258,7 @@ export class LevelMenuScene extends Phaser.Scene {
           this.scene.start("GameplayScene", { levelNumber });
         });
       }
-    }
+    });
 
     const border = this.add.image(
       config.centerX,
