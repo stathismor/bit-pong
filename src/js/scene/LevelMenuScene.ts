@@ -63,8 +63,8 @@ export class LevelMenuScene extends Phaser.Scene {
       return accumulator;
     }, {});
 
-    const levelOrders = Object.keys(completedLevels).map((level) => {
-      return levelMap[level].order;
+    const levelOrders = Object.keys(completedLevels).map((name) => {
+      return levelMap[name].order;
     });
     const sortedLevels = LEVELS.sort((a, b) => a.order - b.order);
     const configLevelsLength = LEVELS.length;
@@ -73,9 +73,6 @@ export class LevelMenuScene extends Phaser.Scene {
         ? 1
         : Math.max(...levelOrders.map((order) => parseInt(order))) + 1;
     const camera = this.scene.scene.cameras.main;
-
-    console.log("levelOrders", levelOrders);
-    console.log("nextLevel", nextLevel);
 
     this.pagesCount = Math.ceil(configLevelsLength / LEVELS_PER_PAGE);
     this.currentPageNum = 1;

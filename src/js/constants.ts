@@ -1,6 +1,7 @@
 export const VERSION = 7;
 export const MAX_LIVES = 3;
 export const TEXTURE_ATLAS = "bit_pong_atlas";
+export const LOCAL_STORAGE_ROOT_OLD = "bit-pong-levels";
 export const LOCAL_STORAGE_ROOT = "bit-pong";
 export const LOCAL_STORAGE_VERSION = "version";
 export const LOCAL_STORAGE_LEVELS = "levels";

@@ -93,7 +93,8 @@ export function isSpriteImmobile(sprite): boolean {
 }
 
 export function getOldCompletedLevels() {
-  const levels = JSON.parse(localStorage.getItem("bit-pong-levels")) || {};
+  const levels =
+    JSON.parse(localStorage.getItem(constants.LOCAL_STORAGE_ROOT_OLD)) || {};
 
   return levels;
 }

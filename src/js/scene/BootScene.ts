@@ -67,11 +67,22 @@ export class BootScene extends Phaser.Scene {
       console.info("Bit Pong: Migrating data to version", constants.VERSION);
 
       localStorage.setItem(constants.LOCAL_STORAGE_ROOT, JSON.stringify(root));
+      localStorage.removeItem(constants.LOCAL_STORAGE_ROOT_OLD);
+    }
+  }
+
+  initLocalStorage(): void {
+    const localVersion = getVersion();
+    if (!localVersion) {
+      console.info("Initialising local storage");
+      root = { version: constants.VERSION, levels: {} };
+      localStorage.setItem(constants.LOCAL_STORAGE_ROOT, JSON.stringify(root));
     }
   }
 
   create(): void {
     this.migrate();
+    this.initLocalStorage();
     this.scene.start("StartMenuScene");
   }
 }
