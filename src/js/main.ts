@@ -5,6 +5,7 @@ import { GameplayScene } from "./scene/GameplayScene";
 import { LevelMenuScene } from "./scene/LevelMenuScene";
 import { StartMenuScene } from "./scene/StartMenuScene";
 import { CreditsScene } from "./scene/CreditsScene";
+import { YouWonScene } from "./scene/YouWonScene";
 import { ScaleManager } from "./ScaleManager";
 import { mobileAndTabletCheck } from "./utils";
 
@@ -41,6 +42,7 @@ const game = new Game({
     CreditsScene,
     LevelMenuScene,
     GameplayScene,
+    YouWonScene,
   ],
   // callbacks: {
   //   postBoot: (): void => {

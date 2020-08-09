@@ -105,12 +105,6 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
       )
       .setOrigin(0)
       .setName(OPTION_NEXT_LEVEL);
-
-    // @TODO. This sisable zone for last level, need to remove texture
-    if (levelNumber >= levelsCount) {
-      this.nextLevel.setVisible(false);
-      this.setFrame("popup_success_no_next");
-    }
   }
 
   popup(): void {
@@ -134,6 +128,10 @@ export class CompleteLevelPopup extends Phaser.GameObjects.Sprite {
     this.award.setDepth(DEPTH);
     this.award.setVisible(true);
     this.awardTween.play();
+
+    if (this.levelNumber >= this.levelsCount) {
+      this.scene.scene.start("YouWonScene");
+    }
   }
 
   static onComplete(tween, gameObjects): void {

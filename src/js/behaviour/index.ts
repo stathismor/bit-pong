@@ -5,6 +5,7 @@ import { Scale } from "./Scale";
 import { ScaleTween } from "./ScaleTween";
 import { Fountain } from "./Fountain";
 import { RandomPosition } from "./RandomPosition";
+import { Jump } from "./Jump";
 import { RandomAngle } from "./RandomAngle";
 
 const BEHAVIOUR_MAPPER = {
@@ -16,6 +17,7 @@ const BEHAVIOUR_MAPPER = {
   scaleTween: ScaleTween,
   randomPosition: RandomPosition,
   randomAngle: RandomAngle,
+  jump: Jump,
 };
 
 export default BEHAVIOUR_MAPPER;

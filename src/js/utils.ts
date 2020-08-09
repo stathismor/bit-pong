@@ -121,3 +121,38 @@ export function getVersion(): string {
   const version = root[constants.LOCAL_STORAGE_VERSION];
   return version;
 }
+
+export function addSmallNumber(scene, number, x, y): void {
+  const numberText = number.toString();
+  const firstDigit = parseInt(numberText[0]);
+  let secondDigit = null;
+  let offsetDiff = 0;
+  let firstDigitOffsetX = 0;
+  const firstDigitKey = constants.LEVEL_DIGIT_SMALL_MAP[firstDigit];
+  const firstDigitImage = scene.add
+    .image(x, y, constants.TEXTURE_ATLAS, firstDigitKey)
+    .setDepth(constants.MAX_DEPTH);
+  let numberWidth = firstDigitImage.width;
+
+  if (number > 9) {
+    secondDigit = parseInt(numberText[1]);
+    const secondDigitKey = constants.LEVEL_DIGIT_SMALL_MAP[secondDigit];
+    const secondDigitImage = scene.add
+      .image(0, 0, constants.TEXTURE_ATLAS, secondDigitKey)
+      .setDepth(constants.MAX_DEPTH);
+
+    const secondDigitOffsetX = secondDigitImage.width;
+    firstDigitOffsetX = firstDigitImage.width;
+    // @HACK digit "1" has different width, so needs some special treatment
+    if (secondDigit === 1) {
+      offsetDiff = -Math.abs(firstDigitOffsetX - secondDigitOffsetX) / 2;
+    } else {
+      offsetDiff = Math.abs(firstDigitOffsetX - secondDigitOffsetX) / 2;
+    }
+
+    secondDigitImage.setPosition(x + firstDigitImage.width + offsetDiff, y);
+    numberWidth += offsetDiff + secondDigitImage.width;
+  }
+
+  return numberWidth;
+}

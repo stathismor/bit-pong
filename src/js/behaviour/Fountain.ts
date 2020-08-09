@@ -8,7 +8,8 @@ const MULTI = 1.3;
 export class Fountain {
   constructor(scene, owner) {
     this.owner = owner;
-    const balls = [...SpriteManager.GetBalls(), SpriteManager.GetPlayer()];
+    let balls = [...SpriteManager.GetBalls(), SpriteManager.GetPlayer()];
+    balls = balls.filter((ball) => ball !== undefined);
 
     const source = {
       contains: (x, y): void => {
