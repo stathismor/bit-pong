@@ -7,7 +7,7 @@ import { uuidv4 } from "../utils";
 import * as constants from "../constants";
 
 export class Player extends Phaser.Physics.Matter.Sprite {
-  constructor(scene, x, y, texture, frame, angleRad, behaviours) {
+  constructor(scene, x, y, texture, frame, angleRad, depth, behaviours) {
     super(scene.matter.world, x, y, texture, frame);
 
     this.setData("name", frame + "_" + uuidv4());
@@ -31,13 +31,10 @@ export class Player extends Phaser.Physics.Matter.Sprite {
       );
     }
 
-    // @HACK: A bigger cup fits a smaller cup
-    if (frame.startsWith("cup")) {
-      if (this.scale > 1) {
-        this.setDepth(23);
-      } else {
-        this.setDepth(21);
-      }
+    if (depth) {
+      this.setDepth(depth);
+    } else {
+      this.customSetDepth();
     }
 
     ComponentManager.Add(
@@ -47,5 +44,16 @@ export class Player extends Phaser.Physics.Matter.Sprite {
     );
 
     this.body.timeScale = constants.TIME_SCALE;
+  }
+
+  customSetDepth(): void {
+    if (this.frame.name.startsWith("cup")) {
+      // @HACK: A bigger cup fits a smaller cup
+      if (this.scale > 1) {
+        this.setDepth(23);
+      } else {
+        this.setDepth(21);
+      }
+    }
   }
 }

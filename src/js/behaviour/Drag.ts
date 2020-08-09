@@ -110,6 +110,10 @@ export class Drag {
       gameObject.removeInteractive();
       this.dragStartedAt = new Date();
 
+      // @HACK: This assumer the owner is a player, and is here just for those
+      // trick levels where the owner needs to overlay the HUD.
+      owner.customSetDepth();
+
       gameObject.scene.sound.play("swoosh");
     });
   }

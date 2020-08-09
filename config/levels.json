@@ -1444,5 +1444,37 @@
       "x": 250,
       "y": 370
     }
+  },
+  {
+    "name": "42",
+    "order": 42,
+    "description": "Where am I?",
+    "cups": [
+      {
+        "x": 333,
+        "y": 500,
+        "angle": 330
+      }
+    ],
+    "tables": [
+      {
+        "x": 520,
+        "y": 270
+      }
+    ],
+    "tables_half": [
+      {
+        "x": 150,
+        "y": 291,
+        "angle": 90
+      }
+    ],
+    "player": {
+      "name": "ball_white",
+      "x": 667,
+      "y": 30,
+      "depth": 110,
+      "behaviours": [{ "name": "scale", "options": { "value": 0.28 } }]
+    }
   }
 ]
