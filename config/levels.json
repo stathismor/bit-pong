@@ -1476,5 +1476,37 @@
       "depth": 110,
       "behaviours": [{ "name": "scale", "options": { "value": 0.28 } }]
     }
+  },
+  {
+    "name": "43",
+    "order": 43,
+    "description": "Where am I? Here.",
+    "cups": [
+      {
+        "x": 450,
+        "y": 460,
+        "angle": 330
+      }
+    ],
+    "tables": [
+      {
+        "x": 670,
+        "y": 270
+      }
+    ],
+    "tables_half": [
+      {
+        "x": 300,
+        "y": 291,
+        "angle": 90
+      }
+    ],
+    "player": {
+      "name": "ball_white",
+      "x": 1092,
+      "y": 55,
+      "depth": 110,
+      "behaviours": [{ "name": "scale", "options": { "value": 0.25 } }]
+    }
   }
 ]
