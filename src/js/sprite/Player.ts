@@ -12,6 +12,7 @@ export class Player extends Phaser.Physics.Matter.Sprite {
 
     this.setData("name", frame + "_" + uuidv4());
     this.setData("isPlayer", true);
+    this.configDepth = depth;
 
     this.livesNumber = constants.MAX_LIVES;
 
@@ -31,11 +32,7 @@ export class Player extends Phaser.Physics.Matter.Sprite {
       );
     }
 
-    if (depth) {
-      this.setDepth(depth);
-    } else {
-      this.customSetDepth();
-    }
+    this.overrideDepth(true);
 
     ComponentManager.Add(
       scene,
@@ -46,13 +43,19 @@ export class Player extends Phaser.Physics.Matter.Sprite {
     this.body.timeScale = constants.TIME_SCALE;
   }
 
-  customSetDepth(): void {
-    if (this.frame.name.startsWith("cup")) {
-      // @HACK: A bigger cup fits a smaller cup
-      if (this.scale > 1) {
-        this.setDepth(23);
+  overrideDepth(useConfig = false): void {
+    if (useConfig) {
+      this.setDepth(this.configDepth);
+    } else {
+      if (this.frame.name.startsWith("cup")) {
+        // @HACK: A bigger cup fits a smaller cup
+        if (this.scale > 1) {
+          this.setDepth(23);
+        } else {
+          this.setDepth(21);
+        }
       } else {
-        this.setDepth(21);
+        this.setDepth(0);
       }
     }
   }

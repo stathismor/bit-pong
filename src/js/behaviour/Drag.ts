@@ -12,7 +12,6 @@ const GREY_BALL_SCALE = 1.6;
 const DEATH_DELAY = 650;
 const DRAG_RADIUS = 170;
 const IMMOBILE_CHECK_PERIOD = 200;
-const IMMOBILE_DIST = 40;
 // As a failsafe, level ends after 12 seconds of throwing the ball
 const LEVEL_TIMEOUT = 12000;
 
@@ -112,7 +111,7 @@ export class Drag {
 
       // @HACK: This assumer the owner is a player, and is here just for those
       // trick levels where the owner needs to overlay the HUD.
-      owner.customSetDepth();
+      owner.overrideDepth();
 
       gameObject.scene.sound.play("swoosh");
     });
@@ -200,6 +199,7 @@ export class Drag {
     this.owner.y = this.owner.startPos.y;
     this.owner.rotation = this.angleRad;
     this.owner.launched = false;
+    this.owner.overrideDepth(true);
 
     SpriteManager.ResetPositions();
   }
