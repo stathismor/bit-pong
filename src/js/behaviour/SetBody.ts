@@ -55,7 +55,7 @@ export class SetBody {
       const sensor = M.Bodies.rectangle(
         owner.width / 2,
         owner.height - 50,
-        40,
+        35,
         50,
         { isSensor: true }
       );
