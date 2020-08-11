@@ -1483,22 +1483,20 @@
     "description": "Where am I? Here.",
     "cups": [
       {
-        "x": 450,
+        "x": 790,
         "y": 460,
         "angle": 330
       }
     ],
-    "tables": [
-      {
-        "x": 670,
-        "y": 270
-      }
-    ],
     "tables_half": [
       {
-        "x": 300,
+        "x": 640,
         "y": 291,
         "angle": 90
+      },
+      {
+        "x": 820,
+        "y": 270
       }
     ],
     "player": {
@@ -1714,16 +1712,16 @@
     "description": "Planet eater",
     "cups": [
       {
-        "x": 880,
-        "y": 380,
+        "x": 700,
+        "y": 400,
         "angle": 45,
         "behaviours": [
           {
             "name": "orbit",
             "options": {
-              "x": 880,
+              "x": 900,
               "y": 380,
-              "distance": 190,
+              "distance": 177,
               "speed": -0.005
             }
           },
@@ -1735,16 +1733,18 @@
           },
           { "name": "scale", "options": { "value": 0.5 } }
         ]
-      },
+      }
+    ],
+    "tables_half": [
       {
-        "x": 880,
-        "y": 380,
+        "x": 900,
+        "y": 300,
         "isStatic": true,
         "behaviours": [
           {
             "name": "orbit",
             "options": {
-              "x": 880,
+              "x": 900,
               "y": 380,
               "distance": 285,
               "speed": 0.007
@@ -1763,7 +1763,7 @@
     "balls": [
       {
         "name": "ball_orange",
-        "x": 880,
+        "x": 900,
         "y": 380,
         "isStatic": true,
         "behaviours": [
@@ -1776,17 +1776,17 @@
         ]
       },
       {
-        "x": 880,
+        "x": 900,
         "y": 380,
         "isStatic": true,
         "behaviours": [
           {
             "name": "orbit",
             "options": {
-              "x": 880,
+              "x": 900,
               "y": 380,
-              "distance": 100,
-              "speed": 0.025
+              "distance": 90,
+              "speed": 0.03
             }
           }
         ]
