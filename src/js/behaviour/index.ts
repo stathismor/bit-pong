@@ -7,6 +7,7 @@ import { Fountain } from "./Fountain";
 import { RandomPosition } from "./RandomPosition";
 import { Jump } from "./Jump";
 import { RandomAngle } from "./RandomAngle";
+import { Orbit } from "./Orbit";
 
 const BEHAVIOUR_MAPPER = {
   rotate: Rotate,
@@ -18,6 +19,7 @@ const BEHAVIOUR_MAPPER = {
   randomPosition: RandomPosition,
   randomAngle: RandomAngle,
   jump: Jump,
+  orbit: Orbit,
 };
 
 export default BEHAVIOUR_MAPPER;

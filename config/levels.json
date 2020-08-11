@@ -1508,5 +1508,107 @@
       "depth": 110,
       "behaviours": [{ "name": "scale", "options": { "value": 0.25 } }]
     }
+  },
+  {
+    "name": "44",
+    "order": 44,
+    "description": "Where am I? Here.",
+    "cups": [
+      {
+        "x": 850,
+        "y": 380,
+        "behaviours": [
+          {
+            "name": "rotate",
+            "options": { "direction": -1 }
+          }
+        ]
+      }
+    ],
+    "balls": [
+      {
+        "name": "ball_orange",
+        "x": 850,
+        "y": 380,
+        "isStatic": true,
+        "behaviours": [
+          {
+            "name": "orbit",
+            "options": { "x": 850, "y": 380, "distance": 200, "speed": 0.05 }
+          }
+        ]
+      }
+    ],
+    "player": {
+      "name": "ball_white",
+      "x": 250,
+      "y": 370
+    }
+  },
+  {
+    "name": "45",
+    "order": 45,
+    "description": "Where am I? Here.",
+    "cups": [
+      {
+        "x": 850,
+        "y": 380
+      }
+    ],
+    "balls": [
+      {
+        "name": "ball_orange",
+        "x": 850,
+        "y": 200,
+        "isStatic": true,
+        "behaviours": [
+          {
+            "name": "orbit",
+            "options": { "x": 850, "y": 380, "distance": 135, "speed": 0.015 }
+          }
+        ]
+      },
+      {
+        "name": "ball_orange",
+        "x": 1000,
+        "y": 380,
+        "isStatic": true,
+        "behaviours": [
+          {
+            "name": "orbit",
+            "options": { "x": 850, "y": 380, "distance": 205, "speed": 0.019 }
+          }
+        ]
+      },
+      {
+        "name": "ball_orange",
+        "x": 850,
+        "y": 500,
+        "isStatic": true,
+        "behaviours": [
+          {
+            "name": "orbit",
+            "options": { "x": 850, "y": 380, "distance": 275, "speed": 0.023 }
+          }
+        ]
+      },
+      {
+        "name": "ball_orange",
+        "x": 400,
+        "y": 380,
+        "isStatic": true,
+        "behaviours": [
+          {
+            "name": "orbit",
+            "options": { "x": 850, "y": 380, "distance": 345, "speed": 0.027 }
+          }
+        ]
+      }
+    ],
+    "player": {
+      "name": "ball_white",
+      "x": 250,
+      "y": 370
+    }
   }
 ]

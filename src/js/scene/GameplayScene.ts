@@ -66,7 +66,8 @@ export class GameplayScene extends Phaser.Scene {
         ballConf.y,
         constants.TEXTURE_ATLAS,
         ballConf.name || "ball_white",
-        ballConf.isStatic
+        ballConf.isStatic,
+        ballConf.behaviours
       );
       this.add.existing(ball);
       SpriteManager.Add(ball, "ball", ballConf);
