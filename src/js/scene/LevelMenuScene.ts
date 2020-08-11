@@ -63,9 +63,11 @@ export class LevelMenuScene extends Phaser.Scene {
       return accumulator;
     }, {});
 
-    const levelOrders = Object.keys(completedLevels).map((name) => {
-      return levelMap[name].order;
-    });
+    const levelOrders = Object.keys(completedLevels)
+      .filter((name) => levelMap[name])
+      .map((name) => {
+        return levelMap[name].order;
+      });
     const sortedLevels = LEVELS.sort((a, b) => a.order - b.order);
     const configLevelsLength = LEVELS.length;
     const nextLevel =
@@ -330,8 +332,9 @@ export class LevelMenuScene extends Phaser.Scene {
 
     // Move page to current level number. If coming from gameplay scene,
     // move to that page, otherwise the last one.
-    this.currentPageNum = Math.ceil(
-      (levelNumber || nextLevel) / LEVELS_PER_PAGE
+    this.currentPageNum = Math.min(
+      Math.ceil((levelNumber || nextLevel) / LEVELS_PER_PAGE),
+      this.pagesCount
     );
     camera.scrollX += config.width * (this.currentPageNum - 1);
 

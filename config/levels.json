@@ -1564,7 +1564,13 @@
         "behaviours": [
           {
             "name": "orbit",
-            "options": { "x": 850, "y": 380, "distance": 135, "speed": 0.015 }
+            "options": {
+              "x": 850,
+              "y": 380,
+              "distance": 135,
+              "speed": 0.015,
+              "satellite": { "name": "drop_dark" }
+            }
           }
         ]
       },
@@ -1588,7 +1594,13 @@
         "behaviours": [
           {
             "name": "orbit",
-            "options": { "x": 850, "y": 380, "distance": 275, "speed": 0.023 }
+            "options": {
+              "x": 850,
+              "y": 380,
+              "distance": 275,
+              "speed": 0.023,
+              "satellite": { "name": "drop_light" }
+            }
           }
         ]
       },
@@ -1600,7 +1612,12 @@
         "behaviours": [
           {
             "name": "orbit",
-            "options": { "x": 850, "y": 380, "distance": 345, "speed": 0.027 }
+            "options": {
+              "x": 850,
+              "y": 380,
+              "distance": 345,
+              "speed": 0.027
+            }
           }
         ]
       }
