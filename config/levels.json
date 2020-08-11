@@ -1548,7 +1548,7 @@
   {
     "name": "45",
     "order": 45,
-    "description": "Where am I? Here.",
+    "description": "Cup system",
     "cups": [
       {
         "x": 850,
@@ -1617,6 +1617,59 @@
               "y": 380,
               "distance": 345,
               "speed": 0.027
+            }
+          }
+        ]
+      }
+    ],
+    "player": {
+      "name": "ball_white",
+      "x": 250,
+      "y": 370
+    }
+  },
+  {
+    "name": "46",
+    "order": 46,
+    "description": "Orbiting bounce",
+    "cups": [
+      {
+        "x": 800,
+        "y": 380,
+        "angle": 45
+      }
+    ],
+    "tables_half": [
+      {
+        "x": 800,
+        "y": 200,
+        "angle": 80,
+        "isStatic": true,
+        "behaviours": [
+          {
+            "name": "orbit",
+            "options": {
+              "x": 800,
+              "y": 380,
+              "distance": 300,
+              "speed": -0.015
+            }
+          }
+        ]
+      },
+      {
+        "x": 800,
+        "y": 400,
+        "angle": 80,
+        "isStatic": true,
+        "behaviours": [
+          {
+            "name": "orbit",
+            "options": {
+              "x": 800,
+              "y": 380,
+              "distance": 300,
+              "speed": -0.015
             }
           }
         ]
