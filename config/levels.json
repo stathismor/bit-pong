@@ -1799,5 +1799,67 @@
       "angle": 180,
       "behaviours": [, { "name": "scale", "options": { "value": 2 } }]
     }
+  },
+  {
+    "name": "49",
+    "order": 49,
+    "description": "Drop",
+    "cups": [
+      {
+        "x": 876,
+        "y": 423
+      }
+    ],
+    "tables": [
+      {
+        "x": 800,
+        "y": 488
+      }
+    ],
+    "tables_half": [
+      {
+        "x": 800,
+        "y": 350,
+        "angle": 90
+      },
+      {
+        "x": 776,
+        "y": 350,
+        "angle": 90
+      },
+      {
+        "x": 752,
+        "y": 350,
+        "angle": 90
+      },
+      {
+        "x": 728,
+        "y": 350,
+        "angle": 90
+      },
+      {
+        "x": 704,
+        "y": 350,
+        "angle": 90
+      },
+      {
+        "x": 680,
+        "y": 350,
+        "angle": 90
+      }
+    ],
+    "balls": [
+      {
+        "x": 811,
+        "y": 170
+      }
+    ],
+    "player": {
+      "name": "drop_dark",
+      "x": 250,
+      "y": 370,
+      "angle": 180,
+      "behaviours": [, { "name": "scale", "options": { "value": 1.5 } }]
+    }
   }
 ]

@@ -179,7 +179,10 @@ export class Drag {
     // the hitArea (definidely enableDebug is, shows different area than actual one)
     // and it's hard to find a consistent way of setting a larger hit area, so we
     // hard-code one. At the time of writing this, this only exists for level 35.
-    if (this.owner.scale <= 0.25) {
+    if (
+      this.owner.scale <= 0.25 ||
+      this.owner.getData("name").startsWith("drop")
+    ) {
       this.owner.setInteractive(
         new Phaser.Geom.Circle(55, 55, 110),
         Phaser.Geom.Circle.Contains
