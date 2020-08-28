@@ -45,7 +45,7 @@ export class Drag {
     // TODO: REMOVE grey asseets
     const greyBall = scene.add.image(x, y, constants.TEXTURE_ATLAS, frame);
     greyBall.setScale(owner.scale * GREY_BALL_SCALE);
-    greyBall.setAlpha(0.07);
+    greyBall.setAlpha(0.1);
     greyBall.tint = "#d9d9d9";
     greyBall.rotation = angleRad;
 

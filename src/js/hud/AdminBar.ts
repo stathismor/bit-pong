@@ -21,7 +21,7 @@ export class AdminBar {
       .setDepth(constants.MAX_DEPTH)
       .setScrollFactor(0)
       .setInteractive();
-    this.image.on("pointerdown", () => {
+    this.image.on("pointerup", () => {
       this.scene.sound.play("button_click");
       this.updateSoundRegistry();
       this.updateSoundTexture();
@@ -38,7 +38,7 @@ export class AdminBar {
         .setDepth(constants.MAX_DEPTH)
         .setScrollFactor(0)
         .setInteractive();
-      exitButton.on("pointerdown", () => {
+      exitButton.on("pointerup", () => {
         this.scene.sound.play("button_click");
         this.scene.scene.start("StartMenuScene");
       });
@@ -55,7 +55,7 @@ export class AdminBar {
         .setDepth(constants.MAX_DEPTH)
         .setScrollFactor(0)
         .setInteractive();
-      selectLevelButton.on("pointerdown", () => {
+      selectLevelButton.on("pointerup", () => {
         this.scene.sound.play("button_click");
         this.scene.scene.start("LevelMenuScene", { levelNumber });
       });
@@ -74,7 +74,7 @@ export class AdminBar {
         .setScrollFactor(0);
       if (isEnabled) {
         retryButton.setInteractive();
-        retryButton.on("pointerdown", () => {
+        retryButton.on("pointerup", () => {
           this.scene.sound.play("button_click");
           this.scene.scene.start("GameplayScene", { levelNumber });
         });
