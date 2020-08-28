@@ -12,6 +12,11 @@ const GREY_BALL_SCALE = 1.6;
 const DEATH_DELAY = 650;
 const DRAG_RADIUS = 170;
 const IMMOBILE_CHECK_PERIOD = 200;
+const DRAGGABLE_SCALE_CIRCLE_CONSTANT = 45;
+const DRAGGABLE_SCALE_CIRCLE_MULTIPLIER = 12;
+const DRAGGABLE_SCALE_MULTIPLIER_X = 1.5;
+const DRAGGABLE_SCALE_MULTIPLIER_Y = 2.6;
+
 // As a failsafe, level ends after 12 seconds of throwing the ball
 const LEVEL_TIMEOUT = 12000;
 
@@ -179,19 +184,46 @@ export class Drag {
     // the hitArea (definidely enableDebug is, shows different area than actual one)
     // and it's hard to find a consistent way of setting a larger hit area, so we
     // hard-code one. At the time of writing this, this only exists for level 35.
+    const scale =
+      DRAGGABLE_SCALE_CIRCLE_CONSTANT +
+      DRAGGABLE_SCALE_CIRCLE_MULTIPLIER / this.owner.scale;
     if (
-      this.owner.scale <= 0.25 ||
+      this.owner.getData("name").startsWith("ball") ||
       this.owner.getData("name").startsWith("drop")
     ) {
       this.owner.setInteractive(
-        new Phaser.Geom.Circle(55, 55, 110),
+        new Phaser.Geom.Circle(
+          this.owner.width / 2,
+          this.owner.height / 2,
+          scale
+        ),
         Phaser.Geom.Circle.Contains
       );
-      // this.scene.input.enableDebug(this.owner, 0xff00ff); // Buggy :(
-      this.scene.input.setDraggable(this.owner);
+    } else if (
+      this.owner.getData("name").startsWith("table") ||
+      this.owner.getData("name").startsWith("cup")
+    ) {
+      const draggableWidth = this.owner.width * DRAGGABLE_SCALE_MULTIPLIER_X;
+      const draggableHeight = this.owner.getData("name").startsWith("table")
+        ? this.owner.height * DRAGGABLE_SCALE_MULTIPLIER_Y
+        : this.owner.height * DRAGGABLE_SCALE_MULTIPLIER_X;
+      const diffX = draggableWidth - this.owner.width;
+      const diffY = draggableHeight - this.owner.height;
+      this.owner.setInteractive(
+        new Phaser.Geom.Rectangle(
+          -diffX / 2,
+          -diffY / 2,
+          draggableWidth,
+          draggableHeight
+        ),
+        Phaser.Geom.Rectangle.Contains
+      );
     } else {
       this.owner.setInteractive({ draggable: true });
     }
+    this.scene.input.setDraggable(this.owner);
+    // @DEBUG
+    // this.scene.input.enableDebug(this.owner, 0xff00ff); // Buggy :(
   }
 
   reset(): void {
