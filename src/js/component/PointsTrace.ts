@@ -55,6 +55,10 @@ export default class PointsTrace {
 
       this.launched = true;
 
+      if (fadeOutTween) {
+        fadeOutTween.stop();
+      }
+
       this.tracePointsGroup.children.each((point) => {
         point.setVisible(false);
         point.setActive(false);
