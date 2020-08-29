@@ -1861,5 +1861,71 @@
       "angle": 180,
       "behaviours": [, { "name": "scale", "options": { "value": 1.5 } }]
     }
+  },
+
+  {
+    "name": "50",
+    "order": 50,
+    "description": "Ball in a ball",
+    "tables_half": [
+      {
+        "x": 820,
+        "y": 70
+      },
+      {
+        "x": 1043,
+        "y": 162,
+        "angle": 45
+      },
+      {
+        "x": 1136,
+        "y": 385,
+        "angle": 90
+      },
+      {
+        "x": 1043,
+        "y": 607,
+        "angle": 315
+      },
+      {
+        "x": 820,
+        "y": 700
+      },
+      {
+        "x": 597,
+        "y": 607,
+        "angle": 45
+      },
+      {
+        "x": 597,
+        "y": 162,
+        "angle": 315
+      }
+    ],
+    "balls": [
+      {
+        "x": 820,
+        "y": 385,
+        "isStatic": true,
+        "behaviours": [
+          {
+            "name": "randomPosition",
+            "options": {
+              "x": 700,
+              "y": 265,
+              "width": 320,
+              "height": 240,
+              "delay": 1600
+            }
+          }
+        ]
+      }
+    ],
+    "player": {
+      "name": "cup",
+      "x": 250,
+      "y": 370,
+      "angle": 90
+    }
   }
 ]
