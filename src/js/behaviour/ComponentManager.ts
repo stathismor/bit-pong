@@ -12,4 +12,8 @@ export class ComponentManager {
   static Update(delta): void {
     this.components.forEach((component) => component.update(delta));
   }
+
+  static GetComponents() {
+    return this.components;
+  }
 }

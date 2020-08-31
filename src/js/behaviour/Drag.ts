@@ -1,4 +1,6 @@
 import ProjectionLine from "../component/ProjectionLine";
+import { ComponentManager } from "../behaviour/ComponentManager";
+import { RandomPosition } from "../behaviour/RandomPosition";
 import PointsTrace from "../component/PointsTrace";
 import { OwnerTrace } from "../component/OwnerTrace";
 import * as constants from "../constants";
@@ -145,7 +147,14 @@ export class Drag {
     if (timeDiff > IMMOBILE_CHECK_PERIOD) {
       this.checkImmobileTime = new Date();
 
-      const sprites = [...SpriteManager.GetBalls(), this.owner];
+      // @HACK: Because of level where balls fall like rain, we consider that every time
+      // a RandomPosition behaviour exists, we do not check those sprites
+      const hasRandomPosition = ComponentManager.GetComponents().some(
+        (c) => c instanceof RandomPosition
+      );
+      const sprites = hasRandomPosition
+        ? [this.owner]
+        : [...SpriteManager.GetBalls(), this.owner];
 
       areSpritesInactive = sprites.every(
         (ball) => isSpriteImmobile(ball) || isOutsideWorld(ball)
