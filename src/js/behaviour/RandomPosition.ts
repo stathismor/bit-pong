@@ -7,8 +7,6 @@ export class RandomPosition {
     const delay = options.delay ? options.delay : RANDOM_POSITION_DELAY;
     this.resetMomentum = !!options.resetMomentum;
 
-    // console.log("options.isStatic", options.isStatic);
-    // console.log("this.isStatic", this.isStatic);
     this.delayedCall(scene, owner, x, y, width, height, delay);
   }
 

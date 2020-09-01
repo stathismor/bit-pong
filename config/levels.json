@@ -2433,5 +2433,56 @@
       "angle": 90,
       "behaviours": [, { "name": "scale", "options": { "value": 2 } }]
     }
+  },
+  {
+    "name": "57",
+    "order": 57,
+    "tables_half": [
+      {
+        "x": 20,
+        "y": 200,
+        "angle": 90,
+        "behaviours": [
+          {
+            "name": "move",
+            "options": {
+              "y": 520,
+              "direction": "horizontal"
+            }
+          }
+        ]
+      },
+      {
+        "x": 360,
+        "y": 200
+      },
+      {
+        "x": 496,
+        "y": 314,
+        "angle": 90
+      },
+      {
+        "x": 610,
+        "y": 452
+      }
+    ],
+    "balls": [
+      {
+        "x": 495,
+        "y": 150
+      }
+    ],
+    "cups": [
+      {
+        "x": 572,
+        "y": 387,
+        "angle": 0
+      }
+    ],
+    "player": {
+      "name": "ball_orange",
+      "x": 250,
+      "y": 430
+    }
   }
 ]
