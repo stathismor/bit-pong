@@ -524,8 +524,53 @@
     }
   },
   {
-    "name": "17",
+    "name": "60",
     "order": 17,
+    "tables_half": [
+      {
+        "x": 700,
+        "y": 300,
+        "angle": 90
+      },
+      {
+        "x": 928,
+        "y": 300,
+        "angle": 90
+      },
+      {
+        "x": 814,
+        "y": 438
+      },
+      {
+        "x": 814,
+        "y": 162,
+        "behaviours": [
+          {
+            "name": "move",
+            "options": {
+              "y": 90,
+              "direction": "horizontal"
+            }
+          }
+        ]
+      }
+    ],
+    "cups": [
+      {
+        "x": 814,
+        "y": 373
+      }
+    ],
+    "player": {
+      "name": "ball_white",
+      "x": 250,
+      "y": 418,
+      "angle": 180
+    }
+  },
+  {
+    "name": "17",
+    "order": 18,
     "balls": [
       {
         "x": 800,
@@ -543,7 +588,7 @@
   },
   {
     "name": "18",
-    "order": 18,
+    "order": 19,
     "tables": [
       {
         "x": 750,
@@ -578,7 +623,7 @@
   },
   {
     "name": "19",
-    "order": 19,
+    "order": 20,
     "tables_half": [
       {
         "x": 620,
@@ -606,7 +651,7 @@
   },
   {
     "name": "20",
-    "order": 20,
+    "order": 21,
     "description": "Rotating player cup",
     "balls": [
       {
@@ -628,7 +673,7 @@
   },
   {
     "name": "21",
-    "order": 21,
+    "order": 22,
     "cups": [
       {
         "x": 856,
@@ -657,7 +702,7 @@
   },
   {
     "name": "22",
-    "order": 22,
+    "order": 23,
     "tables_half": [
       {
         "x": 800,
@@ -710,7 +755,7 @@
   },
   {
     "name": "23",
-    "order": 23,
+    "order": 24,
     "tables_half": [
       {
         "x": 870,
@@ -748,7 +793,7 @@
   },
   {
     "name": "24",
-    "order": 24,
+    "order": 25,
     "description": "Snooker rookie",
     "cups": [
       {
@@ -778,7 +823,7 @@
   },
   {
     "name": "25",
-    "order": 25,
+    "order": 26,
     "description": "Snooker pro",
     "cups": [
       {
@@ -813,7 +858,7 @@
   },
   {
     "name": "26",
-    "order": 26,
+    "order": 27,
     "description": "Snooker god",
     "cups": [
       {
@@ -845,8 +890,197 @@
     }
   },
   {
+    "name": "57",
+    "order": 28,
+    "tables_half": [
+      {
+        "x": 20,
+        "y": 200,
+        "angle": 90,
+        "behaviours": [
+          {
+            "name": "move",
+            "options": {
+              "y": 520,
+              "direction": "horizontal"
+            }
+          }
+        ]
+      },
+      {
+        "x": 360,
+        "y": 200
+      },
+      {
+        "x": 496,
+        "y": 314,
+        "angle": 90
+      },
+      {
+        "x": 610,
+        "y": 452
+      }
+    ],
+    "balls": [
+      {
+        "x": 495,
+        "y": 150
+      }
+    ],
+    "cups": [
+      {
+        "x": 572,
+        "y": 387,
+        "angle": 0
+      }
+    ],
+    "player": {
+      "name": "ball_orange",
+      "x": 250,
+      "y": 430
+    }
+  },
+  {
+    "name": "58",
+    "order": 29,
+    "tables_half": [
+      {
+        "x": 600,
+        "y": 440,
+        "angle": 0
+      }
+    ],
+    "balls": [{ "x": 725, "y": 380 }],
+    "cups": [
+      {
+        "x": 717,
+        "y": 610,
+        "angle": 0
+      }
+    ],
+    "player": {
+      "name": "ball_orange",
+      "x": 250,
+      "y": 370
+    }
+  },
+  {
+    "name": "32",
+    "order": 30,
+    "description": "Who's a big ball",
+    "tables": [
+      {
+        "x": 735,
+        "y": 439
+      }
+    ],
+    "cups": [
+      {
+        "x": 1100,
+        "y": 520
+      }
+    ],
+    "balls": [
+      {
+        "x": 847,
+        "y": 360,
+        "angle": 0
+      },
+      {
+        "x": 921,
+        "y": 360,
+        "angle": 0
+      },
+      {
+        "x": 794,
+        "y": 360,
+        "angle": 0
+      },
+      {
+        "x": 985,
+        "y": 360,
+        "angle": 0
+      }
+    ],
+    "player": {
+      "name": "ball_white",
+      "x": 250,
+      "y": 225,
+      "behaviours": [{ "name": "scale", "options": { "value": 2 } }]
+    }
+  },
+  {
+    "name": "34",
+    "order": 31,
+    "description": "Big in big",
+    "cups": [
+      {
+        "x": 900,
+        "y": 590,
+        "behaviours": [{ "name": "scale", "options": { "value": 2 } }]
+      },
+      {
+        "x": 709,
+        "y": 376,
+        "angle": 90
+      },
+      {
+        "x": 1091,
+        "y": 376,
+        "angle": 270
+      },
+      {
+        "x": 759,
+        "y": 264,
+        "angle": 90
+      },
+      {
+        "x": 1041,
+        "y": 264,
+        "angle": 270
+      }
+    ],
+    "balls": [
+      {
+        "x": 1900,
+        "y": 180,
+        "angle": 0
+      }
+    ],
+    "player": {
+      "name": "ball_white",
+      "x": 250,
+      "y": 370,
+      "behaviours": [{ "name": "scale", "options": { "value": 2 } }]
+    }
+  },
+  {
+    "name": "35",
+    "order": 32,
+    "description": "Where's the ball?",
+    "tables": [
+      {
+        "x": 640,
+        "y": 360
+      }
+    ],
+    "cups": [
+      {
+        "x": 640,
+        "y": 322,
+        "behaviours": [{ "name": "scale", "options": { "value": 0.5 } }]
+      }
+    ],
+    "player": {
+      "name": "ball_white",
+      "x": 128,
+      "y": 32,
+      "behaviours": [{ "name": "scale", "options": { "value": 0.25 } }]
+    }
+  },
+  {
     "name": "27",
-    "order": 27,
+    "order": 33,
     "description": "Fountain shot",
     "tables": [
       {
@@ -877,7 +1111,7 @@
   },
   {
     "name": "28",
-    "order": 28,
+    "order": 34,
     "description": "Fountain pool shot",
     "cups": [
       {
@@ -908,7 +1142,7 @@
   },
   {
     "name": "29",
-    "order": 29,
+    "order": 35,
     "description": "Fountain pool shot with three cups",
     "cups": [
       {
@@ -953,7 +1187,7 @@
   },
   {
     "name": "30",
-    "order": 30,
+    "order": 36,
     "description": "Fountain domino",
     "cups": [
       {
@@ -1012,7 +1246,7 @@
   },
   {
     "name": "31",
-    "order": 31,
+    "order": 37,
     "description": "Rotating fountains",
     "cups": [
       {
@@ -1099,53 +1333,108 @@
     }
   },
   {
-    "name": "32",
-    "order": 32,
-    "description": "Who's a big ball",
-    "tables": [
-      {
-        "x": 735,
-        "y": 439
-      }
-    ],
+    "name": "55",
+    "order": 38,
+    "description": "I heard you like fountains",
     "cups": [
       {
-        "x": 1100,
-        "y": 520
+        "x": 650,
+        "y": 500,
+        "behaviours": [
+          {
+            "name": "fountain"
+          }
+        ]
+      },
+      {
+        "x": 650,
+        "y": 150,
+        "angle": 180,
+        "behaviours": [
+          {
+            "name": "fountain"
+          }
+        ]
+      },
+      {
+        "x": 778,
+        "y": 500,
+        "behaviours": [
+          {
+            "name": "fountain"
+          }
+        ]
+      },
+      {
+        "x": 778,
+        "y": 150,
+        "angle": 180,
+        "behaviours": [
+          {
+            "name": "fountain"
+          }
+        ]
+      },
+      {
+        "x": 906,
+        "y": 500,
+        "behaviours": [
+          {
+            "name": "fountain"
+          }
+        ]
+      },
+      {
+        "x": 906,
+        "y": 150,
+        "angle": 180,
+        "behaviours": [
+          {
+            "name": "fountain"
+          }
+        ]
+      },
+      {
+        "x": 1034,
+        "y": 500,
+        "behaviours": [
+          {
+            "name": "move",
+            "options": {
+              "x": 1200,
+              "direction": "horizontal"
+            }
+          }
+        ]
       }
     ],
     "balls": [
       {
-        "x": 847,
-        "y": 360,
-        "angle": 0
+        "name": "ball_orange",
+        "x": 650,
+        "y": 300
       },
       {
-        "x": 921,
-        "y": 360,
-        "angle": 0
+        "name": "ball_white",
+        "x": 778,
+        "y": 300
       },
       {
-        "x": 794,
-        "y": 360,
-        "angle": 0
-      },
-      {
-        "x": 985,
-        "y": 360,
-        "angle": 0
+        "name": "ball_orange",
+        "x": 906,
+        "y": 300
       }
     ],
     "player": {
-      "name": "ball_white",
+      "name": "ball_orange",
       "x": 250,
-      "y": 225,
-      "behaviours": [{ "name": "scale", "options": { "value": 2 } }]
+      "y": 370,
+      "angle": 90
     }
   },
   {
     "name": "33",
-    "order": 33,
+    "order": 39,
     "description": "Swallow",
     "cups": [
       {
@@ -1170,77 +1459,137 @@
     }
   },
   {
-    "name": "34",
-    "order": 34,
-    "description": "Big in big",
+    "name": "49",
+    "order": 40,
+    "description": "Drop",
     "cups": [
       {
-        "x": 900,
-        "y": 590,
-        "behaviours": [{ "name": "scale", "options": { "value": 2 } }]
-      },
+        "x": 876,
+        "y": 423
+      }
+    ],
+    "tables": [
       {
-        "x": 709,
-        "y": 376,
+        "x": 800,
+        "y": 488
+      }
+    ],
+    "tables_half": [
+      {
+        "x": 800,
+        "y": 350,
         "angle": 90
       },
       {
-        "x": 1091,
-        "y": 376,
-        "angle": 270
-      },
-      {
-        "x": 759,
-        "y": 264,
+        "x": 776,
+        "y": 350,
         "angle": 90
       },
       {
-        "x": 1041,
-        "y": 264,
-        "angle": 270
+        "x": 752,
+        "y": 350,
+        "angle": 90
+      },
+      {
+        "x": 728,
+        "y": 350,
+        "angle": 90
+      },
+      {
+        "x": 704,
+        "y": 350,
+        "angle": 90
+      },
+      {
+        "x": 680,
+        "y": 350,
+        "angle": 90
       }
     ],
     "balls": [
       {
-        "x": 1900,
-        "y": 180,
-        "angle": 0
+        "x": 811,
+        "y": 170
       }
     ],
     "player": {
-      "name": "ball_white",
+      "name": "drop_dark",
       "x": 250,
       "y": 370,
-      "behaviours": [{ "name": "scale", "options": { "value": 2 } }]
+      "angle": 180,
+      "behaviours": [, { "name": "scale", "options": { "value": 1.5 } }]
     }
   },
   {
-    "name": "35",
-    "order": 35,
-    "description": "Where's the ball?",
-    "tables": [
+    "name": "56",
+    "order": 41,
+    "description": "Route",
+    "tables_half": [
       {
-        "x": 640,
-        "y": 360
+        "x": 602,
+        "y": 190,
+        "angle": 340
+      },
+      {
+        "x": 602,
+        "y": 254,
+        "angle": 340
+      },
+      {
+        "x": 851,
+        "y": 146
+      },
+      {
+        "x": 851,
+        "y": 210
+      },
+      {
+        "x": 1085,
+        "y": 557,
+        "angle": 90
+      },
+      {
+        "x": 1109,
+        "y": 557,
+        "angle": 90
+      },
+      {
+        "x": 1103,
+        "y": 695
+      }
+    ],
+    "balls": [
+      {
+        "x": 1035,
+        "y": 150
+      },
+      {
+        "x": 1077,
+        "y": 380
       }
     ],
     "cups": [
       {
-        "x": 640,
-        "y": 322,
-        "behaviours": [{ "name": "scale", "options": { "value": 0.5 } }]
+        "x": 1009,
+        "y": 274,
+        "angle": 180
+      },
+      {
+        "x": 1009,
+        "y": 630
       }
     ],
     "player": {
-      "name": "ball_white",
-      "x": 128,
-      "y": 32,
-      "behaviours": [{ "name": "scale", "options": { "value": 0.25 } }]
+      "name": "drop_dark",
+      "x": 250,
+      "y": 370,
+      "angle": 90,
+      "behaviours": [, { "name": "scale", "options": { "value": 2 } }]
     }
   },
   {
     "name": "36",
-    "order": 36,
+    "order": 42,
     "description": "Where's the ball?",
     "tables_half": [
       {
@@ -1280,7 +1629,7 @@
   },
   {
     "name": "37",
-    "order": 37,
+    "order": 43,
     "cups": [
       {
         "x": 800,
@@ -1300,7 +1649,7 @@
   },
   {
     "name": "38",
-    "order": 38,
+    "order": 44,
     "cups": [
       {
         "x": 750,
@@ -1329,7 +1678,7 @@
   },
   {
     "name": "39",
-    "order": 39,
+    "order": 45,
     "tables": [
       {
         "x": 540,
@@ -1362,7 +1711,7 @@
   },
   {
     "name": "40",
-    "order": 40,
+    "order": 46,
     "description": "Random tables",
     "cups": [
       {
@@ -1425,7 +1774,7 @@
   },
   {
     "name": "41",
-    "order": 41,
+    "order": 47,
     "description": "Random cup",
     "cups": [
       {
@@ -1446,425 +1795,8 @@
     }
   },
   {
-    "name": "42",
-    "order": 42,
-    "description": "Where am I?",
-    "cups": [
-      {
-        "x": 333,
-        "y": 500,
-        "angle": 330
-      }
-    ],
-    "tables": [
-      {
-        "x": 520,
-        "y": 270
-      }
-    ],
-    "tables_half": [
-      {
-        "x": 150,
-        "y": 291,
-        "angle": 90
-      }
-    ],
-    "player": {
-      "name": "ball_white",
-      "x": 667,
-      "y": 30,
-      "depth": 110,
-      "behaviours": [{ "name": "scale", "options": { "value": 0.28 } }]
-    }
-  },
-  {
-    "name": "43",
-    "order": 43,
-    "description": "Where am I? Here.",
-    "cups": [
-      {
-        "x": 790,
-        "y": 460,
-        "angle": 330
-      }
-    ],
-    "tables_half": [
-      {
-        "x": 640,
-        "y": 291,
-        "angle": 90
-      },
-      {
-        "x": 820,
-        "y": 270
-      }
-    ],
-    "player": {
-      "name": "ball_white",
-      "x": 1092,
-      "y": 55,
-      "depth": 110,
-      "behaviours": [{ "name": "scale", "options": { "value": 0.25 } }]
-    }
-  },
-  {
-    "name": "44",
-    "order": 44,
-    "description": "Where am I? Here.",
-    "cups": [
-      {
-        "x": 850,
-        "y": 380,
-        "behaviours": [
-          {
-            "name": "rotate",
-            "options": { "direction": -1 }
-          }
-        ]
-      }
-    ],
-    "balls": [
-      {
-        "name": "ball_orange",
-        "x": 850,
-        "y": 380,
-        "isStatic": true,
-        "behaviours": [
-          {
-            "name": "orbit",
-            "options": { "x": 850, "y": 380, "distance": 200, "speed": 0.05 }
-          }
-        ]
-      }
-    ],
-    "player": {
-      "name": "ball_white",
-      "x": 250,
-      "y": 370
-    }
-  },
-  {
-    "name": "45",
-    "order": 45,
-    "description": "Cup system",
-    "cups": [
-      {
-        "x": 850,
-        "y": 380,
-        "behaviours": [
-          {
-            "name": "orbit",
-            "options": {
-              "x": 880,
-              "y": 380,
-              "distance": 4,
-              "speed": 0.04
-            }
-          }
-        ]
-      }
-    ],
-    "balls": [
-      {
-        "name": "ball_orange",
-        "x": 850,
-        "y": 200,
-        "isStatic": true,
-        "behaviours": [
-          {
-            "name": "orbit",
-            "options": {
-              "x": 850,
-              "y": 380,
-              "distance": 155,
-              "speed": 0.015,
-              "satellite": { "name": "drop_dark" }
-            }
-          }
-        ]
-      },
-      {
-        "name": "ball_orange",
-        "x": 1000,
-        "y": 380,
-        "isStatic": true,
-        "behaviours": [
-          {
-            "name": "orbit",
-            "options": { "x": 850, "y": 380, "distance": 223, "speed": 0.019 }
-          }
-        ]
-      },
-      {
-        "name": "ball_orange",
-        "x": 850,
-        "y": 500,
-        "isStatic": true,
-        "behaviours": [
-          {
-            "name": "orbit",
-            "options": {
-              "x": 850,
-              "y": 380,
-              "distance": 293,
-              "speed": 0.023,
-              "satellite": { "name": "drop_light" }
-            }
-          }
-        ]
-      },
-      {
-        "name": "ball_orange",
-        "x": 400,
-        "y": 380,
-        "isStatic": true,
-        "behaviours": [
-          {
-            "name": "orbit",
-            "options": {
-              "x": 850,
-              "y": 380,
-              "distance": 363,
-              "speed": 0.027
-            }
-          }
-        ]
-      }
-    ],
-    "player": {
-      "name": "ball_white",
-      "x": 250,
-      "y": 370
-    }
-  },
-  {
-    "name": "46",
-    "order": 46,
-    "description": "Orbiting bounce",
-    "cups": [
-      {
-        "x": 800,
-        "y": 380,
-        "angle": 45
-      }
-    ],
-    "tables_half": [
-      {
-        "x": 800,
-        "y": 200,
-        "angle": 80,
-        "isStatic": true,
-        "behaviours": [
-          {
-            "name": "orbit",
-            "options": {
-              "x": 800,
-              "y": 380,
-              "distance": 300,
-              "speed": -0.015
-            }
-          }
-        ]
-      },
-      {
-        "x": 800,
-        "y": 400,
-        "angle": 80,
-        "isStatic": true,
-        "behaviours": [
-          {
-            "name": "orbit",
-            "options": {
-              "x": 800,
-              "y": 380,
-              "distance": 300,
-              "speed": -0.015
-            }
-          }
-        ]
-      }
-    ],
-    "player": {
-      "name": "ball_white",
-      "x": 250,
-      "y": 370
-    }
-  },
-  {
-    "name": "47",
-    "order": 47,
-    "description": "Wanna get high?",
-    "cups": [
-      {
-        "x": 830,
-        "y": 89
-      }
-    ],
-    "player": {
-      "name": "ball_white",
-      "x": 335,
-      "y": 55
-    }
-  },
-  {
-    "name": "48",
-    "order": 48,
-    "description": "Planet eater",
-    "cups": [
-      {
-        "x": 700,
-        "y": 400,
-        "angle": 45,
-        "behaviours": [
-          {
-            "name": "orbit",
-            "options": {
-              "x": 900,
-              "y": 380,
-              "distance": 177,
-              "speed": -0.005
-            }
-          },
-          {
-            "name": "rotate",
-            "options": {
-              "speed": 0.00055
-            }
-          },
-          { "name": "scale", "options": { "value": 0.5 } }
-        ]
-      }
-    ],
-    "tables_half": [
-      {
-        "x": 900,
-        "y": 300,
-        "isStatic": true,
-        "behaviours": [
-          {
-            "name": "orbit",
-            "options": {
-              "x": 900,
-              "y": 380,
-              "distance": 285,
-              "speed": 0.007
-            }
-          },
-          {
-            "name": "rotate",
-            "options": {
-              "speed": 0.001
-            }
-          },
-          { "name": "scale", "options": { "value": 0.5 } }
-        ]
-      }
-    ],
-    "balls": [
-      {
-        "name": "ball_orange",
-        "x": 900,
-        "y": 380,
-        "isStatic": true,
-        "behaviours": [
-          {
-            "name": "rotate",
-            "options": {
-              "speed": -0.0004
-            }
-          }
-        ]
-      },
-      {
-        "x": 900,
-        "y": 380,
-        "isStatic": true,
-        "behaviours": [
-          {
-            "name": "orbit",
-            "options": {
-              "x": 900,
-              "y": 380,
-              "distance": 90,
-              "speed": 0.03
-            }
-          }
-        ]
-      }
-    ],
-    "player": {
-      "name": "cup",
-      "x": 250,
-      "y": 370,
-      "angle": 180,
-      "behaviours": [, { "name": "scale", "options": { "value": 2 } }]
-    }
-  },
-  {
-    "name": "49",
-    "order": 49,
-    "description": "Drop",
-    "cups": [
-      {
-        "x": 876,
-        "y": 423
-      }
-    ],
-    "tables": [
-      {
-        "x": 800,
-        "y": 488
-      }
-    ],
-    "tables_half": [
-      {
-        "x": 800,
-        "y": 350,
-        "angle": 90
-      },
-      {
-        "x": 776,
-        "y": 350,
-        "angle": 90
-      },
-      {
-        "x": 752,
-        "y": 350,
-        "angle": 90
-      },
-      {
-        "x": 728,
-        "y": 350,
-        "angle": 90
-      },
-      {
-        "x": 704,
-        "y": 350,
-        "angle": 90
-      },
-      {
-        "x": 680,
-        "y": 350,
-        "angle": 90
-      }
-    ],
-    "balls": [
-      {
-        "x": 811,
-        "y": 170
-      }
-    ],
-    "player": {
-      "name": "drop_dark",
-      "x": 250,
-      "y": 370,
-      "angle": 180,
-      "behaviours": [, { "name": "scale", "options": { "value": 1.5 } }]
-    }
-  },
-  {
     "name": "50",
-    "order": 50,
+    "order": 48,
     "description": "Ball in a ball",
     "tables_half": [
       {
@@ -1929,7 +1861,7 @@
   },
   {
     "name": "51",
-    "order": 51,
+    "order": 49,
     "description": "rain",
     "balls": [
       {
@@ -2056,8 +1988,40 @@
     }
   },
   {
+    "name": "42",
+    "order": 50,
+    "description": "Where am I?",
+    "cups": [
+      {
+        "x": 333,
+        "y": 500,
+        "angle": 330
+      }
+    ],
+    "tables": [
+      {
+        "x": 520,
+        "y": 270
+      }
+    ],
+    "tables_half": [
+      {
+        "x": 150,
+        "y": 291,
+        "angle": 90
+      }
+    ],
+    "player": {
+      "name": "ball_white",
+      "x": 667,
+      "y": 30,
+      "depth": 110,
+      "behaviours": [{ "name": "scale", "options": { "value": 0.28 } }]
+    }
+  },
+  {
     "name": "52",
-    "order": 52,
+    "order": 51,
     "description": "rain",
     "tables": [
       {
@@ -2126,7 +2090,7 @@
   },
   {
     "name": "53",
-    "order": 53,
+    "order": 52,
     "description": "Bounce. Bounce, bounce, bounce, bounce.",
     "tables": [
       {
@@ -2204,6 +2168,22 @@
     }
   },
   {
+    "name": "47",
+    "order": 53,
+    "description": "Wanna get high?",
+    "cups": [
+      {
+        "x": 830,
+        "y": 89
+      }
+    ],
+    "player": {
+      "name": "ball_white",
+      "x": 335,
+      "y": 55
+    }
+  },
+  {
     "name": "54",
     "order": 54,
     "description": "Pyramid",
@@ -2268,250 +2248,74 @@
     }
   },
   {
-    "name": "55",
+    "name": "43",
     "order": 55,
-    "description": "I heard you like fountains",
+    "description": "Where am I? Here.",
     "cups": [
       {
-        "x": 650,
-        "y": 500,
-        "behaviours": [
-          {
-            "name": "fountain"
-          }
-        ]
-      },
-      {
-        "x": 650,
-        "y": 150,
-        "angle": 180,
-        "behaviours": [
-          {
-            "name": "fountain"
-          }
-        ]
-      },
-      {
-        "x": 778,
-        "y": 500,
-        "behaviours": [
-          {
-            "name": "fountain"
-          }
-        ]
-      },
-      {
-        "x": 778,
-        "y": 150,
-        "angle": 180,
-        "behaviours": [
-          {
-            "name": "fountain"
-          }
-        ]
-      },
-      {
-        "x": 906,
-        "y": 500,
-        "behaviours": [
-          {
-            "name": "fountain"
-          }
-        ]
-      },
-      {
-        "x": 906,
-        "y": 150,
-        "angle": 180,
-        "behaviours": [
-          {
-            "name": "fountain"
-          }
-        ]
-      },
-      {
-        "x": 1034,
-        "y": 500,
-        "behaviours": [
-          {
-            "name": "move",
-            "options": {
-              "x": 1200,
-              "direction": "horizontal"
-            }
-          }
-        ]
+        "x": 790,
+        "y": 460,
+        "angle": 330
       }
     ],
-    "balls": [
+    "tables_half": [
       {
-        "name": "ball_orange",
-        "x": 650,
-        "y": 300
+        "x": 640,
+        "y": 291,
+        "angle": 90
       },
       {
-        "name": "ball_white",
-        "x": 778,
-        "y": 300
-      },
-      {
-        "name": "ball_orange",
-        "x": 906,
-        "y": 300
+        "x": 820,
+        "y": 270
       }
     ],
     "player": {
-      "name": "ball_orange",
-      "x": 250,
-      "y": 370,
-      "angle": 90
+      "name": "ball_white",
+      "x": 1092,
+      "y": 55,
+      "depth": 110,
+      "behaviours": [{ "name": "scale", "options": { "value": 0.25 } }]
     }
   },
   {
-    "name": "56",
+    "name": "44",
     "order": 56,
-    "description": "Route",
-    "tables_half": [
-      {
-        "x": 602,
-        "y": 190,
-        "angle": 340
-      },
-      {
-        "x": 602,
-        "y": 254,
-        "angle": 340
-      },
-      {
-        "x": 851,
-        "y": 146
-      },
-      {
-        "x": 851,
-        "y": 210
-      },
-      {
-        "x": 1085,
-        "y": 557,
-        "angle": 90
-      },
-      {
-        "x": 1109,
-        "y": 557,
-        "angle": 90
-      },
-      {
-        "x": 1103,
-        "y": 695
-      }
-    ],
-    "balls": [
-      {
-        "x": 1035,
-        "y": 150
-      },
-      {
-        "x": 1077,
-        "y": 380
-      }
-    ],
+    "description": "Where am I? Here.",
     "cups": [
       {
-        "x": 1009,
-        "y": 274,
-        "angle": 180
-      },
-      {
-        "x": 1009,
-        "y": 630
-      }
-    ],
-    "player": {
-      "name": "drop_dark",
-      "x": 250,
-      "y": 370,
-      "angle": 90,
-      "behaviours": [, { "name": "scale", "options": { "value": 2 } }]
-    }
-  },
-  {
-    "name": "57",
-    "order": 57,
-    "tables_half": [
-      {
-        "x": 20,
-        "y": 200,
-        "angle": 90,
+        "x": 850,
+        "y": 380,
         "behaviours": [
           {
-            "name": "move",
-            "options": {
-              "y": 520,
-              "direction": "horizontal"
-            }
+            "name": "rotate",
+            "options": { "direction": -1 }
           }
         ]
-      },
-      {
-        "x": 360,
-        "y": 200
-      },
-      {
-        "x": 496,
-        "y": 314,
-        "angle": 90
-      },
-      {
-        "x": 610,
-        "y": 452
       }
     ],
     "balls": [
       {
-        "x": 495,
-        "y": 150
-      }
-    ],
-    "cups": [
-      {
-        "x": 572,
-        "y": 387,
-        "angle": 0
-      }
-    ],
-    "player": {
-      "name": "ball_orange",
-      "x": 250,
-      "y": 430
-    }
-  },
-  {
-    "name": "58",
-    "order": 58,
-    "tables_half": [
-      {
-        "x": 600,
-        "y": 440,
-        "angle": 0
-      }
-    ],
-    "balls": [{ "x": 725, "y": 380 }],
-    "cups": [
-      {
-        "x": 717,
-        "y": 610,
-        "angle": 0
+        "name": "ball_orange",
+        "x": 850,
+        "y": 380,
+        "isStatic": true,
+        "behaviours": [
+          {
+            "name": "orbit",
+            "options": { "x": 850, "y": 380, "distance": 200, "speed": 0.05 }
+          }
+        ]
       }
     ],
     "player": {
-      "name": "ball_orange",
+      "name": "ball_white",
       "x": 250,
       "y": 370
     }
   },
   {
     "name": "59",
-    "order": 59,
+    "order": 57,
     "balls": [
       {
         "name": "ball_orange",
@@ -2553,48 +2357,244 @@
     }
   },
   {
-    "name": "60",
-    "order": 60,
-    "tables_half": [
+    "name": "45",
+    "order": 58,
+    "description": "Cup system",
+    "cups": [
       {
-        "x": 700,
-        "y": 300,
-        "angle": 90
-      },
-      {
-        "x": 928,
-        "y": 300,
-        "angle": 90
-      },
-      {
-        "x": 814,
-        "y": 438
-      },
-      {
-        "x": 814,
-        "y": 162,
+        "x": 850,
+        "y": 380,
         "behaviours": [
           {
-            "name": "move",
+            "name": "orbit",
             "options": {
-              "y": 90,
-              "direction": "horizontal"
+              "x": 880,
+              "y": 380,
+              "distance": 4,
+              "speed": 0.04
             }
           }
         ]
       }
     ],
-    "cups": [
+    "balls": [
       {
-        "x": 814,
-        "y": 373
+        "name": "ball_orange",
+        "x": 850,
+        "y": 200,
+        "isStatic": true,
+        "behaviours": [
+          {
+            "name": "orbit",
+            "options": {
+              "x": 850,
+              "y": 380,
+              "distance": 155,
+              "speed": 0.015,
+              "satellite": { "name": "drop_dark" }
+            }
+          }
+        ]
+      },
+      {
+        "name": "ball_orange",
+        "x": 1000,
+        "y": 380,
+        "isStatic": true,
+        "behaviours": [
+          {
+            "name": "orbit",
+            "options": { "x": 850, "y": 380, "distance": 223, "speed": 0.019 }
+          }
+        ]
+      },
+      {
+        "name": "ball_orange",
+        "x": 850,
+        "y": 500,
+        "isStatic": true,
+        "behaviours": [
+          {
+            "name": "orbit",
+            "options": {
+              "x": 850,
+              "y": 380,
+              "distance": 293,
+              "speed": 0.023,
+              "satellite": { "name": "drop_light" }
+            }
+          }
+        ]
+      },
+      {
+        "name": "ball_orange",
+        "x": 400,
+        "y": 380,
+        "isStatic": true,
+        "behaviours": [
+          {
+            "name": "orbit",
+            "options": {
+              "x": 850,
+              "y": 380,
+              "distance": 363,
+              "speed": 0.027
+            }
+          }
+        ]
       }
     ],
     "player": {
       "name": "ball_white",
       "x": 250,
-      "y": 418,
-      "angle": 180
+      "y": 370
+    }
+  },
+  {
+    "name": "46",
+    "order": 59,
+    "description": "Orbiting bounce",
+    "cups": [
+      {
+        "x": 800,
+        "y": 380,
+        "angle": 45
+      }
+    ],
+    "tables_half": [
+      {
+        "x": 800,
+        "y": 200,
+        "angle": 80,
+        "isStatic": true,
+        "behaviours": [
+          {
+            "name": "orbit",
+            "options": {
+              "x": 800,
+              "y": 380,
+              "distance": 300,
+              "speed": -0.015
+            }
+          }
+        ]
+      },
+      {
+        "x": 800,
+        "y": 400,
+        "angle": 80,
+        "isStatic": true,
+        "behaviours": [
+          {
+            "name": "orbit",
+            "options": {
+              "x": 800,
+              "y": 380,
+              "distance": 300,
+              "speed": -0.015
+            }
+          }
+        ]
+      }
+    ],
+    "player": {
+      "name": "ball_white",
+      "x": 250,
+      "y": 370
+    }
+  },
+  {
+    "name": "48",
+    "order": 60,
+    "description": "Planet eater",
+    "cups": [
+      {
+        "x": 700,
+        "y": 400,
+        "angle": 45,
+        "behaviours": [
+          {
+            "name": "orbit",
+            "options": {
+              "x": 900,
+              "y": 380,
+              "distance": 177,
+              "speed": -0.005
+            }
+          },
+          {
+            "name": "rotate",
+            "options": {
+              "speed": 0.00055
+            }
+          },
+          { "name": "scale", "options": { "value": 0.5 } }
+        ]
+      }
+    ],
+    "tables_half": [
+      {
+        "x": 900,
+        "y": 300,
+        "isStatic": true,
+        "behaviours": [
+          {
+            "name": "orbit",
+            "options": {
+              "x": 900,
+              "y": 380,
+              "distance": 285,
+              "speed": 0.007
+            }
+          },
+          {
+            "name": "rotate",
+            "options": {
+              "speed": 0.001
+            }
+          },
+          { "name": "scale", "options": { "value": 0.5 } }
+        ]
+      }
+    ],
+    "balls": [
+      {
+        "name": "ball_orange",
+        "x": 900,
+        "y": 380,
+        "isStatic": true,
+        "behaviours": [
+          {
+            "name": "rotate",
+            "options": {
+              "speed": -0.0004
+            }
+          }
+        ]
+      },
+      {
+        "x": 900,
+        "y": 380,
+        "isStatic": true,
+        "behaviours": [
+          {
+            "name": "orbit",
+            "options": {
+              "x": 900,
+              "y": 380,
+              "distance": 90,
+              "speed": 0.03
+            }
+          }
+        ]
+      }
+    ],
+    "player": {
+      "name": "cup",
+      "x": 250,
+      "y": 370,
+      "angle": 180,
+      "behaviours": [, { "name": "scale", "options": { "value": 2 } }]
     }
   }
 ]
