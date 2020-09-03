@@ -1944,7 +1944,7 @@
               "y": -40,
               "width": 10,
               "height": 10,
-              "delay": 1300,
+              "delay": 1600,
               "resetMomentum": true
             }
           }
@@ -1962,7 +1962,7 @@
               "y": -350,
               "width": 10,
               "height": 10,
-              "delay": 2500,
+              "delay": 2800,
               "resetMomentum": true
             }
           }
@@ -1980,7 +1980,7 @@
               "y": -50,
               "width": 10,
               "height": 10,
-              "delay": 3000,
+              "delay": 3300,
               "resetMomentum": true
             }
           }
@@ -1998,7 +1998,7 @@
               "y": -200,
               "width": 10,
               "height": 10,
-              "delay": 2800,
+              "delay": 3100,
               "resetMomentum": true
             }
           }
@@ -2016,7 +2016,7 @@
               "y": -50,
               "width": 10,
               "height": 10,
-              "delay": 2200,
+              "delay": 2500,
               "resetMomentum": true
             }
           }
@@ -2034,7 +2034,7 @@
               "y": -300,
               "width": 10,
               "height": 10,
-              "delay": 2500,
+              "delay": 2800,
               "resetMomentum": true
             }
           }
@@ -2549,6 +2549,51 @@
       "name": "cup",
       "x": 250,
       "y": 370,
+      "angle": 180
+    }
+  },
+  {
+    "name": "60",
+    "order": 60,
+    "tables_half": [
+      {
+        "x": 700,
+        "y": 300,
+        "angle": 90
+      },
+      {
+        "x": 928,
+        "y": 300,
+        "angle": 90
+      },
+      {
+        "x": 814,
+        "y": 438
+      },
+      {
+        "x": 814,
+        "y": 162,
+        "behaviours": [
+          {
+            "name": "move",
+            "options": {
+              "y": 90,
+              "direction": "horizontal"
+            }
+          }
+        ]
+      }
+    ],
+    "cups": [
+      {
+        "x": 814,
+        "y": 373
+      }
+    ],
+    "player": {
+      "name": "ball_white",
+      "x": 250,
+      "y": 418,
       "angle": 180
     }
   }
