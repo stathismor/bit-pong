@@ -63,7 +63,7 @@ export class StartMenuScene extends Phaser.Scene {
       creditsRect.setStrokeStyle(size, "0xFF0000");
     }
 
-    this.input.on("gameobjectdown", (pointer, gameObject) => {
+    this.input.on("gameobjectup", (pointer, gameObject) => {
       if (gameObject.name === BUTTON_PLAY_NAME) {
         this.scene.scene.sound.play("button_click");
         this.scene.start("LevelMenuScene", { levelNumber: 0 });

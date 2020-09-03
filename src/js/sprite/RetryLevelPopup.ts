@@ -66,7 +66,7 @@ export default class RetryLevelPopup extends Phaser.GameObjects.Sprite {
 
   static onComplete(tween, gameObjects): void {
     const retryLevelPopup = gameObjects[0];
-    retryLevelPopup.scene.input.on("gameobjectdown", (pointer, gameObject) => {
+    retryLevelPopup.scene.input.on("gameobjectup", (pointer, gameObject) => {
       gameObject.scene.sound.play("button_click");
       if (
         gameObject.name === OPTION_SELECT_LEVEL_NAME ||
