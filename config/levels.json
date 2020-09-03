@@ -2508,5 +2508,48 @@
       "x": 250,
       "y": 370
     }
+  },
+  {
+    "name": "59",
+    "order": 59,
+    "balls": [
+      {
+        "name": "ball_orange",
+        "x": 800,
+        "y": 380,
+        "isStatic": true,
+        "behaviours": [
+          {
+            "name": "scaleTween",
+            "options": { "to": 2, "duration": 1300 }
+          }
+        ]
+      },
+      {
+        "x": 800,
+        "y": 380,
+        "isStatic": true,
+        "behaviours": [
+          {
+            "name": "orbit",
+            "options": {
+              "x": 800,
+              "y": 380,
+              "distance": 177
+            }
+          },
+          {
+            "name": "scaleTween",
+            "options": { "to": 2 }
+          }
+        ]
+      }
+    ],
+    "player": {
+      "name": "cup",
+      "x": 250,
+      "y": 370,
+      "angle": 180
+    }
   }
 ]
