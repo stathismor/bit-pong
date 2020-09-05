@@ -1843,10 +1843,10 @@
             "name": "randomPosition",
             "options": {
               "x": 700,
-              "y": 265,
+              "y": 180,
               "width": 320,
-              "height": 240,
-              "delay": 1600
+              "height": 400,
+              "delay": 1500
             }
           }
         ]
