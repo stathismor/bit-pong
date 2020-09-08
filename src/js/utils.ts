@@ -115,6 +115,10 @@ export function getLevelByNumber(number) {
   return LEVELS.filter((level) => number === level.order)[0];
 }
 
+export function getLevelByName(name) {
+  return LEVELS.filter((level) => name === level.name)[0];
+}
+
 export function getVersion(): string {
   const root =
     JSON.parse(localStorage.getItem(constants.LOCAL_STORAGE_ROOT)) || {};

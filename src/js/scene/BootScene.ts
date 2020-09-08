@@ -2,7 +2,7 @@ import * as constants from "../constants";
 import Images from "../images";
 import Sounds from "../sounds";
 import Data from "../data";
-import { getVersion, getOldCompletedLevels } from "../utils";
+import { getVersion, getOldCompletedLevels, getLevelByName } from "../utils";
 
 export class BootScene extends Phaser.Scene {
   constructor() {
@@ -60,7 +60,8 @@ export class BootScene extends Phaser.Scene {
       for (const order in oldLevels) {
         const lives = oldLevels[order];
         const level = { lives };
-        root["levels"][order] = level;
+        const configLevel = getLevelByName(order);
+        root["levels"][configLevel.name] = level;
       }
 
       console.info("Bit Pong: Migrating data to version", constants.VERSION);
