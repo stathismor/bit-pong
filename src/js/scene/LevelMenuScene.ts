@@ -141,11 +141,11 @@ export class LevelMenuScene extends Phaser.Scene {
       const levelNumber = level.order;
       const levelName = level.name;
       const isCompleted = levelName in completedLevels;
-      const isNextLevel = levelNumber === nextLevel;
+      const isAvailableLevel = levelNumber <= nextLevel && !isCompleted;
 
-      const yOffset = isCompleted || isNextLevel ? 32 : 82;
+      const yOffset = isCompleted || isAvailableLevel ? 32 : 82;
       let imageKey = "";
-      if (isCompleted || isNextLevel) {
+      if (isCompleted || isAvailableLevel) {
         imageKey = "level_tile_green";
       } else {
         imageKey = "level_tile_locked";
@@ -166,7 +166,7 @@ export class LevelMenuScene extends Phaser.Scene {
       const levelNumberText = levelNumber.toString();
       const firstDigit = parseInt(levelNumberText[0]);
       const firstDigitKey =
-        isCompleted || isNextLevel
+        isCompleted || isAvailableLevel
           ? LEVEL_DIGIT_BIG_MAP[firstDigit]
           : LEVEL_DIGIT_MEDIUM_MAP[firstDigit];
       const firstDigitImage = this.add.image(
@@ -179,7 +179,7 @@ export class LevelMenuScene extends Phaser.Scene {
       if (levelNumber > 9) {
         const secondDigit = parseInt(levelNumberText[1]);
         const secondDigitKey =
-          isCompleted || isNextLevel
+          isCompleted || isAvailableLevel
             ? LEVEL_DIGIT_BIG_MAP[secondDigit]
             : LEVEL_DIGIT_MEDIUM_MAP[secondDigit];
         const secondDigitImage = this.add.image(
@@ -216,11 +216,11 @@ export class LevelMenuScene extends Phaser.Scene {
         levelImage.y - levelImage.height / 2 + yOffset
       );
 
-      if (isCompleted || isNextLevel) {
+      if (isCompleted || isAvailableLevel) {
         const lives = completedLevels[levelName]
           ? completedLevels[levelName]["lives"]
           : 0;
-        const awardKey = isNextLevel
+        const awardKey = isAvailableLevel
           ? "trophy_empty"
           : lives >= 2
           ? "trophy_gold_small"
@@ -245,7 +245,7 @@ export class LevelMenuScene extends Phaser.Scene {
       }
 
       // Only allow click if it's completed or it's the next level
-      if (isCompleted || isNextLevel || process.env.DEBUG === "true") {
+      if (isCompleted || isAvailableLevel || process.env.DEBUG === "true") {
         // Make the text interactive
         levelImage.setInteractive(
           new Phaser.Geom.Rectangle(0, 0, levelImage.width, levelImage.height),
