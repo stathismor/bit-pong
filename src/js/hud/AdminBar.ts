@@ -1,4 +1,4 @@
-import { getCompletedLevels } from "../utils";
+import { getCompletedLevels, getLevelByNumber } from "../utils";
 
 import * as constants from "../constants";
 
@@ -61,7 +61,8 @@ export class AdminBar {
       });
 
       const completedLevels = getCompletedLevels();
-      const isEnabled = levelNumber in completedLevels;
+      const levelName = getLevelByNumber(levelNumber).name;
+      const isEnabled = levelName in completedLevels;
       const key = isEnabled ? "admin_retry_enabled" : "admin_retry_disabled";
       const retryButton = scene.add
         .image(
