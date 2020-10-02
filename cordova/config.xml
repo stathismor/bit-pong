@@ -33,6 +33,7 @@
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
+        <preference name="WKWebViewOnly" value="true" />
     </platform>
     <preference name="android-minSdkVersion" value="22" />
     <preference name="Fullscreen" value="true" />
