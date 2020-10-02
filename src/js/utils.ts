@@ -66,6 +66,21 @@ export function mobileAndTabletCheck(): boolean {
   return check;
 }
 
+export function isIOS(): boolean {
+  return (
+    [
+      "iPad Simulator",
+      "iPhone Simulator",
+      "iPod Simulator",
+      "iPad",
+      "iPhone",
+      "iPod",
+    ].includes(navigator.platform) ||
+    // iPad on iOS 13 detection
+    (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+  );
+}
+
 export function isOutsideWorld(sprite): boolean {
   const { width, height } = sprite.scene.sys.game.CONFIG;
 

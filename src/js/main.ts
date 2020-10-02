@@ -6,8 +6,8 @@ import { LevelMenuScene } from "./scene/LevelMenuScene";
 import { StartMenuScene } from "./scene/StartMenuScene";
 import { CreditsScene } from "./scene/CreditsScene";
 import { YouWonScene } from "./scene/YouWonScene";
-import { ScaleManager } from "./ScaleManager";
-import { mobileAndTabletCheck } from "./utils";
+import { mobileAndTabletCheck, isIOS } from "./utils";
+// import { ScaleManager } from "./ScaleManager";
 
 const WIDTH = 640 * 2;
 const HEIGHT = 360 * 2;
@@ -18,6 +18,9 @@ const scale = mobileAndTabletCheck()
       autoCenter: Phaser.Scale.CENTER_BOTH,
     }
   : { autoCenter: Phaser.Scale.CENTER_BOTH };
+
+// Disable for IOS
+const disableWebAudio = isIOS();
 
 const game = new Game({
   type: Phaser.AUTO,
@@ -50,7 +53,7 @@ const game = new Game({
   //   },
   // },
   audio: {
-    disableWebAudio: false,
+    disableWebAudio,
   },
 });
 
