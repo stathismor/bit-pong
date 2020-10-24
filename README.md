@@ -1,34 +1,64 @@
 # Bit Pong
 
-A game about a ball and a cup.
-
 ![github_background](https://user-images.githubusercontent.com/908935/87860930-53889400-c939-11ea-853c-624406a8fd9d.png)
 
-Bit Pong is a casual game where you only have one goal: Put the ball in the cup. The way this can be achieved varies. Start by dragging the ball and letting it go, and watch the levels get progressively more surreal.
+**A game about a ball and a cup.**
 
-## Play / Download
+Bit Pong is a casual game where you only have one goal: put the ball in the cup. Start by dragging the ball and letting it go and adapt to the progressively surreal levels!
 
-Bit Pong was built primarily with mobile in mind, although a web version also exists.
+## Play
 
 ### Android
 
-TBC
+<a href='https://play.google.com/store/apps/details?id=strahius.bitpong&pcampaignid=github'>
+    <img alt='Get it on Google Play' src='https://play.google.com/intl/en_gb/badges/static/images/badges/en-play-badge.png' height=70px/>
+</a>
 
 ### Browser
 
-Play the [web version](https://strahius.itch.io/bit-pong) on itch.io.
+Play the web version on [itch.io](https://strahius.itch.io/bit-pong) or on [gh-pages](https://strahius.github.io/bit-pong/).
+
+### iOS
+
+In development.
+
+## Tech stack
+
+Bit Pong is written in TypeScript, using the [Phaser](https://github.com/photonstorm/phaser) game engine, and [Matter.js](https://brm.io/matter-js/) for the physics part. [parcel](https://parceljs.org/) is used for bundling it all together. The game is built with mobile in mind, although it is primarily a web application. `cordova` is used for the conversion to a mobile app (using `WebView`).
+
+## Requirements
+
+You need to have [Node.js](https://nodejs.org/en/download/) and [yarn](https://classic.yarnpkg.com/en/docs/install) (or [npm](https://www.npmjs.com/) if you prefer) installed on your machine.
 
 ## Install
 
-To install the game locally, clone the repo and just do:
+After you clone the repo, on the root directory just run:
 
 `$ yarn`
 
 ## Run
 
-To run the game locally, on the repo's root directory do:
+Run:
 
 `$ yarn start`
+
+`parcel` will automatically open the game in your default browser.
+
+## Deploy
+
+If you want to deploy under your own [GitHub page](https://pages.github.com/), you can do that with:
+
+`$ yarn deploy`
+
+If your repo is setup to support `gh-pages`, then you should be able to access the game at `https://<username>.github.io/<repo-name>`. For this repo, the game is also available at https://strahius.github.io/bit-pong/.
+
+## Build APK
+
+Making an Android mobile version is a bit more involved. It requires that you install [cordova](https://cordova.apache.org/) and Android Studio with at least one Android image, if you want to emulate an Android phone on your machine. In `package.json` you can find the relevant scripts that automate all of the APK generation and emulation process.
+
+## Known issues
+
+Unfortunately, `Matter.js` has [an issue](https://github.com/photonstorm/phaser/issues/3957) where its engine update is not refresh-rate-dependent. Since `Phaser` caps on the refresh rate of the screen, rendering and physics updates can be out of sync. This is happening on screens with refresh rate higher than 60Hz, and causes a slowdown effect.
 
 ## License
 
