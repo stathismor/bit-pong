@@ -42,7 +42,7 @@ Run:
 
 `$ yarn start`
 
-`parcel` will automatically open the game in your default browser.
+`parcel` will automatically open the game in your default browser, running on your local `Node.js` server.
 
 ## Deploy
 
@@ -54,11 +54,17 @@ If your repo is setup to support `gh-pages`, then you should be able to access t
 
 ## Build APK
 
-Making an Android mobile version is a bit more involved. It requires that you install [cordova](https://cordova.apache.org/) and Android Studio with at least one Android image, if you want to emulate an Android phone on your machine. In `package.json` you can find the relevant scripts that automate all of the APK generation and emulation process.
+Making an Android mobile version is a bit more involved. It requires that you install [cordova](https://cordova.apache.org/) and [Android Studio](https://developer.android.com/studio) with at least one Android image, if you want to emulate an Android phone on your machine. In `package.json` you can find the relevant scripts that automate all of the APK generation and emulation process.
+
+## Architecture
+
+You can read about the architecture of the game [here](ARCHITECTURE.md).
 
 ## Known issues
 
-Unfortunately, `Matter.js` has [an issue](https://github.com/photonstorm/phaser/issues/3957) where its engine update is not refresh-rate-dependent. Since `Phaser` caps on the refresh rate of the screen, rendering and physics updates can be out of sync. This is happening on screens with refresh rate higher than 60Hz, and causes a slowdown effect.
+### Slowdown on high refresh rate screens
+
+Unfortunately, `Matter.js` has [an issue](https://github.com/photonstorm/phaser/issues/3957) where its engine update is not refresh-rate-dependent. Since `Phaser` caps on the refresh rate of the screen, rendering and physics updates can be out of sync. This is happening on screens with refresh rate higher than 60Hz, and can cause a slowdown effect, with the ball not going towards the projected trajectory.
 
 ## License
 
