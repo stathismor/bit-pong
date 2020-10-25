@@ -52,13 +52,9 @@ If you want to deploy under your own [GitHub page](https://pages.github.com/), y
 
 If your repo is setup to support `gh-pages`, then you should be able to access the game at `https://<username>.github.io/<repo-name>`. For this repo, the game is also available at https://strahius.github.io/bit-pong/.
 
-## Build APK
-
-Making an Android mobile version is a bit more involved. It requires that you install [cordova](https://cordova.apache.org/) and [Android Studio](https://developer.android.com/studio) with at least one Android image, if you want to emulate an Android phone on your machine. In `package.json` you can find the relevant scripts that automate all of the APK generation and emulation process.
-
 ## Architecture
 
-You can read about the architecture of the game [here](ARCHITECTURE.md).
+You can read about the game architecture [here](ARCHITECTURE.md).
 
 ## Known issues
 
