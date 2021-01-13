@@ -16,7 +16,7 @@ Bit Pong is a casual game where you only have one goal: put the ball in the cup.
 
 ### Browser
 
-Play the web version on [itch.io](https://strahius.itch.io/bit-pong) or on [gh-pages](https://strahius.github.io/bit-pong/).
+Play the web version on [itch.io](https://strahius.itch.io/bit-pong) or on [gh-pages](https://stathismor.github.io/bit-pong/).
 
 ### iOS
 
@@ -50,7 +50,7 @@ If you want to deploy under your own [GitHub page](https://pages.github.com/), y
 
 `$ yarn deploy`
 
-If your repo is setup to support `gh-pages`, then you should be able to access the game at `https://<username>.github.io/<repo-name>`. For this repo, the game is also available at https://strahius.github.io/bit-pong/.
+If your repo is setup to support `gh-pages`, then you should be able to access the game at `https://<username>.github.io/<repo-name>`. For this repo, the game is also available at https://stathismor.github.io/bit-pong/.
 
 ## Architecture
 
@@ -70,4 +70,4 @@ Bit Pong source code is released under the [GPLv3 license](https://opensource.or
 
 ### Assets
 
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Bit Pong assets (images and audio)</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/strahius/bit-pong" property="cc:attributionName" rel="cc:attributionURL">Stathis Moraitidis</a> are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Bit Pong assets (images and audio)</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/stathismor/bit-pong" property="cc:attributionName" rel="cc:attributionURL">Stathis Moraitidis</a> are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
