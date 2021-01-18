@@ -28,7 +28,8 @@ Bit Pong is written in TypeScript, using the [Phaser](https://github.com/photons
 
 ## Requirements
 
-You need to have [Node.js](https://nodejs.org/en/download/) and [yarn](https://classic.yarnpkg.com/en/docs/install) (or [npm](https://www.npmjs.com/) if you prefer) installed on your machine.
+1. [Node.js](https://nodejs.org/en/download/) and [yarn](https://classic.yarnpkg.com/en/docs/install) (or [npm](https://www.npmjs.com/) if you prefer)
+2. [git-lfs](https://git-lfs.github.com/)
 
 ## Install
 
