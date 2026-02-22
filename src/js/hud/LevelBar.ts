@@ -6,15 +6,15 @@ const LEVEL_NUMBER_OFFSET_X = 10;
 const OFFSET_Y = 30;
 
 export default class LevelBar {
-  constructor(scene, levelNumber) {
-    const config = scene.sys.game.CONFIG;
+  constructor(scene: Phaser.Scene, levelNumber: number) {
+    const config = (scene.sys.game as GameWithConfig).CONFIG;
 
     scene.add
       .image(
         config.centerX + LEVEL_TEXT_OFFSET_X,
         OFFSET_Y,
         constants.TEXTURE_ATLAS,
-        "level_text"
+        "level_text",
       )
       .setDepth(constants.MAX_DEPTH);
 
@@ -22,7 +22,7 @@ export default class LevelBar {
       scene,
       levelNumber,
       config.centerX + LEVEL_NUMBER_OFFSET_X,
-      OFFSET_Y
+      OFFSET_Y,
     );
   }
 }

@@ -18,16 +18,12 @@ export class StartMenuScene extends Phaser.Scene {
   }
 
   create(): void {
-    // this.scene.start("GameplayScene", { levelNumber: 56 });
-    // this.scene.start("LevelMenuScene");
-    // this.scene.start("CreditsScene");
-    // this.scene.start("YouWonScene");
-    const config = this.sys.game.CONFIG;
+    const config = (this.sys.game as GameWithConfig).CONFIG;
     this.add.image(
       config.centerX,
       config.centerY,
       constants.TEXTURE_ATLAS,
-      "start"
+      "start",
     );
 
     const playButton = this.add
@@ -42,28 +38,28 @@ export class StartMenuScene extends Phaser.Scene {
       .setName(BUTTON_CREDITS_NAME);
     creditsButton.setInteractive();
 
-    if (process.env.DEBUG === "true") {
+    if (import.meta.env.DEV) {
       const size = 2;
       const playBounds = playButton.getBounds();
       const playRect = this.add.rectangle(
         playBounds.x + BUTTON_WIDTH / 2,
         playBounds.y + BUTTON_HEIGHT / 2,
         playBounds.width,
-        playBounds.height
+        playBounds.height,
       );
-      playRect.setStrokeStyle(size, "0xFF0000");
+      playRect.setStrokeStyle(size, 0xff0000);
 
       const creditsBounds = creditsButton.getBounds();
       const creditsRect = this.add.rectangle(
         creditsBounds.x + BUTTON_WIDTH / 2,
         creditsBounds.y + BUTTON_HEIGHT / 2,
         creditsBounds.width,
-        creditsBounds.height
+        creditsBounds.height,
       );
-      creditsRect.setStrokeStyle(size, "0xFF0000");
+      creditsRect.setStrokeStyle(size, 0xff0000);
     }
 
-    this.input.on("gameobjectup", (pointer, gameObject) => {
+    this.input.on("gameobjectup", (_pointer: Phaser.Input.Pointer, gameObject: Phaser.GameObjects.GameObject) => {
       if (gameObject.name === BUTTON_PLAY_NAME) {
         this.scene.scene.sound.play("button_click");
         this.scene.start("LevelMenuScene", { levelNumber: 0 });
@@ -78,39 +74,39 @@ export class StartMenuScene extends Phaser.Scene {
       VERSION_OFFSET_X,
       config.height - VERSION_OFFSET_Y,
       constants.TEXTURE_ATLAS,
-      constants.LEVEL_DIGIT_SMALL_MAP["v"]
+      constants.LEVEL_DIGIT_SMALL_MAP["v"],
     );
     this.add.image(
       VERSION_OFFSET_X + VERSION_DIGIT_DISTANCE + 2,
       config.height - VERSION_OFFSET_Y - 1,
       constants.TEXTURE_ATLAS,
-      constants.LEVEL_DIGIT_SMALL_MAP["0"]
+      constants.LEVEL_DIGIT_SMALL_MAP["0"],
     );
     this.add.image(
       VERSION_OFFSET_X + 2 * VERSION_DIGIT_DISTANCE,
       config.height - VERSION_OFFSET_Y + 4,
       constants.TEXTURE_ATLAS,
-      constants.LEVEL_DIGIT_SMALL_MAP["dot"]
+      constants.LEVEL_DIGIT_SMALL_MAP["dot"],
     );
     this.add.image(
       VERSION_OFFSET_X + 3 * VERSION_DIGIT_DISTANCE - 2,
       config.height - VERSION_OFFSET_Y - 1,
       constants.TEXTURE_ATLAS,
-      constants.LEVEL_DIGIT_SMALL_MAP["0"]
+      constants.LEVEL_DIGIT_SMALL_MAP["0"],
     );
     this.add.image(
       VERSION_OFFSET_X + 4 * VERSION_DIGIT_DISTANCE - 4,
       config.height - VERSION_OFFSET_Y + 4,
       constants.TEXTURE_ATLAS,
-      constants.LEVEL_DIGIT_SMALL_MAP["dot"]
+      constants.LEVEL_DIGIT_SMALL_MAP["dot"],
     );
     this.add.image(
       VERSION_OFFSET_X + 5 * VERSION_DIGIT_DISTANCE - 6,
       config.height - VERSION_OFFSET_Y - 1,
       constants.TEXTURE_ATLAS,
-      constants.LEVEL_DIGIT_SMALL_MAP["8"]
+      constants.LEVEL_DIGIT_SMALL_MAP["8"],
     );
 
-    ((): void => new AdminBar(this))();
+    void new AdminBar(this);
   }
 }

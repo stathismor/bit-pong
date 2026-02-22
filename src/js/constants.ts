@@ -9,7 +9,7 @@ export const TIME_SCALE = 1.2;
 export const MAX_DEPTH = 100;
 export const FOUNTAIN_TIME_DIFF = 100;
 
-export const LEVEL_DIGIT_SMALL_MAP = {
+export const LEVEL_DIGIT_SMALL_MAP: Record<string | number, string> = {
   0: "digit_small_zero",
   1: "digit_small_one",
   2: "digit_small_two",

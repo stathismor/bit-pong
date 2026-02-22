@@ -1517,7 +1517,7 @@
       "x": 250,
       "y": 370,
       "angle": 180,
-      "behaviours": [, { "name": "scale", "options": { "value": 1.5 } }]
+      "behaviours": [{ "name": "scale", "options": { "value": 1.5 } }]
     }
   },
   {
@@ -1584,7 +1584,7 @@
       "x": 250,
       "y": 370,
       "angle": 90,
-      "behaviours": [, { "name": "scale", "options": { "value": 2 } }]
+      "behaviours": [{ "name": "scale", "options": { "value": 2 } }]
     }
   },
   {
@@ -2594,7 +2594,7 @@
       "x": 250,
       "y": 370,
       "angle": 180,
-      "behaviours": [, { "name": "scale", "options": { "value": 2 } }]
+      "behaviours": [{ "name": "scale", "options": { "value": 2 } }]
     }
   }
 ]

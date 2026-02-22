@@ -5,14 +5,19 @@ import { uuidv4 } from "../utils";
 
 import * as constants from "../constants";
 
+interface BehaviourConf {
+  name: string;
+  options?: Record<string, unknown>;
+}
+
 export class Ball extends Phaser.Physics.Matter.Sprite {
-  constructor(scene, x, y, texture, frame, isStatic, behaviours) {
-    super(scene.matter.world, x, y, texture, frame);
+  constructor(scene: Phaser.Scene, x: number, y: number, texture: string, frame: string, isStatic: boolean, behaviours?: BehaviourConf[]) {
+    super((scene as Phaser.Scene & { matter: Phaser.Physics.Matter.MatterPhysics }).matter.world, x, y, texture, frame);
 
     ComponentManager.Add(
       scene,
       this,
-      new SetBody(scene, this, frame, x, y, 0, true)
+      new SetBody(scene, this, frame, x, y, 0, true),
     );
 
     if (behaviours) {
@@ -20,14 +25,14 @@ export class Ball extends Phaser.Physics.Matter.Sprite {
         ComponentManager.Add(
           scene,
           this,
-          new BEHAVIOUR_MAPPER[behaviour.name](scene, this, behaviour.options)
+          new BEHAVIOUR_MAPPER[behaviour.name](scene, this, behaviour.options),
         );
       });
     }
 
     this.setFriction(0.06);
     this.setStatic(isStatic);
-    this.body.timeScale = constants.TIME_SCALE;
+    (this.body as MatterJS.BodyType).timeScale = constants.TIME_SCALE;
     this.setData("name", `${frame}_${uuidv4()}`);
   }
 }

@@ -1,33 +1,38 @@
 {
   "name": "bit-pong",
+  "version": "1.1.0",
+  "license": "MIT",
+  "type": "module",
   "scripts": {
-    "start": "parcel src/index.html --open",
-    "build": "parcel build src/index.html --no-source-maps --public-url .",
-    "deploy": "yarn build && cp policy/policy.html dist && gh-pages -d dist",
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy": "vite build && cp policy/policy.html dist && gh-pages -d dist",
     "cordova:emulate": "cd cordova && cordova emulate android",
     "cordova:run": "cd cordova && cordova run android",
-    "cordova:build": "yarn build && rm -rf cordova/www/* && cp -r dist/* cordova/www/",
-    "cordova:apk": "yarn cordova:build && scripts/create_apk.sh",
+    "cordova:build": "pnpm build && rm -rf cordova/www/* && cp -r dist/* cordova/www/",
+    "cordova:apk": "pnpm cordova:build && scripts/create_apk.sh",
     "lint": "eslint 'src/**/*.ts'",
     "lint:fix": "eslint --fix 'src/**/*.ts'"
   },
-  "license": "MIT",
-  "version": "1.1.0",
-  "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^2.25.0",
-    "@typescript-eslint/parser": "^2.25.0",
-    "cssnano": "^4.1.10",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.10.1",
-    "eslint-plugin-prettier": "^3.1.2",
-    "gh-pages": "^2.2.0",
-    "node-sass": "^4.13.0",
-    "parcel-plugin-clean-dist": "0.0.6",
-    "prettier": "^2.0.2",
-    "typescript": "^3.6.4"
-  },
   "dependencies": {
-    "parcel-bundler": "^1.12.4",
-    "phaser": "^3.22.0"
+    "phaser": "4.0.0-rc.6"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "eslint": "^9.0.0",
+    "eslint-config-prettier": "^10.0.0",
+    "gh-pages": "^6.0.0",
+    "prettier": "^3.0.0",
+    "sass": "^1.80.0",
+    "typescript": "^5.6.0",
+    "typescript-eslint": "^8.0.0",
+    "vite": "^6.0.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "@parcel/watcher"
+    ]
   }
 }

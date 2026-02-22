@@ -1,12 +1,10 @@
 import { Game } from "phaser";
-
 import { BootScene } from "./scene/BootScene";
 import { GameplayScene } from "./scene/GameplayScene";
 import { LevelMenuScene } from "./scene/LevelMenuScene";
 import { StartMenuScene } from "./scene/StartMenuScene";
 import { CreditsScene } from "./scene/CreditsScene";
 import { YouWonScene } from "./scene/YouWonScene";
-import { ScaleManager } from "./ScaleManager";
 import { mobileAndTabletCheck } from "./utils";
 
 const WIDTH = 640 * 2;
@@ -31,11 +29,10 @@ const game = new Game({
   physics: {
     default: "matter",
     matter: {
-      gravity: { y: 0.8 },
+      gravity: { x: 0, y: 0.8 },
       debug: false,
     },
   },
-
   scene: [
     BootScene,
     StartMenuScene,
@@ -44,15 +41,10 @@ const game = new Game({
     GameplayScene,
     YouWonScene,
   ],
-  // callbacks: {
-  //   postBoot: (): void => {
-  //     ((): void => new ScaleManager(WIDTH, HEIGHT, game.device.os.desktop))();
-  //   },
-  // },
   audio: {
     disableWebAudio: false,
   },
-});
+}) as GameWithConfig;
 
 game.CONFIG = {
   width: WIDTH,

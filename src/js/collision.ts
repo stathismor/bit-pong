@@ -1,8 +1,8 @@
-export let cupCategory = null;
-export let dropCategory = null;
-export let tableCategory = null;
+export let cupCategory: number = 0;
+export let dropCategory: number = 0;
+export let tableCategory: number = 0;
 
-export function initCategories(scene): void {
+export function initCategories(scene: Phaser.Scene & { matter: Phaser.Physics.Matter.MatterPhysics }): void {
   scene.matter.world.resetCollisionIDs();
   cupCategory = scene.matter.world.nextCategory();
   dropCategory = scene.matter.world.nextCategory();

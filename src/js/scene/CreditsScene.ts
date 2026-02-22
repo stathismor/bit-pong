@@ -14,45 +14,45 @@ export class CreditsScene extends Phaser.Scene {
   }
 
   create(): void {
-    const config = this.sys.game.CONFIG;
+    const config = (this.sys.game as GameWithConfig).CONFIG;
     this.cameras.main.setBackgroundColor("#011627");
     this.add.image(
       config.centerX,
       TITLE_OFFSET_Y,
       constants.TEXTURE_ATLAS,
-      "credits_title"
+      "credits_title",
     );
     this.add.image(
       config.centerX,
       TITLE_OFFSET_Y + DEPARTMENT_OFFSET_Y,
       constants.TEXTURE_ATLAS,
-      "credits_concept"
+      "credits_concept",
     );
     this.add.image(
       config.centerX,
       TITLE_OFFSET_Y + DEPARTMENT_OFFSET_Y + NAME_OFFSET_Y,
       constants.TEXTURE_ATLAS,
-      "credits_stathis"
+      "credits_stathis",
     );
     this.add.image(
       config.centerX,
       TITLE_OFFSET_Y + 2 * DEPARTMENT_OFFSET_Y + NAME_OFFSET_Y,
       constants.TEXTURE_ATLAS,
-      "credits_art"
+      "credits_art",
     );
     this.add.image(
       config.centerX,
       TITLE_OFFSET_Y + 2 * DEPARTMENT_OFFSET_Y + 2 * NAME_OFFSET_Y,
       constants.TEXTURE_ATLAS,
-      "credits_stathis"
+      "credits_stathis",
     );
     this.add.image(
       config.centerX,
       TITLE_OFFSET_Y + 2 * DEPARTMENT_OFFSET_Y + 3 * NAME_OFFSET_Y,
       constants.TEXTURE_ATLAS,
-      "credits_antony"
+      "credits_antony",
     );
 
-    ((): void => new AdminBar(this, true))();
+    void new AdminBar(this, true);
   }
 }

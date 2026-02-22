@@ -9,7 +9,8 @@ import { Jump } from "./Jump";
 import { RandomAngle } from "./RandomAngle";
 import { Orbit } from "./Orbit";
 
-const BEHAVIOUR_MAPPER = {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const BEHAVIOUR_MAPPER: Record<string, new (...args: any[]) => { update(delta?: number): void }> = {
   rotate: Rotate,
   move: Move,
   setBody: SetBody,

@@ -1,10 +1,23 @@
-export class SpriteManager {
-  static player = undefined;
-  static balls = [];
-  static cups = [];
-  static tables = [];
+interface SpriteConf {
+  x: number;
+  y: number;
+  angle?: number;
+  isStatic?: boolean;
+  [key: string]: unknown;
+}
 
-  static Add(sprite, type, conf): void {
+interface SpriteData {
+  sprite: Phaser.Physics.Matter.Sprite;
+  conf: SpriteConf;
+}
+
+export class SpriteManager {
+  static player: SpriteData | undefined = undefined;
+  static balls: SpriteData[] = [];
+  static cups: SpriteData[] = [];
+  static tables: SpriteData[] = [];
+
+  static Add(sprite: Phaser.Physics.Matter.Sprite, type: string, conf: SpriteConf): void {
     switch (type) {
       case "player":
         SpriteManager.player = { sprite, conf };
@@ -44,17 +57,17 @@ export class SpriteManager {
       sprite.x = conf.x;
       sprite.y = conf.y;
       sprite.rotation = Phaser.Math.DegToRad(conf.angle || 0);
-      sprite.body.speed = 0;
-      sprite.setStatic(true); // Needed to reset any momentum
-      sprite.setStatic(conf.isStatic);
+      (sprite.body as MatterJS.BodyType).speed = 0;
+      sprite.setStatic(true);
+      sprite.setStatic(!!conf.isStatic);
     }
   }
 
-  static GetPlayer(): Phaser.sprite {
+  static GetPlayer(): Phaser.Physics.Matter.Sprite | undefined {
     return SpriteManager.player ? SpriteManager.player.sprite : undefined;
   }
 
-  static GetBalls(): Phaser.sprite {
+  static GetBalls(): Phaser.Physics.Matter.Sprite[] {
     return SpriteManager.balls.map((ball) => ball.sprite);
   }
 }

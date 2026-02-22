@@ -2,10 +2,19 @@ import * as constants from "../constants";
 
 const TRACE_DISTANCE = 60;
 
+interface LaunchableSprite extends Phaser.Physics.Matter.Sprite {
+  launched: boolean;
+}
+
 export class OwnerTrace {
-  constructor(scene, owner, frame) {
+  scene: Phaser.Scene;
+  owner: LaunchableSprite;
+  prevOwnerTracePos: { x: number; y: number };
+  ownerTraceGroup: Phaser.GameObjects.Group;
+
+  constructor(scene: Phaser.Scene, owner: Phaser.Physics.Matter.Sprite, frame: string) {
     this.scene = scene;
-    this.owner = owner;
+    this.owner = owner as LaunchableSprite;
     this.prevOwnerTracePos = { x: owner.x, y: owner.y };
 
     this.ownerTraceGroup = scene.add.group({
@@ -18,18 +27,18 @@ export class OwnerTrace {
     });
   }
 
-  update(delta): void {
+  update(): void {
     if (
       this.owner.launched &&
-      this.owner.body.speed > 3 &&
+      (this.owner.body as MatterJS.BodyType).speed > 3 &&
       Phaser.Math.Distance.Between(
         this.prevOwnerTracePos.x,
         this.prevOwnerTracePos.y,
         this.owner.x,
-        this.owner.y
+        this.owner.y,
       ) > TRACE_DISTANCE
     ) {
-      const ownerTrace = this.ownerTraceGroup.getFirstDead();
+      const ownerTrace = this.ownerTraceGroup.getFirstDead() as Phaser.GameObjects.Image | null;
       if (ownerTrace) {
         ownerTrace.x = this.owner.x;
         ownerTrace.y = this.owner.y;
@@ -42,7 +51,6 @@ export class OwnerTrace {
           ease: "Sine.easeOut",
           duration: 550,
           delay: 0,
-          pause: false,
           onComplete: OwnerTrace.onComplete,
           alpha: {
             getStart: (): number => 0.17,
@@ -54,8 +62,8 @@ export class OwnerTrace {
     }
   }
 
-  static onComplete(tween): void {
-    const target = tween.targets[0];
+  static onComplete(tween: Phaser.Tweens.Tween): void {
+    const target = tween.targets[0] as Phaser.GameObjects.Image;
     target.setVisible(false);
     target.setActive(false);
   }

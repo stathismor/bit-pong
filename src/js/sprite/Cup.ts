@@ -5,9 +5,14 @@ import { cupCategory } from "../collision";
 import { uuidv4 } from "../utils";
 import * as constants from "../constants";
 
+interface BehaviourConf {
+  name: string;
+  options?: Record<string, unknown>;
+}
+
 export class Cup extends Phaser.Physics.Matter.Sprite {
-  constructor(scene, x, y, angleRad, behaviours) {
-    super(scene.matter.world, x, y, constants.TEXTURE_ATLAS, "cup");
+  constructor(scene: Phaser.Scene, x: number, y: number, angleRad: number, behaviours?: BehaviourConf[]) {
+    super((scene as Phaser.Scene & { matter: Phaser.Physics.Matter.MatterPhysics }).matter.world, x, y, constants.TEXTURE_ATLAS, "cup");
     this.setDepth(22);
 
     this.setData("name", "cup_" + uuidv4());
@@ -15,7 +20,7 @@ export class Cup extends Phaser.Physics.Matter.Sprite {
     ComponentManager.Add(
       scene,
       this,
-      new SetBody(scene, this, "cup", x, y, angleRad, true)
+      new SetBody(scene, this, "cup", x, y, angleRad, true),
     );
 
     if (behaviours) {
@@ -23,8 +28,8 @@ export class Cup extends Phaser.Physics.Matter.Sprite {
         ComponentManager.Add(
           scene,
           this,
-          new BEHAVIOUR_MAPPER[behaviour.name](scene, this, behaviour.options)
-        )
+          new BEHAVIOUR_MAPPER[behaviour.name](scene, this, behaviour.options),
+        ),
       );
     }
 

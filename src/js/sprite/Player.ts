@@ -6,9 +6,18 @@ import { uuidv4 } from "../utils";
 
 import * as constants from "../constants";
 
+interface BehaviourConf {
+  name: string;
+  options?: Record<string, unknown>;
+}
+
 export class Player extends Phaser.Physics.Matter.Sprite {
-  constructor(scene, x, y, texture, frame, angleRad, depth, behaviours) {
-    super(scene.matter.world, x, y, texture, frame);
+  configDepth: number;
+  livesNumber: number;
+  touchesTable = false;
+
+  constructor(scene: Phaser.Scene, x: number, y: number, texture: string, frame: string, angleRad: number, depth: number, behaviours?: BehaviourConf[]) {
+    super((scene as Phaser.Scene & { matter: Phaser.Physics.Matter.MatterPhysics }).matter.world, x, y, texture, frame);
 
     this.setData("name", frame + "_" + uuidv4());
     this.setData("isPlayer", true);
@@ -19,7 +28,7 @@ export class Player extends Phaser.Physics.Matter.Sprite {
     ComponentManager.Add(
       scene,
       this,
-      new SetBody(scene, this, frame, x, y, angleRad, true)
+      new SetBody(scene, this, frame, x, y, angleRad, true),
     );
 
     if (behaviours) {
@@ -27,8 +36,8 @@ export class Player extends Phaser.Physics.Matter.Sprite {
         ComponentManager.Add(
           scene,
           this,
-          new BEHAVIOUR_MAPPER[behaviour.name](scene, this, behaviour.options)
-        )
+          new BEHAVIOUR_MAPPER[behaviour.name](scene, this, behaviour.options),
+        ),
       );
     }
 
@@ -37,10 +46,10 @@ export class Player extends Phaser.Physics.Matter.Sprite {
     ComponentManager.Add(
       scene,
       this,
-      new Drag(scene, this, x, y, frame, angleRad)
+      new Drag(scene, this, x, y, frame, angleRad),
     );
 
-    this.body.timeScale = constants.TIME_SCALE;
+    (this.body as MatterJS.BodyType).timeScale = constants.TIME_SCALE;
   }
 
   overrideDepth(useConfig = false): void {

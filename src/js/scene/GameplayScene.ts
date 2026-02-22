@@ -21,36 +21,58 @@ export enum GameplaySceneStatus {
   COMPLETE,
 }
 
+interface LevelData {
+  levelNumber?: number;
+  result?: string;
+  keyPressed?: boolean;
+}
+
+interface BehaviourConf {
+  name: string;
+  options?: Record<string, unknown>;
+}
+
+interface LevelConf {
+  tables?: { x: number; y: number; angle?: number; behaviours?: BehaviourConf[] }[];
+  tables_half?: { x: number; y: number; angle?: number; behaviours?: BehaviourConf[] }[];
+  cups?: { x: number; y: number; angle: number; behaviours?: BehaviourConf[] }[];
+  balls?: { x: number; y: number; name?: string; isStatic: boolean; behaviours?: BehaviourConf[] }[];
+  player: { x: number; y: number; name: string; angle?: number; depth: number; behaviours?: BehaviourConf[] };
+}
+
 export class GameplayScene extends Phaser.Scene {
+  levelNumber = 1;
+  status: GameplaySceneStatus = GameplaySceneStatus.PLAY;
+  keyPressed = false;
+  completeLevelPopup!: CompleteLevelPopup;
+
   constructor() {
     super({
       key: "GameplayScene",
     });
-    this.levelNumber = 1;
   }
 
-  create(data): void {
-    const config = this.sys.game.CONFIG;
+  create(data: LevelData): void {
+    const config = (this.sys.game as GameWithConfig).CONFIG;
     this.levelNumber = this.getLevelNumber(data);
     this.status = GameplaySceneStatus.PLAY;
-    this.keyPressed = data.keyPressed || false; // Used for debugging
+    this.keyPressed = data.keyPressed || false;
 
-    initCategories(this);
+    initCategories(this as unknown as Phaser.Scene & { matter: Phaser.Physics.Matter.MatterPhysics });
 
     SpriteManager.Clear();
     ComponentManager.Clear();
 
-    // Add background
     this.add.image(
       config.centerX,
       config.centerY,
       constants.TEXTURE_ATLAS,
-      "background"
+      "background",
     );
 
     initParticles(this);
 
-    const level = LEVELS[this.levelNumber - 1];
+    const level = (LEVELS as LevelConf[])[this.levelNumber - 1];
     const {
       tables: confTables = [],
       tables_half: confTablesHalf = [],
@@ -67,7 +89,7 @@ export class GameplayScene extends Phaser.Scene {
         constants.TEXTURE_ATLAS,
         ballConf.name || "ball_white",
         ballConf.isStatic,
-        ballConf.behaviours
+        ballConf.behaviours,
       );
       this.add.existing(ball);
       SpriteManager.Add(ball, "ball", ballConf);
@@ -81,14 +103,13 @@ export class GameplayScene extends Phaser.Scene {
       playerConf.name,
       Phaser.Math.DegToRad(playerConf.angle || 0),
       playerConf.depth,
-      playerConf.behaviours
+      playerConf.behaviours,
     );
     SpriteManager.Add(player, "player", playerConf);
     this.add.existing(player);
 
-    initCollisions(this, player);
+    initCollisions(this as unknown as Parameters<typeof initCollisions>[0], player as unknown as Parameters<typeof initCollisions>[1]);
 
-    // @TODO: Table should be rendered after the cup
     confTables.forEach((confTable) => {
       const table = new Table(
         this,
@@ -97,7 +118,7 @@ export class GameplayScene extends Phaser.Scene {
         constants.TEXTURE_ATLAS,
         "table",
         Phaser.Math.DegToRad(confTable.angle || 0),
-        confTable.behaviours
+        confTable.behaviours,
       );
       this.add.existing(table);
     });
@@ -110,34 +131,30 @@ export class GameplayScene extends Phaser.Scene {
         constants.TEXTURE_ATLAS,
         "table_half",
         Phaser.Math.DegToRad(confTable.angle || 0),
-        confTable.behaviours
+        confTable.behaviours,
       );
       this.add.existing(table);
     });
 
-    const cups = [];
     confCups.forEach((confCup) => {
       const cup = new Cup(
         this,
         confCup.x,
         confCup.y,
         confCup.angle,
-        confCup.behaviours
+        confCup.behaviours,
       );
       this.add.existing(cup);
-      cups.push(cup);
-      // SpriteManager.Add(cup, "cup", confCup);
     });
 
-    ((): void => new LevelBar(this, this.levelNumber))();
+    void new LevelBar(this, this.levelNumber);
 
-    // @TODO: How do I get lives number here
     const healthBar = new HealthBar(this, player.livesNumber);
     const retryLevelPopup = new RetryLevelPopup(
       this,
       config.centerX,
       config.centerY,
-      this.levelNumber
+      this.levelNumber,
     );
 
     player.on("dead", () => {
@@ -147,22 +164,22 @@ export class GameplayScene extends Phaser.Scene {
       }
     });
 
-    ((): void => new AdminBar(this, true, this.levelNumber))();
+    void new AdminBar(this, true, this.levelNumber);
 
     this.completeLevelPopup = new CompleteLevelPopup(
       this,
       config.centerX,
       config.centerY,
       this.levelNumber,
-      LEVELS.length
+      LEVELS.length,
     );
 
-    if (process.env.DEBUG === "true") {
+    if (import.meta.env.DEV) {
       this.debug();
     }
   }
 
-  update(time, delta): void {
+  update(_time: number, delta: number): void {
     ComponentManager.Update(delta);
   }
 
@@ -178,7 +195,7 @@ export class GameplayScene extends Phaser.Scene {
     this.completeLevelPopup.popup();
   }
 
-  getLevelNumber(data): void {
+  getLevelNumber(data: LevelData): number {
     const { result, levelNumber } = data;
 
     if (levelNumber) {
@@ -196,29 +213,28 @@ export class GameplayScene extends Phaser.Scene {
   }
 
   debug(): void {
-    // Add a red border
-    const config = this.sys.game.CONFIG;
+    const config = (this.sys.game as GameWithConfig).CONFIG;
     const size = 2;
     const border = this.add.rectangle(
       config.centerX,
       config.centerY,
       config.width - size,
-      config.height - size
+      config.height - size,
     );
-    border.setStrokeStyle(size, "0xFF0000");
+    border.setStrokeStyle(size, 0xff0000);
 
-    this.input.keyboard.addKey("S").on("down", () => {
-      this.scene.scene.sound.setMute(!this.scene.scene.sound.mute);
+    this.input.keyboard!.addKey("S").on("down", () => {
+      this.sound.setMute(!this.sound.mute);
     });
 
     const skipLevelsData = [
       {
-        key: this.input.keyboard.addKey("LEFT"),
-        func: (level): number => level - 1,
+        key: this.input.keyboard!.addKey("LEFT"),
+        func: (level: number): number => level - 1,
       },
       {
-        key: this.input.keyboard.addKey("RIGHT"),
-        func: (level): number => level + 1,
+        key: this.input.keyboard!.addKey("RIGHT"),
+        func: (level: number): number => level + 1,
       },
     ];
 

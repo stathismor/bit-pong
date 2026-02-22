@@ -1,6 +1,6 @@
 export class Move {
-  constructor(scene, owner, options) {
-    const tweenOptions = {
+  constructor(scene: Phaser.Scene, owner: Phaser.GameObjects.GameObject, options?: { direction?: string; x?: number; y?: number }) {
+    const tweenOptions: Record<string, unknown> = {
       targets: owner,
       ease: "Sine.easeInOut",
       duration: 2100,
@@ -23,7 +23,7 @@ export class Move {
       }
     }
 
-    scene.tweens.add(tweenOptions);
+    scene.tweens.add(tweenOptions as Phaser.Types.Tweens.TweenBuilderConfig);
   }
 
   update(): void {}

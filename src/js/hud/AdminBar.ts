@@ -7,16 +7,19 @@ const BUTTONS_X_DISTANCE = 64;
 const BUTTONS_Y_OFFSET = 40;
 
 export class AdminBar {
-  constructor(scene, showExit = false, levelNumber) {
+  scene: Phaser.Scene;
+  image: Phaser.GameObjects.Image;
+
+  constructor(scene: Phaser.Scene, showExit = false, levelNumber?: number) {
     this.scene = scene;
-    const config = scene.sys.game.CONFIG;
+    const config = (scene.sys.game as GameWithConfig).CONFIG;
 
     this.image = scene.add
       .image(
         config.width - BUTTONS_X_OFFSET,
         BUTTONS_Y_OFFSET,
         constants.TEXTURE_ATLAS,
-        "admin_sound_off"
+        "admin_sound_off",
       )
       .setDepth(constants.MAX_DEPTH)
       .setScrollFactor(0)
@@ -33,7 +36,7 @@ export class AdminBar {
           config.width - BUTTONS_X_OFFSET - BUTTONS_X_DISTANCE,
           BUTTONS_Y_OFFSET,
           constants.TEXTURE_ATLAS,
-          "admin_home"
+          "admin_home",
         )
         .setDepth(constants.MAX_DEPTH)
         .setScrollFactor(0)
@@ -50,7 +53,7 @@ export class AdminBar {
           config.width - BUTTONS_X_OFFSET - 2 * BUTTONS_X_DISTANCE,
           BUTTONS_Y_OFFSET,
           constants.TEXTURE_ATLAS,
-          "admin_select_level"
+          "admin_select_level",
         )
         .setDepth(constants.MAX_DEPTH)
         .setScrollFactor(0)
@@ -69,7 +72,7 @@ export class AdminBar {
           config.width - BUTTONS_X_OFFSET - 3 * BUTTONS_X_DISTANCE,
           BUTTONS_Y_OFFSET,
           constants.TEXTURE_ATLAS,
-          key
+          key,
         )
         .setDepth(constants.MAX_DEPTH)
         .setScrollFactor(0);

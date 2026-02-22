@@ -18,7 +18,7 @@ const PAGE_NUMBER_OFFSET_X = 25;
 const PAGE_NUMBER_OFFSET_Y = 664;
 const PAGE_NUMBER_DISTANCE = 14;
 
-const LEVEL_DIGIT_BIG_MAP = {
+const LEVEL_DIGIT_BIG_MAP: Record<number, string> = {
   0: "digit_big_zero",
   1: "digit_big_one",
   2: "digit_big_two",
@@ -31,7 +31,7 @@ const LEVEL_DIGIT_BIG_MAP = {
   9: "digit_big_nine",
 };
 
-const LEVEL_DIGIT_MEDIUM_MAP = {
+const LEVEL_DIGIT_MEDIUM_MAP: Record<number, string> = {
   0: "digit_medium_zero",
   1: "digit_medium_one",
   2: "digit_medium_two",
@@ -44,36 +44,51 @@ const LEVEL_DIGIT_MEDIUM_MAP = {
   9: "digit_medium_nine",
 };
 
+interface LevelConf {
+  name: string;
+  order: number;
+}
+
 export class LevelMenuScene extends Phaser.Scene {
+  pagesCount = 1;
+  currentPageNum = 1;
+  pagesCountKey = "";
+  currentPageNumKey = "";
+  currentPageNumImage!: Phaser.GameObjects.Image;
+  leftArrowEnabled!: Phaser.GameObjects.Image;
+  rightArrowEnabled!: Phaser.GameObjects.Image;
+  leftArrowDisabled!: Phaser.GameObjects.Image;
+  rightArrowDisabled!: Phaser.GameObjects.Image;
+
   constructor() {
     super({
       key: "LevelMenuScene",
     });
   }
 
-  create(data): void {
-    const config = this.sys.game.CONFIG;
-    let { levelNumber } = data;
-    const levelWidthDistance = 22; //config.width / LEVELS_PER_ROW;
+  create(data: { levelNumber?: number }): void {
+    const config = (this.sys.game as GameWithConfig).CONFIG;
+    const { levelNumber } = data;
+    const levelWidthDistance = 22;
     const levelPos = { x: TILE_OFFSET_X, y: 252 };
 
     const completedLevels = getCompletedLevels();
-    const levelMap = LEVELS.reduce((accumulator, currentValue) => {
+    const levelMap = (LEVELS as LevelConf[]).reduce((accumulator, currentValue) => {
       accumulator[currentValue.name] = currentValue;
       return accumulator;
-    }, {});
+    }, {} as Record<string, LevelConf>);
 
     const levelOrders = Object.keys(completedLevels)
       .filter((name) => levelMap[name])
       .map((name) => {
         return levelMap[name].order;
       });
-    const sortedLevels = LEVELS.sort((a, b) => a.order - b.order);
+    const sortedLevels = [...(LEVELS as LevelConf[])].sort((a, b) => a.order - b.order);
     const configLevelsLength = LEVELS.length;
     const nextLevel =
       levelOrders.length === 0
         ? 1
-        : Math.max(...levelOrders.map((order) => parseInt(order))) + 1;
+        : Math.max(...levelOrders.map((order) => order)) + 1;
     const camera = this.scene.scene.cameras.main;
 
     this.pagesCount = Math.ceil(configLevelsLength / LEVELS_PER_PAGE);
@@ -84,7 +99,7 @@ export class LevelMenuScene extends Phaser.Scene {
         config.centerX + i * config.width,
         config.centerY,
         constants.TEXTURE_ATLAS,
-        "background"
+        "background",
       );
     }
 
@@ -92,7 +107,7 @@ export class LevelMenuScene extends Phaser.Scene {
       config.centerX,
       TITLE_OFFSET_Y,
       constants.TEXTURE_ATLAS,
-      "select_level_text"
+      "select_level_text",
     );
     title.setScrollFactor(0);
 
@@ -104,44 +119,44 @@ export class LevelMenuScene extends Phaser.Scene {
       config.centerX - PAGE_NUMBER_OFFSET_X,
       PAGE_NUMBER_OFFSET_Y,
       constants.TEXTURE_ATLAS,
-      "digit_small_bracket_left"
+      "digit_small_bracket_left",
     );
     leftBracket.setScrollFactor(0);
     this.currentPageNumImage = this.add.image(
       config.centerX - PAGE_NUMBER_OFFSET_X + PAGE_NUMBER_DISTANCE,
       PAGE_NUMBER_OFFSET_Y,
       constants.TEXTURE_ATLAS,
-      this.currentPageNumKey
+      this.currentPageNumKey,
     );
     this.currentPageNumImage.setScrollFactor(0);
     const slash = this.add.image(
       config.centerX - PAGE_NUMBER_OFFSET_X + PAGE_NUMBER_DISTANCE * 2,
       PAGE_NUMBER_OFFSET_Y,
       constants.TEXTURE_ATLAS,
-      "digit_small_slash"
+      "digit_small_slash",
     );
     slash.setScrollFactor(0);
     const pagesCountImage = this.add.image(
       config.centerX - PAGE_NUMBER_OFFSET_X + PAGE_NUMBER_DISTANCE * 3,
       PAGE_NUMBER_OFFSET_Y,
       constants.TEXTURE_ATLAS,
-      this.pagesCountKey
+      this.pagesCountKey,
     );
     pagesCountImage.setScrollFactor(0);
     const rightBracket = this.add.image(
       config.centerX - PAGE_NUMBER_OFFSET_X + PAGE_NUMBER_DISTANCE * 4,
       PAGE_NUMBER_OFFSET_Y,
       constants.TEXTURE_ATLAS,
-      "digit_small_bracket_right"
+      "digit_small_bracket_right",
     );
     rightBracket.setScrollFactor(0);
 
     let pageNum = 0;
     sortedLevels.forEach((level) => {
-      const levelNumber = level.order;
+      const lvlNumber = level.order;
       const levelName = level.name;
       const isCompleted = levelName in completedLevels;
-      const isAvailableLevel = levelNumber <= nextLevel && !isCompleted;
+      const isAvailableLevel = lvlNumber <= nextLevel && !isCompleted;
 
       const yOffset = isCompleted || isAvailableLevel ? 32 : 82;
       let imageKey = "";
@@ -155,7 +170,7 @@ export class LevelMenuScene extends Phaser.Scene {
         0,
         0,
         constants.TEXTURE_ATLAS,
-        imageKey
+        imageKey,
       );
       levelImage.x = levelPos.x - levelWidthDistance / 2;
       levelImage.y = levelPos.y - levelImage.height + LEVEL_OFFSET_Y;
@@ -163,7 +178,7 @@ export class LevelMenuScene extends Phaser.Scene {
       let firstDigitOffsetX = 0;
       let offsetDiff = 0;
 
-      const levelNumberText = levelNumber.toString();
+      const levelNumberText = lvlNumber.toString();
       const firstDigit = parseInt(levelNumberText[0]);
       const firstDigitKey =
         isCompleted || isAvailableLevel
@@ -173,10 +188,10 @@ export class LevelMenuScene extends Phaser.Scene {
         0,
         0,
         constants.TEXTURE_ATLAS,
-        firstDigitKey
+        firstDigitKey,
       );
 
-      if (levelNumber > 9) {
+      if (lvlNumber > 9) {
         const secondDigit = parseInt(levelNumberText[1]);
         const secondDigitKey =
           isCompleted || isAvailableLevel
@@ -186,7 +201,7 @@ export class LevelMenuScene extends Phaser.Scene {
           0,
           0,
           constants.TEXTURE_ATLAS,
-          secondDigitKey
+          secondDigitKey,
         );
 
         const secondDigitOffsetX = secondDigitImage.width;
@@ -204,7 +219,7 @@ export class LevelMenuScene extends Phaser.Scene {
             secondDigitImage.width / 2 +
             secondDigitOffsetX -
             offsetDiff,
-          levelImage.y - levelImage.height / 2 + yOffset
+          levelImage.y - levelImage.height / 2 + yOffset,
         );
       }
 
@@ -213,7 +228,7 @@ export class LevelMenuScene extends Phaser.Scene {
           levelWidthDistance / 2 -
           firstDigitOffsetX / 2 -
           offsetDiff,
-        levelImage.y - levelImage.height / 2 + yOffset
+        levelImage.y - levelImage.height / 2 + yOffset,
       );
 
       if (isCompleted || isAvailableLevel) {
@@ -223,38 +238,36 @@ export class LevelMenuScene extends Phaser.Scene {
         const awardKey = isAvailableLevel
           ? "trophy_empty"
           : lives >= 2
-          ? "trophy_gold_small"
-          : "trophy_silver_small";
+            ? "trophy_gold_small"
+            : "trophy_silver_small";
         this.add.image(
           levelImage.x,
           levelImage.y + 30,
           constants.TEXTURE_ATLAS,
-          awardKey
+          awardKey,
         );
       }
 
-      if (levelNumber % LEVELS_PER_PAGE === 0) {
+      if (lvlNumber % LEVELS_PER_PAGE === 0) {
         pageNum += 1;
         levelPos.x = TILE_OFFSET_X + pageNum * config.width;
         levelPos.y = 256 - levelImage.height + LEVEL_OFFSET_Y;
-      } else if (levelNumber % LEVELS_PER_ROW === 0) {
+      } else if (lvlNumber % LEVELS_PER_ROW === 0) {
         levelPos.x = TILE_OFFSET_X + pageNum * config.width;
         levelPos.y += ROW_HEIGHT;
       } else {
         levelPos.x = levelPos.x + TILE_DISTANCE_X;
       }
 
-      // Only allow click if it's completed or it's the next level
-      if (isCompleted || isAvailableLevel || process.env.DEBUG === "true") {
-        // Make the text interactive
+      if (isCompleted || isAvailableLevel || import.meta.env.DEV) {
         levelImage.setInteractive(
           new Phaser.Geom.Rectangle(0, 0, levelImage.width, levelImage.height),
-          Phaser.Geom.Rectangle.Contains
+          Phaser.Geom.Rectangle.Contains,
         );
 
         levelImage.on("pointerup", () => {
           this.scene.scene.sound.play("button_click");
-          this.scene.start("GameplayScene", { levelNumber });
+          this.scene.start("GameplayScene", { levelNumber: lvlNumber });
         });
       }
     });
@@ -263,7 +276,7 @@ export class LevelMenuScene extends Phaser.Scene {
       config.centerX,
       BORDER_OFFSET_Y,
       constants.TEXTURE_ATLAS,
-      "select_level_border"
+      "select_level_border",
     );
     border.setScrollFactor(0);
 
@@ -271,24 +284,24 @@ export class LevelMenuScene extends Phaser.Scene {
       ARROW_OFFSET_X,
       ARROW_OFFSET_Y,
       constants.TEXTURE_ATLAS,
-      "arrow_left_enabled"
+      "arrow_left_enabled",
     );
     this.rightArrowEnabled = this.add.image(
       config.width - ARROW_OFFSET_X,
       ARROW_OFFSET_Y,
       constants.TEXTURE_ATLAS,
-      "arrow_right_enabled"
+      "arrow_right_enabled",
     );
     const navigationData = [
       {
         button: this.leftArrowEnabled,
         diffX: -config.width,
-        func: (pageNum): void => pageNum - 1,
+        func: (pageNum: number): number => pageNum - 1,
       },
       {
         button: this.rightArrowEnabled,
         diffX: config.width,
-        func: (pageNum): void => pageNum + 1,
+        func: (pageNum: number): number => pageNum + 1,
       },
     ];
     for (const { button, diffX, func } of navigationData) {
@@ -317,7 +330,7 @@ export class LevelMenuScene extends Phaser.Scene {
       ARROW_OFFSET_X,
       ARROW_OFFSET_Y,
       constants.TEXTURE_ATLAS,
-      "arrow_left_disabled"
+      "arrow_left_disabled",
     );
     this.leftArrowDisabled.setScrollFactor(0);
     this.leftArrowDisabled.visible = false;
@@ -325,26 +338,23 @@ export class LevelMenuScene extends Phaser.Scene {
       config.width - ARROW_OFFSET_X,
       ARROW_OFFSET_Y,
       constants.TEXTURE_ATLAS,
-      "arrow_right_disabled"
+      "arrow_right_disabled",
     );
     this.rightArrowDisabled.setScrollFactor(0);
     this.rightArrowDisabled.visible = false;
 
-    // Move page to current level number. If coming from gameplay scene,
-    // move to that page, otherwise the last one.
     this.currentPageNum = Math.min(
       Math.ceil((levelNumber || nextLevel) / LEVELS_PER_PAGE),
-      this.pagesCount
+      this.pagesCount,
     );
     camera.scrollX += config.width * (this.currentPageNum - 1);
 
     this.updatePage();
 
-    ((): void => new AdminBar(this, true))();
+    void new AdminBar(this, true);
   }
 
   updatePage(): void {
-    // Left arrow
     if (this.currentPageNum < 2) {
       this.leftArrowEnabled.visible = false;
       this.leftArrowDisabled.visible = true;
@@ -353,7 +363,6 @@ export class LevelMenuScene extends Phaser.Scene {
       this.leftArrowDisabled.visible = false;
     }
 
-    // Right arrow
     if (this.currentPageNum < this.pagesCount) {
       this.rightArrowEnabled.visible = true;
       this.rightArrowDisabled.visible = false;

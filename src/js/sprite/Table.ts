@@ -3,9 +3,14 @@ import BEHAVIOUR_MAPPER from "../behaviour";
 import { ComponentManager } from "../behaviour/ComponentManager";
 import { uuidv4 } from "../utils";
 
+interface BehaviourConf {
+  name: string;
+  options?: Record<string, unknown>;
+}
+
 export class Table extends Phaser.Physics.Matter.Sprite {
-  constructor(scene, x, y, texture, frame, angleDeg, behaviours) {
-    super(scene.matter.world, x, y, texture, frame, {
+  constructor(scene: Phaser.Scene, x: number, y: number, texture: string, frame: string, angleDeg: number, behaviours?: BehaviourConf[]) {
+    super((scene as Phaser.Scene & { matter: Phaser.Physics.Matter.MatterPhysics }).matter.world, x, y, texture, frame, {
       isStatic: true,
       angle: angleDeg,
     });
@@ -16,7 +21,7 @@ export class Table extends Phaser.Physics.Matter.Sprite {
         ComponentManager.Add(
           scene,
           this,
-          new BEHAVIOUR_MAPPER[behaviour.name](scene, this, behaviour.options)
+          new BEHAVIOUR_MAPPER[behaviour.name](scene, this, behaviour.options),
         );
       });
     }

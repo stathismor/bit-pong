@@ -1,7 +1,11 @@
-export class ComponentManager {
-  static components = [];
+interface Behaviour {
+  update(delta?: number): void;
+}
 
-  static Add(scene, owner, component): void {
+export class ComponentManager {
+  static components: Behaviour[] = [];
+
+  static Add(_scene: Phaser.Scene, _owner: Phaser.GameObjects.GameObject, component: Behaviour): void {
     this.components.push(component);
   }
 
@@ -9,11 +13,11 @@ export class ComponentManager {
     this.components.length = 0;
   }
 
-  static Update(delta): void {
+  static Update(delta: number): void {
     this.components.forEach((component) => component.update(delta));
   }
 
-  static GetComponents() {
+  static GetComponents(): Behaviour[] {
     return this.components;
   }
 }

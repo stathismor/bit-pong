@@ -12,11 +12,11 @@ export class BootScene extends Phaser.Scene {
   }
 
   preload(): void {
-    const config = this.sys.game.CONFIG;
+    const config = (this.sys.game as GameWithConfig).CONFIG;
 
-    // HACK: parcel changes the asset names in dist directory, so
-    // we dynamically get the new image names for the atlas
-    const atlasData = Data.bit_pong_data;
+    // With Vite, asset URLs are already resolved — patch the atlas JSON
+    // to point at the correct hashed image URL
+    const atlasData = JSON.parse(JSON.stringify(Data.bit_pong_data));
     atlasData.textures[0].image = Images.bit_pong_atlas;
     const multiAtlasFileConfig = {
       key: constants.TEXTURE_ATLAS,
@@ -47,21 +47,20 @@ export class BootScene extends Phaser.Scene {
     camera.setBounds(0, 0, config.width, config.height);
   }
 
-  // @TODO: Remove this after testing
   migrate(): void {
     const localVersion = getVersion();
     const oldLevels = getOldCompletedLevels();
     const newVersion = constants.VERSION;
     if ((!localVersion || localVersion < newVersion) && oldLevels) {
-      const root = {};
+      const root: Record<string, unknown> = {};
       root["version"] = newVersion;
-      root["levels"] = {};
+      root["levels"] = {} as Record<string, unknown>;
 
       for (const order in oldLevels) {
         const lives = oldLevels[order];
         const level = { lives };
         const configLevel = getLevelByName(order);
-        root["levels"][configLevel.name] = level;
+        (root["levels"] as Record<string, unknown>)[configLevel.name] = level;
       }
 
       console.info("Bit Pong: Migrating data to version", constants.VERSION);
@@ -75,7 +74,7 @@ export class BootScene extends Phaser.Scene {
     const localVersion = getVersion();
     if (!localVersion) {
       console.info("Initialising local storage");
-      root = { version: constants.VERSION, levels: {} };
+      const root = { version: constants.VERSION, levels: {} };
       localStorage.setItem(constants.LOCAL_STORAGE_ROOT, JSON.stringify(root));
     }
   }

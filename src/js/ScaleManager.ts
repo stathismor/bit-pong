@@ -1,25 +1,25 @@
 export class ScaleManager {
-  constructor(width, height, isDesktop) {
+  constructor(width: number, height: number, isDesktop: boolean) {
     window.addEventListener("resize", () =>
-      ScaleManager.resize(width, height, isDesktop)
+      ScaleManager.resize(width, height, isDesktop),
     );
     ScaleManager.resize(width, height, isDesktop);
   }
 
-  static resize(configWidth, configHeight, isDesktop) {
-    // Check if device DPI messes up the width-height-ratio
+  static resize(configWidth: number, configHeight: number, isDesktop: boolean): void {
     const canvas = document.getElementsByTagName("canvas")[0];
     const content = document.getElementById("content");
 
-    // For desktop, only multiply with integer number
+    if (!canvas || !content) return;
+
     if (isDesktop) {
       const multipleHeight = Math.max(
         1,
-        Math.floor(window.innerHeight / configHeight)
+        Math.floor(window.innerHeight / configHeight),
       );
       const multipleWidth = Math.max(
         1,
-        Math.floor(window.innerWidth / configWidth)
+        Math.floor(window.innerWidth / configWidth),
       );
       const multiple = Math.min(multipleWidth, multipleHeight);
 
@@ -31,10 +31,8 @@ export class ScaleManager {
       return;
     }
 
-    // Width-height-ratio of game resolution
     const gameRatio = configWidth / configHeight;
 
-    // Make content full height of browser and keep the ratio of game resolution
     content.style.width = `${window.innerHeight * gameRatio}px`;
     content.style.height = `${window.innerHeight}px`;
 
@@ -44,7 +42,6 @@ export class ScaleManager {
     const height = window.innerHeight * (dpiW / dpiH);
     const width = height * gameRatio;
 
-    // Scale canvas
     canvas.style.width = `${width}px`;
     canvas.style.height = `${height}px`;
   }

@@ -4,7 +4,14 @@ import { uuidv4 } from "../utils";
 const SPEED = 0.03;
 
 export class Orbit {
-  constructor(scene, owner, options) {
+  owner: Phaser.GameObjects.GameObject;
+  x: number;
+  y: number;
+  distance: number;
+  speed: number;
+  satellite: Phaser.Physics.Matter.Image | undefined;
+
+  constructor(scene: Phaser.Scene, owner: Phaser.GameObjects.GameObject, options: { x: number; y: number; distance: number; speed?: number; satellite?: { name: string } }) {
     this.owner = owner;
     this.x = options.x;
     this.y = options.y;
@@ -13,31 +20,32 @@ export class Orbit {
     this.satellite = undefined;
 
     if (options.satellite) {
-      this.satellite = scene.matter.add.image(
+      const matterScene = scene as Phaser.Scene & { matter: Phaser.Physics.Matter.MatterPhysics };
+      this.satellite = matterScene.matter.add.image(
         this.x,
         this.y,
         constants.TEXTURE_ATLAS,
-        options.satellite.name
+        options.satellite.name,
       );
       this.satellite.setData("name", "drop_" + uuidv4());
       this.satellite.setStatic(true);
     }
   }
 
-  update(delta): void {
+  update(): void {
     Phaser.Actions.RotateAroundDistance(
       [this.owner],
       { x: this.x, y: this.y },
       this.speed,
-      this.distance
+      this.distance,
     );
 
     if (this.satellite) {
       Phaser.Actions.RotateAroundDistance(
         [this.satellite],
-        { x: this.owner.x, y: this.owner.y },
+        { x: (this.owner as Phaser.GameObjects.Sprite).x, y: (this.owner as Phaser.GameObjects.Sprite).y },
         this.speed,
-        50
+        50,
       );
     }
   }

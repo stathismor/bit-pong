@@ -2,7 +2,7 @@ const DURATION = 900;
 const DELAY = 0;
 
 export class Jump {
-  constructor(scene, owner, options) {
+  constructor(scene: Phaser.Scene, owner: Phaser.GameObjects.GameObject, options: { duration?: number; delay?: number; y: number }) {
     const tweenOptions = {
       targets: owner,
       ease: "Bounce.easeIn",

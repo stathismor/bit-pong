@@ -2,7 +2,10 @@ const ROTATION_SPEED = 0.002;
 const ROTATION_DIRECTION = 1; // 1 for clockwise, -1 for counter-clockwise
 
 export class Rotate {
-  constructor(scene, owner, options) {
+  speed: number;
+  owner: Phaser.GameObjects.GameObject;
+
+  constructor(_scene: Phaser.Scene, owner: Phaser.GameObjects.GameObject, options?: { direction?: number; speed?: number }) {
     this.speed = ROTATION_SPEED;
     let direction = ROTATION_DIRECTION;
 
@@ -14,7 +17,8 @@ export class Rotate {
     this.owner = owner;
   }
 
-  update(delta): void {
-    this.owner.setRotation(this.owner.rotation + this.speed * delta);
+  update(delta?: number): void {
+    const sprite = this.owner as Phaser.GameObjects.Sprite;
+    sprite.setRotation(sprite.rotation + this.speed * (delta || 0));
   }
 }

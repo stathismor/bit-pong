@@ -5,7 +5,11 @@ const HEALTH_BAR_OFFSET_Y = 32;
 const LIVES_DISTANCE = 32;
 
 export default class HealthBar {
-  constructor(scene, livesNumber) {
+  scene: Phaser.Scene;
+  emptyLives: Phaser.GameObjects.Group;
+  fullLives: Phaser.GameObjects.Group;
+
+  constructor(scene: Phaser.Scene, livesNumber: number) {
     this.scene = scene;
 
     this.emptyLives = scene.add.group({
@@ -26,13 +30,14 @@ export default class HealthBar {
     this.update(livesNumber);
   }
 
-  update(livesNumber): void {
+  update(livesNumber: number): void {
     this.killAllLives();
     for (let index = 0; index < constants.MAX_LIVES; index += 1) {
-      const life =
+      const life = (
         index < livesNumber
           ? this.fullLives.getFirstDead()
-          : this.emptyLives.getFirstDead();
+          : this.emptyLives.getFirstDead()
+      ) as Phaser.GameObjects.Image;
       life.setDepth(constants.MAX_DEPTH);
       life.setActive(true);
       life.setVisible(true);
@@ -42,14 +47,14 @@ export default class HealthBar {
   }
 
   killAllLives(): void {
-    this.fullLives.children.each((life) => {
+    this.fullLives.getChildren().forEach((life) => {
       this.fullLives.kill(life);
-      life.setVisible(false);
+      (life as Phaser.GameObjects.Image).setVisible(false);
     });
 
-    this.emptyLives.children.each((life) => {
+    this.emptyLives.getChildren().forEach((life) => {
       this.emptyLives.kill(life);
-      life.setVisible(false);
+      (life as Phaser.GameObjects.Image).setVisible(false);
     });
   }
 }
