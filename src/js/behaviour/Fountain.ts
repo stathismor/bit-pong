@@ -53,10 +53,12 @@ export class Fountain {
     };
 
     // Phaser 4: create emitter directly as a game object
+    const angle = owner.angle - 90;
     this.emitter = scene.add.particles(0, 0, constants.TEXTURE_ATLAS, {
       frame: ["drop_dark", "drop_light"],
       alpha: { start: 1, end: 0, ease: "Quint.easeIn" },
       speed: { min: 200 * MULTI, max: 300 * MULTI },
+      angle: { min: angle - EMITTER_OFFSET, max: angle + EMITTER_OFFSET },
       accelerationY: 500,
       lifespan: { min: 500, max: 700 },
       quantity: 20,
@@ -66,20 +68,15 @@ export class Fountain {
     });
     this.emitter.setDepth(10);
 
-    const angle = owner.angle - 90;
-    this.emitter.setEmitterAngle({
-      min: angle - EMITTER_OFFSET,
-      max: angle + EMITTER_OFFSET,
-    });
-
     this.emitter.start();
   }
 
   update(): void {
     const angle = this.owner.angle - 90;
-    this.emitter.setEmitterAngle({
-      min: angle - EMITTER_OFFSET,
-      max: angle + EMITTER_OFFSET,
-    });
+    // Directly update the angle op's start/end range since setEmitterAngle's
+    // onChange only updates 'current', not the min/max range used by method 6.
+    const angleOp = this.emitter.ops.angle;
+    angleOp.start = angle - EMITTER_OFFSET;
+    angleOp.end = angle + EMITTER_OFFSET;
   }
 }

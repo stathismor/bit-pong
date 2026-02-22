@@ -39,20 +39,17 @@ export default class BitDrops {
     }
 
     // Phaser 4: scene.add.particles returns a ParticleEmitter directly
+    const initAngle = Phaser.Math.RadToDeg(0.34) - 90;
     this.emitter = scene.add.particles(400, 160, constants.TEXTURE_ATLAS, {
       frame: ["drop_dark", "drop_light"],
       alpha: { start: 1, end: 0, ease: "Quint.easeIn" },
       speed: { min: 290 * MULTI, max: 320 * MULTI },
+      angle: { min: initAngle - EMITTER_OFFSET, max: initAngle + EMITTER_OFFSET },
       accelerationY: 800,
       lifespan: { min: 500, max: 700 },
       quantity: 10,
       maxParticles: 50,
       emitting: false,
-    });
-    const angle = Phaser.Math.RadToDeg(0.34) - 90;
-    this.emitter.setEmitterAngle({
-      min: angle - EMITTER_OFFSET,
-      max: angle + EMITTER_OFFSET,
     });
 
     scene.events.once("shutdown", () => this.emitter.destroy());
@@ -61,10 +58,11 @@ export default class BitDrops {
   emitParticles(x: number, y: number, rotation: number): void {
     this.emitter.setPosition(x, y);
     const angle = Phaser.Math.RadToDeg(rotation) - 90;
-    this.emitter.setEmitterAngle({
-      min: angle - EMITTER_OFFSET,
-      max: angle + EMITTER_OFFSET,
-    });
+    // Directly update the angle op's start/end range since setEmitterAngle's
+    // onChange only updates 'current', not the min/max range used by method 6.
+    const angleOp = this.emitter.ops.angle;
+    angleOp.start = angle - EMITTER_OFFSET;
+    angleOp.end = angle + EMITTER_OFFSET;
     this.emitter.start();
   }
 
