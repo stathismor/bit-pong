@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 import { getCompletedLevels, getLevelByNumber } from "../utils";
 
 import * as constants from "../constants";

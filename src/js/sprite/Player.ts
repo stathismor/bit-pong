@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 import BEHAVIOUR_MAPPER from "../behaviour";
 import { SetBody } from "../behaviour/SetBody";
 import { Drag } from "../behaviour/Drag";

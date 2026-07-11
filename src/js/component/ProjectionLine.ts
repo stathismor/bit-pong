@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 import * as constants from "../constants";
 
 const MAX_PROJECTION_POINTS = 30;

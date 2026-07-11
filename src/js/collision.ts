@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 export let cupCategory: number = 0;
 export let dropCategory: number = 0;
 export let tableCategory: number = 0;

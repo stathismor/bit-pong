@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 export class Move {
   constructor(scene: Phaser.Scene, owner: Phaser.GameObjects.GameObject, options?: { direction?: string; x?: number; y?: number }) {
     const tweenOptions: Record<string, unknown> = {

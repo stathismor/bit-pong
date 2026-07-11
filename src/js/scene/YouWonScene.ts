@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 import { AdminBar } from "../hud/AdminBar";
 
 import LEVELS from "../../../config/levels.json";

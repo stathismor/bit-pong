@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 import ProjectionLine from "../component/ProjectionLine";
 import { ComponentManager } from "../behaviour/ComponentManager";
 import { RandomPosition } from "../behaviour/RandomPosition";

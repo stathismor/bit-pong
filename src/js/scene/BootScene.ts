@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 import * as constants from "../constants";
 import Images from "../images";
 import Sounds from "../sounds";
@@ -23,9 +24,6 @@ export class BootScene extends Phaser.Scene {
       url: atlasData,
     };
     this.load.multiatlas(multiAtlasFileConfig);
-    this.load.image("you_won_title", Images.you_won_title);
-    this.load.image("you_won_text", Images.you_won_text);
-    this.load.image("digit_small_colon", Images.digit_small_colon);
 
     // Audio
     this.load.audio("bounce_table", Sounds.bounce_table, { instances: 2 });

@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 interface SpriteConf {
   x: number;
   y: number;

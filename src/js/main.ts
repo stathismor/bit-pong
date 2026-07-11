@@ -1,4 +1,4 @@
-import { Game } from "phaser";
+import Phaser, { Game } from "phaser";
 import { BootScene } from "./scene/BootScene";
 import { GameplayScene } from "./scene/GameplayScene";
 import { LevelMenuScene } from "./scene/LevelMenuScene";

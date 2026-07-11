@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 import * as constants from "../constants";
 
 const HEALD_BAR_OFFSET_X = 0;

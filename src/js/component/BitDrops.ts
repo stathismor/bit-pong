@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 import { cupCategory, tableCategory, dropCategory } from "../collision";
 import { uuidv4 } from "../utils";
 import * as constants from "../constants";

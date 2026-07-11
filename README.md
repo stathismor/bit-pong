@@ -24,32 +24,32 @@ In development.
 
 ## Tech stack
 
-Bit Pong is written in TypeScript, using the [Phaser](https://github.com/photonstorm/phaser) game engine, and [Matter.js](https://brm.io/matter-js/) for the physics part. [parcel](https://parceljs.org/) is used for bundling it all together. The game is built with mobile in mind, although it is primarily a web application. `cordova` is used for the conversion to a mobile app (using `WebView`).
+Bit Pong is written in TypeScript, using the [Phaser](https://github.com/phaserjs/phaser) game engine (v4), and [Matter.js](https://brm.io/matter-js/) for the physics part. [Vite](https://vitejs.dev/) is used for bundling it all together. The game is built with mobile in mind, although it is primarily a web application. `cordova` is used for the conversion to a mobile app (using `WebView`).
 
 ## Requirements
 
-1. [Node.js](https://nodejs.org/en/download/) and [yarn](https://classic.yarnpkg.com/en/docs/install) (or [npm](https://www.npmjs.com/) if you prefer)
+1. [Node.js](https://nodejs.org/en/download/) and [pnpm](https://pnpm.io/installation)
 2. [git-lfs](https://git-lfs.github.com/)
 
 ## Install
 
 After you clone the repo, on the root directory just run:
 
-`$ yarn`
+`$ pnpm install`
 
 ## Run
 
 Run:
 
-`$ yarn start`
+`$ pnpm start`
 
-`parcel` will automatically open the game in your default browser, running on your local `Node.js` server.
+`Vite` will start a local dev server; open the printed URL in your browser to play the game.
 
 ## Deploy
 
 If you want to deploy under your own [GitHub page](https://pages.github.com/), you can do that with:
 
-`$ yarn deploy`
+`$ pnpm run deploy`
 
 If your repo is setup to support `gh-pages`, then you should be able to access the game at `https://<username>.github.io/<repo-name>`. For this repo, the game is also available at https://stathismor.github.io/bit-pong/.
 

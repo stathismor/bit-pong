@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 interface Behaviour {
   update(delta?: number): void;
 }

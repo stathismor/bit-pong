@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 import * as constants from "../constants";
 
 const TRACE_POINTS_DISTANCE = 30;

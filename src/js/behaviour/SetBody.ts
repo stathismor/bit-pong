@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 const SIDE_WITH = 10;
 const SIDES_ANGLE = 13;
 const OFFSET = 8;

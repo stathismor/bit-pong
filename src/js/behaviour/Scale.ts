@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 const DEFAULT_SCALE = 1;
 
 export class Scale {

@@ -16,7 +16,7 @@
     "lint:fix": "eslint --fix 'src/**/*.ts'"
   },
   "dependencies": {
-    "phaser": "4.0.0-rc.6"
+    "phaser": "4.2.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",

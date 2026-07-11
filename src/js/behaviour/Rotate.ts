@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 const ROTATION_SPEED = 0.002;
 const ROTATION_DIRECTION = 1; // 1 for clockwise, -1 for counter-clockwise
 

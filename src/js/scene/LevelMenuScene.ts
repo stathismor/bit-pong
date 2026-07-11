@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 import LEVELS from "../../../config/levels.json";
 import { AdminBar } from "../hud/AdminBar";
 import { getCompletedLevels } from "../utils";

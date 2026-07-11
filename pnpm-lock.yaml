@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       phaser:
-        specifier: 4.0.0-rc.6
-        version: 4.0.0-rc.6
+        specifier: 4.2.1
+        version: 4.2.1
     devDependencies:
       '@eslint/js':
         specifier: ^9.0.0
@@ -943,8 +943,8 @@ packages:
     resolution: {integrity: sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==}
     engines: {node: '>=8'}
 
-  phaser@4.0.0-rc.6:
-    resolution: {integrity: sha512-36DRtoZVYyKf4Fmm/IlNEpIyM4NLHjI+W1hbA+nji1e1uKCB9Ojj7XryiReB5+e5367gHT/WJpSuJoEp3LeCQw==}
+  phaser@4.2.1:
+    resolution: {integrity: sha512-WUNwCPJpdjvZiuT6SgCfYVW8Qw/3j0jJ4ws7P2QkhFLFu74sbGuyHJcbFueGkY/AYO4Pi47bNQXn1OCJeLX//w==}
 
   picocolors@1.1.1:
     resolution: {integrity: sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA==}
@@ -1934,7 +1934,7 @@ snapshots:
 
   path-type@4.0.0: {}
 
-  phaser@4.0.0-rc.6:
+  phaser@4.2.1:
     dependencies:
       eventemitter3: 5.0.4
 

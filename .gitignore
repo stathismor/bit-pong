@@ -1,10 +1,16 @@
+# Dependencies & build output
 node_modules/
 dist/
-cordova/platforms/
-cordova/plugins/
-cordova/www/
-cordova/apks/
-.cache/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Editors & IDEs
 .vscode/
-.idea
-*.log
+.idea/
+*.swp
+*.swo

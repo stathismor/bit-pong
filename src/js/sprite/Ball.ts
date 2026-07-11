@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 import { ComponentManager } from "../behaviour/ComponentManager";
 import { SetBody } from "../behaviour/SetBody";
 import BEHAVIOUR_MAPPER from "../behaviour";

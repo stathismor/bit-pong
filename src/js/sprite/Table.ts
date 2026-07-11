@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 import { tableCategory } from "../collision";
 import BEHAVIOUR_MAPPER from "../behaviour";
 import { ComponentManager } from "../behaviour/ComponentManager";

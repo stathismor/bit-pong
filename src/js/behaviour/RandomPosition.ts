@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 const RANDOM_POSITION_DELAY = 4300;
 
 export class RandomPosition {

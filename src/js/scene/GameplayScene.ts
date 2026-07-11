@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 import LEVELS from "../../../config/levels.json";
 import { Ball } from "../sprite/Ball";
 import { Player } from "../sprite/Player";

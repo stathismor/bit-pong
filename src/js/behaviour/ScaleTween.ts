@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 const DEFAULT_SCALE = 0.5;
 const DEFAULT_DURATION = 2100;
 

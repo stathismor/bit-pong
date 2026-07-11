@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 import * as constants from "../constants";
 import { successEmitter } from "../particles";
 import { getCompletedLevels, getLevelByNumber } from "../utils";

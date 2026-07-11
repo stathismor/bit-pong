@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 import * as constants from "../constants";
 import { SpriteManager } from "../sprite/SpriteManager";
 

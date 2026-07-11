@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 const DURATION = 900;
 const DELAY = 0;
 

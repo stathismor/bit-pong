@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 import * as constants from "./constants";
 import BitDrops from "./component/BitDrops";
 import { GameplaySceneStatus } from "./scene/GameplayScene";

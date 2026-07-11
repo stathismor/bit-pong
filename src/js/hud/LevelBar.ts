@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 import { addSmallNumber } from "../utils";
 import * as constants from "../constants";
 

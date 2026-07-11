@@ -1,3 +1,4 @@
+import Phaser from "phaser";
 import { AdminBar } from "../hud/AdminBar";
 
 const TITLE_OFFSET_Y = 100;
