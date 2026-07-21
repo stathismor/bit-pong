@@ -2,6 +2,13 @@
 node_modules/
 dist/
 
+# Cordova generated
+cordova/platforms/
+cordova/plugins/
+cordova/www/
+app-release.aab
+app-release.apk
+
 # macOS
 .DS_Store
 
