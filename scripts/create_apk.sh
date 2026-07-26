@@ -1,6 +1,10 @@
 #!/bin/bash
 set -euo pipefail
 
+export ANDROID_HOME="${ANDROID_HOME:-$HOME/Android/Sdk}"
+export JAVA_HOME="${JAVA_HOME:-$HOME/.jdks/jdk-17.0.19+10}"
+export PATH="$JAVA_HOME/bin:$HOME/.local/opt/gradle-8.13/bin:$PATH"
+
 BUILD_TOOLS="$ANDROID_HOME/build-tools/36.0.0"
 KEYSTORE="${KEYSTORE:-$HOME/.android/bit-pong-upload.keystore}"
 KEY_ALIAS="${KEY_ALIAS:-upload}"

@@ -8,6 +8,7 @@ cordova/plugins/
 cordova/www/
 app-release.aab
 app-release.apk
+app-release.apk.idsig
 
 # macOS
 .DS_Store
